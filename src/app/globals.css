@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-text-primary: #141414;
+  --color-text-secondary: #5c5c5c;
+  --color-text-tertiary: #999999;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f5;
+  --color-border-tertiary: rgba(0,0,0,0.15);
+  --color-border-secondary: rgba(0,0,0,0.30);
+  --color-border-primary: rgba(0,0,0,0.40);
+  --color-success: #0F6E56;
+  --color-warning: #854F0B;
+  --color-danger: #A32D2D;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; }
+textarea { resize: vertical; }
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes slide-up {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in { animation: fade-in 0.2s ease-out; }
+.animate-slide-up { animation: slide-up 0.25s ease-out; }
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+input:focus, select:focus, textarea:focus { outline: none; }
+::selection { background: #e8e8e8; }
+
+@media print {
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  body { font-size: 12px; }
+}
+.print-only { display: none; }
