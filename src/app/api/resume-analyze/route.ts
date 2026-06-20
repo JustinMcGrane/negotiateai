@@ -5,35 +5,82 @@ const client = new Anthropic()
 
 export async function POST(req: NextRequest) {
   try {
-    const { resumeText, targetRole } = await req.json()
+    const { resumeText, targetRole, jobDescription } = await req.json()
 
-    const prompt = `You are an expert recruiter and career coach. Analyze this resume${targetRole ? ` for the target role: ${targetRole}` : ''}.
+    const hasJD = jobDescription && jobDescription.trim().length > 50
+
+    const prompt = `You are a senior technical recruiter and career coach with 15 years of experience reviewing resumes for top-tier companies including Google, Meta, Amazon, McKinsey, and leading startups. You have reviewed over 10,000 resumes and know exactly what gets candidates interviews in 2024-2025.
+
+Analyze this resume with the rigor of a hiring manager who receives 200 applications per role. Be direct, specific, and results-focused. Generic advice helps no one.
 
 RESUME:
 ${resumeText}
 
-Provide a JSON response with exactly this structure:
+${targetRole ? `TARGET ROLE: ${targetRole}` : ''}
+${hasJD ? `\nJOB DESCRIPTION TO MATCH AGAINST:\n${jobDescription}` : ''}
+
+Provide a JSON response with EXACTLY this structure. Be brutally honest and hyper-specific — reference actual content from the resume:
+
 {
-  "score": <number 0-100 overall resume quality>,
-  "atsScore": <number 0-100 ATS/keyword optimization score>,
-  "summary": "<2-3 sentence executive summary of the resume's strengths and biggest opportunity>",
-  "strengths": ["<strength 1>", "<strength 2>", "<strength 3>"],
-  "improvements": ["<specific improvement 1>", "<specific improvement 2>", "<specific improvement 3>", "<specific improvement 4>"],
-  "keywords": ["<missing keyword 1>", "<missing keyword 2>", "<missing keyword 3>", "<missing keyword 4>", "<missing keyword 5>"]
+  "overallScore": <0-100 score based on how likely this resume is to get interviews for the target role>,
+  "atsScore": <0-100 score for ATS/keyword optimization — will it pass automated screening?>,
+  "summary": "<3-4 sentence executive assessment. What is the single biggest strength of this resume? What is the single biggest thing holding it back? Be specific — reference actual jobs, companies, or bullets from the resume.>",
+  "marketPosition": "<One sentence on where this candidate sits in the market — e.g. 'This resume positions you as a mid-level generalist competing against specialists, which will hurt your chances at Series B+ companies paying $150k+.'>",
+  "sections": [
+    { "name": "Summary/Headline", "score": <0-100>, "feedback": "<Specific feedback referencing what they wrote or didn't write>" },
+    { "name": "Work Experience", "score": <0-100>, "feedback": "<Which roles are strong? Which are weak? What's missing — metrics, scope, impact?>" },
+    { "name": "Skills", "score": <0-100>, "feedback": "<Are the right skills listed? Are they organized well? What's missing for the target role?>" },
+    { "name": "Education", "score": <0-100>, "feedback": "<Is it positioned correctly? Should it be moved up or down? Any missing credentials?>" },
+    { "name": "Overall Format & ATS", "score": <0-100>, "feedback": "<Length, formatting, file type concerns, ATS parse issues>" }
+  ],
+  "strengths": [
+    "<Specific strength 1 — reference actual content>",
+    "<Specific strength 2>",
+    "<Specific strength 3>"
+  ],
+  "criticalIssues": [
+    "<The most important thing to fix — be specific about what's wrong and why it's hurting them>",
+    "<Second most critical issue>",
+    "<Third critical issue>"
+  ],
+  "bulletRewrites": [
+    {
+      "original": "<Copy a weak bullet EXACTLY as written from the resume>",
+      "rewritten": "<Rewrite it with a strong action verb, quantified impact, and clear scope. If you don't have numbers, suggest placeholder formats like [X%] or [$Xk]>",
+      "reason": "<One sentence on why the rewrite is stronger>"
+    },
+    {
+      "original": "<Second weak bullet>",
+      "rewritten": "<Rewritten version>",
+      "reason": "<Why it's better>"
+    },
+    {
+      "original": "<Third weak bullet>",
+      "rewritten": "<Rewritten version>",
+      "reason": "<Why it's better>"
+    }
+  ],
+  "missingKeywords": ["<keyword 1>", "<keyword 2>", "<keyword 3>", "<keyword 4>", "<keyword 5>", "<keyword 6>"],
+  "topPriorities": [
+    "<The single most impactful change they should make this week — be specific>",
+    "<Second priority change>",
+    "<Third priority change>"
+  ],
+  "interviewReadiness": "<One sentence verdict: e.g. 'Ready to apply at mid-market companies; needs 2-3 hours of work before targeting FAANG or top-tier startups.'>"
 }
 
-Be specific and actionable. Reference actual content from the resume. Return only valid JSON.`
+Return only valid JSON. No markdown code blocks. No commentary outside the JSON.`
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 1024,
+      max_tokens: 2048,
       messages: [{ role: 'user', content: prompt }],
     })
 
     const text = response.content[0].type === 'text' ? response.content[0].text : '{}'
     const jsonMatch = text.match(/\{[\s\S]*\}/)
-    const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : {}
-
+    if (!jsonMatch) throw new Error('No JSON in response')
+    const parsed = JSON.parse(jsonMatch[0])
     return NextResponse.json(parsed)
   } catch (err) {
     console.error(err)
