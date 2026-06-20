@@ -75,7 +75,7 @@ export function Sidebar() {
       <div style={{ padding: '14px 16px 12px', borderBottom: '0.5px solid var(--color-border-tertiary)', display: 'flex', alignItems: 'center' }}>
         <Link href="/dashboard">
           <Image
-            src="/9893fdb6-00eb-4f89-8209-8a3cffb84aa8.png"
+            src="/logo.png"
             alt="NegotiateAI"
             width={140}
             height={40}
