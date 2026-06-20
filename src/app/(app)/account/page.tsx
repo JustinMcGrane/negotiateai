@@ -1,57 +1,169 @@
-import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
-import Link from 'next/link'
+'use client'
+import { useState, useEffect } from 'react'
+import { createClient } from '@/lib/supabase/client'
+import { useRouter } from 'next/navigation'
+import { CheckCircle, LogOut } from 'lucide-react'
 
-export const metadata: Metadata = { title: 'Account — NegotiateAI' }
+export default function AccountPage() {
+  const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
+  const [profile, setProfile] = useState<{ name?: string; plan?: string; sessions_used?: number; tools_used?: string[] } | null>(null)
+  const [name, setName] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
-export default async function AccountPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
+  useEffect(() => {
+    async function load() {
+      const supabase = createClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) { router.push('/login'); return }
+      setUser(user)
+      const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+      setProfile(profile)
+      setName(profile?.name || '')
+      setLoading(false)
+    }
+    load()
+  }, [])
 
-  const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+  async function saveName() {
+    if (!user || !name.trim()) return
+    setSaving(true)
+    const supabase = createClient()
+    await supabase.from('profiles').upsert({ id: user.id, name: name.trim() })
+    setSaving(false)
+    setSaved(true)
+    setTimeout(() => setSaved(false), 2500)
+  }
 
-  const planMap: Record<string, string> = { free: 'Free', pro: 'Pro', report: 'Report' }
-  const planLabel = planMap[profile?.plan || 'free'] || 'Free'
+  async function signOut() {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push('/login')
+  }
+
+  const planLabel = { free: 'Free', pro: 'Pro', report: 'Report' }[profile?.plan || 'free'] || 'Free'
+  const isPro = profile?.plan === 'pro'
+
+  const inputStyle = {
+    width: '100%', height: 42, padding: '0 14px', fontSize: 14,
+    border: '0.5px solid var(--color-border-secondary)',
+    borderRadius: 8, background: '#fff',
+    color: 'var(--color-text-primary)', outline: 'none',
+    boxSizing: 'border-box' as const,
+  }
+
+  if (loading) return (
+    <div style={{ padding: '32px 24px' }}>
+      <div className="skeleton" style={{ height: 24, width: 120, marginBottom: 24 }} />
+      <div className="skeleton" style={{ height: 120, borderRadius: 12 }} />
+    </div>
+  )
 
   return (
-    <div style={{ padding: '32px 32px 80px', maxWidth: 600 }}>
-      <h1 style={{ fontSize: 18, fontWeight: 500, marginBottom: 24 }}>Account</h1>
+    <div style={{ maxWidth: 580, margin: '0 auto', padding: '32px 24px 80px' }}>
+      <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 28px' }}>Account</h1>
 
-      <div style={{ background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 24, marginBottom: 16 }}>
-        <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 12 }}>PROFILE</div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-          <div style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>Name</div>
-          <div style={{ fontSize: 13 }}>{profile?.name || '—'}</div>
+      {/* Plan badge */}
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        background: isPro ? '#141414' : 'var(--color-background-secondary)',
+        borderRadius: 12, padding: '16px 20px', marginBottom: 20,
+      }}>
+        <div>
+          <div style={{ fontSize: 12, color: isPro ? 'rgba(255,255,255,0.5)' : 'var(--color-text-tertiary)', marginBottom: 2 }}>CURRENT PLAN</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: isPro ? '#fff' : 'var(--color-text-primary)' }}>{planLabel}</div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-          <div style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>Email</div>
-          <div style={{ fontSize: 13 }}>{user.email}</div>
+        {!isPro && (
+          <a href="/account/billing" style={{
+            background: '#141414', color: '#fff',
+            padding: '8px 16px', borderRadius: 8,
+            fontSize: 13, fontWeight: 600, textDecoration: 'none',
+          }}>Upgrade to Pro</a>
+        )}
+        {isPro && (
+          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }}>Active</div>
+        )}
+      </div>
+
+      {/* Profile */}
+      <div style={{
+        background: '#fff',
+        border: '0.5px solid var(--color-border-tertiary)',
+        borderRadius: 12, padding: 24, marginBottom: 16,
+      }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)', marginBottom: 18, letterSpacing: '0.04em' }}>PROFILE</div>
+
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ fontSize: 13, color: 'var(--color-text-secondary)', display: 'block', marginBottom: 6 }}>Name</label>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <input
+              value={name}
+              onChange={e => setName(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && saveName()}
+              placeholder="Your name"
+              style={inputStyle}
+            />
+            <button
+              onClick={saveName}
+              disabled={saving || !name.trim()}
+              style={{
+                height: 42, padding: '0 16px', flexShrink: 0,
+                background: saved ? '#10b981' : '#141414',
+                color: '#fff', border: 'none', borderRadius: 8,
+                fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                display: 'flex', alignItems: 'center', gap: 6,
+                transition: 'background 0.2s',
+                opacity: saving || !name.trim() ? 0.5 : 1,
+              }}
+            >
+              {saved ? <><CheckCircle size={14} /> Saved</> : saving ? 'Saving…' : 'Save'}
+            </button>
+          </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>Plan</div>
-          <div style={{ fontSize: 12, padding: '2px 8px', background: profile?.plan === 'pro' ? '#141414' : 'var(--color-background-secondary)', color: profile?.plan === 'pro' ? '#fff' : 'var(--color-text-primary)', borderRadius: 4 }}>{planLabel}</div>
+
+        <div style={{ marginBottom: 0 }}>
+          <label style={{ fontSize: 13, color: 'var(--color-text-secondary)', display: 'block', marginBottom: 6 }}>Email</label>
+          <input
+            value={user?.email || ''}
+            disabled
+            style={{ ...inputStyle, background: '#f9fafb', color: 'var(--color-text-tertiary)', cursor: 'not-allowed' }}
+          />
         </div>
       </div>
 
-      <div style={{ background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 24, marginBottom: 16 }}>
-        <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 12 }}>USAGE</div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-          <div style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>Sessions completed</div>
-          <div style={{ fontSize: 13 }}>{profile?.sessions_used || 0}</div>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>Tools used</div>
-          <div style={{ fontSize: 13 }}>{profile?.tools_used?.length || 0}</div>
+      {/* Usage */}
+      <div style={{
+        background: '#fff',
+        border: '0.5px solid var(--color-border-tertiary)',
+        borderRadius: 12, padding: 24, marginBottom: 20,
+      }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)', marginBottom: 16, letterSpacing: '0.04em' }}>USAGE</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div style={{ background: 'var(--color-background-secondary)', borderRadius: 8, padding: '14px 16px', textAlign: 'center' }}>
+            <div style={{ fontSize: 24, fontWeight: 700 }}>{profile?.sessions_used || 0}</div>
+            <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>Sessions completed</div>
+          </div>
+          <div style={{ background: 'var(--color-background-secondary)', borderRadius: 8, padding: '14px 16px', textAlign: 'center' }}>
+            <div style={{ fontSize: 24, fontWeight: 700 }}>{profile?.tools_used?.length || 0}</div>
+            <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>Tools used</div>
+          </div>
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: 10 }}>
-        <Link href="/account/billing" style={{ height: 38, display: 'inline-flex', alignItems: 'center', padding: '0 16px', background: '#141414', color: '#fff', borderRadius: 8, fontSize: 13, textDecoration: 'none' }}>
-          Manage billing
-        </Link>
-      </div>
+      {/* Sign out */}
+      <button
+        onClick={signOut}
+        style={{
+          display: 'flex', alignItems: 'center', gap: 8,
+          background: 'transparent', border: '0.5px solid var(--color-border-tertiary)',
+          borderRadius: 8, padding: '10px 16px',
+          fontSize: 13, color: 'var(--color-text-secondary)', cursor: 'pointer',
+        }}
+      >
+        <LogOut size={14} /> Sign out
+      </button>
     </div>
   )
 }

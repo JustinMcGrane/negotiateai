@@ -1,13 +1,13 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, TrendingUp, Play, BarChart2, Settings } from 'lucide-react'
+import { LayoutDashboard, UserCircle, FileText, Search, Settings } from 'lucide-react'
 
 const items = [
   { label: 'Home', href: '/dashboard', icon: LayoutDashboard },
-  { label: 'Analyze', href: '/tools/comp-analyzer', icon: TrendingUp },
-  { label: 'Practice', href: '/tools/simulator', icon: Play },
-  { label: 'Progress', href: '/progress', icon: BarChart2 },
+  { label: 'Sarah', href: '/recruiter', icon: UserCircle },
+  { label: 'Resume', href: '/resume', icon: FileText },
+  { label: 'Jobs', href: '/jobs', icon: Search },
   { label: 'Account', href: '/account', icon: Settings },
 ]
 
@@ -16,20 +16,23 @@ export function MobileNav() {
   return (
     <nav style={{
       position: 'fixed', bottom: 0, left: 0, right: 0,
-      background: 'var(--color-background-primary)',
+      background: '#fff',
       borderTop: '0.5px solid var(--color-border-tertiary)',
-      display: 'flex', zIndex: 50, paddingBottom: 'env(safe-area-inset-bottom)',
+      display: 'flex', zIndex: 50,
+      paddingBottom: 'env(safe-area-inset-bottom)',
+      boxShadow: '0 -4px 20px rgba(0,0,0,0.06)',
     }}>
       {items.map((item) => {
-        const active = path.startsWith(item.href)
+        const active = path === item.href || path.startsWith(item.href + '/')
         return (
           <Link key={item.href} href={item.href} style={{
             flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center',
-            padding: '10px 4px 8px', gap: 3, textDecoration: 'none',
-            color: active ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
-            fontSize: 10,
+            padding: '10px 4px 8px', gap: 4, textDecoration: 'none',
+            color: active ? '#141414' : '#9ca3af',
+            fontSize: 10, fontWeight: active ? 600 : 400,
+            transition: 'color 0.15s',
           }}>
-            <item.icon size={20} />
+            <item.icon size={20} strokeWidth={active ? 2.5 : 1.8} />
             {item.label}
           </Link>
         )

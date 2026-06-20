@@ -8,12 +8,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="hidden md:flex">
         <Sidebar />
       </div>
-      <main style={{ flex: 1, minWidth: 0, overflowX: 'hidden' }}>
+      <main style={{ flex: 1, minWidth: 0, overflowX: 'hidden', paddingBottom: 'var(--mobile-nav-height, 0)' }} className="mobile-main">
         {children}
       </main>
       <div className="md:hidden">
         <MobileNav />
       </div>
+      <style>{`
+        @media (max-width: 767px) {
+          .mobile-main { padding-bottom: 72px !important; }
+        }
+      `}</style>
     </div>
   )
 }
