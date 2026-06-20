@@ -1,10 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { createClient } from '@/lib/supabase/server'
+import { checkAndIncrementUsage, FREE_LIMITS } from '@/lib/usage'
 
 const client = new Anthropic()
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('plan')
+      .eq('id', user.id)
+      .single()
+
+    const isPro = profile?.plan === 'pro'
+    const usage = await checkAndIncrementUsage(user.id, 'resume', isPro)
+
+    if (!usage.allowed) {
+      return NextResponse.json({
+        error: 'limit_reached',
+        message: `You've used all ${FREE_LIMITS.resume} free resume analyses this month. Upgrade to Pro for unlimited analyses.`,
+        used: usage.used,
+        limit: usage.limit,
+      }, { status: 429 })
+    }
+
     const { resumeText, targetRole, jobDescription } = await req.json()
 
     const hasJD = jobDescription && jobDescription.trim().length > 50
@@ -81,7 +108,7 @@ Return only valid JSON. No markdown code blocks. No commentary outside the JSON.
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) throw new Error('No JSON in response')
     const parsed = JSON.parse(jsonMatch[0])
-    return NextResponse.json(parsed)
+    return NextResponse.json({ ...parsed, used: usage.used, limit: usage.limit })
   } catch (err) {
     console.error(err)
     return NextResponse.json({ error: 'Analysis failed' }, { status: 500 })

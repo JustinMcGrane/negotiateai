@@ -1,10 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { createClient } from '@/lib/supabase/server'
+import { checkAndIncrementUsage, FREE_LIMITS } from '@/lib/usage'
 
 const client = new Anthropic()
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('plan')
+      .eq('id', user.id)
+      .single()
+
+    const isPro = profile?.plan === 'pro'
+    const usage = await checkAndIncrementUsage(user.id, 'cover-letter', isPro)
+
+    if (!usage.allowed) {
+      return NextResponse.json({
+        error: 'limit_reached',
+        message: `You've used all ${FREE_LIMITS['cover-letter']} free cover letters this month. Upgrade to Pro for unlimited generations.`,
+        used: usage.used,
+        limit: usage.limit,
+      }, { status: 429 })
+    }
+
     const { jobTitle, company, jobDesc, resume, tone } = await req.json()
 
     const toneGuide = {
@@ -38,7 +65,7 @@ Return only the letter text, no additional commentary.`
     })
 
     const letter = response.content[0].type === 'text' ? response.content[0].text : ''
-    return NextResponse.json({ letter })
+    return NextResponse.json({ letter, used: usage.used, limit: usage.limit })
   } catch (err) {
     console.error(err)
     return NextResponse.json({ error: 'Generation failed' }, { status: 500 })

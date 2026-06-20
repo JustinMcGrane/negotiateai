@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { createClient } from '@/lib/supabase/server'
+import { checkAndIncrementUsage, FREE_LIMITS } from '@/lib/usage'
 
 const client = new Anthropic()
 
@@ -35,6 +37,31 @@ Your goal is to make this person feel like they have a recruiter in their corner
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('plan')
+      .eq('id', user.id)
+      .single()
+
+    const isPro = profile?.plan === 'pro'
+    const usage = await checkAndIncrementUsage(user.id, 'recruiter', isPro)
+
+    if (!usage.allowed) {
+      return NextResponse.json({
+        error: 'limit_reached',
+        message: `You've used all ${FREE_LIMITS.recruiter} free messages this month. Upgrade to Pro for unlimited access to Sarah.`,
+        used: usage.used,
+        limit: usage.limit,
+      }, { status: 429 })
+    }
+
     const { messages } = await req.json()
 
     const anthropicMessages = messages
@@ -52,7 +79,7 @@ export async function POST(req: NextRequest) {
     })
 
     const content = response.content[0].type === 'text' ? response.content[0].text : ''
-    return NextResponse.json({ content })
+    return NextResponse.json({ content, used: usage.used, limit: usage.limit })
   } catch (err) {
     console.error(err)
     return NextResponse.json({ error: 'Failed to get response' }, { status: 500 })
