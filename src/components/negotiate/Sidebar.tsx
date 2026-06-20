@@ -72,19 +72,26 @@ export function Sidebar() {
         flexShrink: 0,
       }}
     >
-      <div style={{ padding: '14px 16px 12px', borderBottom: '0.5px solid var(--color-border-tertiary)', display: 'flex', alignItems: 'center' }}>
-        <Link href="/dashboard">
+      <div style={{
+        padding: '20px 16px 18px',
+        borderBottom: '0.5px solid var(--color-border-tertiary)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Image
             src="/logo.png"
             alt="NegotiateAI"
-            width={140}
-            height={40}
+            width={180}
+            height={52}
             style={{ objectFit: 'contain' }}
+            priority
           />
         </Link>
       </div>
 
-      <nav style={{ flex: 1, padding: '8px 0', overflowY: 'auto' }}>
+      <nav style={{ flex: 1, padding: '10px 0', overflowY: 'auto' }}>
         {nav.map((item) => {
           if ('href' in item) {
             const active = path === item.href
