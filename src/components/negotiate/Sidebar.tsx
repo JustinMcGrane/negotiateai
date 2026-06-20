@@ -7,6 +7,7 @@ import {
   LayoutDashboard, TrendingUp, FileSearch, Calculator, DollarSign,
   BookOpen, Mail, Shield, PenLine, Play, MessageSquare,
   BarChart2, Settings, CreditCard, ChevronRight,
+  UserCircle, FileText, Search, ClipboardList, PenSquare,
 } from 'lucide-react'
 
 type NavItem = { label: string; href: string; icon: LucideIcon }
@@ -15,6 +16,16 @@ type NavEntry = NavItem | NavGroup
 
 const nav: NavEntry[] = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  {
+    label: 'Career Hub',
+    items: [
+      { label: 'AI Recruiter', href: '/recruiter', icon: UserCircle },
+      { label: 'Resume Analyzer', href: '/resume', icon: FileText },
+      { label: 'Job Search', href: '/jobs', icon: Search },
+      { label: 'Cover Letter', href: '/tools/cover-letter', icon: PenSquare },
+      { label: 'Application Tracker', href: '/tracker', icon: ClipboardList },
+    ],
+  },
   {
     label: 'Intelligence',
     items: [
