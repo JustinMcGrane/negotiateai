@@ -4,7 +4,7 @@ import { Send, Briefcase, Sparkles } from 'lucide-react'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
-const ALEX_INTRO = `Hi! I'm **Alex Chen**, your personal AI recruiter.
+const SARAH_INTRO = `Hi! I'm **Sarah**, your personal AI recruiter.
 
 I've spent 12 years placing talent at companies like Google, Meta, Stripe, and hundreds of top startups. I know what hiring managers look for, what red flags kill candidacies, and exactly how to position you to land the role — and the offer — you deserve.
 
@@ -19,7 +19,7 @@ What are you working on today?`
 
 export default function RecruiterPage() {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: ALEX_INTRO },
+    { role: 'assistant', content: SARAH_INTRO },
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -69,7 +69,7 @@ export default function RecruiterPage() {
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <h1 style={{ fontSize: 18, fontWeight: 600, margin: 0 }}>Alex Chen</h1>
+              <h1 style={{ fontSize: 18, fontWeight: 600, margin: 0 }}>Sarah</h1>
               <span style={{
                 fontSize: 10, background: '#10b981', color: '#fff',
                 borderRadius: 4, padding: '2px 6px', fontWeight: 600,
@@ -128,7 +128,7 @@ export default function RecruiterPage() {
               borderRadius: '18px 18px 18px 4px',
               padding: '12px 16px', fontSize: 14,
             }}>
-              <span style={{ opacity: 0.5 }}>Alex is thinking…</span>
+              <span style={{ opacity: 0.5 }}>Sarah is thinking…</span>
             </div>
           </div>
         )}
@@ -146,7 +146,7 @@ export default function RecruiterPage() {
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send() } }}
-            placeholder="Ask Alex anything about your job search…"
+            placeholder="Ask Sarah anything about your job search…"
             rows={1}
             style={{
               flex: 1, background: 'transparent', border: 'none', outline: 'none',
@@ -169,7 +169,7 @@ export default function RecruiterPage() {
           </button>
         </div>
         <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', textAlign: 'center', marginTop: 8 }}>
-          Alex uses real market data and AI to give you recruiter-grade career advice.
+          Sarah uses real market data and AI to give you recruiter-grade career advice.
         </p>
       </div>
     </div>
