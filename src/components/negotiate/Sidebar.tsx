@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { BrandMark } from './BrandMark'
 import type { LucideIcon } from 'lucide-react'
 import {
   LayoutDashboard, TrendingUp, FileSearch, Calculator, DollarSign,
@@ -72,9 +72,16 @@ export function Sidebar() {
         flexShrink: 0,
       }}
     >
-      <div style={{ padding: '16px 16px 12px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '0.5px solid var(--color-border-tertiary)' }}>
-        <BrandMark />
-        <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)' }}>NegotiateAI</span>
+      <div style={{ padding: '14px 16px 12px', borderBottom: '0.5px solid var(--color-border-tertiary)', display: 'flex', alignItems: 'center' }}>
+        <Link href="/dashboard">
+          <Image
+            src="/9893fdb6-00eb-4f89-8209-8a3cffb84aa8.png"
+            alt="NegotiateAI"
+            width={140}
+            height={40}
+            style={{ objectFit: 'contain' }}
+          />
+        </Link>
       </div>
 
       <nav style={{ flex: 1, padding: '8px 0', overflowY: 'auto' }}>

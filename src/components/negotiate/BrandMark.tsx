@@ -1,20 +1,13 @@
-import { Briefcase } from 'lucide-react'
+import Image from 'next/image'
 
 export function BrandMark({ size = 26 }: { size?: number }) {
   return (
-    <div
-      style={{
-        width: size,
-        height: size,
-        background: '#141414',
-        borderRadius: 6,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
-      }}
-    >
-      <Briefcase size={size * 0.55} color="#fff" strokeWidth={1.5} />
-    </div>
+    <Image
+      src="/9893fdb6-00eb-4f89-8209-8a3cffb84aa8.png"
+      alt="NegotiateAI"
+      width={size}
+      height={size}
+      style={{ objectFit: 'contain', flexShrink: 0 }}
+    />
   )
 }
