@@ -3,12 +3,15 @@ import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { checkAndIncrementUsage, FREE_LIMITS } from '@/lib/usage'
+import { getUserProfile, formatProfileContext } from '@/lib/profile-context'
 
 const client = new Anthropic()
 
-const FREE_SYSTEM_PROMPT = `You are Sarah, a senior recruiter with 12 years of experience. You have placed candidates at Google, Meta, Stripe, Airbnb, and hundreds of venture-backed startups. You have reviewed tens of thousands of resumes and conducted thousands of interviews across engineering, product, design, sales, and executive roles.
+function buildFreeSystemPrompt(profileContext: string) {
+  const profileSection = profileContext ? `\n\n${profileContext}\n\nUse this to make your advice specific to them. Reference it naturally — do not announce it or repeat it back verbatim.` : ''
+  return `You are Sarah, a senior recruiter with 12 years of experience. You have placed candidates at Google, Meta, Stripe, Airbnb, and hundreds of venture-backed startups. You have reviewed tens of thousands of resumes and conducted thousands of interviews across engineering, product, design, sales, and executive roles.
 
-You are talking to a job seeker one-on-one. This is a real conversation, not a report.
+You are talking to a job seeker one-on-one. This is a real conversation, not a report.${profileSection}
 
 How you communicate:
 - Write like a human, not a consultant. Short paragraphs. Plain sentences.
@@ -36,8 +39,9 @@ What you never do:
 When users ask about deep coaching — like mock interviews, negotiation roleplay, or step-by-step job search strategy — you can give them a taste but let them know that full coaching sessions are available with a Pro account. Be natural about it, not salesy.
 
 Your goal is to make this person feel like they have a recruiter in their corner who will tell them the truth and help them actually land the job.`
+}
 
-function buildProSystemPrompt(memory: Record<string, string>) {
+function buildProSystemPrompt(memory: Record<string, string>, profileContext: string) {
   const memoryLines: string[] = []
   if (memory.targetRole) memoryLines.push(`Target role: ${memory.targetRole}`)
   if (memory.currentRole) memoryLines.push(`Current role: ${memory.currentRole}`)
@@ -48,14 +52,14 @@ function buildProSystemPrompt(memory: Record<string, string>) {
   if (memory.background) memoryLines.push(`Background: ${memory.background}`)
   if (memory.challenges) memoryLines.push(`Current challenges: ${memory.challenges}`)
 
+  const profileSection = profileContext ? `\n\n${profileContext}` : ''
   const memorySection = memoryLines.length > 0
     ? `\n\nWHAT YOU KNOW ABOUT THIS PERSON:\n${memoryLines.join('\n')}\n\nUse this context naturally. Reference it when relevant. Update your understanding as the conversation reveals more.`
     : ''
 
   return `You are Sarah, a senior recruiter and career coach with 12 years of experience. You have placed candidates at Google, Meta, Stripe, Airbnb, and hundreds of venture-backed startups. You have conducted thousands of interviews and coached hundreds of professionals through career transitions, offer negotiations, and job searches.
 
-This person is a Pro member. They have full access to everything you can offer. Give them everything.
-${memorySection}
+This person is a Pro member. They have full access to everything you can offer. Give them everything.${profileSection}${memorySection}
 
 YOUR COACHING CAPABILITIES:
 
@@ -138,7 +142,7 @@ export async function POST(req: NextRequest) {
 
     const { data: profile } = await supabase
       .from('profiles')
-      .select('plan')
+      .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role')
       .eq('id', user.id)
       .single()
 
@@ -156,7 +160,17 @@ export async function POST(req: NextRequest) {
 
     const { messages } = await req.json()
 
-    let systemPrompt = FREE_SYSTEM_PROMPT
+    const onboardingProfile = {
+      goal: profile?.onboarding_goal,
+      situation: profile?.onboarding_situation,
+      experience: profile?.onboarding_experience,
+      role: profile?.onboarding_role,
+    }
+
+    const { formatProfileContext } = await import('@/lib/profile-context')
+    const profileContext = formatProfileContext(onboardingProfile)
+
+    let systemPrompt = buildFreeSystemPrompt(profileContext)
     let memory: Record<string, string> = {}
 
     if (isPro) {
@@ -168,7 +182,7 @@ export async function POST(req: NextRequest) {
         .single()
 
       memory = (memoryData?.context as Record<string, string>) ?? {}
-      systemPrompt = buildProSystemPrompt(memory)
+      systemPrompt = buildProSystemPrompt(memory, profileContext)
     }
 
     const anthropicMessages = messages
@@ -187,7 +201,6 @@ export async function POST(req: NextRequest) {
 
     const content = response.content[0].type === 'text' ? response.content[0].text : ''
 
-    // Fire-and-forget memory extraction for Pro users every 4 messages
     if (isPro && messages.length % 4 === 0) {
       extractAndSaveMemory(user.id, messages, memory)
     }
