@@ -7,7 +7,7 @@ import {
   LayoutDashboard, TrendingUp, FileSearch, Calculator, DollarSign,
   BookOpen, Mail, Shield, PenLine, Play, MessageSquare,
   BarChart2, Settings, CreditCard, ChevronRight,
-  UserCircle, FileText, Search, ClipboardList, PenSquare,
+  UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowUpLeft,
 } from 'lucide-react'
 
 type NavItem = { label: string; href: string; icon: LucideIcon }
@@ -139,7 +139,7 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div style={{ padding: 12, borderTop: '0.5px solid var(--color-border-tertiary)' }}>
+      <div style={{ padding: 12, borderTop: '0.5px solid var(--color-border-tertiary)', display: 'flex', flexDirection: 'column', gap: 8 }}>
         <Link href="/account/billing" style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           background: '#141414', color: '#fff', borderRadius: 8,
@@ -147,6 +147,16 @@ export function Sidebar() {
         }}>
           Upgrade to Pro
           <ChevronRight size={14} />
+        </Link>
+        <Link href="/" style={{
+          display: 'flex', alignItems: 'center', gap: 6,
+          padding: '6px 8px', fontSize: 12,
+          color: 'var(--color-text-tertiary)',
+          textDecoration: 'none', borderRadius: 6,
+          transition: 'color 0.15s',
+        }}>
+          <ArrowUpLeft size={13} />
+          Back to website
         </Link>
       </div>
     </aside>
