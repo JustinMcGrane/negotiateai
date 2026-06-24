@@ -59,8 +59,11 @@ export async function POST(req: NextRequest) {
     const apiKey = process.env.RAPIDAPI_KEY
 
     if (!apiKey) {
+      console.log('[job-search] No RAPIDAPI_KEY found, returning mock data')
       return NextResponse.json({ jobs: getMockJobs(query, location) })
     }
+
+    console.log('[job-search] RAPIDAPI_KEY found, length:', apiKey.length)
 
     const params = new URLSearchParams({
       query: [query, jobType, location].filter(Boolean).join(' '),
@@ -82,15 +85,28 @@ export async function POST(req: NextRequest) {
       if (typeMap[jobType]) params.set('employment_types', typeMap[jobType])
     }
 
-    const res = await fetch(`https://jsearch.p.rapidapi.com/search?${params}`, {
+    const url = `https://jsearch.p.rapidapi.com/search?${params}`
+    console.log('[job-search] Fetching:', url)
+
+    const res = await fetch(url, {
       headers: {
         'X-RapidAPI-Key': apiKey,
         'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
       },
     })
-    const data = await res.json()
 
-    const jobs = (data.data || []).map((j: JSearchJob) => ({
+    console.log('[job-search] JSearch status:', res.status)
+    const data = await res.json()
+    console.log('[job-search] JSearch response keys:', Object.keys(data))
+    console.log('[job-search] Jobs count:', data.data?.length ?? 0)
+    if (data.message) console.log('[job-search] JSearch message:', data.message)
+
+    if (!res.ok || !data.data) {
+      console.log('[job-search] Falling back to mock data')
+      return NextResponse.json({ jobs: getMockJobs(query, location) })
+    }
+
+    const jobs = data.data.map((j: JSearchJob) => ({
       title: j.job_title || '',
       company: j.employer_name || '',
       location: formatLocation(j),
@@ -103,8 +119,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ jobs })
   } catch (err) {
-    console.error(err)
-    return NextResponse.json({ jobs: [] }, { status: 500 })
+    console.error('[job-search] Error:', err)
+    return NextResponse.json({ jobs: getMockJobs('', '') }, { status: 200 })
   }
 }
 
@@ -116,7 +132,7 @@ function getMockJobs(query: string, location: string) {
       location: location || 'San Francisco, CA',
       salary: '$140k – $180k',
       posted: '2 days ago',
-      description: 'We are looking for an experienced professional to join our growing team. You will work on challenging problems and collaborate with world-class engineers across a fast-paced, mission-driven environment.',
+      description: 'We are looking for an experienced professional to join our growing team.',
       url: 'https://www.linkedin.com/jobs/',
       source: 'LinkedIn',
     },
@@ -126,7 +142,7 @@ function getMockJobs(query: string, location: string) {
       location: location || 'Remote',
       salary: '$120k – $160k',
       posted: '1 week ago',
-      description: 'Join our fast-growing startup and help shape the future of our product. Competitive salary, equity, and great benefits.',
+      description: 'Join our fast-growing startup and help shape the future of our product.',
       url: 'https://www.indeed.com/jobs',
       source: 'Indeed',
     },
@@ -136,29 +152,9 @@ function getMockJobs(query: string, location: string) {
       location: location || 'New York, NY',
       salary: '$130k – $170k',
       posted: '3 days ago',
-      description: 'Exciting opportunity for a motivated professional ready to make an impact. Strong culture, mentorship program, and clear advancement path.',
+      description: 'Exciting opportunity for a motivated professional ready to make an impact.',
       url: 'https://www.glassdoor.com/Job/',
       source: 'Glassdoor',
-    },
-    {
-      title: `${query} Contractor`,
-      company: 'Bright Consulting Group',
-      location: location || 'Austin, TX',
-      salary: '$75 – $95 / hr',
-      posted: '5 days ago',
-      description: 'Short-term contract role with potential to convert full-time. Ideal for someone available to start immediately.',
-      url: 'https://www.linkedin.com/jobs/',
-      source: 'LinkedIn',
-    },
-    {
-      title: `Associate ${query}`,
-      company: 'NextLevel Finance',
-      location: location || 'Chicago, IL',
-      salary: '$90k – $115k',
-      posted: '1 day ago',
-      description: 'Great entry point for someone looking to grow quickly. Structured mentorship and clear internal mobility.',
-      url: 'https://www.indeed.com/jobs',
-      source: 'Indeed',
     },
   ]
 }
