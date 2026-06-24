@@ -42,18 +42,7 @@ async function extractProfile(
       max_tokens: 200,
       messages: [{
         role: 'user',
-        content: `Extract what you know about this user from the conversation. Return ONLY valid JSON with these fields (omit fields you are not confident about):
-{
-  "goal": one of "new_job" | "negotiate" | "raise" | "resume" (only if clearly stated),
-  "situation": one of "actively_looking" | "casually_looking" | "have_offer" | "employed" (only if clearly stated),
-  "experience": one of "0-2" | "3-5" | "6-10" | "10+" (only if clearly stated),
-  "role": string (their job title or field, only if clearly stated)
-}
-
-Conversation:
-${transcript}
-
-Return only the JSON object, nothing else.`,
+        content: `Extract what you know about this user from the conversation. Return ONLY valid JSON with these fields (omit fields you are not confident about):\n{\n  "goal": one of "new_job" | "negotiate" | "raise" | "resume" (only if clearly stated),\n  "situation": one of "actively_looking" | "casually_looking" | "have_offer" | "employed" (only if clearly stated),\n  "experience": one of "0-2" | "3-5" | "6-10" | "10+" (only if clearly stated),\n  "role": string (their job title or field, only if clearly stated)\n}\n\nConversation:\n${transcript}\n\nReturn only the JSON object, nothing else.`,
       }],
     })
 
@@ -67,10 +56,6 @@ Return only the JSON object, nothing else.`,
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-
     const { messages } = await req.json()
 
     const anthropicMessages = messages
@@ -91,20 +76,27 @@ export async function POST(req: NextRequest) {
     const complete = content.includes('[ONBOARDING_COMPLETE]')
     const displayContent = content.replace('[ONBOARDING_COMPLETE]', '').trim()
 
-    // Run extraction in parallel (best-effort, use Haiku for speed)
     const allMessages = [...messages, { role: 'assistant', content: displayContent }]
     const profile = await extractProfile(allMessages)
 
-    // If complete, save the profile
+    // Save profile if complete and user is authenticated
     if (complete && Object.keys(profile).length > 0) {
-      await supabase.from('profiles').upsert({
-        id: user.id,
-        onboarding_goal: profile.goal,
-        onboarding_situation: profile.situation,
-        onboarding_experience: profile.experience,
-        onboarding_role: profile.role,
-        onboarded_at: new Date().toISOString(),
-      })
+      try {
+        const supabase = await createClient()
+        const { data: { user } } = await supabase.auth.getUser()
+        if (user) {
+          await supabase.from('profiles').upsert({
+            id: user.id,
+            onboarding_goal: profile.goal,
+            onboarding_situation: profile.situation,
+            onboarding_experience: profile.experience,
+            onboarding_role: profile.role,
+            onboarded_at: new Date().toISOString(),
+          })
+        }
+      } catch {
+        // Profile save is best-effort, never block the response
+      }
     }
 
     return NextResponse.json({ content: displayContent, complete, profile })

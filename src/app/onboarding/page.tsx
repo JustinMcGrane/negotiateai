@@ -54,6 +54,12 @@ export default function OnboardingPage() {
         body: JSON.stringify({ messages: updatedMessages }),
       })
       const data = await res.json()
+
+      if (!data.content) {
+        setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }])
+        return
+      }
+
       setMessages(prev => [...prev, { role: 'assistant', content: data.content }])
       if (data.profile) setProfile(data.profile)
       if (data.complete) setComplete(true)
@@ -65,26 +71,28 @@ export default function OnboardingPage() {
   }
 
   async function finish() {
-    // Ensure profile is saved even if extraction missed something — save what we have
     if (Object.keys(profile).length > 0) {
-      const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
-      if (user) {
-        await supabase.from('profiles').upsert({
-          id: user.id,
-          onboarding_goal: profile.goal,
-          onboarding_situation: profile.situation,
-          onboarding_experience: profile.experience,
-          onboarding_role: profile.role,
-          onboarded_at: new Date().toISOString(),
-        })
-      }
+      try {
+        const supabase = createClient()
+        const { data: { user } } = await supabase.auth.getUser()
+        if (user) {
+          await supabase.from('profiles').upsert({
+            id: user.id,
+            onboarding_goal: profile.goal,
+            onboarding_situation: profile.situation,
+            onboarding_experience: profile.experience,
+            onboarding_role: profile.role,
+            onboarded_at: new Date().toISOString(),
+          })
+        }
+      } catch {}
     }
     const dest = FIRST_STEPS[profile.goal ?? ''] ?? '/dashboard'
     router.push(dest)
   }
 
   function renderContent(text: string) {
+    if (!text) return ''
     return text
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\n/g, '<br />')
@@ -161,7 +169,6 @@ export default function OnboardingPage() {
             </div>
           )}
 
-          {/* Completion CTA */}
           {complete && !loading && (
             <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 8 }}>
               <button
@@ -181,7 +188,6 @@ export default function OnboardingPage() {
           <div ref={bottomRef} />
         </div>
 
-        {/* Input */}
         {!complete && (
           <div style={{ padding: '12px 0 28px' }}>
             <div style={{
