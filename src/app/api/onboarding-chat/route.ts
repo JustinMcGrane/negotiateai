@@ -76,31 +76,35 @@ export async function POST(req: NextRequest) {
     const complete = content.includes('[ONBOARDING_COMPLETE]')
     const displayContent = content.replace('[ONBOARDING_COMPLETE]', '').trim()
 
-    const allMessages = [...messages, { role: 'assistant', content: displayContent }]
-    const profile = await extractProfile(allMessages)
+    // Only run profile extraction when onboarding is complete — avoids double API call on every message
+    let profile: ExtractedProfile = {}
+    if (complete) {
+      const allMessages = [...messages, { role: 'assistant', content: displayContent }]
+      profile = await extractProfile(allMessages)
 
-    if (complete && Object.keys(profile).length > 0) {
-      try {
-        const supabase = await createClient()
-        const { data: { user } } = await supabase.auth.getUser()
-        if (user) {
-          await supabase.from('profiles').upsert({
-            id: user.id,
-            onboarding_goal: profile.goal,
-            onboarding_situation: profile.situation,
-            onboarding_experience: profile.experience,
-            onboarding_role: profile.role,
-            onboarded_at: new Date().toISOString(),
-          })
+      if (Object.keys(profile).length > 0) {
+        try {
+          const supabase = await createClient()
+          const { data: { user } } = await supabase.auth.getUser()
+          if (user) {
+            await supabase.from('profiles').upsert({
+              id: user.id,
+              onboarding_goal: profile.goal,
+              onboarding_situation: profile.situation,
+              onboarding_experience: profile.experience,
+              onboarding_role: profile.role,
+              onboarded_at: new Date().toISOString(),
+            })
+          }
+        } catch {
+          // best-effort, never block the response
         }
-      } catch {
-        // best-effort, never block the response
       }
     }
 
     return NextResponse.json({ content: displayContent, complete, profile })
   } catch (err) {
-    console.error(err)
+    console.error('[onboarding-chat]', err)
     return NextResponse.json({ error: 'Failed' }, { status: 500 })
   }
 }
