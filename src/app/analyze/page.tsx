@@ -46,13 +46,8 @@ function ScoreCard({ score, verdict }: { score: number; verdict: string }) {
       <div className="flex-shrink-0">
         <svg width="88" height="88" viewBox="0 0 88 88">
           <circle cx="44" cy="44" r={r} fill="none" stroke="#e5e7eb" strokeWidth="7" />
-          <circle
-            cx="44" cy="44" r={r} fill="none"
-            stroke={color} strokeWidth="7"
-            strokeDasharray={`${dash} ${circ}`}
-            strokeLinecap="round"
-            transform="rotate(-90 44 44)"
-          />
+          <circle cx="44" cy="44" r={r} fill="none" stroke={color} strokeWidth="7"
+            strokeDasharray={`${dash} ${circ}`} strokeLinecap="round" transform="rotate(-90 44 44)" />
           <text x="44" y="47" textAnchor="middle" fontSize="22" fontWeight="800" fill="#111827">{score}</text>
           <text x="44" y="59" textAnchor="middle" fontSize="9" fill="#9ca3af">out of 10</text>
         </svg>
@@ -163,13 +158,13 @@ function WhatIsIncludedModal({ onClose }: { onClose: () => void }) {
     { icon: '🎯', label: 'Negotiation playbook with word-for-word scripts' },
     { icon: '💪', label: 'Offer strengths to leverage in your conversation' },
     { icon: '🚩', label: 'Red flags and missing terms to watch out for' },
-    { icon: '💬', label: 'Unlimited follow-up with your AI recruiter Sarah' },
+    { icon: '💬', label: 'Unlimited offer analyses every month' },
   ]
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
       <div ref={ref} className="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-base font-bold text-gray-900">What&apos;s included</h3>
+          <h3 className="text-base font-bold text-gray-900">What&apos;s included — $49/month</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-700 text-lg leading-none">&times;</button>
         </div>
         <ul className="space-y-4 mb-8">
@@ -180,10 +175,8 @@ function WhatIsIncludedModal({ onClose }: { onClose: () => void }) {
             </li>
           ))}
         </ul>
-        <button
-          onClick={onClose}
-          className="w-full py-3 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-700 transition-colors"
-        >
+        <button onClick={onClose}
+          className="w-full py-3 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-700 transition-colors">
           Got it
         </button>
       </div>
@@ -191,7 +184,11 @@ function WhatIsIncludedModal({ onClose }: { onClose: () => void }) {
   )
 }
 
-function AnalysisResults({ result, isUnlocked }: { result: OfferAnalysis; isUnlocked: boolean }) {
+function AnalysisResults({ result, isUnlocked, onUnlock }: {
+  result: OfferAnalysis
+  isUnlocked: boolean
+  onUnlock: () => Promise<void>
+}) {
   const [showModal, setShowModal] = useState(false)
   const [checkoutLoading, setCheckoutLoading] = useState(false)
 
@@ -203,17 +200,8 @@ function AnalysisResults({ result, isUnlocked }: { result: OfferAnalysis; isUnlo
   async function handleUnlock() {
     setCheckoutLoading(true)
     try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          priceId: process.env.NEXT_PUBLIC_STRIPE_REPORT_PRICE_ID,
-          returnPath: '/analyze?unlocked=1',
-        }),
-      })
-      const data = await res.json()
-      if (data.url) window.location.href = data.url
-    } catch {
+      await onUnlock()
+    } finally {
       setCheckoutLoading(false)
     }
   }
@@ -221,43 +209,31 @@ function AnalysisResults({ result, isUnlocked }: { result: OfferAnalysis; isUnlo
   return (
     <>
       {showModal && <WhatIsIncludedModal onClose={() => setShowModal(false)} />}
-
       <div className="space-y-4">
         <ScoreCard score={result.score} verdict={result.verdict} />
-
         {firstComp && renderComponent(firstComp)}
-
         {lockedComps.length > 0 && (
           <div className="relative">
-            <div
-              className="space-y-4"
-              style={hasLocked ? { filter: 'blur(6px)', pointerEvents: 'none', userSelect: 'none' } : undefined}
-            >
-              {lockedComps.map((comp, i) => (
-                <div key={i}>{renderComponent(comp)}</div>
-              ))}
+            <div className="space-y-4"
+              style={hasLocked ? { filter: 'blur(6px)', pointerEvents: 'none', userSelect: 'none' } : undefined}>
+              {lockedComps.map((comp, i) => <div key={i}>{renderComponent(comp)}</div>)}
             </div>
-
             {hasLocked && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-8 max-w-sm w-full mx-4 text-center">
                   <div className="text-3xl mb-3">🔒</div>
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Estimated money left on table</p>
-                  <p className="text-4xl font-black text-gray-900 mb-3">{fmt(result.moneyLeftOnTable ?? result.gap ?? 0)}</p>
+                  <p className="text-4xl font-black text-gray-900 mb-1">{fmt(result.moneyLeftOnTable ?? result.gap ?? 0)}</p>
+                  <p className="text-xs text-gray-400 mb-5">$49/month · cancel anytime</p>
                   <p className="text-sm text-gray-600 mb-6 leading-relaxed">
                     Unlock your full negotiation playbook, scripts, red flags, and offer strengths.
                   </p>
-                  <button
-                    onClick={handleUnlock}
-                    disabled={checkoutLoading}
-                    className="w-full py-3.5 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-700 transition-colors mb-3 disabled:opacity-50"
-                  >
-                    {checkoutLoading ? 'Redirecting...' : 'Unlock my analysis'}
+                  <button onClick={handleUnlock} disabled={checkoutLoading}
+                    className="w-full py-3.5 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-700 transition-colors mb-3 disabled:opacity-50">
+                    {checkoutLoading ? 'Redirecting...' : 'Unlock my analysis — $49/mo'}
                   </button>
-                  <button
-                    onClick={() => setShowModal(true)}
-                    className="w-full py-3 border border-gray-200 text-gray-600 text-sm font-medium rounded-xl hover:bg-gray-50 transition-colors"
-                  >
+                  <button onClick={() => setShowModal(true)}
+                    className="w-full py-3 border border-gray-200 text-gray-600 text-sm font-medium rounded-xl hover:bg-gray-50 transition-colors">
                     See what&apos;s included
                   </button>
                 </div>
@@ -277,12 +253,28 @@ export default function AnalyzePage() {
   const [result, setResult] = useState<OfferAnalysis | null>(null)
   const [error, setError] = useState('')
   const [isUnlocked, setIsUnlocked] = useState(false)
+  const [subChecked, setSubChecked] = useState(false)
 
+  // Check subscription status on load
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search)
-      if (params.get('unlocked') === '1') setIsUnlocked(true)
+    async function checkSub() {
+      try {
+        // Unlocked via Stripe redirect
+        const params = new URLSearchParams(window.location.search)
+        if (params.get('unlocked') === '1') {
+          setIsUnlocked(true)
+          setSubChecked(true)
+          return
+        }
+        // Check Supabase profile plan
+        const res = await fetch('/api/subscription-status')
+        const data = await res.json()
+        if (data.subscribed) setIsUnlocked(true)
+      } finally {
+        setSubChecked(true)
+      }
     }
+    checkSub()
   }, [])
 
   useEffect(() => {
@@ -316,6 +308,19 @@ export default function AnalyzePage() {
     }
   }
 
+  async function handleUnlock() {
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        priceId: process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID,
+        returnPath: '/analyze?unlocked=1',
+      }),
+    })
+    const data = await res.json()
+    if (data.url) window.location.href = data.url
+  }
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <header className="border-b border-gray-100 px-6 py-4 flex items-center justify-between">
@@ -341,11 +346,8 @@ export default function AnalyzePage() {
                   rows={12}
                   className="w-full px-5 py-4 rounded-2xl border border-gray-200 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none leading-relaxed"
                 />
-                <button
-                  type="submit"
-                  disabled={!offerText.trim()}
-                  className="w-full py-4 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-                >
+                <button type="submit" disabled={!offerText.trim()}
+                  className="w-full py-4 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
                   Analyze Offer
                 </button>
               </form>
@@ -357,12 +359,7 @@ export default function AnalyzePage() {
               <div className="w-10 h-10 border-2 border-gray-200 border-t-gray-900 rounded-full animate-spin" />
               <div className="flex flex-col gap-3 w-full max-w-sm">
                 {LOADING_STEPS.map((step, i) => (
-                  <div
-                    key={step}
-                    className={`flex items-center gap-3 text-sm transition-all duration-500 ${
-                      i <= stepIndex ? 'opacity-100' : 'opacity-20'
-                    }`}
-                  >
+                  <div key={step} className={`flex items-center gap-3 text-sm transition-all duration-500 ${i <= stepIndex ? 'opacity-100' : 'opacity-20'}`}>
                     <div className={`w-4 h-4 rounded-full flex-shrink-0 transition-colors duration-300 ${
                       i < stepIndex ? 'bg-gray-900' : i === stepIndex ? 'bg-gray-400 animate-pulse' : 'bg-gray-200'
                     }`} />
@@ -380,18 +377,16 @@ export default function AnalyzePage() {
             </div>
           )}
 
-          {result && !loading && (
+          {result && !loading && subChecked && (
             <div>
               <div className="flex items-center justify-between mb-5">
                 <h2 className="text-xl font-bold text-gray-900">Your Offer Analysis</h2>
-                <button
-                  onClick={() => { setResult(null); setOfferText('') }}
-                  className="text-xs text-gray-400 hover:text-gray-700 underline underline-offset-2"
-                >
+                <button onClick={() => { setResult(null); setOfferText('') }}
+                  className="text-xs text-gray-400 hover:text-gray-700 underline underline-offset-2">
                   Analyze another
                 </button>
               </div>
-              <AnalysisResults result={result} isUnlocked={isUnlocked} />
+              <AnalysisResults result={result} isUnlocked={isUnlocked} onUnlock={handleUnlock} />
             </div>
           )}
         </div>
