@@ -12,24 +12,50 @@ export async function POST(req: NextRequest) {
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 800,
+      max_tokens: 1200,
       system: `You are a senior compensation analyst. The user will paste raw offer details in plain text. Extract the information and return ONLY a valid JSON object with this exact structure:
 {
-  "score": number (0-100 offer strength score),
+  "score": number (0-10 offer strength score),
   "verdict": "below market" | "at market" | "above market",
   "role": string,
   "company": string,
   "location": string,
-  "baseSalary": number (annual, in USD),
-  "totalComp4yr": number (base + bonus + equity over 4 years),
-  "marketMedian": number (market median base salary for this role and location),
+  "baseSalary": number,
+  "marketMedian": number,
   "gap": number (marketMedian minus baseSalary — positive means underpaid),
-  "analysis": string (2-3 sentences summarizing the offer strength and key insight),
-  "negotiate": string[] (3-4 specific, actionable things to push back on),
-  "strengths": string[] (2-3 genuine positives about this offer)
+  "totalComp4yr": number,
+  "moneyLeftOnTable": number (realistic additional comp achievable through negotiation),
+  "components": [
+    {
+      "title": "Market Rate Breakdown",
+      "type": "market",
+      "summary": string (2-3 sentences on how this offer compares to market),
+      "dataPoints": [
+        { "label": string, "value": string }
+      ]
+    },
+    {
+      "title": "Negotiation Playbook",
+      "type": "negotiate",
+      "summary": string (1-2 sentences framing the negotiation opportunity),
+      "items": [
+        { "lever": string, "script": string, "potential": string }
+      ]
+    },
+    {
+      "title": "Offer Strengths",
+      "type": "strengths",
+      "items": string[]
+    },
+    {
+      "title": "Red Flags",
+      "type": "redflags",
+      "items": string[]
+    }
+  ]
 }
 
-If a value is not mentioned in the offer text, make a reasonable estimate based on role, location, and company stage. Return only the JSON object.`,
+For the negotiation playbook, each item should have: lever (what to push on), script (a one-line opener to use in the conversation), and potential (e.g. "+$10k base"). If no red flags exist, return an empty items array. If a value is not mentioned, estimate from role/location/company stage. Return only the JSON object.`,
       messages: [{ role: 'user', content: offerText }],
     })
 
@@ -37,8 +63,7 @@ If a value is not mentioned in the offer text, make a reasonable estimate based 
     const match = text.match(/\{[\s\S]*\}/)
     if (!match) throw new Error('Invalid response')
 
-    const result = JSON.parse(match[0])
-    return NextResponse.json(result)
+    return NextResponse.json(JSON.parse(match[0]))
   } catch (err) {
     console.error('[analyze]', err)
     return NextResponse.json({ error: 'Analysis failed' }, { status: 500 })

@@ -1,11 +1,20 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const LOADING_STEPS = [
   'Checking market rates for your role...',
   'Comparing against salary data points...',
   'Building your negotiation strategy...',
 ]
+
+type DataPoint = { label: string; value: string }
+type NegotiateItem = { lever: string; script: string; potential: string }
+
+type Component =
+  | { title: string; type: 'market'; summary: string; dataPoints: DataPoint[] }
+  | { title: string; type: 'negotiate'; summary: string; items: NegotiateItem[] }
+  | { title: string; type: 'strengths'; items: string[] }
+  | { title: string; type: 'redflags'; items: string[] }
 
 type OfferAnalysis = {
   score: number
@@ -14,35 +23,252 @@ type OfferAnalysis = {
   company: string
   location: string
   baseSalary: number
-  totalComp4yr: number
   marketMedian: number
   gap: number
-  analysis: string
-  negotiate: string[]
-  strengths: string[]
+  totalComp4yr: number
+  moneyLeftOnTable: number
+  components: Component[]
 }
 
 function fmt(n: number) {
   return '$' + Math.round(n).toLocaleString()
 }
 
-function ScoreRing({ score }: { score: number }) {
-  const r = 36
+function ScoreCard({ score, verdict }: { score: number; verdict: string }) {
+  const color = score >= 7 ? '#10b981' : score >= 4 ? '#f59e0b' : '#ef4444'
+  const bg = score >= 7 ? 'bg-emerald-50' : score >= 4 ? 'bg-amber-50' : 'bg-red-50'
+  const textColor = score >= 7 ? 'text-emerald-700' : score >= 4 ? 'text-amber-700' : 'text-red-700'
+  const r = 32
   const circ = 2 * Math.PI * r
-  const dash = (score / 100) * circ
-  const color = score >= 70 ? '#10b981' : score >= 45 ? '#f59e0b' : '#ef4444'
+  const dash = (score / 10) * circ
   return (
-    <svg width="96" height="96" viewBox="0 0 96 96">
-      <circle cx="48" cy="48" r={r} fill="none" stroke="#f3f4f6" strokeWidth="8" />
-      <circle
-        cx="48" cy="48" r={r} fill="none"
-        stroke={color} strokeWidth="8"
-        strokeDasharray={`${dash} ${circ}`}
-        strokeLinecap="round"
-        transform="rotate(-90 48 48)"
-      />
-      <text x="48" y="53" textAnchor="middle" fontSize="20" fontWeight="700" fill="#111827">{score}</text>
-    </svg>
+    <div className="flex items-center gap-6 bg-gray-50 rounded-2xl p-6 border border-gray-100">
+      <div className="flex-shrink-0">
+        <svg width="88" height="88" viewBox="0 0 88 88">
+          <circle cx="44" cy="44" r={r} fill="none" stroke="#e5e7eb" strokeWidth="7" />
+          <circle
+            cx="44" cy="44" r={r} fill="none"
+            stroke={color} strokeWidth="7"
+            strokeDasharray={`${dash} ${circ}`}
+            strokeLinecap="round"
+            transform="rotate(-90 44 44)"
+          />
+          <text x="44" y="47" textAnchor="middle" fontSize="22" fontWeight="800" fill="#111827">{score}</text>
+          <text x="44" y="59" textAnchor="middle" fontSize="9" fill="#9ca3af">out of 10</text>
+        </svg>
+      </div>
+      <div>
+        <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-2 ${bg} ${textColor}`}>
+          {verdict.toUpperCase()}
+        </span>
+        <p className="text-sm text-gray-500">Overall offer score</p>
+      </div>
+    </div>
+  )
+}
+
+function MarketComponent({ comp }: { comp: Extract<Component, { type: 'market' }> }) {
+  return (
+    <div className="border border-gray-100 rounded-2xl p-5 space-y-4">
+      <div>
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">{comp.title}</p>
+        <p className="text-sm text-gray-700 leading-relaxed">{comp.summary}</p>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        {comp.dataPoints?.map((dp, i) => (
+          <div key={i} className="bg-gray-50 rounded-xl p-3">
+            <p className="text-xs text-gray-400 mb-0.5">{dp.label}</p>
+            <p className="text-base font-bold text-gray-900">{dp.value}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function NegotiateComponent({ comp }: { comp: Extract<Component, { type: 'negotiate' }> }) {
+  return (
+    <div className="border border-gray-100 rounded-2xl p-5 space-y-4">
+      <div>
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">{comp.title}</p>
+        <p className="text-sm text-gray-700 leading-relaxed">{comp.summary}</p>
+      </div>
+      <div className="space-y-3">
+        {comp.items?.map((item, i) => (
+          <div key={i} className="bg-gray-50 rounded-xl p-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-semibold text-gray-900">{item.lever}</span>
+              <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">{item.potential}</span>
+            </div>
+            <p className="text-xs text-gray-500 italic">&ldquo;{item.script}&rdquo;</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function StrengthsComponent({ comp }: { comp: Extract<Component, { type: 'strengths' }> }) {
+  return (
+    <div className="border border-gray-100 rounded-2xl p-5">
+      <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">{comp.title}</p>
+      <ul className="space-y-2">
+        {comp.items?.map((item, i) => (
+          <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
+            <span className="text-emerald-500 mt-0.5 flex-shrink-0">✓</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+function RedFlagsComponent({ comp }: { comp: Extract<Component, { type: 'redflags' }> }) {
+  if (!comp.items?.length) return null
+  return (
+    <div className="border border-red-100 rounded-2xl p-5 bg-red-50/40">
+      <p className="text-xs font-semibold text-red-400 uppercase tracking-widest mb-4">{comp.title}</p>
+      <ul className="space-y-2">
+        {comp.items.map((item, i) => (
+          <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
+            <span className="text-red-400 mt-0.5 flex-shrink-0">⚠</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+function renderComponent(comp: Component) {
+  if (comp.type === 'market') return <MarketComponent comp={comp} />
+  if (comp.type === 'negotiate') return <NegotiateComponent comp={comp} />
+  if (comp.type === 'strengths') return <StrengthsComponent comp={comp} />
+  if (comp.type === 'redflags') return <RedFlagsComponent comp={comp} />
+  return null
+}
+
+function WhatIsIncludedModal({ onClose }: { onClose: () => void }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose()
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [onClose])
+  const items = [
+    { icon: '📊', label: 'Full market rate breakdown with data points' },
+    { icon: '🎯', label: 'Negotiation playbook with word-for-word scripts' },
+    { icon: '💪', label: 'Offer strengths to leverage in your conversation' },
+    { icon: '🚩', label: 'Red flags and missing terms to watch out for' },
+    { icon: '💬', label: 'Unlimited follow-up with your AI recruiter Sarah' },
+  ]
+  return (
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
+      <div ref={ref} className="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-base font-bold text-gray-900">What&apos;s included</h3>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-700 text-lg leading-none">&times;</button>
+        </div>
+        <ul className="space-y-4 mb-8">
+          {items.map((item) => (
+            <li key={item.label} className="flex items-start gap-3 text-sm text-gray-700">
+              <span className="text-base flex-shrink-0">{item.icon}</span>
+              {item.label}
+            </li>
+          ))}
+        </ul>
+        <button
+          onClick={onClose}
+          className="w-full py-3 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-700 transition-colors"
+        >
+          Got it
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function AnalysisResults({ result, isUnlocked }: { result: OfferAnalysis; isUnlocked: boolean }) {
+  const [showModal, setShowModal] = useState(false)
+  const [checkoutLoading, setCheckoutLoading] = useState(false)
+
+  const components = result.components ?? []
+  const firstComp = components[0]
+  const lockedComps = components.slice(1)
+  const hasLocked = lockedComps.length > 0 && !isUnlocked
+
+  async function handleUnlock() {
+    setCheckoutLoading(true)
+    try {
+      const priceId = process.env.NEXT_PUBLIC_STRIPE_REPORT_PRICE_ID
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId }),
+      })
+      const data = await res.json()
+      if (data.url) window.location.href = data.url
+    } catch {
+      setCheckoutLoading(false)
+    }
+  }
+
+  return (
+    <>
+      {showModal && <WhatIsIncludedModal onClose={() => setShowModal(false)} />}
+
+      <div className="space-y-4">
+        {/* Score card — always visible */}
+        <ScoreCard score={result.score} verdict={result.verdict} />
+
+        {/* First component — always visible */}
+        {firstComp && renderComponent(firstComp)}
+
+        {/* Remaining components — blurred unless unlocked */}
+        {lockedComps.length > 0 && (
+          <div className="relative">
+            <div
+              className="space-y-4"
+              style={hasLocked ? { filter: 'blur(6px)', pointerEvents: 'none', userSelect: 'none' } : undefined}
+            >
+              {lockedComps.map((comp, i) => (
+                <div key={i}>{renderComponent(comp)}</div>
+              ))}
+            </div>
+
+            {/* Paywall card */}
+            {hasLocked && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-8 max-w-sm w-full mx-4 text-center">
+                  <div className="text-3xl mb-3">🔒</div>
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Estimated money left on table</p>
+                  <p className="text-4xl font-black text-gray-900 mb-3">{fmt(result.moneyLeftOnTable ?? result.gap ?? 0)}</p>
+                  <p className="text-sm text-gray-600 mb-6 leading-relaxed">
+                    Unlock your full negotiation playbook, scripts, red flags, and offer strengths.
+                  </p>
+                  <button
+                    onClick={handleUnlock}
+                    disabled={checkoutLoading}
+                    className="w-full py-3.5 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-700 transition-colors mb-3 disabled:opacity-50"
+                  >
+                    {checkoutLoading ? 'Redirecting...' : 'Unlock my analysis'}
+                  </button>
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className="w-full py-3 border border-gray-200 text-gray-600 text-sm font-medium rounded-xl hover:bg-gray-50 transition-colors"
+                  >
+                    See what&apos;s included
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 
@@ -52,6 +278,15 @@ export default function AnalyzePage() {
   const [stepIndex, setStepIndex] = useState(-1)
   const [result, setResult] = useState<OfferAnalysis | null>(null)
   const [error, setError] = useState('')
+  // Set to true after successful Stripe checkout (e.g. via ?unlocked=1 query param)
+  const [isUnlocked, setIsUnlocked] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      if (params.get('unlocked') === '1') setIsUnlocked(true)
+    }
+  }, [])
 
   useEffect(() => {
     if (!loading) return
@@ -83,12 +318,6 @@ export default function AnalyzePage() {
       setStepIndex(-1)
     }
   }
-
-  const verdictColor = result?.verdict === 'above market'
-    ? 'text-emerald-600 bg-emerald-50'
-    : result?.verdict === 'below market'
-    ? 'text-red-600 bg-red-50'
-    : 'text-amber-600 bg-amber-50'
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -155,8 +384,8 @@ export default function AnalyzePage() {
           )}
 
           {result && !loading && (
-            <div className="space-y-5">
-              <div className="flex items-center justify-between mb-2">
+            <div>
+              <div className="flex items-center justify-between mb-5">
                 <h2 className="text-xl font-bold text-gray-900">Your Offer Analysis</h2>
                 <button
                   onClick={() => { setResult(null); setOfferText('') }}
@@ -165,75 +394,7 @@ export default function AnalyzePage() {
                   Analyze another
                 </button>
               </div>
-
-              {/* Score + verdict */}
-              <div className="flex items-center gap-6 bg-gray-50 rounded-2xl p-6">
-                <ScoreRing score={result.score} />
-                <div>
-                  <span className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-2 ${verdictColor}`}>
-                    {result.verdict.toUpperCase()}
-                  </span>
-                  <p className="text-sm text-gray-600 leading-relaxed">{result.analysis}</p>
-                </div>
-              </div>
-
-              {/* Key numbers */}
-              <div className="grid grid-cols-3 gap-3">
-                <div className="bg-gray-50 rounded-xl p-4">
-                  <p className="text-xs text-gray-400 mb-1">Base Salary</p>
-                  <p className="text-xl font-bold text-gray-900">{fmt(result.baseSalary)}</p>
-                </div>
-                <div className="bg-gray-50 rounded-xl p-4">
-                  <p className="text-xs text-gray-400 mb-1">Market Median</p>
-                  <p className="text-xl font-bold text-gray-900">{fmt(result.marketMedian)}</p>
-                </div>
-                <div className="bg-gray-50 rounded-xl p-4">
-                  <p className="text-xs text-gray-400 mb-1">{result.gap > 0 ? 'Gap to Close' : 'Above Market'}</p>
-                  <p className={`text-xl font-bold ${result.gap > 0 ? 'text-red-500' : 'text-emerald-500'}`}>
-                    {fmt(Math.abs(result.gap))}
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 rounded-xl p-4">
-                <p className="text-xs text-gray-400 mb-1">4-Year Total Comp</p>
-                <p className="text-2xl font-bold text-gray-900">{fmt(result.totalComp4yr)}</p>
-              </div>
-
-              {/* Negotiation points */}
-              {result.negotiate?.length > 0 && (
-                <div className="border border-gray-100 rounded-2xl p-5">
-                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">What to negotiate</p>
-                  <ul className="space-y-3">
-                    {result.negotiate.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
-                        <span className="w-5 h-5 rounded-full bg-gray-900 text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5">{i + 1}</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Strengths */}
-              {result.strengths?.length > 0 && (
-                <div className="border border-gray-100 rounded-2xl p-5">
-                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">Offer strengths</p>
-                  <ul className="space-y-2">
-                    {result.strengths.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
-                        <span className="text-emerald-500 mt-0.5">✓</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              <p className="text-center text-xs text-gray-400 pt-2">
-                Want a full negotiation strategy?{' '}
-                <a href="/recruiter" className="text-gray-700 font-medium underline underline-offset-2">Talk to Sarah, your AI recruiter →</a>
-              </p>
+              <AnalysisResults result={result} isUnlocked={isUnlocked} />
             </div>
           )}
         </div>
