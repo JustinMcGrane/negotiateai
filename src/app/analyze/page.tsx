@@ -203,11 +203,13 @@ function AnalysisResults({ result, isUnlocked }: { result: OfferAnalysis; isUnlo
   async function handleUnlock() {
     setCheckoutLoading(true)
     try {
-      const priceId = process.env.NEXT_PUBLIC_STRIPE_REPORT_PRICE_ID
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ priceId }),
+        body: JSON.stringify({
+          priceId: process.env.NEXT_PUBLIC_STRIPE_REPORT_PRICE_ID,
+          returnPath: '/analyze?unlocked=1',
+        }),
       })
       const data = await res.json()
       if (data.url) window.location.href = data.url
@@ -221,13 +223,10 @@ function AnalysisResults({ result, isUnlocked }: { result: OfferAnalysis; isUnlo
       {showModal && <WhatIsIncludedModal onClose={() => setShowModal(false)} />}
 
       <div className="space-y-4">
-        {/* Score card — always visible */}
         <ScoreCard score={result.score} verdict={result.verdict} />
 
-        {/* First component — always visible */}
         {firstComp && renderComponent(firstComp)}
 
-        {/* Remaining components — blurred unless unlocked */}
         {lockedComps.length > 0 && (
           <div className="relative">
             <div
@@ -239,7 +238,6 @@ function AnalysisResults({ result, isUnlocked }: { result: OfferAnalysis; isUnlo
               ))}
             </div>
 
-            {/* Paywall card */}
             {hasLocked && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-8 max-w-sm w-full mx-4 text-center">
@@ -278,7 +276,6 @@ export default function AnalyzePage() {
   const [stepIndex, setStepIndex] = useState(-1)
   const [result, setResult] = useState<OfferAnalysis | null>(null)
   const [error, setError] = useState('')
-  // Set to true after successful Stripe checkout (e.g. via ?unlocked=1 query param)
   const [isUnlocked, setIsUnlocked] = useState(false)
 
   useEffect(() => {

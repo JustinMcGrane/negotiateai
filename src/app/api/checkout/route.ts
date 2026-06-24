@@ -9,16 +9,20 @@ export async function POST(req: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
-    const { priceId } = await req.json()
+    const { priceId, returnPath } = await req.json()
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
 
     const isOneTime = priceId === process.env.STRIPE_REPORT_PRICE_ID
+    const successUrl = returnPath
+      ? `${baseUrl}${returnPath}`
+      : `${baseUrl}/dashboard?upgraded=1`
+
     const session = await getStripe().checkout.sessions.create({
       mode: isOneTime ? 'payment' : 'subscription',
       payment_method_types: ['card'],
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${baseUrl}/dashboard?upgraded=1`,
-      cancel_url: `${baseUrl}/account/billing`,
+      success_url: successUrl,
+      cancel_url: `${baseUrl}/analyze`,
       metadata: { userId: user?.id || '' },
       customer_email: user?.email,
     })
