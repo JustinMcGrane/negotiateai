@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { getUserProfile, formatProfileContext } from '@/lib/profile-context'
 
 function getClient() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }) }
 
@@ -7,8 +8,11 @@ export async function POST(req: NextRequest) {
   try {
     const { role, currentSalary, targetSalary, timeInRole, wins } = await req.json()
 
-    const prompt = `You are a salary negotiation expert. Return ONLY valid JSON.
+    const profile = await getUserProfile()
+    const profileContext = formatProfileContext(profile)
+    const contextBlock = profileContext ? `\n\n${profileContext}\n` : ''
 
+    const prompt = `You are a salary negotiation expert. Return ONLY valid JSON.${contextBlock}
 Details:
 - Role: ${role}
 - Current salary: $${currentSalary}
