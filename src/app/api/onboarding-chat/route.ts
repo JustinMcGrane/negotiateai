@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
 
-const client = new Anthropic()
+const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 const SYSTEM_PROMPT = `You are Sarah, a senior recruiter with 12 years of experience. You are meeting a new user for the first time and your job is to quickly learn about them so you can give them tailored advice throughout the platform.
 
@@ -79,7 +79,6 @@ export async function POST(req: NextRequest) {
     const allMessages = [...messages, { role: 'assistant', content: displayContent }]
     const profile = await extractProfile(allMessages)
 
-    // Save profile if complete and user is authenticated
     if (complete && Object.keys(profile).length > 0) {
       try {
         const supabase = await createClient()
@@ -95,7 +94,7 @@ export async function POST(req: NextRequest) {
           })
         }
       } catch {
-        // Profile save is best-effort, never block the response
+        // best-effort, never block the response
       }
     }
 

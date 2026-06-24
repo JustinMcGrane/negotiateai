@@ -6,12 +6,16 @@ function getStripe() { return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVe
 
 export async function POST(req: NextRequest) {
   try {
+    const { priceId, returnPath } = await req.json()
+
+    if (!priceId) {
+      return NextResponse.json({ error: 'Missing priceId' }, { status: 400 })
+    }
+
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
-    const { priceId, returnPath } = await req.json()
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
-
     const isOneTime = priceId === process.env.STRIPE_REPORT_PRICE_ID
     const successUrl = returnPath
       ? `${baseUrl}${returnPath}`

@@ -20,14 +20,22 @@ export async function POST(req: NextRequest) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
     const userId = session.metadata?.userId
-    if (!userId) return NextResponse.json({ received: true })
+
+    if (!userId) {
+      console.warn('[webhook] checkout.session.completed missing userId, session:', session.id)
+      return NextResponse.json({ received: true })
+    }
 
     const supabase = createServiceClient()
     const isReport = session.mode === 'payment'
-    await supabase
+    const { error } = await supabase
       .from('profiles')
       .update({ plan: isReport ? 'report' : 'pro' })
       .eq('id', userId)
+
+    if (error) {
+      console.error('[webhook] Failed to update profile plan for user', userId, error)
+    }
   }
 
   return NextResponse.json({ received: true })
