@@ -2,9 +2,67 @@ import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { TrendingUp, FileSearch, Play, ArrowRight, UserCircle, FileText, Search } from 'lucide-react'
+import { TrendingUp, FileSearch, Play, ArrowRight, UserCircle, FileText, Search, Lock, CalendarCheck, Rocket, Briefcase, GitBranch } from 'lucide-react'
 
 export const metadata: Metadata = { title: 'Dashboard — NegotiateAI' }
+
+function computeHealthScore(profile: Record<string, string> | null): number {
+  if (!profile) return 42
+  let score = 45
+  if (profile.onboarding_role) score += 8
+  if (profile.onboarding_goal) score += 5
+  const expBonus: Record<string, number> = { '0-2': 0, '3-5': 8, '6-10': 14, '10+': 18 }
+  score += expBonus[profile.onboarding_experience] ?? 0
+  const sitBonus: Record<string, number> = { actively_looking: 5, have_offer: 12, employed: 16, casually_looking: 3 }
+  score += sitBonus[profile.onboarding_situation] ?? 0
+  if (profile.plan === 'pro') score += 10
+  return Math.min(score, 99)
+}
+
+function healthLabel(score: number): { label: string; color: string; bg: string } {
+  if (score >= 80) return { label: 'Strong', color: '#059669', bg: '#ecfdf5' }
+  if (score >= 60) return { label: 'Moderate', color: '#d97706', bg: '#fffbeb' }
+  return { label: 'Needs Work', color: '#dc2626', bg: '#fef2f2' }
+}
+
+type FeatureCard = {
+  icon: React.ElementType
+  title: string
+  copy: (role: string, experience: string) => string
+  iconColor: string
+  iconBg: string
+}
+
+const FEATURE_CARDS: FeatureCard[] = [
+  {
+    icon: CalendarCheck,
+    title: 'Annual Review Coach',
+    copy: (role, exp) => `Get a prep plan for your ${role || 'role'} review based on your ${exp || 'current'} years of experience.`,
+    iconColor: '#6366f1',
+    iconBg: '#eef2ff',
+  },
+  {
+    icon: Rocket,
+    title: 'Promotion Planner',
+    copy: (role) => `Build a 90-day case for your ${role ? role + ' promotion' : 'next promotion'} with milestones and talking points.`,
+    iconColor: '#0891b2',
+    iconBg: '#e0f2fe',
+  },
+  {
+    icon: Briefcase,
+    title: 'Competing Offer Tool',
+    copy: (role) => `Use a competing offer to negotiate a raise in your ${role || 'current'} role without burning bridges.`,
+    iconColor: '#059669',
+    iconBg: '#ecfdf5',
+  },
+  {
+    icon: GitBranch,
+    title: 'Career Timeline',
+    copy: (role, exp) => `Map your ${role || 'career'} trajectory over the next 3 years given your ${exp || 'current'} experience level.`,
+    iconColor: '#7c3aed',
+    iconBg: '#f5f3ff',
+  },
+]
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -39,9 +97,16 @@ export default async function DashboardPage() {
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
 
   const avgScore = sessions?.length
-    ? Math.round(sessions.reduce((sum, s) => sum + (s.overall_score || 0), 0) / sessions.length)
+    ? Math.round(sessions.reduce((sum: number, s: { overall_score?: number }) => sum + (s.overall_score || 0), 0) / sessions.length)
     : 0
-  const bestScore = sessions?.length ? Math.max(...sessions.map((s) => s.overall_score || 0)) : 0
+  const bestScore = sessions?.length ? Math.max(...sessions.map((s: { overall_score?: number }) => s.overall_score || 0)) : 0
+
+  const healthScore = computeHealthScore(profile)
+  const { label: healthLabelText, color: healthColor, bg: healthBg } = healthLabel(healthScore)
+
+  const role = profile?.onboarding_role || ''
+  const expMap: Record<string, string> = { '0-2': '0–2', '3-5': '3–5', '6-10': '6–10', '10+': '10+' }
+  const experience = expMap[profile?.onboarding_experience] || ''
 
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 24px 80px' }}>
@@ -52,6 +117,35 @@ export default async function DashboardPage() {
         <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
           {plan === 'pro' ? 'Pro plan' : 'Free plan'} · {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
         </p>
+      </div>
+
+      {/* Compensation Health Score */}
+      <div style={{
+        background: 'var(--color-background-secondary)',
+        border: '0.5px solid var(--color-border-tertiary)',
+        borderRadius: 16, padding: '28px 32px',
+        marginBottom: 28,
+        display: 'flex', alignItems: 'center', gap: 32,
+      }}>
+        <div>
+          <div style={{ fontSize: 72, fontWeight: 900, lineHeight: 1, color: 'var(--color-text-primary)', letterSpacing: '-2px' }}>
+            {healthScore}
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginTop: 4, fontWeight: 500 }}>out of 100</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.07em', color: 'var(--color-text-tertiary)', marginBottom: 6 }}>COMPENSATION HEALTH SCORE</div>
+          <span style={{ display: 'inline-block', fontSize: 12, fontWeight: 700, padding: '3px 10px', borderRadius: 20, background: healthBg, color: healthColor, marginBottom: 8 }}>
+            {healthLabelText}
+          </span>
+          <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.6, maxWidth: 340 }}>
+            {healthScore < 60
+              ? 'Your profile suggests you may be leaving money on the table. Complete your profile and analyze your offer to improve your score.'
+              : healthScore < 80
+              ? 'You have a solid foundation. Use the tools below to sharpen your negotiation position.'
+              : 'You are in a strong position. Keep your skills and offer data up to date to stay ahead.'}
+          </p>
+        </div>
       </div>
 
       {/* New user welcome */}
@@ -81,7 +175,7 @@ export default async function DashboardPage() {
         </div>
       )}
 
-      {/* Stats (only show if they have activity) */}
+      {/* Stats */}
       {!isNew && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 12, marginBottom: 28 }}>
           {[
@@ -101,7 +195,7 @@ export default async function DashboardPage() {
         </div>
       )}
 
-      {/* Career Hub quick access */}
+      {/* Career Hub */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>CAREER HUB</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
@@ -127,7 +221,7 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Negotiation tools */}
+      {/* Negotiation Tools */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>NEGOTIATION TOOLS</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
@@ -153,12 +247,51 @@ export default async function DashboardPage() {
         </div>
       </div>
 
+      {/* Locked feature cards */}
+      <div style={{ marginBottom: 28 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>COMING WITH PRO</div>
+          <Link href="/upgrade" style={{ fontSize: 12, color: 'var(--color-text-tertiary)', textDecoration: 'underline' }}>See all</Link>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
+          {FEATURE_CARDS.map((card) => (
+            <Link key={card.title} href="/upgrade" style={{ textDecoration: 'none' }}>
+              <div style={{
+                background: 'var(--color-background-secondary)',
+                border: '0.5px solid var(--color-border-tertiary)',
+                borderRadius: 12, padding: 16,
+                opacity: 0.85,
+                position: 'relative',
+                height: '100%',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 10 }}>
+                  <div style={{ width: 36, height: 36, background: card.iconBg, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <card.icon size={16} color={card.iconColor} />
+                  </div>
+                  <span style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 4,
+                    fontSize: 10, fontWeight: 700, color: '#92400e',
+                    background: '#fef3c7', borderRadius: 20, padding: '2px 8px',
+                  }}>
+                    <Lock size={9} /> PRO
+                  </span>
+                </div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>{card.title}</div>
+                <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                  {card.copy(role, experience)}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {/* Recent activity */}
       {(toolUses?.length || 0) > 0 && (
         <div style={{ marginBottom: 28 }}>
           <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>RECENT ACTIVITY</div>
           <div style={{ background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, overflow: 'hidden' }}>
-            {toolUses?.map((use, i) => (
+            {toolUses?.map((use: { id: string; tool_id: string; created_at: string }, i: number) => (
               <div key={use.id} style={{
                 padding: '12px 16px',
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -174,7 +307,7 @@ export default async function DashboardPage() {
         </div>
       )}
 
-      {/* Upgrade banner for free users who have used the app */}
+      {/* Upgrade banner */}
       {plan === 'free' && !isNew && (
         <div style={{
           background: '#141414', color: '#fff', borderRadius: 14, padding: '22px 28px',
@@ -183,7 +316,7 @@ export default async function DashboardPage() {
           <div>
             <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>You are on the free plan</div>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>
-              Upgrade to Pro for unlimited access to all tools and unlimited chats with Sarah.
+              Upgrade to Pro for unlimited access to all tools and the features above.
             </div>
           </div>
           <Link href="/account/billing" style={{
