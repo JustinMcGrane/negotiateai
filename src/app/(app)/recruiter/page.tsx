@@ -94,6 +94,11 @@ export default function RecruiterPage() {
         return
       }
 
+      if (!res.ok || !data.content) {
+        setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }])
+        return
+      }
+
       if (data.used !== undefined) setUsed(data.used)
 
       if (data.isPro && !isPro) {
@@ -120,6 +125,7 @@ export default function RecruiterPage() {
   }
 
   function renderContent(text: string) {
+    if (!text) return ''
     return text
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\n/g, '<br />')
