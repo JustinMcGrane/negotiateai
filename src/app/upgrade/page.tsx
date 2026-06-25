@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Check, ArrowLeft } from 'lucide-react'
+import { Check, ArrowLeft, Zap } from 'lucide-react'
 import Link from 'next/link'
 
 export default function UpgradePage() {
@@ -21,89 +21,123 @@ export default function UpgradePage() {
 
   const plans = [
     {
-      key: 'pro',
-      name: 'Pro',
-      price: '$29',
-      sub: '/mo · or $249/yr',
+      key: 'free',
+      name: 'Free',
+      price: '$0',
+      sub: 'Forever free',
       features: [
-        'Unlimited access to all 10 tools',
-        'Sarah AI recruiter — unlimited messages',
-        'Annual Review Coach',
-        'Promotion Planner',
-        'Competing Offer Tool',
-        'Career Timeline',
-        'Full session history',
-        'PDF export',
-        'Progress tracking',
-        'Priority support',
+        'Sarah salary assessment (one session)',
+        'See your current market value',
+        'Get your target role + salary',
+        'Realistic timeline to get there',
       ],
-      cta: 'Upgrade to Pro',
+      cta: 'Current plan',
+      priceId: '',
+      disabled: true,
+    },
+    {
+      key: 'pro',
+      name: 'Professional',
+      price: '$49',
+      sub: '/month',
+      features: [
+        'Sarah AI recruiter — unlimited coaching',
+        'All 10 negotiation tools — unlimited',
+        'Resume analyzer',
+        'Cover letter generator',
+        'Offer evaluator + counter-offer builder',
+        'Raise builder + negotiation playbook',
+        'Better AI quality (Claude Sonnet)',
+        'Session history',
+      ],
+      cta: 'Get Professional',
       priceId: process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || '',
       highlight: true,
     },
     {
-      key: 'report',
-      name: 'One-time report',
-      price: '$49',
-      sub: 'One-time, no subscription',
+      key: 'elite',
+      name: 'Elite',
+      price: '$79',
+      sub: '/month',
       features: [
-        'Full compensation audit',
-        'PDF report delivered',
-        'All Intelligence + Strategy tools once',
-        '1 simulation',
+        'Everything in Professional',
+        'Sarah remembers you across every session',
+        'Mock interview coaching with feedback',
+        'Live negotiation roleplay with Sarah',
+        'Annual Review Coach',
+        'Promotion Planner',
+        'Competing Offer Strategy Tool',
+        'Career Timeline builder',
+        'PDF compensation report',
+        'Priority support',
       ],
-      cta: 'Buy report',
-      priceId: process.env.NEXT_PUBLIC_STRIPE_REPORT_PRICE_ID || '',
+      cta: 'Get Elite',
+      priceId: process.env.NEXT_PUBLIC_STRIPE_ELITE_PRICE_ID || '',
     },
   ]
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--color-background-secondary)', padding: '40px 24px 80px' }}>
-      <div style={{ maxWidth: 820, margin: '0 auto' }}>
+      <div style={{ maxWidth: 1000, margin: '0 auto' }}>
         <Link href="/dashboard" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--color-text-secondary)', textDecoration: 'none', marginBottom: 32 }}>
           <ArrowLeft size={14} /> Back to dashboard
         </Link>
 
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <h1 style={{ fontSize: 32, fontWeight: 600, letterSpacing: '-0.02em', marginBottom: 12 }}>Unlock your full potential</h1>
-          <p style={{ fontSize: 16, color: 'var(--color-text-secondary)', maxWidth: 480, margin: '0 auto' }}>
-            Get unlimited access to every tool, Sarah's full coaching capabilities, and features built to move your career forward.
+          <h1 style={{ fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 12 }}>
+            Choose your plan
+          </h1>
+          <p style={{ fontSize: 16, color: 'var(--color-text-secondary)', maxWidth: 500, margin: '0 auto' }}>
+            Most people who use NegotiateAI land a higher salary within 6 months. Pick the plan that matches where you are.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20, maxWidth: 680, margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
           {plans.map((plan) => (
             <div key={plan.key} style={{
-              background: '#fff',
-              border: plan.highlight ? '2px solid #141414' : '0.5px solid var(--color-border-tertiary)',
+              background: plan.key === 'elite' ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : '#fff',
+              border: plan.highlight ? '2px solid #141414' : plan.key === 'elite' ? '1px solid rgba(102,126,234,0.4)' : '0.5px solid var(--color-border-tertiary)',
               borderRadius: 16, padding: 28, position: 'relative',
+              display: 'flex', flexDirection: 'column',
             }}>
               {plan.highlight && (
                 <div style={{ position: 'absolute', top: -11, left: 24, background: '#141414', color: '#fff', fontSize: 11, padding: '2px 10px', borderRadius: 4, fontWeight: 600 }}>
                   Most popular
                 </div>
               )}
-              <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 4 }}>{plan.name}</div>
-              <div style={{ fontSize: 32, fontWeight: 600, letterSpacing: '-0.02em', marginBottom: 2 }}>{plan.price}</div>
-              <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginBottom: 24 }}>{plan.sub}</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
+              {plan.key === 'elite' && (
+                <div style={{ position: 'absolute', top: -11, left: 24, background: 'linear-gradient(135deg, #667eea, #764ba2)', color: '#fff', fontSize: 11, padding: '2px 10px', borderRadius: 4, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <Zap size={10} /> Best results
+                </div>
+              )}
+
+              <div style={{ marginBottom: 20 }}>
+                <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8, color: plan.key === 'elite' ? 'rgba(255,255,255,0.6)' : 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{plan.name}</div>
+                <div style={{ fontSize: 36, fontWeight: 700, letterSpacing: '-0.02em', color: plan.key === 'elite' ? '#fff' : 'var(--color-text-primary)' }}>{plan.price}</div>
+                <div style={{ fontSize: 13, color: plan.key === 'elite' ? 'rgba(255,255,255,0.4)' : 'var(--color-text-tertiary)', marginTop: 2 }}>{plan.sub}</div>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1, marginBottom: 24 }}>
                 {plan.features.map((f) => (
                   <div key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <Check size={13} color="#10b981" style={{ flexShrink: 0, marginTop: 1 }} />
-                    <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>{f}</span>
+                    <Check size={13} color={plan.key === 'elite' ? '#667eea' : '#10b981'} style={{ flexShrink: 0, marginTop: 2 }} />
+                    <span style={{ fontSize: 13, color: plan.key === 'elite' ? 'rgba(255,255,255,0.7)' : 'var(--color-text-secondary)', lineHeight: 1.4 }}>{f}</span>
                   </div>
                 ))}
               </div>
+
               <button
-                disabled={loading === plan.key}
-                onClick={() => checkout(plan.priceId, plan.key)}
+                disabled={plan.disabled || loading === plan.key}
+                onClick={() => !plan.disabled && checkout(plan.priceId, plan.key)}
                 style={{
-                  width: '100%', height: 42,
-                  background: plan.highlight ? '#141414' : 'transparent',
-                  color: plan.highlight ? '#fff' : 'var(--color-text-primary)',
-                  border: plan.highlight ? 'none' : '0.5px solid var(--color-border-primary)',
-                  borderRadius: 10, fontSize: 14, fontWeight: 500, cursor: 'pointer',
-                  opacity: loading === plan.key ? 0.5 : 1,
+                  width: '100%', height: 44,
+                  background: plan.key === 'elite'
+                    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                    : plan.highlight ? '#141414' : 'transparent',
+                  color: plan.key === 'free' ? 'var(--color-text-secondary)' : '#fff',
+                  border: plan.key === 'free' ? '0.5px solid var(--color-border-primary)' : 'none',
+                  borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: plan.disabled ? 'default' : 'pointer',
+                  opacity: (plan.disabled || loading === plan.key) ? 0.5 : 1,
                 }}
               >
                 {loading === plan.key ? 'Loading…' : plan.cta}
