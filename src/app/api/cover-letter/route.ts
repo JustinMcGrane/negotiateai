@@ -59,7 +59,7 @@ Instructions:
 Return only the letter text, no additional commentary.`
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: isPro ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001',
       max_tokens: 1024,
       messages: [{ role: 'user', content: prompt }],
     })
