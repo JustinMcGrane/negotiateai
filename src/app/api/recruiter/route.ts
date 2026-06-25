@@ -5,7 +5,7 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { checkAndIncrementUsage, FREE_LIMITS } from '@/lib/usage'
 import { getUserProfile, formatProfileContext } from '@/lib/profile-context'
 
-const client = new Anthropic()
+const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 function buildFreeSystemPrompt(profileContext: string) {
   const profileSection = profileContext ? `\n\n${profileContext}\n\nUse this to make your advice specific to them. Reference it naturally — do not announce it or repeat it back verbatim.` : ''
@@ -191,6 +191,15 @@ export async function POST(req: NextRequest) {
         role: m.role as 'user' | 'assistant',
         content: m.content,
       }))
+
+    // Anthropic requires messages to start with 'user' role
+    while (anthropicMessages.length > 0 && anthropicMessages[0].role === 'assistant') {
+      anthropicMessages.shift()
+    }
+
+    if (anthropicMessages.length === 0) {
+      return NextResponse.json({ error: 'No messages to process' }, { status: 400 })
+    }
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-6',
