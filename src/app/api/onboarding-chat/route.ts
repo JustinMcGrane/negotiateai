@@ -58,12 +58,23 @@ export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json()
 
+    // Anthropic requires messages to start with 'user'.
+    // The opening assistant message is hardcoded UI — strip it before sending.
     const anthropicMessages = messages
       .filter((m: { role: string }) => m.role !== 'system')
       .map((m: { role: string; content: string }) => ({
         role: m.role as 'user' | 'assistant',
         content: m.content,
       }))
+
+    // Drop leading assistant messages so the array always starts with 'user'
+    while (anthropicMessages.length > 0 && anthropicMessages[0].role === 'assistant') {
+      anthropicMessages.shift()
+    }
+
+    if (anthropicMessages.length === 0) {
+      return NextResponse.json({ error: 'No user message provided' }, { status: 400 })
+    }
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-6',
@@ -76,7 +87,7 @@ export async function POST(req: NextRequest) {
     const complete = content.includes('[ONBOARDING_COMPLETE]')
     const displayContent = content.replace('[ONBOARDING_COMPLETE]', '').trim()
 
-    // Only run profile extraction when onboarding is complete — avoids double API call on every message
+    // Only extract profile on completion to avoid a second API call on every message
     let profile: ExtractedProfile = {}
     if (complete) {
       const allMessages = [...messages, { role: 'assistant', content: displayContent }]
