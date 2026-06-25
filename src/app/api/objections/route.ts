@@ -30,7 +30,9 @@ Return three responses to this objection:
     })
 
     const text = (msg.content[0] as { type: string; text: string }).text
-    return NextResponse.json(JSON.parse(text))
+    const match = text.match(/\{[\s\S]*\}/)
+    if (!match) throw new Error('No JSON in response')
+    return NextResponse.json(JSON.parse(match[0]))
   } catch (e) {
     console.error(e)
     return NextResponse.json({ error: 'Failed' }, { status: 500 })

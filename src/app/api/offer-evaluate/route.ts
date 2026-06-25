@@ -36,7 +36,9 @@ Return this exact JSON (score 0-100, verdict one of: "below market"|"at market"|
     })
 
     const text = (msg.content[0] as { type: string; text: string }).text
-    return NextResponse.json(JSON.parse(text))
+    const match = text.match(/\{[\s\S]*\}/)
+    if (!match) throw new Error('No JSON in response')
+    return NextResponse.json(JSON.parse(match[0]))
   } catch (e) {
     console.error(e)
     return NextResponse.json({ error: 'Evaluation failed' }, { status: 500 })

@@ -140,11 +140,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role')
-      .eq('id', user.id)
-      .single()
+    const [{ data: profile }, { messages }] = await Promise.all([
+      supabase
+        .from('profiles')
+        .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role')
+        .eq('id', user.id)
+        .single(),
+      req.json(),
+    ])
 
     const isPro = profile?.plan === 'pro'
     const usage = await checkAndIncrementUsage(user.id, 'recruiter', isPro)
@@ -157,8 +160,6 @@ export async function POST(req: NextRequest) {
         limit: usage.limit,
       }, { status: 429 })
     }
-
-    const { messages } = await req.json()
 
     const onboardingProfile = {
       goal: profile?.onboarding_goal,

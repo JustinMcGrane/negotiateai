@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import PrintButton from './PrintButton'
 
 export const metadata: Metadata = { title: 'Compensation Report — NegotiateAI' }
 
@@ -36,9 +37,7 @@ export default async function ReportPage() {
           <h1 style={{ fontSize: 18, fontWeight: 500 }}>Compensation report</h1>
           <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>Generated for {user.email} · {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
         </div>
-        <button onClick={() => window.print()} style={{ height: 34, padding: '0 14px', background: 'transparent', border: '0.5px solid var(--color-border-primary)', borderRadius: 6, fontSize: 12 }} className="no-print">
-          Save as PDF
-        </button>
+        <PrintButton />
       </div>
 
       <div style={{ background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 24, marginBottom: 20 }}>
