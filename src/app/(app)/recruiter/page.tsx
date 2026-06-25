@@ -1,17 +1,22 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
-import { Send, Briefcase, Sparkles, Lock, ChevronDown, ChevronUp, Brain } from 'lucide-react'
+import { Send, Briefcase, Sparkles, Brain, ChevronDown, ChevronUp, ArrowRight, TrendingUp, Clock, Lock } from 'lucide-react'
 import Link from 'next/link'
 
 type Message = { role: 'user' | 'assistant'; content: string }
+type Assessment = {
+  currentSalary: number
+  currentTitle: string
+  targetTitle: string
+  targetSalary: number
+  timeline: string
+}
 
-const FREE_LIMIT = 20
+const ASSESSMENT_INTRO = `Hi, I'm Sarah — your AI recruiter.
 
-const FREE_INTRO = `Hi, I'm Sarah — your AI recruiter.
+I've spent 12 years placing candidates at Google, Meta, Stripe, and hundreds of top startups. Before we dive in, I want to run a quick salary assessment for you — it takes about 5 minutes and I'll show you exactly where you stand in the market and what you could realistically be earning.
 
-I've spent 12 years placing talent at Google, Meta, Stripe, and hundreds of top startups. I know what hiring managers actually look for, what kills candidacies before they start, and how to position you to land the role and the offer you deserve.
-
-What are you working on right now?`
+To get started: what's your current job title and roughly how many years of experience do you have?`
 
 const PRO_INTRO = `Hi — good to connect. I'm Sarah.
 
@@ -20,13 +25,6 @@ I've got your profile pulled up and I'm ready to dig in. I can run mock intervie
 I'll remember everything we talk about, so you never have to repeat yourself.
 
 What's the most pressing thing on your plate right now?`
-
-const FREE_STARTERS = [
-  'How do I negotiate my salary?',
-  'What do recruiters look for in a resume?',
-  'How do I get more interviews?',
-  'Should I apply if I don\'t meet all the requirements?',
-]
 
 const PRO_STARTERS = [
   { label: 'Mock interview', prompt: 'Run me through a mock interview for my target role. Ask me the questions and give me feedback on my answers.' },
@@ -37,16 +35,20 @@ const PRO_STARTERS = [
   { label: 'Career pivot', prompt: 'I\'m thinking about pivoting careers. Help me figure out if it makes sense and how to position myself.' },
 ]
 
+function fmt(n: number) {
+  if (n >= 1000) return `$${Math.round(n / 1000)}k`
+  return `$${n}`
+}
+
 export default function RecruiterPage() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [used, setUsed] = useState(0)
-  const [limitReached, setLimitReached] = useState(false)
   const [isPro, setIsPro] = useState(false)
   const [memory, setMemory] = useState<Record<string, string>>({})
   const [showMemory, setShowMemory] = useState(false)
   const [initialized, setInitialized] = useState(false)
+  const [assessment, setAssessment] = useState<Assessment | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -55,13 +57,8 @@ export default function RecruiterPage() {
         const res = await fetch('/api/sarah-memory')
         const data = await res.json()
         setMemory(data.memory ?? {})
-        const hasMemory = Object.keys(data.memory ?? {}).length > 0
-        // Detect Pro by checking if memory endpoint works with pro context
-        // We'll detect isPro from first API response
-        setMessages([{ role: 'assistant', content: FREE_INTRO }])
-      } catch {
-        setMessages([{ role: 'assistant', content: FREE_INTRO }])
-      }
+      } catch {}
+      setMessages([{ role: 'assistant', content: ASSESSMENT_INTRO }])
       setInitialized(true)
     }
     init()
@@ -69,11 +66,11 @@ export default function RecruiterPage() {
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+  }, [messages, assessment])
 
   async function send(text?: string) {
     const content = (text ?? input).trim()
-    if (!content || loading || limitReached) return
+    if (!content || loading || assessment) return
     const userMsg: Message = { role: 'user', content }
     setMessages(prev => [...prev, userMsg])
     setInput('')
@@ -88,24 +85,14 @@ export default function RecruiterPage() {
       })
       const data = await res.json()
 
-      if (res.status === 429) {
-        setLimitReached(true)
-        setUsed(FREE_LIMIT)
-        return
-      }
-
       if (!res.ok || !data.content) {
         setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }])
         return
       }
 
-      if (data.used !== undefined) setUsed(data.used)
-
       if (data.isPro && !isPro) {
         setIsPro(true)
-        // Refresh memory
         fetch('/api/sarah-memory').then(r => r.json()).then(d => setMemory(d.memory ?? {}))
-        // Replace intro with Pro intro if first exchange
         if (messages.length === 1) {
           setMessages([
             { role: 'assistant', content: PRO_INTRO },
@@ -117,6 +104,10 @@ export default function RecruiterPage() {
       }
 
       setMessages(prev => [...prev, { role: 'assistant', content: data.content }])
+
+      if (data.assessment) {
+        setAssessment(data.assessment)
+      }
     } catch {
       setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }])
     } finally {
@@ -131,17 +122,11 @@ export default function RecruiterPage() {
       .replace(/\n/g, '<br />')
   }
 
-  const remaining = Math.max(0, FREE_LIMIT - used)
   const memoryEntries = Object.entries(memory).filter(([, v]) => v)
   const memoryLabels: Record<string, string> = {
-    targetRole: 'Target role',
-    currentRole: 'Current role',
-    targetCompany: 'Target company',
-    salaryTarget: 'Salary target',
-    interviewStage: 'Interview stage',
-    goals: 'Goals',
-    background: 'Background',
-    challenges: 'Challenges',
+    targetRole: 'Target role', currentRole: 'Current role', targetCompany: 'Target company',
+    salaryTarget: 'Salary target', interviewStage: 'Interview stage',
+    goals: 'Goals', background: 'Background', challenges: 'Challenges',
   }
 
   if (!initialized) return null
@@ -149,7 +134,7 @@ export default function RecruiterPage() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', maxWidth: 800, margin: '0 auto', padding: '0 24px' }}>
       {/* Header */}
-      <div style={{ padding: '24px 0 16px', borderBottom: '0.5px solid var(--color-border-tertiary)' }}>
+      <div style={{ padding: '24px 0 16px', borderBottom: '0.5px solid var(--color-border-tertiary)', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{
             width: 44, height: 44, borderRadius: '50%',
@@ -166,7 +151,7 @@ export default function RecruiterPage() {
                 background: isPro ? 'linear-gradient(135deg, #667eea, #764ba2)' : '#10b981',
                 color: '#fff', borderRadius: 4, padding: '2px 6px', fontWeight: 600,
               }}>
-                {isPro ? 'PRO COACH' : 'AI RECRUITER'}
+                {isPro ? 'PRO COACH' : assessment ? 'ASSESSMENT COMPLETE' : 'SALARY ASSESSMENT'}
               </span>
             </div>
             <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: 0 }}>
@@ -189,20 +174,13 @@ export default function RecruiterPage() {
                 {showMemory ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
               </button>
             )}
-            {used > 0 && !limitReached && !isPro && (
-              <span style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>
-                {remaining} left this month
-              </span>
-            )}
             <Sparkles size={16} color="#f59e0b" />
           </div>
         </div>
 
-        {/* Memory panel */}
         {isPro && showMemory && memoryEntries.length > 0 && (
           <div style={{
-            marginTop: 12,
-            background: 'rgba(102,126,234,0.06)',
+            marginTop: 12, background: 'rgba(102,126,234,0.06)',
             border: '1px solid rgba(102,126,234,0.15)',
             borderRadius: 8, padding: '12px 16px',
             display: 'flex', flexWrap: 'wrap', gap: '8px 24px',
@@ -259,97 +237,121 @@ export default function RecruiterPage() {
             <div style={{
               background: 'var(--color-background-secondary)',
               border: '0.5px solid var(--color-border-tertiary)',
-              borderRadius: '18px 18px 18px 4px',
-              padding: '12px 16px', fontSize: 14,
+              borderRadius: '18px 18px 18px 4px', padding: '12px 16px', fontSize: 14,
             }}>
               <span style={{ opacity: 0.5 }}>Sarah is thinking…</span>
             </div>
           </div>
         )}
 
-        {/* Pro starter prompts — show after intro if no messages sent yet */}
+        {/* Pro starters */}
         {isPro && messages.length === 1 && !loading && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, paddingLeft: 36 }}>
             {PRO_STARTERS.map(s => (
-              <button
-                key={s.label}
-                onClick={() => send(s.prompt)}
-                style={{
-                  background: 'var(--color-background-secondary)',
-                  border: '0.5px solid var(--color-border-tertiary)',
-                  borderRadius: 20, padding: '7px 14px',
-                  fontSize: 12, cursor: 'pointer',
-                  color: 'var(--color-text-primary)',
-                }}
-              >
+              <button key={s.label} onClick={() => send(s.prompt)} style={{
+                background: 'var(--color-background-secondary)',
+                border: '0.5px solid var(--color-border-tertiary)',
+                borderRadius: 20, padding: '7px 14px', fontSize: 12, cursor: 'pointer',
+                color: 'var(--color-text-primary)',
+              }}>
                 {s.label}
               </button>
             ))}
           </div>
         )}
 
-        {/* Free starter prompts */}
-        {!isPro && messages.length === 1 && !loading && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, paddingLeft: 36 }}>
-            {FREE_STARTERS.map(s => (
-              <button
-                key={s}
-                onClick={() => send(s)}
-                style={{
-                  background: 'var(--color-background-secondary)',
-                  border: '0.5px solid var(--color-border-tertiary)',
-                  borderRadius: 20, padding: '7px 14px',
-                  fontSize: 12, cursor: 'pointer',
-                  color: 'var(--color-text-primary)',
-                }}
-              >
-                {s}
-              </button>
-            ))}
+        {/* Assessment results + upgrade screen */}
+        {assessment && !isPro && (
+          <div style={{ marginTop: 8 }}>
+            {/* Salary cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 20 }}>
+              <div style={{
+                background: 'var(--color-background-secondary)',
+                border: '0.5px solid var(--color-border-tertiary)',
+                borderRadius: 12, padding: '18px 20px',
+              }}>
+                <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', margin: '0 0 4px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Your current market value</p>
+                <p style={{ fontSize: 11, color: 'var(--color-text-secondary)', margin: '0 0 8px' }}>{assessment.currentTitle}</p>
+                <p style={{ fontSize: 28, fontWeight: 700, margin: 0, letterSpacing: '-0.02em' }}>{fmt(assessment.currentSalary)}</p>
+              </div>
+              <div style={{
+                background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+                border: '1px solid rgba(102,126,234,0.3)',
+                borderRadius: 12, padding: '18px 20px',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                  <TrendingUp size={12} color="#667eea" />
+                  <p style={{ fontSize: 11, color: '#667eea', margin: 0, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>With NegotiateAI</p>
+                </div>
+                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: '0 0 8px' }}>{assessment.targetTitle}</p>
+                <p style={{ fontSize: 28, fontWeight: 700, margin: 0, letterSpacing: '-0.02em', color: '#fff' }}>{fmt(assessment.targetSalary)}</p>
+              </div>
+            </div>
+
+            {/* Timeline */}
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: 10,
+              background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)',
+              borderRadius: 10, padding: '12px 16px', marginBottom: 20,
+            }}>
+              <Clock size={15} color="#10b981" style={{ flexShrink: 0 }} />
+              <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-primary)' }}>
+                <strong>Timeline:</strong> Most people in your position reach {assessment.targetTitle} in <strong>{assessment.timeline}</strong> with the right tools and preparation.
+              </p>
+            </div>
+
+            {/* Upgrade CTA */}
+            <div style={{
+              background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+              border: '1px solid rgba(102,126,234,0.3)',
+              borderRadius: 16, padding: '28px 28px 24px',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+                <Lock size={14} color="#667eea" />
+                <span style={{ fontSize: 11, color: '#667eea', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Unlock your path to {fmt(assessment.targetSalary)}</span>
+              </div>
+              <h3 style={{ color: '#fff', fontSize: 20, fontWeight: 700, margin: '0 0 10px', letterSpacing: '-0.01em' }}>
+                Your assessment is complete. The work starts now.
+              </h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, lineHeight: 1.6, margin: '0 0 24px' }}>
+                Sarah has mapped your path to {assessment.targetTitle}. To get you there, you need the right tools — resume coaching, mock interviews, negotiation roleplay, and a strategy built around your specific situation. That is what NegotiateAI is built for.
+              </p>
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                <Link
+                  href="/upgrade"
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 8,
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    color: '#fff', textDecoration: 'none',
+                    borderRadius: 10, padding: '13px 24px',
+                    fontSize: 14, fontWeight: 700,
+                  }}
+                >
+                  Start for $49/month <ArrowRight size={15} />
+                </Link>
+                <Link
+                  href="/upgrade"
+                  style={{
+                    display: 'inline-flex', alignItems: 'center',
+                    background: 'transparent',
+                    color: 'rgba(255,255,255,0.5)', textDecoration: 'none',
+                    borderRadius: 10, padding: '13px 20px',
+                    fontSize: 13, border: '1px solid rgba(255,255,255,0.1)',
+                  }}
+                >
+                  See all plans
+                </Link>
+              </div>
+            </div>
           </div>
         )}
 
         <div ref={bottomRef} />
       </div>
 
-      {/* Input / Limit */}
-      {limitReached ? (
-        <div style={{ padding: '20px 0 24px', borderTop: '0.5px solid var(--color-border-tertiary)' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
-            border: '1px solid rgba(102,126,234,0.3)',
-            borderRadius: 12, padding: '20px 24px',
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{
-                width: 36, height: 36, borderRadius: '50%',
-                background: 'rgba(102,126,234,0.2)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-              }}>
-                <Lock size={16} color="#667eea" />
-              </div>
-              <div>
-                <p style={{ margin: 0, fontWeight: 600, fontSize: 14, color: '#fff' }}>
-                  You've used all {FREE_LIMIT} free messages this month
-                </p>
-                <p style={{ margin: '2px 0 0', fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>
-                  Upgrade to Pro for unlimited coaching with Sarah
-                </p>
-              </div>
-            </div>
-            <Link href="/account/billing" style={{
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              color: '#fff', textDecoration: 'none',
-              borderRadius: 8, padding: '10px 20px',
-              fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0,
-            }}>
-              Upgrade to Pro
-            </Link>
-          </div>
-        </div>
-      ) : (
-        <div style={{ padding: '12px 0 24px' }}>
+      {/* Input */}
+      {!assessment && !isPro && (
+        <div style={{ padding: '12px 0 24px', flexShrink: 0 }}>
           <div style={{
             display: 'flex', gap: 8,
             background: 'var(--color-background-secondary)',
@@ -360,7 +362,7 @@ export default function RecruiterPage() {
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send() } }}
-              placeholder={isPro ? 'Ask Sarah anything — she remembers your context…' : 'Ask Sarah anything about your job search…'}
+              placeholder="Tell Sarah about your current role…"
               rows={1}
               style={{
                 flex: 1, background: 'transparent', border: 'none', outline: 'none',
@@ -372,21 +374,57 @@ export default function RecruiterPage() {
               onClick={() => send()}
               disabled={!input.trim() || loading}
               style={{
-                background: isPro ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#141414',
-                color: '#fff', border: 'none',
+                background: '#141414', color: '#fff', border: 'none',
                 borderRadius: 8, width: 36, height: 36, cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                opacity: !input.trim() || loading ? 0.4 : 1,
-                flexShrink: 0,
+                opacity: !input.trim() || loading ? 0.4 : 1, flexShrink: 0,
               }}
             >
               <Send size={15} />
             </button>
           </div>
           <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', textAlign: 'center', marginTop: 8 }}>
-            {isPro
-              ? 'Sarah remembers your context across sessions and coaches you through every stage of your search.'
-              : 'Sarah gives you recruiter-grade advice based on 12 years of real placements.'}
+            Free salary assessment · Takes about 5 minutes
+          </p>
+        </div>
+      )}
+
+      {isPro && (
+        <div style={{ padding: '12px 0 24px', flexShrink: 0 }}>
+          <div style={{
+            display: 'flex', gap: 8,
+            background: 'var(--color-background-secondary)',
+            border: '0.5px solid var(--color-border-tertiary)',
+            borderRadius: 12, padding: '8px 12px',
+          }}>
+            <textarea
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send() } }}
+              placeholder="Ask Sarah anything — she remembers your context…"
+              rows={1}
+              style={{
+                flex: 1, background: 'transparent', border: 'none', outline: 'none',
+                fontSize: 14, color: 'var(--color-text-primary)', resize: 'none',
+                lineHeight: 1.5, paddingTop: 4,
+              }}
+            />
+            <button
+              onClick={() => send()}
+              disabled={!input.trim() || loading}
+              style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: '#fff', border: 'none',
+                borderRadius: 8, width: 36, height: 36, cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                opacity: !input.trim() || loading ? 0.4 : 1, flexShrink: 0,
+              }}
+            >
+              <Send size={15} />
+            </button>
+          </div>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', textAlign: 'center', marginTop: 8 }}>
+            Sarah remembers your context across sessions and coaches you through every stage of your search.
           </p>
         </div>
       )}

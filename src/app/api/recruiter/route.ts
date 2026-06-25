@@ -7,6 +7,36 @@ import { formatProfileContext } from '@/lib/profile-context'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
+function buildAssessmentSystemPrompt(profileContext: string) {
+  const profileSection = profileContext ? `\n\nWhat you already know about them:\n${profileContext}\n` : ''
+  return `You are Sarah, a senior recruiter with 12 years of experience placing candidates at Google, Meta, Stripe, Airbnb, and hundreds of top startups. You are running a free salary assessment for a new user.${profileSection}
+
+YOUR GOAL: Collect enough information to give them a personalized salary assessment, then deliver it honestly and motivatingly.
+
+STEP 1 — COLLECT INFORMATION (naturally, conversationally):
+Learn their current role and title, years of experience, location, highest education level, and current salary (ask gently). Encourage them to paste their resume for more accurate recommendations. Ask one or two things at a time. Never interrogate.
+
+STEP 2 — DELIVER THE ASSESSMENT (only when you have enough info):
+Once you have their role, experience, and location, deliver the assessment. Include:
+1. Their current market salary range — what they should be earning right now
+2. A specific target role one level up with a realistic salary range for that title in their market
+3. An honest encouraging timeline — how long it typically takes to reach that role (be specific: "most people I work with in your position land this in 4 to 6 months")
+4. One or two specific things standing between them and that role — honest but not crushing
+5. A warm close acknowledging this is achievable and that the platform exists to help them get there faster
+
+Be genuinely encouraging. Give real hope based on real numbers. Do not be vague.
+
+When you have delivered the full assessment, end your message with this exact line on its own:
+[ASSESSMENT_COMPLETE]{"currentSalary":CURRENT_ESTIMATE,"currentTitle":"THEIR_CURRENT_TITLE","targetTitle":"TARGET_TITLE","targetSalary":TARGET_SALARY_MIDPOINT,"timeline":"X to Y months"}[/ASSESSMENT_COMPLETE]
+
+Replace values with real numbers and strings. currentSalary and targetSalary are integers (no $ sign). timeline is a short string like "4 to 6 months".
+
+HOW YOU COMMUNICATE:
+- Write like a human. Short paragraphs. Plain sentences.
+- Never use bullet points or headers.
+- No filler phrases. One question at a time.`
+}
+
 function buildFreeSystemPrompt(profileContext: string) {
   const profileSection = profileContext ? `\n\n${profileContext}\n\nUse this to make your advice specific to them. Reference it naturally — do not announce it or repeat it back verbatim.` : ''
   return `You are Sarah, a senior recruiter with 12 years of experience. You have placed candidates at Google, Meta, Stripe, Airbnb, and hundreds of venture-backed startups. You have reviewed tens of thousands of resumes and conducted thousands of interviews across engineering, product, design, sales, and executive roles.
@@ -169,8 +199,9 @@ export async function POST(req: NextRequest) {
     }
 
     const profileContext = formatProfileContext(onboardingProfile)
+    const isAssessmentMode = !isPro
 
-    let systemPrompt = buildFreeSystemPrompt(profileContext)
+    let systemPrompt = isAssessmentMode ? buildAssessmentSystemPrompt(profileContext) : buildFreeSystemPrompt(profileContext)
     let memory: Record<string, string> = {}
 
     if (isPro) {
@@ -208,13 +239,26 @@ export async function POST(req: NextRequest) {
       messages: anthropicMessages,
     })
 
-    const content = response.content[0].type === 'text' ? response.content[0].text : ''
+    const rawContent = response.content[0].type === 'text' ? response.content[0].text : ''
+
+    // Parse assessment completion signal for free users
+    let assessment = null
+    let content = rawContent
+    if (!isPro) {
+      const assessmentMatch = rawContent.match(/\[ASSESSMENT_COMPLETE\]([\s\S]*?)\[\/ASSESSMENT_COMPLETE\]/)
+      if (assessmentMatch) {
+        try {
+          assessment = JSON.parse(assessmentMatch[1])
+        } catch {}
+        content = rawContent.replace(/\[ASSESSMENT_COMPLETE\][\s\S]*?\[\/ASSESSMENT_COMPLETE\]/, '').trim()
+      }
+    }
 
     if (isPro && messages.length % 4 === 0) {
       extractAndSaveMemory(user.id, messages, memory)
     }
 
-    return NextResponse.json({ content, used: usage.used, limit: usage.limit, isPro })
+    return NextResponse.json({ content, used: usage.used, limit: usage.limit, isPro, assessment })
   } catch (err) {
     console.error('[recruiter] error:', err)
     return NextResponse.json({ error: 'Failed to get response' }, { status: 500 })
