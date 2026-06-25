@@ -215,8 +215,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ content, used: usage.used, limit: usage.limit, isPro })
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err)
-    console.error('[recruiter] error:', message)
-    return NextResponse.json({ error: 'Failed to get response', detail: message }, { status: 500 })
+    console.error('[recruiter] error:', err)
+    return NextResponse.json({ error: 'Failed to get response' }, { status: 500 })
   }
 }
