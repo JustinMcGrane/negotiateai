@@ -326,7 +326,7 @@ export default function LandingPage() {
               <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>Free</div>
               <div style={{ fontSize: 32, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 4 }}>$0</div>
               <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>No credit card required</div>
-              {['1 use per tool', '1 practice simulation', 'Resume analysis', 'Sarah AI recruiter (5 messages)'].map(f => (
+              {['Sarah salary assessment (one session)', 'See your current market value', 'Get your target role + salary', 'Realistic timeline to get there'].map(f => (
                 <div key={f} style={{ fontSize: 13, color: '#475569', padding: '6px 0', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ color: '#10b981', fontWeight: 700 }}>✓</span> {f}
                 </div>
@@ -348,16 +348,16 @@ export default function LandingPage() {
                 fontSize: 11, fontWeight: 700, padding: '3px 12px', borderRadius: 20,
                 whiteSpace: 'nowrap',
               }}>MOST POPULAR</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 6 }}>Pro</div>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>$29<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>or $249/yr — save $99</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 6 }}>Professional</div>
+              <div style={{ fontSize: 32, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>$49<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>Unlimited coaching &amp; tools</div>
               {[
-                'Unlimited access to all 15+ tools',
-                'Unlimited Sarah conversations',
-                'Advanced resume analysis',
-                'Full session history',
-                'PDF export',
-                'Progress tracking',
+                'Sarah AI recruiter — unlimited coaching',
+                'All 10 negotiation tools — unlimited',
+                'Resume analyzer + cover letter generator',
+                'Offer evaluator + counter-offer builder',
+                'Raise builder + negotiation playbook',
+                'Session history',
               ].map(f => (
                 <div key={f} style={{ fontSize: 13, color: '#cbd5e1', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ color: '#34d399', fontWeight: 700 }}>✓</span> {f}
@@ -369,26 +369,32 @@ export default function LandingPage() {
                 background: '#2563eb', borderRadius: 9,
                 fontSize: 14, textDecoration: 'none', color: '#fff', fontWeight: 700,
               }}>
-                Start Pro →
+                Get Professional →
               </Link>
             </div>
 
-            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 14, padding: 28 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>One-time Report</div>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 4 }}>$49</div>
-              <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>No subscription</div>
-              {['Full compensation audit', 'Resume analysis + rewrite', 'PDF report delivered', 'All Intelligence tools once'].map(f => (
-                <div key={f} style={{ fontSize: 13, color: '#475569', padding: '6px 0', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ color: '#10b981', fontWeight: 700 }}>✓</span> {f}
+            <div style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', border: '1px solid rgba(102,126,234,0.4)', borderRadius: 14, padding: 28, position: 'relative' }}>
+              <div style={{
+                position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
+                background: 'linear-gradient(135deg, #667eea, #764ba2)', color: '#fff',
+                fontSize: 11, fontWeight: 700, padding: '3px 12px', borderRadius: 20,
+                whiteSpace: 'nowrap',
+              }}>BEST RESULTS</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 6 }}>Elite</div>
+              <div style={{ fontSize: 32, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>$79<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 24 }}>Everything in Professional, plus:</div>
+              {['Sarah remembers you across sessions', 'Mock interview coaching with feedback', 'Live negotiation roleplay with Sarah', 'Annual Review Coach + Promotion Planner', 'PDF compensation report', 'Priority support'].map(f => (
+                <div key={f} style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ color: '#667eea', fontWeight: 700 }}>✓</span> {f}
                 </div>
               ))}
               <Link href="/signup" style={{
                 display: 'block', marginTop: 24, textAlign: 'center',
                 height: 42, lineHeight: '42px',
-                border: '1px solid #d1d5db', borderRadius: 9,
-                fontSize: 14, textDecoration: 'none', color: '#374151', fontWeight: 600,
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: 9,
+                fontSize: 14, textDecoration: 'none', color: '#fff', fontWeight: 700,
               }}>
-                Buy report
+                Get Elite →
               </Link>
             </div>
           </div>

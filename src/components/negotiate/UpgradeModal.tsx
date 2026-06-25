@@ -28,7 +28,7 @@ export function UpgradeModal({ onClose }: Props) {
       }} onClick={(e) => e.stopPropagation()} className="animate-slide-up">
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 500 }}>Upgrade to Pro</div>
+            <div style={{ fontSize: 16, fontWeight: 500 }}>Upgrade your plan</div>
             <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>
               You've reached the free plan limit for this tool.
             </div>
@@ -44,44 +44,45 @@ export function UpgradeModal({ onClose }: Props) {
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 500 }}>Pro monthly</div>
+                <div style={{ fontSize: 13, fontWeight: 600 }}>Professional</div>
                 <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>
-                  Unlimited access to all 10 tools
+                  Unlimited coaching + all 10 negotiation tools
                 </div>
               </div>
-              <div style={{ fontSize: 18, fontWeight: 500 }}>$29<span style={{ fontSize: 12, fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: 18, fontWeight: 600 }}>$49<span style={{ fontSize: 12, fontWeight: 400 }}>/mo</span></div>
             </div>
             <button onClick={() => handleUpgrade(process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || '')}
               style={{
                 marginTop: 14, width: '100%', height: 38, background: '#141414', color: '#fff',
-                border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 500,
+                border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer',
               }}>
-              Get Pro monthly
+              Get Professional
             </button>
           </div>
 
-          <div style={{ border: '0.5px solid var(--color-border-tertiary)', borderRadius: 10, padding: 20 }}>
+          <div style={{ border: '0.5px solid var(--color-border-tertiary)', borderRadius: 10, padding: 20, background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 500 }}>Pro annual</div>
-                <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>
-                  Save $99/yr · $20.75/mo
+                <div style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>Elite</div>
+                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 2 }}>
+                  Everything + memory, mock interviews, roleplay
                 </div>
               </div>
-              <div style={{ fontSize: 18, fontWeight: 500 }}>$249<span style={{ fontSize: 12, fontWeight: 400 }}>/yr</span></div>
+              <div style={{ fontSize: 18, fontWeight: 600, color: '#fff' }}>$79<span style={{ fontSize: 12, fontWeight: 400 }}>/mo</span></div>
             </div>
-            <button onClick={() => handleUpgrade(process.env.NEXT_PUBLIC_STRIPE_PRO_ANNUAL_PRICE_ID || '')}
+            <button onClick={() => handleUpgrade(process.env.NEXT_PUBLIC_STRIPE_ELITE_PRICE_ID || '')}
               style={{
-                marginTop: 14, width: '100%', height: 38, background: 'transparent', color: 'var(--color-text-primary)',
-                border: '0.5px solid var(--color-border-primary)', borderRadius: 8, fontSize: 13,
+                marginTop: 14, width: '100%', height: 38,
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff',
+                border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer',
               }}>
-              Get Pro annual
+              Get Elite
             </button>
           </div>
         </div>
 
         <div style={{ marginTop: 16, fontSize: 12, color: 'var(--color-text-tertiary)', textAlign: 'center' }}>
-          Or get a <a href="/account/billing" style={{ color: 'var(--color-text-secondary)', textDecoration: 'underline' }}>one-time compensation report for $49</a>
+          <a href="/upgrade" style={{ color: 'var(--color-text-secondary)', textDecoration: 'underline' }}>See full plan comparison</a>
         </div>
       </div>
     </div>
