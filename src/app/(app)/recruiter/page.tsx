@@ -95,7 +95,8 @@ export default function RecruiterPage() {
       }
 
       if (!res.ok || !data.content) {
-        setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }])
+        const detail = data?.detail || data?.error || 'Unknown error'
+        setMessages(prev => [...prev, { role: 'assistant', content: `Error: ${detail}` }])
         return
       }
 

@@ -3,7 +3,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { checkAndIncrementUsage, FREE_LIMITS } from '@/lib/usage'
-import { getUserProfile, formatProfileContext } from '@/lib/profile-context'
+import { formatProfileContext } from '@/lib/profile-context'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -167,7 +167,6 @@ export async function POST(req: NextRequest) {
       role: profile?.onboarding_role,
     }
 
-    const { formatProfileContext } = await import('@/lib/profile-context')
     const profileContext = formatProfileContext(onboardingProfile)
 
     let systemPrompt = buildFreeSystemPrompt(profileContext)
@@ -216,7 +215,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ content, used: usage.used, limit: usage.limit, isPro })
   } catch (err) {
-    console.error(err)
-    return NextResponse.json({ error: 'Failed to get response' }, { status: 500 })
+    const message = err instanceof Error ? err.message : String(err)
+    console.error('[recruiter] error:', message)
+    return NextResponse.json({ error: 'Failed to get response', detail: message }, { status: 500 })
   }
 }
