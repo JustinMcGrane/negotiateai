@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
-import { createClient } from '@/lib/supabase/server'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -29,14 +28,8 @@ type ExtractedProfile = {
   role?: string
 }
 
-async function extractProfile(
-  messages: Array<{ role: string; content: string }>
-): Promise<ExtractedProfile> {
+async function extractProfile(transcript: string): Promise<ExtractedProfile> {
   try {
-    const transcript = messages
-      .map(m => `${m.role === 'user' ? 'User' : 'Sarah'}: ${m.content}`)
-      .join('\n')
-
     const res = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 200,
@@ -45,7 +38,6 @@ async function extractProfile(
         content: `Extract what you know about this user from the conversation. Return ONLY valid JSON with these fields (omit fields you are not confident about):\n{\n  "goal": one of "new_job" | "negotiate" | "raise" | "resume" (only if clearly stated),\n  "situation": one of "actively_looking" | "casually_looking" | "have_offer" | "employed" (only if clearly stated),\n  "experience": one of "0-2" | "3-5" | "6-10" | "10+" (only if clearly stated),\n  "role": string (their job title or field, only if clearly stated)\n}\n\nConversation:\n${transcript}\n\nReturn only the JSON object, nothing else.`,
       }],
     })
-
     const text = res.content[0].type === 'text' ? res.content[0].text : '{}'
     const match = text.match(/\{[\s\S]*\}/)
     return match ? JSON.parse(match[0]) : {}
@@ -58,64 +50,49 @@ export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json()
 
-    // Anthropic requires messages to start with 'user'.
-    // The opening assistant message is hardcoded UI — strip it before sending.
-    const anthropicMessages = messages
-      .filter((m: { role: string }) => m.role !== 'system')
+    if (!Array.isArray(messages) || messages.length === 0) {
+      return NextResponse.json({ error: 'No messages provided' }, { status: 400 })
+    }
+
+    // Anthropic requires messages to start with 'user' — strip any leading assistant turns
+    const filtered = messages
+      .filter((m: { role: string }) => m.role === 'user' || m.role === 'assistant')
       .map((m: { role: string; content: string }) => ({
         role: m.role as 'user' | 'assistant',
         content: m.content,
       }))
 
-    // Drop leading assistant messages so the array always starts with 'user'
-    while (anthropicMessages.length > 0 && anthropicMessages[0].role === 'assistant') {
-      anthropicMessages.shift()
+    while (filtered.length > 0 && filtered[0].role === 'assistant') {
+      filtered.shift()
     }
 
-    if (anthropicMessages.length === 0) {
-      return NextResponse.json({ error: 'No user message provided' }, { status: 400 })
+    if (filtered.length === 0) {
+      return NextResponse.json({ error: 'No user message found' }, { status: 400 })
     }
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-6',
       max_tokens: 512,
       system: SYSTEM_PROMPT,
-      messages: anthropicMessages,
+      messages: filtered,
     })
 
     const content = response.content[0].type === 'text' ? response.content[0].text : ''
     const complete = content.includes('[ONBOARDING_COMPLETE]')
     const displayContent = content.replace('[ONBOARDING_COMPLETE]', '').trim()
 
-    // Only extract profile on completion to avoid a second API call on every message
+    // Only extract profile on completion — avoids extra API call on every message
     let profile: ExtractedProfile = {}
     if (complete) {
-      const allMessages = [...messages, { role: 'assistant', content: displayContent }]
-      profile = await extractProfile(allMessages)
-
-      if (Object.keys(profile).length > 0) {
-        try {
-          const supabase = await createClient()
-          const { data: { user } } = await supabase.auth.getUser()
-          if (user) {
-            await supabase.from('profiles').upsert({
-              id: user.id,
-              onboarding_goal: profile.goal,
-              onboarding_situation: profile.situation,
-              onboarding_experience: profile.experience,
-              onboarding_role: profile.role,
-              onboarded_at: new Date().toISOString(),
-            })
-          }
-        } catch {
-          // best-effort, never block the response
-        }
-      }
+      const transcript = messages
+        .map((m: { role: string; content: string }) => `${m.role === 'user' ? 'User' : 'Sarah'}: ${m.content}`)
+        .join('\n') + `\nSarah: ${displayContent}`
+      profile = await extractProfile(transcript)
     }
 
     return NextResponse.json({ content: displayContent, complete, profile })
   } catch (err) {
-    console.error('[onboarding-chat]', err)
-    return NextResponse.json({ error: 'Failed' }, { status: 500 })
+    console.error('[onboarding-chat] error:', err)
+    return NextResponse.json({ error: 'Failed to get response' }, { status: 500 })
   }
 }
