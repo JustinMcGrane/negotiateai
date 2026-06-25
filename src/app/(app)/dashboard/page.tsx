@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { TrendingUp, FileSearch, Play, ArrowRight, UserCircle, FileText, Search, Lock, CalendarCheck, Rocket, Briefcase, GitBranch } from 'lucide-react'
+import { MarketAlertCard } from '@/components/negotiate/MarketAlertCard'
 
 export const metadata: Metadata = { title: 'Dashboard — NegotiateAI' }
 
@@ -71,7 +72,7 @@ export default async function DashboardPage() {
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('*')
+    .select('*, last_checkin_at')
     .eq('id', user.id)
     .single()
 
@@ -107,6 +108,11 @@ export default async function DashboardPage() {
   const role = profile?.onboarding_role || ''
   const expMap: Record<string, string> = { '0-2': '0–2', '3-5': '3–5', '6-10': '6–10', '10+': '10+' }
   const experience = expMap[profile?.onboarding_experience] || ''
+
+  const isPro = plan === 'pro' || plan === 'elite'
+  const lastCheckin = profile?.last_checkin_at ? new Date(profile.last_checkin_at) : null
+  const daysSinceCheckin = lastCheckin ? Math.floor((Date.now() - lastCheckin.getTime()) / (1000 * 60 * 60 * 24)) : null
+  const checkinDue = isPro && (daysSinceCheckin === null || daysSinceCheckin >= 90)
 
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 24px 80px' }}>
@@ -147,6 +153,35 @@ export default async function DashboardPage() {
           </p>
         </div>
       </div>
+
+      {/* Check-in due card */}
+      {checkinDue && (
+        <div style={{
+          background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
+          border: '1px solid #86efac',
+          borderRadius: 14, padding: '20px 24px', marginBottom: 20,
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12,
+        }}>
+          <div>
+            <div style={{ fontSize: 12, color: '#166534', fontWeight: 700, letterSpacing: '0.05em', marginBottom: 4 }}>QUARTERLY CHECK-IN DUE</div>
+            <div style={{ fontSize: 14, fontWeight: 600, color: '#14532d', marginBottom: 4 }}>
+              {daysSinceCheckin === null ? "It's time for your first check-in with Sarah." : `It has been ${daysSinceCheckin} days since your last check-in.`}
+            </div>
+            <div style={{ fontSize: 13, color: '#166534' }}>A lot can change in 3 months. Let Sarah reassess your market value.</div>
+          </div>
+          <Link href="/recruiter?checkin=true" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            background: '#16a34a', color: '#fff',
+            padding: '10px 18px', borderRadius: 9,
+            fontSize: 13, fontWeight: 700, textDecoration: 'none', flexShrink: 0,
+          }}>
+            Start check-in <ArrowRight size={13} />
+          </Link>
+        </div>
+      )}
+
+      {/* Market alert card */}
+      <MarketAlertCard role={role} />
 
       {/* New user welcome */}
       {isNew && (

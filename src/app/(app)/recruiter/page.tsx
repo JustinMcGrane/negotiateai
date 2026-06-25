@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Send, Briefcase, Sparkles, Brain, ChevronDown, ChevronUp, ArrowRight, TrendingUp, Clock, Lock } from 'lucide-react'
 import Link from 'next/link'
 
@@ -11,6 +12,10 @@ type Assessment = {
   targetSalary: number
   timeline: string
 }
+
+const CHECKIN_INTRO = `Welcome back — it's great to hear from you again.
+
+A lot can shift in a few months. Let's catch up on where things stand. Tell me what's changed since we last spoke — new role, offer on the table, or just a general update — and I'll reassess your market position and tell you what's moved.`
 
 const ASSESSMENT_INTRO = `Hi, I'm Sarah — your AI recruiter.
 
@@ -41,6 +46,9 @@ function fmt(n: number) {
 }
 
 export default function RecruiterPage() {
+  const searchParams = useSearchParams()
+  const isCheckin = searchParams.get('checkin') === 'true'
+
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -58,8 +66,13 @@ export default function RecruiterPage() {
         const data = await res.json()
         setMemory(data.memory ?? {})
       } catch {}
-      setMessages([{ role: 'assistant', content: ASSESSMENT_INTRO }])
+      const intro = isCheckin ? CHECKIN_INTRO : ASSESSMENT_INTRO
+      setMessages([{ role: 'assistant', content: intro }])
       setInitialized(true)
+      // Mark check-in started
+      if (isCheckin) {
+        fetch('/api/checkin', { method: 'POST' }).catch(() => {})
+      }
     }
     init()
   }, [])
