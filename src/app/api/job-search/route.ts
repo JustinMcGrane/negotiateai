@@ -65,49 +65,42 @@ export async function POST(req: NextRequest) {
 
     console.log('[job-search] RAPIDAPI_KEY found, length:', apiKey.length)
 
-    const params = new URLSearchParams({
+    const baseParams: Record<string, string> = {
       query: [query, location].filter(Boolean).join(' '),
-      num_pages: '3',
-      page: '1',
+      num_pages: '1',
       country: 'us',
-    })
-    if (DATE_FILTER_MAP[datePosted]) {
-      params.set('date_posted', DATE_FILTER_MAP[datePosted])
     }
-    if (jobType === 'Remote') {
-      params.set('remote_jobs_only', 'true')
-    }
+    if (DATE_FILTER_MAP[datePosted]) baseParams.date_posted = DATE_FILTER_MAP[datePosted]
+    if (jobType === 'Remote') baseParams.remote_jobs_only = 'true'
     if (jobType && jobType !== 'Any' && jobType !== 'Remote') {
-      const typeMap: Record<string, string> = {
-        'Full-time': 'FULLTIME',
-        'Part-time': 'PARTTIME',
-        'Contract': 'CONTRACTOR',
-      }
-      if (typeMap[jobType]) params.set('employment_types', typeMap[jobType])
+      const typeMap: Record<string, string> = { 'Full-time': 'FULLTIME', 'Part-time': 'PARTTIME', 'Contract': 'CONTRACTOR' }
+      if (typeMap[jobType]) baseParams.employment_types = typeMap[jobType]
     }
 
-    const url = `https://jsearch.p.rapidapi.com/search?${params}`
-    console.log('[job-search] Fetching:', url)
+    const headers = { 'X-RapidAPI-Key': apiKey, 'X-RapidAPI-Host': 'jsearch.p.rapidapi.com' }
 
-    const res = await fetch(url, {
-      headers: {
-        'X-RapidAPI-Key': apiKey,
-        'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
-      },
-    })
+    const pageResults = await Promise.allSettled(
+      [1, 2, 3].map(page => {
+        const params = new URLSearchParams({ ...baseParams, page: String(page) })
+        return fetch(`https://jsearch.p.rapidapi.com/search?${params}`, { headers }).then(r => r.json())
+      })
+    )
 
-    console.log('[job-search] JSearch status:', res.status)
-    const data = await res.json()
-    console.log('[job-search] JSearch response keys:', Object.keys(data))
-    console.log('[job-search] Jobs count:', data.data?.length ?? 0)
-    if (data.message) console.log('[job-search] JSearch message:', data.message)
+    const allJobs: JSearchJob[] = []
+    for (const result of pageResults) {
+      if (result.status === 'fulfilled' && result.value?.data) {
+        allJobs.push(...result.value.data)
+      }
+    }
 
-    if (!res.ok || !data.data) {
+    console.log('[job-search] Total jobs fetched:', allJobs.length)
+
+    if (allJobs.length === 0) {
       console.log('[job-search] Falling back to mock data')
       return NextResponse.json({ jobs: getMockJobs(query, location) })
     }
 
-    const jobs = data.data.map((j: JSearchJob) => ({
+    const jobs = allJobs.map((j: JSearchJob) => ({
       title: j.job_title || '',
       company: j.employer_name || '',
       location: formatLocation(j),
