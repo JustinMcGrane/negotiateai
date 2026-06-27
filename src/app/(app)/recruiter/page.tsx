@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Send, Briefcase, Sparkles, Brain, ChevronDown, ChevronUp, ArrowRight, TrendingUp, Clock, Lock } from 'lucide-react'
 import Link from 'next/link'
@@ -45,7 +45,7 @@ function fmt(n: number) {
   return `$${n}`
 }
 
-export default function RecruiterPage() {
+function RecruiterInner() {
   const searchParams = useSearchParams()
   const isCheckin = searchParams.get('checkin') === 'true'
 
@@ -442,5 +442,13 @@ export default function RecruiterPage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function RecruiterPage() {
+  return (
+    <Suspense fallback={null}>
+      <RecruiterInner />
+    </Suspense>
   )
 }

@@ -179,7 +179,7 @@ export async function POST(req: NextRequest) {
       req.json(),
     ])
 
-    const isPro = profile?.plan === 'pro'
+    const isPro = profile?.plan === 'pro' || profile?.plan === 'elite'
     const usage = await checkAndIncrementUsage(user.id, 'recruiter', isPro)
 
     if (!usage.allowed) {
