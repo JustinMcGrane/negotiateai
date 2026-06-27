@@ -81,7 +81,7 @@ export function GlobalSearch() {
         icon: '◫',
       })),
     ...team
-      .filter((m) => m.name.toLowerCase().includes(query.toLowerCase()) || m.email.toLowerCase().includes(query.toLowerCase()))
+      .filter((m) => m.name?.toLowerCase().includes(query.toLowerCase()) || m.email?.toLowerCase().includes(query.toLowerCase()))
       .slice(0, 3)
       .map((m) => ({
         id: m.id,

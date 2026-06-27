@@ -35,8 +35,10 @@ Return this JSON:
       messages: [{ role: 'user', content: prompt }],
     })
 
-    const text = (msg.content[0] as { type: string; text: string }).text
-    const debrief = JSON.parse(text)
+    const text = msg.content[0].type === 'text' ? msg.content[0].text : ''
+    const match = text.match(/\{[\s\S]*\}/)
+    if (!match) throw new Error('No JSON in response')
+    const debrief = JSON.parse(match[0])
 
     if (userId) {
       const supabase = createServiceClient()

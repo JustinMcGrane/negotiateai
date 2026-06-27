@@ -131,6 +131,7 @@ function RecruiterInner() {
   function renderContent(text: string) {
     if (!text) return ''
     return text
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\n/g, '<br />')
   }

@@ -37,9 +37,10 @@ Return this exact JSON structure with realistic US compensation data (salary in 
       messages: [{ role: 'user', content: prompt }],
     })
 
-    const text = (msg.content[0] as { type: string; text: string }).text
-    const data = JSON.parse(text)
-    return NextResponse.json(data)
+    const text = msg.content[0].type === 'text' ? msg.content[0].text : ''
+    const match = text.match(/\{[\s\S]*\}/)
+    if (!match) throw new Error('No JSON in response')
+    return NextResponse.json(JSON.parse(match[0]))
   } catch (e) {
     console.error(e)
     return NextResponse.json({ error: 'Analysis failed' }, { status: 500 })
