@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       messages,
     })
 
-    const reply = (msg.content[0] as { type: string; text: string }).text
+    const reply = msg.content[0]?.type === 'text' ? (msg.content[0] as {type:string;text:string}).text : ''
     return NextResponse.json({ reply })
   } catch (e) {
     console.error(e)

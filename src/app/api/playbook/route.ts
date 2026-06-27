@@ -31,7 +31,7 @@ Return a 5-6 step personalized negotiation playbook as JSON:
       messages: [{ role: 'user', content: prompt }],
     })
 
-    const text = (msg.content[0] as { type: string; text: string }).text
+    const text = msg.content[0]?.type === 'text' ? (msg.content[0] as {type:string;text:string}).text : ''
     const match = text.match(/\{[\s\S]*\}/)
     if (!match) throw new Error('No JSON in response')
     return NextResponse.json(JSON.parse(match[0]))

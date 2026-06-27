@@ -28,7 +28,7 @@ Return this JSON (use null for fields not found):
       messages: [{ role: 'user', content: prompt }],
     })
 
-    const responseText = (msg.content[0] as { type: string; text: string }).text
+    const responseText = msg.content[0]?.type === 'text' ? (msg.content[0] as {type:string;text:string}).text : ''
     return NextResponse.json(JSON.parse(responseText))
   } catch (e) {
     console.error(e)
