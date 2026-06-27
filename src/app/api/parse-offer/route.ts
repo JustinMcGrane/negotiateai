@@ -29,7 +29,9 @@ Return this JSON (use null for fields not found):
     })
 
     const responseText = msg.content[0]?.type === 'text' ? (msg.content[0] as {type:string;text:string}).text : ''
-    return NextResponse.json(JSON.parse(responseText))
+    const match = responseText.match(/\{[\s\S]*\}/)
+    if (!match) throw new Error('No JSON in response')
+    return NextResponse.json(JSON.parse(match[0]))
   } catch (e) {
     console.error(e)
     return NextResponse.json({ error: 'Parse failed' }, { status: 500 })

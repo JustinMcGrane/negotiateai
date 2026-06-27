@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 import { PERSONAS } from '@/lib/personas'
 import type { Persona } from '@/lib/personas'
 import { Send, RotateCcw } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 interface Message { role: 'user' | 'assistant' | 'system'; content: string }
 interface Debrief {
@@ -28,6 +29,11 @@ export default function Simulator() {
   const [chatLoading, setChatLoading] = useState(false)
   const [debrief, setDebrief] = useState<Debrief | null>(null)
   const [debriefLoading, setDebriefLoading] = useState(false)
+  const [userId, setUserId] = useState<string | null>(null)
+
+  useEffect(() => {
+    createClient().auth.getUser().then(({ data }) => setUserId(data.user?.id ?? null))
+  }, [])
   const [copied, setCopied] = useState(false)
   const chatRef = useRef<HTMLDivElement>(null)
 
@@ -129,7 +135,7 @@ This is turn ${newTurn} of ${MAX_TURNS}. ${newTurn === MAX_TURNS - 1 ? 'This is 
     const res = await fetch('/api/debrief', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ transcript, role: form.role, offer: form.offer, target: form.target, personaLabel: persona?.name }),
+      body: JSON.stringify({ transcript, role: form.role, offer: form.offer, target: form.target, personaLabel: persona?.name, userId }),
     })
     const data = await res.json()
     setDebrief(data)
