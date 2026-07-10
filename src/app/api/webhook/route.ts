@@ -28,9 +28,17 @@ export async function POST(req: NextRequest) {
 
     const supabase = createServiceClient()
     const isReport = session.mode === 'payment'
+    let plan: string
+    if (isReport) {
+      plan = 'report'
+    } else if (session.metadata?.priceId === process.env.NEXT_PUBLIC_STRIPE_ELITE_PRICE_ID) {
+      plan = 'elite'
+    } else {
+      plan = 'pro'
+    }
     const { error } = await supabase
       .from('profiles')
-      .update({ plan: isReport ? 'report' : 'pro' })
+      .update({ plan })
       .eq('id', userId)
 
     if (error) {

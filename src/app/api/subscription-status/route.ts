@@ -13,7 +13,7 @@ export async function GET() {
       .eq('id', user.id)
       .single()
 
-    const subscribed = data?.plan === 'pro' || data?.plan === 'report'
+    const subscribed = data?.plan === 'pro' || data?.plan === 'elite' || data?.plan === 'report'
     return NextResponse.json({ subscribed })
   } catch {
     return NextResponse.json({ subscribed: false })

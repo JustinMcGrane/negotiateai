@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
       line_items: [{ price: priceId, quantity: 1 }],
       success_url: successUrl,
       cancel_url: `${baseUrl}/analyze`,
-      metadata: { userId: user?.id || '' },
+      metadata: { userId: user?.id || '', priceId },
       customer_email: user?.email,
     })
 

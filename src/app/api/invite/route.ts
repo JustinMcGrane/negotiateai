@@ -9,15 +9,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true, skipped: true })
     }
 
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://negotiateai.com'
     const html = `
-      <div style="font-family: -apple-system, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px 24px; background: #F7F6F2;">
-        <div style="background: #6558D3; width: 48px; height: 48px; border-radius: 11px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
-          <div style="color: white; font-size: 20px; font-weight: 700; font-family: Georgia, serif; line-height: 48px; text-align: center; width: 48px;">R</div>
+      <div style="font-family: -apple-system, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px 24px; background: #f9fafb;">
+        <div style="background: #141414; width: 48px; height: 48px; border-radius: 11px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+          <div style="color: white; font-size: 20px; font-weight: 700; line-height: 48px; text-align: center; width: 48px;">N</div>
         </div>
-        <h1 style="font-family: Georgia, serif; font-size: 24px; font-weight: 700; color: #1E1B3A; margin: 0 0 8px;">${inviterName} invited you to ${workspaceName}</h1>
-        <p style="color: #54516E; font-size: 15px; line-height: 1.6; margin: 0 0 24px;">You've been added to the ${workspaceName} workspace on Roster — a creator team management tool for tasks, content, and payments.</p>
-        <a href="${process.env.NEXT_PUBLIC_APP_URL ?? 'https://app.tryroster.ai'}/signup" style="display: inline-block; background: #6558D3; color: white; text-decoration: none; padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 14px; margin-bottom: 24px;">Accept invite →</a>
-        <p style="color: #9B94C4; font-size: 12px; margin: 0;">If you weren't expecting this invite, you can ignore this email.</p>
+        <h1 style="font-size: 24px; font-weight: 700; color: #111827; margin: 0 0 8px;">${inviterName} invited you to join NegotiateAI</h1>
+        <p style="color: #6b7280; font-size: 15px; line-height: 1.6; margin: 0 0 24px;">You've been invited by ${inviterName} to NegotiateAI — the compensation platform that helps you know your market rate, build your strategy, and negotiate with confidence.</p>
+        <a href="${appUrl}/signup" style="display: inline-block; background: #141414; color: white; text-decoration: none; padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 14px; margin-bottom: 24px;">Accept invite →</a>
+        <p style="color: #9ca3af; font-size: 12px; margin: 0;">If you weren't expecting this invite, you can ignore this email.</p>
       </div>
     `
 
@@ -28,9 +29,9 @@ export async function POST(req: NextRequest) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Roster <noreply@tryroster.ai>',
+        from: 'NegotiateAI <hello@negotiateai.com>',
         to: email,
-        subject: `${inviterName} invited you to ${workspaceName} on Roster`,
+        subject: `${inviterName} invited you to NegotiateAI`,
         html,
       }),
     })

@@ -13,7 +13,7 @@ export default async function ReportPage() {
 
   const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single()
 
-  if (profile?.plan !== 'report' && profile?.plan !== 'pro') {
+  if (profile?.plan !== 'report' && profile?.plan !== 'pro' && profile?.plan !== 'elite') {
     return (
       <div style={{ padding: '32px 32px 80px', maxWidth: 600 }}>
         <h1 style={{ fontSize: 18, fontWeight: 500, marginBottom: 8 }}>Compensation report</h1>
@@ -29,6 +29,12 @@ export default async function ReportPage() {
 
   const { data: sessions } = await supabase.from('sessions').select('*').eq('user_id', user.id).order('created_at', { ascending: false }).limit(1)
   const latestSession = sessions?.[0]
+
+  const { data: usageRows } = await supabase
+    .from('usage_tracking')
+    .select('tool')
+    .eq('user_id', user.id)
+  const usedTools = new Set((usageRows ?? []).map((r: { tool: string }) => r.tool))
 
   return (
     <div style={{ padding: '32px 32px 80px', maxWidth: 860 }}>
@@ -47,11 +53,11 @@ export default async function ReportPage() {
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {[
-            { label: 'Compensation analyzer', href: '/tools/comp-analyzer', done: false },
-            { label: 'Offer evaluator', href: '/tools/offer-evaluator', done: false },
-            { label: 'Equity calculator', href: '/tools/equity-calc', done: false },
-            { label: 'Cost of not negotiating', href: '/tools/cost-calculator', done: false },
-            { label: 'Negotiation playbook', href: '/tools/playbook', done: false },
+            { label: 'Compensation analyzer', href: '/tools/comp-analyzer', done: usedTools.has('comp-analyze') },
+            { label: 'Offer evaluator', href: '/tools/offer-evaluator', done: usedTools.has('offer-evaluate') },
+            { label: 'Equity calculator', href: '/tools/equity-calc', done: usedTools.has('equity-model') },
+            { label: 'Cost of not negotiating', href: '/tools/cost-calculator', done: usedTools.has('cost-calculator') },
+            { label: 'Negotiation playbook', href: '/tools/playbook', done: usedTools.has('playbook') },
             { label: 'Negotiation simulator', href: '/tools/simulator', done: !!latestSession },
           ].map((step) => (
             <div key={step.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', background: 'var(--color-background-secondary)', borderRadius: 6 }}>
