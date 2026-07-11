@@ -4,5 +4,15 @@
     "src/app/api/webhook/route.ts": {
       "maxDuration": 10
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/checkin-reminder",
+      "schedule": "0 14 1 * *"
+    },
+    {
+      "path": "/api/cron/salary-pulse",
+      "schedule": "0 14 * * 1"
+    }
+  ]
 }

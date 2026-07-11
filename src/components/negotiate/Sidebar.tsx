@@ -8,6 +8,7 @@ import {
   BookOpen, Mail, Shield, PenLine, Play, MessageSquare,
   BarChart2, Settings, CreditCard, ChevronRight,
   UserCircle, FileText, Search, ClipboardList, PenSquare,
+  Dumbbell, LineChart,
 } from 'lucide-react'
 
 type NavItem = { label: string; href: string; icon: LucideIcon }
@@ -47,10 +48,12 @@ const nav: NavEntry[] = [
   {
     label: 'Practice',
     items: [
+      { label: 'Daily prep', href: '/tools/daily-prep', icon: Dumbbell },
       { label: 'Negotiation simulator', href: '/tools/simulator', icon: Play },
       { label: 'Interview salary coach', href: '/tools/interview-coach', icon: MessageSquare },
     ],
   },
+  { label: 'Comp Journal', href: '/comp-journal', icon: LineChart },
   { label: 'Progress', href: '/progress', icon: BarChart2 },
   { label: 'Settings', href: '/account', icon: Settings },
   { label: 'Billing', href: '/account/billing', icon: CreditCard },

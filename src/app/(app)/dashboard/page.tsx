@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { TrendingUp, FileSearch, Play, ArrowRight, UserCircle, FileText, Search } from 'lucide-react'
+import { TrendingUp, FileSearch, Play, ArrowRight, UserCircle, FileText, Search, Dumbbell, LineChart, ClipboardList } from 'lucide-react'
 
 export const metadata: Metadata = { title: 'Dashboard — NegotiateAI' }
 
@@ -173,6 +173,32 @@ export default async function DashboardPage() {
           </div>
         </div>
       )}
+
+      {/* Daily habits */}
+      <div style={{ marginBottom: 28 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>DAILY HABITS</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
+          {[
+            { href: '/tools/daily-prep', icon: Dumbbell, color: '#7c3aed', bg: '#f5f3ff', name: 'Daily prep', desc: 'One scenario a day keeps rust away' },
+            { href: '/comp-journal', icon: LineChart, color: '#0891b2', bg: '#e0f2fe', name: 'Comp journal', desc: 'Log raises, bonuses, equity grants' },
+            { href: '/tracker', icon: ClipboardList, color: '#059669', bg: '#ecfdf5', name: 'Job tracker', desc: 'Track your pipeline' },
+          ].map((t) => (
+            <Link key={t.href} href={t.href} style={{
+              background: '#fff', border: '0.5px solid var(--color-border-tertiary)',
+              borderRadius: 12, padding: 16,
+              display: 'flex', gap: 12, textDecoration: 'none',
+            }}>
+              <div style={{ width: 36, height: 36, background: t.bg, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <t.icon size={16} color={t.color} />
+              </div>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)' }}>{t.name}</div>
+                <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>{t.desc}</div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
 
       {/* Upgrade banner for free users who have used the app */}
       {plan === 'free' && !isNew && (
