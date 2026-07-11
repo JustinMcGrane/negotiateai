@@ -30,7 +30,7 @@ export default async function ProgressPage() {
   const last5 = scores.slice(0, 5)
   const prev5 = scores.slice(5, 10)
   const trend = avg(last5) - avg(prev5)
-  const isPro = profile?.plan === 'pro'
+  const isPro = profile?.plan === 'pro' || profile?.plan === 'elite'
 
   const toolUseCounts: Record<string, number> = {}
   ;(toolUses || []).forEach((t: { tool_id: string }) => {

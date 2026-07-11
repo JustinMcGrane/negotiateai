@@ -4,6 +4,16 @@ import { ToolPage } from '@/components/negotiate/ToolPage'
 
 interface Result { subject: string; email: string; talkingPoints: string[]; timing: string }
 
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false)
+  return (
+    <button onClick={() => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2000) }}
+      style={{ fontSize: 11, padding: '4px 10px', borderRadius: 6, border: '0.5px solid var(--color-border-secondary)', background: copied ? '#10b981' : '#fff', color: copied ? '#fff' : 'var(--color-text-secondary)', cursor: 'pointer' }}>
+      {copied ? 'Copied!' : 'Copy'}
+    </button>
+  )
+}
+
 export default function RaiseBuilder() {
   const [form, setForm] = useState({ role: '', currentSalary: '', targetSalary: '', timeInRole: '', wins: '' })
   const [result, setResult] = useState<Result | null>(null)
@@ -54,7 +64,10 @@ export default function RaiseBuilder() {
           <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 4 }}>SUBJECT LINE</div>
           <div style={{ fontSize: 13, fontWeight: 500, padding: '8px 12px', background: 'var(--color-background-secondary)', borderRadius: 6, marginBottom: 16 }}>{result.subject}</div>
 
-          <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8 }}>EMAIL</div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>EMAIL</div>
+            <CopyButton text={result.email} />
+          </div>
           <pre style={{ fontFamily: 'inherit', fontSize: 13, lineHeight: 1.7, whiteSpace: 'pre-wrap', background: 'var(--color-background-secondary)', borderRadius: 8, padding: 16, marginBottom: 20, border: '0.5px solid var(--color-border-tertiary)' }}>{result.email}</pre>
 
           <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 10 }}>TALKING POINTS (in-person)</div>

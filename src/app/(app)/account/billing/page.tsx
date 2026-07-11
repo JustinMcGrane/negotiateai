@@ -1,9 +1,29 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Check } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 export default function BillingPage() {
   const [loading, setLoading] = useState<string | null>(null)
+  const [currentPlan, setCurrentPlan] = useState<string>('free')
+  const [portalLoading, setPortalLoading] = useState(false)
+
+  useEffect(() => {
+    createClient().from('profiles').select('plan').single().then(({ data }) => {
+      if (data?.plan) setCurrentPlan(data.plan)
+    })
+  }, [])
+
+  async function openPortal() {
+    setPortalLoading(true)
+    const res = await fetch('/api/portal', { method: 'POST' })
+    if (res.ok) {
+      const { url } = await res.json()
+      window.location.href = url
+    } else {
+      setPortalLoading(false)
+    }
+  }
 
   async function checkout(priceId: string, key: string) {
     setLoading(key)
@@ -89,6 +109,18 @@ export default function BillingPage() {
           </div>
         ))}
       </div>
+
+      {(currentPlan === 'pro' || currentPlan === 'elite') && (
+        <div style={{ marginBottom: 24, background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 10, padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+          <div>
+            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 2 }}>Manage subscription</div>
+            <div style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>Update payment method, view invoices, or cancel.</div>
+          </div>
+          <button onClick={openPortal} disabled={portalLoading} style={{ height: 36, padding: '0 16px', background: '#141414', color: '#fff', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer', opacity: portalLoading ? 0.6 : 1 }}>
+            {portalLoading ? 'Opening…' : 'Manage billing →'}
+          </button>
+        </div>
+      )}
 
       <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)' }}>
         Payments are processed securely by Stripe. Cancel anytime. NegotiateAI provides AI-generated guidance for informational purposes.

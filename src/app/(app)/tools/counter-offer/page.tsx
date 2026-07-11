@@ -4,6 +4,16 @@ import { ToolPage } from '@/components/negotiate/ToolPage'
 
 interface Result { email: string; script: string; tip: string }
 
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false)
+  return (
+    <button onClick={() => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2000) }}
+      style={{ fontSize: 11, padding: '4px 10px', borderRadius: 6, border: '0.5px solid var(--color-border-secondary)', background: copied ? '#10b981' : '#fff', color: copied ? '#fff' : 'var(--color-text-secondary)', cursor: 'pointer' }}>
+      {copied ? 'Copied!' : 'Copy'}
+    </button>
+  )
+}
+
 export default function CounterOffer() {
   const [form, setForm] = useState({ role: '', company: '', offer: '', counter: '', leverage: '' })
   const [result, setResult] = useState<Result | null>(null)
@@ -46,10 +56,16 @@ export default function CounterOffer() {
 
       {result && (
         <div style={{ marginTop: 32 }} className="animate-slide-up">
-          <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8 }}>EMAIL</div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>EMAIL</div>
+            <CopyButton text={result.email} />
+          </div>
           <pre style={{ fontFamily: 'inherit', fontSize: 13, lineHeight: 1.7, whiteSpace: 'pre-wrap', background: 'var(--color-background-secondary)', borderRadius: 8, padding: 16, marginBottom: 20, border: '0.5px solid var(--color-border-tertiary)' }}>{result.email}</pre>
 
-          <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8 }}>PHONE SCRIPT</div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>PHONE SCRIPT</div>
+            <CopyButton text={result.script} />
+          </div>
           <div style={{ fontStyle: 'italic', fontSize: 13, lineHeight: 1.7, color: 'var(--color-text-secondary)', background: 'var(--color-background-secondary)', borderRadius: 8, padding: 16, marginBottom: 20, border: '0.5px solid var(--color-border-tertiary)' }}>
             &ldquo;{result.script}&rdquo;
           </div>
