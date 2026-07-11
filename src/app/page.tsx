@@ -6,6 +6,7 @@ import {
   Calculator, DollarSign, Mail, Shield, PenLine, MessageSquare,
   UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowRight, Star,
 } from 'lucide-react'
+import { NewsletterForm } from '@/components/negotiate/NewsletterForm'
 
 export const metadata: Metadata = {
   title: 'NegotiateAI — Your personal AI career platform',
@@ -392,6 +393,26 @@ export default function LandingPage() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Newsletter signup */}
+      <section style={{ background: '#f0fdf4', borderTop: '1px solid #bbf7d0', borderBottom: '1px solid #bbf7d0', padding: '72px 24px' }}>
+        <div style={{ maxWidth: 560, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#dcfce7', border: '1px solid #bbf7d0', borderRadius: 20, padding: '5px 14px', marginBottom: 20 }}>
+            <Star size={12} color="#16a34a" fill="#16a34a" />
+            <span style={{ fontSize: 12, color: '#15803d', fontWeight: 600 }}>LIMITED OFFER</span>
+          </div>
+          <h2 style={{ fontSize: 'clamp(22px, 4vw, 32px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 12 }}>
+            Get 30 days of Pro free
+          </h2>
+          <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.7, marginBottom: 32 }}>
+            Subscribe to our weekly salary newsletter and get a free 30-day Pro trial — no credit card required. Every week: market rate data for your role, negotiation tactics, and career moves worth making.
+          </p>
+          <NewsletterForm />
+          <p style={{ fontSize: 12, color: '#86efac', marginTop: 14 }}>
+            No spam. Unsubscribe anytime. Trial activates instantly on signup.
+          </p>
         </div>
       </section>
 
