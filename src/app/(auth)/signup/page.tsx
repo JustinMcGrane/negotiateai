@@ -1,31 +1,40 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import Image from 'next/image'
+import { Suspense } from 'react'
 
-export default function SignupPage() {
+function SignupForm() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const trial = searchParams.get('trial') === '30'
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError('')
     const supabase = createClient()
-    const { error } = await supabase.auth.signUp({ email, password, options: { data: { name } } })
+    const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { name } } })
     if (error) {
       setError(error.message)
       setLoading(false)
-    } else {
-      router.push('/onboarding')
-      router.refresh()
+      return
     }
+
+    // Activate 30-day Pro trial if coming from newsletter
+    if (trial && data.user) {
+      await fetch('/api/activate-trial', { method: 'POST' }).catch(() => {})
+    }
+
+    router.push('/onboarding')
+    router.refresh()
   }
 
   const inp: React.CSSProperties = {
@@ -42,8 +51,17 @@ export default function SignupPage() {
           <Image src="/logo.png" alt="NegotiateAI" width={160} height={48} style={{ objectFit: 'contain' }} priority />
         </div>
 
+        {trial && (
+          <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 8, padding: '10px 14px', marginBottom: 20, textAlign: 'center' }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: '#15803d' }}>🎉 30-day Pro trial included</div>
+            <div style={{ fontSize: 12, color: '#166534', marginTop: 2 }}>No credit card required. Activates on signup.</div>
+          </div>
+        )}
+
         <h1 style={{ fontSize: 18, fontWeight: 500, marginBottom: 4 }}>Create your account</h1>
-        <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 24 }}>Free to get started. No credit card required.</p>
+        <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 24 }}>
+          {trial ? 'Your free trial activates instantly.' : 'Free to get started. No credit card required.'}
+        </p>
 
         <form onSubmit={handleSignup} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div>
@@ -69,7 +87,7 @@ export default function SignupPage() {
             height: 38, background: '#141414', color: '#fff', border: 'none',
             borderRadius: 8, fontSize: 13, opacity: loading ? 0.6 : 1, marginTop: 4,
           }}>
-            {loading ? 'Creating account…' : 'Create account'}
+            {loading ? 'Creating account…' : trial ? 'Create account & activate trial' : 'Create account'}
           </button>
         </form>
 
@@ -79,5 +97,13 @@ export default function SignupPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense>
+      <SignupForm />
+    </Suspense>
   )
 }
