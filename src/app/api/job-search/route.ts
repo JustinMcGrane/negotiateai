@@ -62,16 +62,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ jobs: getMockJobs(query, location) })
     }
 
-    const params = new URLSearchParams({
+    const baseParams = new URLSearchParams({
       query: [query, jobType, location].filter(Boolean).join(' '),
       num_pages: '1',
       country: 'us',
     })
     if (DATE_FILTER_MAP[datePosted]) {
-      params.set('date_posted', DATE_FILTER_MAP[datePosted])
+      baseParams.set('date_posted', DATE_FILTER_MAP[datePosted])
     }
     if (jobType === 'Remote') {
-      params.set('remote_jobs_only', 'true')
+      baseParams.set('remote_jobs_only', 'true')
     }
     if (jobType && jobType !== 'Any' && jobType !== 'Remote') {
       const typeMap: Record<string, string> = {
@@ -79,18 +79,34 @@ export async function POST(req: NextRequest) {
         'Part-time': 'PARTTIME',
         'Contract': 'CONTRACTOR',
       }
-      if (typeMap[jobType]) params.set('employment_types', typeMap[jobType])
+      if (typeMap[jobType]) baseParams.set('employment_types', typeMap[jobType])
     }
 
-    const res = await fetch(`https://jsearch.p.rapidapi.com/search?${params}`, {
-      headers: {
-        'X-RapidAPI-Key': apiKey,
-        'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
-      },
-    })
-    const data = await res.json()
+    const headers = {
+      'X-RapidAPI-Key': apiKey,
+      'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
+    }
 
-    const jobs = (data.data || []).map((j: JSearchJob) => ({
+    const pages = [1, 2, 3]
+    const results = await Promise.allSettled(
+      pages.map((page) => {
+        const params = new URLSearchParams(baseParams)
+        params.set('page', String(page))
+        return fetch(`https://jsearch.p.rapidapi.com/search?${params}`, { headers }).then((r) => r.json())
+      })
+    )
+
+    const allJobs: JSearchJob[] = results.flatMap((r) =>
+      r.status === 'fulfilled' ? (r.value.data || []) : []
+    )
+
+    const seen = new Set<string>()
+    const jobs = allJobs.filter((j: JSearchJob) => {
+      const key = `${j.job_title}|${j.employer_name}|${j.job_apply_link}`
+      if (seen.has(key)) return false
+      seen.add(key)
+      return true
+    }).map((j: JSearchJob) => ({
       title: j.job_title || '',
       company: j.employer_name || '',
       location: formatLocation(j),
