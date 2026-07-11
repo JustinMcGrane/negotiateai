@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { role, experience, location, companySize, industry } = body
 
-    const profile = await getUserProfile()
+    const profile = await getUserProfile().catch(() => null)
     const profileContext = formatProfileContext(profile)
     const contextBlock = profileContext ? `\n\n${profileContext}\n` : ''
 
