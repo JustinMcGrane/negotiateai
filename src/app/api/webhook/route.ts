@@ -17,6 +17,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
   }
 
+  if (event.type === 'customer.subscription.deleted' || event.type === 'customer.subscription.updated') {
+    const sub = event.data.object as Stripe.Subscription
+    if (sub.status === 'canceled' || sub.status === 'unpaid' || sub.status === 'past_due') {
+      const customerId = typeof sub.customer === 'string' ? sub.customer : sub.customer.id
+      const supabase = createServiceClient()
+      await supabase.from('profiles').update({ plan: 'free' }).eq('stripe_customer_id', customerId)
+    }
+  }
+
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
     const userId = session.metadata?.userId

@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       .eq('id', user.id)
       .single()
 
-    const isPro = profile?.plan === 'pro'
+    const isPro = profile?.plan === 'pro' || profile?.plan === 'elite'
     const usage = await checkAndIncrementUsage(user.id, 'resume', isPro)
 
     if (!usage.allowed) {

@@ -69,10 +69,6 @@ function RecruiterInner() {
       const intro = isCheckin ? CHECKIN_INTRO : ASSESSMENT_INTRO
       setMessages([{ role: 'assistant', content: intro }])
       setInitialized(true)
-      // Mark check-in started
-      if (isCheckin) {
-        fetch('/api/checkin', { method: 'POST' }).catch(() => {})
-      }
     }
     init()
   }, [])
@@ -117,6 +113,11 @@ function RecruiterInner() {
       }
 
       setMessages(prev => [...prev, { role: 'assistant', content: data.content }])
+
+      // Mark check-in complete after first real exchange
+      if (isCheckin && messages.length === 1) {
+        fetch('/api/checkin', { method: 'POST' }).catch(() => {})
+      }
 
       if (data.assessment) {
         setAssessment(data.assessment)

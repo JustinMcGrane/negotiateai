@@ -32,9 +32,9 @@ export default async function ReportPage() {
 
   const { data: usageRows } = await supabase
     .from('usage_tracking')
-    .select('tool')
+    .select('feature')
     .eq('user_id', user.id)
-  const usedTools = new Set((usageRows ?? []).map((r: { tool: string }) => r.tool))
+  const usedTools = new Set((usageRows ?? []).map((r: { feature: string }) => r.feature))
 
   return (
     <div style={{ padding: '32px 32px 80px', maxWidth: 860 }}>
@@ -58,6 +58,7 @@ export default async function ReportPage() {
             { label: 'Equity calculator', href: '/tools/equity-calc', done: usedTools.has('equity-model') },
             { label: 'Cost of not negotiating', href: '/tools/cost-calculator', done: usedTools.has('cost-calculator') },
             { label: 'Negotiation playbook', href: '/tools/playbook', done: usedTools.has('playbook') },
+            { label: 'Resume analyzer', href: '/resume', done: usedTools.has('resume') },
             { label: 'Negotiation simulator', href: '/tools/simulator', done: !!latestSession },
           ].map((step) => (
             <div key={step.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', background: 'var(--color-background-secondary)', borderRadius: 6 }}>

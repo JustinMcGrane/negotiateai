@@ -43,8 +43,8 @@ export default function AccountPage() {
     router.push('/login')
   }
 
-  const planLabel = { free: 'Free', pro: 'Pro', report: 'Report' }[profile?.plan || 'free'] || 'Free'
-  const isPro = profile?.plan === 'pro'
+  const planLabel = { free: 'Free', pro: 'Professional', elite: 'Elite', report: 'Report' }[profile?.plan || 'free'] || 'Free'
+  const isPro = profile?.plan === 'pro' || profile?.plan === 'elite'
 
   const inputStyle = {
     width: '100%', height: 42, padding: '0 14px', fontSize: 14,

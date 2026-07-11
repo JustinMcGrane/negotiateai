@@ -1,7 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
 
 function getClient() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }) }
+
+async function trackUsage(feature: string) {
+  try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return
+    const period = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`
+    const svc = createServiceClient()
+    const { data } = await svc.from('usage_tracking').select('count').eq('user_id', user.id).eq('feature', feature).eq('period', period).single()
+    await svc.from('usage_tracking').upsert({ user_id: user.id, feature, period, count: (data?.count ?? 0) + 1 }, { onConflict: 'user_id,feature,period' })
+  } catch {}
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -38,6 +51,7 @@ Return this exact JSON (score 0-100, verdict one of: "below market"|"at market"|
     const text = msg.content[0]?.type === 'text' ? (msg.content[0] as {type:string;text:string}).text : ''
     const match = text.match(/\{[\s\S]*\}/)
     if (!match) throw new Error('No JSON in response')
+    trackUsage('offer-evaluate')
     return NextResponse.json(JSON.parse(match[0]))
   } catch (e) {
     console.error(e)
