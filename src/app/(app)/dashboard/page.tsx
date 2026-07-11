@@ -282,44 +282,59 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Locked feature cards */}
-      <div style={{ marginBottom: 28 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>COMING WITH PRO</div>
-          <Link href="/upgrade" style={{ fontSize: 12, color: 'var(--color-text-tertiary)', textDecoration: 'underline' }}>See all</Link>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
-          {FEATURE_CARDS.map((card) => (
-            <Link key={card.title} href="/upgrade" style={{ textDecoration: 'none' }}>
-              <div style={{
-                background: 'var(--color-background-secondary)',
-                border: '0.5px solid var(--color-border-tertiary)',
-                borderRadius: 12, padding: 16,
-                opacity: 0.85,
-                position: 'relative',
-                height: '100%',
-              }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 10 }}>
-                  <div style={{ width: 36, height: 36, background: card.iconBg, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <card.icon size={16} color={card.iconColor} />
-                  </div>
-                  <span style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 4,
-                    fontSize: 10, fontWeight: 700, color: '#92400e',
-                    background: '#fef3c7', borderRadius: 20, padding: '2px 8px',
-                  }}>
-                    <Lock size={9} /> PRO
-                  </span>
-                </div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>{card.title}</div>
-                <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-                  {card.copy(role, experience)}
-                </div>
+      {/* Elite feature cards */}
+      {(() => {
+        const isElite = plan === 'elite'
+        const cardLinks: Record<string, string> = {
+          'Annual Review Coach': '/tools/annual-review',
+          'Promotion Planner': '/tools/promotion-planner',
+          'Competing Offer Tool': '/tools/competing-offer',
+          'Career Timeline': '/tools/career-timeline',
+        }
+        return (
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>
+                {isElite ? 'ELITE TOOLS' : 'ELITE FEATURES'}
               </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+              {!isElite && <Link href="/upgrade" style={{ fontSize: 12, color: 'var(--color-text-tertiary)', textDecoration: 'underline' }}>Upgrade to Elite</Link>}
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
+              {FEATURE_CARDS.map((card) => (
+                <Link key={card.title} href={isElite ? (cardLinks[card.title] || '/upgrade') : '/upgrade'} style={{ textDecoration: 'none' }}>
+                  <div style={{
+                    background: 'var(--color-background-secondary)',
+                    border: '0.5px solid var(--color-border-tertiary)',
+                    borderRadius: 12, padding: 16,
+                    opacity: isElite ? 1 : 0.85,
+                    position: 'relative',
+                    height: '100%',
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 10 }}>
+                      <div style={{ width: 36, height: 36, background: card.iconBg, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <card.icon size={16} color={card.iconColor} />
+                      </div>
+                      {!isElite && (
+                        <span style={{
+                          display: 'inline-flex', alignItems: 'center', gap: 4,
+                          fontSize: 10, fontWeight: 700, color: '#92400e',
+                          background: '#fef3c7', borderRadius: 20, padding: '2px 8px',
+                        }}>
+                          <Lock size={9} /> ELITE
+                        </span>
+                      )}
+                    </div>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 4 }}>{card.title}</div>
+                    <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                      {card.copy(role, experience)}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )
+      })()}
 
       {/* Recent activity */}
       {(toolUses?.length || 0) > 0 && (

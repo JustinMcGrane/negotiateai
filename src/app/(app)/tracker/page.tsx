@@ -1,6 +1,7 @@
 'use client'
-import { useState, useEffect } from 'react'
-import { Plus, Trash2, ExternalLink, ChevronDown } from 'lucide-react'
+import { useState, useEffect, useCallback } from 'react'
+import { Plus, Trash2, ExternalLink } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 type Status = 'saved' | 'applied' | 'interviewing' | 'offer' | 'rejected'
 type Application = {
@@ -22,47 +23,78 @@ const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: string }
   rejected:     { label: 'Rejected',     color: '#dc2626', bg: '#fef2f2' },
 }
 
-const STORAGE_KEY = 'negotiateai_job_tracker'
-
 export default function TrackerPage() {
   const [apps, setApps] = useState<Application[]>([])
   const [showForm, setShowForm] = useState(false)
   const [form, setForm] = useState({ company: '', title: '', url: '', salary: '', notes: '', status: 'saved' as Status })
+  const [userId, setUserId] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored) setApps(JSON.parse(stored))
+    async function load() {
+      const supabase = createClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+      setUserId(user.id)
+      const { data } = await supabase
+        .from('job_applications')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+      if (data) {
+        setApps(data.map(r => ({
+          id: r.id,
+          company: r.company,
+          title: r.title,
+          url: r.url,
+          status: r.status,
+          salary: r.salary,
+          notes: r.notes,
+          createdAt: r.created_at,
+        })))
+      }
+      setLoading(false)
+    }
+    load()
   }, [])
 
-  function save(updated: Application[]) {
-    setApps(updated)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
-  }
-
-  function add() {
-    if (!form.company || !form.title) return
-    const newApp: Application = {
-      id: crypto.randomUUID(),
-      company: form.company,
-      title: form.title,
-      url: form.url || undefined,
-      status: form.status,
-      salary: form.salary || undefined,
-      notes: form.notes || undefined,
-      createdAt: new Date().toISOString(),
-    }
-    save([newApp, ...apps])
+  const add = useCallback(async () => {
+    if (!form.company || !form.title || !userId) return
+    const supabase = createClient()
+    const { data, error } = await supabase
+      .from('job_applications')
+      .insert({
+        user_id: userId,
+        company: form.company,
+        title: form.title,
+        url: form.url || null,
+        status: form.status,
+        salary: form.salary || null,
+        notes: form.notes || null,
+      })
+      .select()
+      .single()
+    if (error || !data) return
+    setApps(prev => [{
+      id: data.id, company: data.company, title: data.title,
+      url: data.url, status: data.status, salary: data.salary,
+      notes: data.notes, createdAt: data.created_at,
+    }, ...prev])
     setForm({ company: '', title: '', url: '', salary: '', notes: '', status: 'saved' })
     setShowForm(false)
-  }
+  }, [form, userId])
 
-  function updateStatus(id: string, status: Status) {
-    save(apps.map(a => a.id === id ? { ...a, status } : a))
-  }
+  const updateStatus = useCallback(async (id: string, status: Status) => {
+    const supabase = createClient()
+    await supabase.from('job_applications').update({ status }).eq('id', id)
+    setApps(prev => prev.map(a => a.id === id ? { ...a, status } : a))
+  }, [])
 
-  function remove(id: string) {
-    save(apps.filter(a => a.id !== id))
-  }
+  const remove = useCallback(async (id: string) => {
+    const supabase = createClient()
+    await supabase.from('job_applications').delete().eq('id', id)
+    setApps(prev => prev.filter(a => a.id !== id))
+  }, [])
 
   const inputStyle = {
     width: '100%', padding: '9px 12px', fontSize: 13,
@@ -82,7 +114,7 @@ export default function TrackerPage() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28 }}>
         <div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Application Tracker</h1>
-          <p style={{ color: 'var(--color-text-secondary)', marginTop: 8, fontSize: 14, margin: '6px 0 0' }}>
+          <p style={{ color: 'var(--color-text-secondary)', marginTop: 6, fontSize: 14, margin: '6px 0 0' }}>
             Track every application in one place. Never lose track of where you stand.
           </p>
         </div>
@@ -100,10 +132,7 @@ export default function TrackerPage() {
 
       <div style={{ display: 'flex', gap: 12, marginBottom: 28, flexWrap: 'wrap' }}>
         {(Object.entries(STATUS_CONFIG) as [Status, typeof STATUS_CONFIG[Status]][]).map(([s, cfg]) => (
-          <div key={s} style={{
-            background: cfg.bg, borderRadius: 8, padding: '8px 14px',
-            display: 'flex', alignItems: 'center', gap: 8,
-          }}>
+          <div key={s} style={{ background: cfg.bg, borderRadius: 8, padding: '8px 14px', display: 'flex', alignItems: 'center', gap: 8 }}>
             <span style={{ fontSize: 18, fontWeight: 700, color: cfg.color }}>{counts[s]}</span>
             <span style={{ fontSize: 12, color: cfg.color, fontWeight: 500 }}>{cfg.label}</span>
           </div>
@@ -111,11 +140,7 @@ export default function TrackerPage() {
       </div>
 
       {showForm && (
-        <div style={{
-          background: 'var(--color-background-secondary)',
-          border: '0.5px solid var(--color-border-tertiary)',
-          borderRadius: 12, padding: 20, marginBottom: 24,
-        }}>
+        <div style={{ background: 'var(--color-background-secondary)', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 20, marginBottom: 24 }}>
           <h3 style={{ fontSize: 15, fontWeight: 600, margin: '0 0 16px' }}>Add Application</h3>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
             <div>
@@ -137,11 +162,7 @@ export default function TrackerPage() {
           </div>
           <div style={{ marginBottom: 12 }}>
             <label style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Status</label>
-            <select
-              value={form.status}
-              onChange={e => setForm(f => ({ ...f, status: e.target.value as Status }))}
-              style={{ ...inputStyle, cursor: 'pointer' }}
-            >
+            <select value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value as Status }))} style={{ ...inputStyle, cursor: 'pointer' }}>
               {(Object.entries(STATUS_CONFIG) as [Status, typeof STATUS_CONFIG[Status]][]).map(([s, cfg]) => (
                 <option key={s} value={s}>{cfg.label}</option>
               ))}
@@ -149,98 +170,45 @@ export default function TrackerPage() {
           </div>
           <div style={{ marginBottom: 16 }}>
             <label style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Notes</label>
-            <textarea
-              value={form.notes}
-              onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
-              placeholder="Recruiter name, next steps, impressions..."
-              rows={3}
-              style={{ ...inputStyle, resize: 'vertical' }}
-            />
+            <textarea value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} placeholder="Recruiter name, next steps, impressions..." rows={3} style={{ ...inputStyle, resize: 'vertical' }} />
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
-            <button
-              onClick={add}
-              disabled={!form.company || !form.title}
-              style={{
-                background: '#141414', color: '#fff', border: 'none',
-                borderRadius: 7, padding: '9px 18px', fontSize: 13, fontWeight: 500,
-                cursor: 'pointer', opacity: !form.company || !form.title ? 0.5 : 1,
-              }}
-            >
-              Save
-            </button>
-            <button
-              onClick={() => setShowForm(false)}
-              style={{
-                background: 'transparent', color: 'var(--color-text-secondary)',
-                border: '0.5px solid var(--color-border-tertiary)',
-                borderRadius: 7, padding: '9px 18px', fontSize: 13, cursor: 'pointer',
-              }}
-            >
-              Cancel
-            </button>
+            <button onClick={add} disabled={!form.company || !form.title} style={{ background: '#141414', color: '#fff', border: 'none', borderRadius: 7, padding: '9px 18px', fontSize: 13, fontWeight: 500, cursor: 'pointer', opacity: !form.company || !form.title ? 0.5 : 1 }}>Save</button>
+            <button onClick={() => setShowForm(false)} style={{ background: 'transparent', color: 'var(--color-text-secondary)', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 7, padding: '9px 18px', fontSize: 13, cursor: 'pointer' }}>Cancel</button>
           </div>
         </div>
       )}
 
-      {apps.length === 0 ? (
-        <div style={{
-          textAlign: 'center', padding: 60,
-          background: 'var(--color-background-secondary)',
-          border: '0.5px solid var(--color-border-tertiary)',
-          borderRadius: 12,
-        }}>
-          <p style={{ color: 'var(--color-text-secondary)', fontSize: 14, margin: 0 }}>
-            No applications yet. Add your first one above.
-          </p>
+      {loading ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {[1,2,3].map(i => <div key={i} className="skeleton" style={{ height: 60, borderRadius: 10 }} />)}
+        </div>
+      ) : apps.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: 60, background: 'var(--color-background-secondary)', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12 }}>
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: 14, margin: 0 }}>No applications yet. Add your first one above.</p>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {apps.map(app => {
             const cfg = STATUS_CONFIG[app.status]
             return (
-              <div key={app.id} style={{
-                background: 'var(--color-background-secondary)',
-                border: '0.5px solid var(--color-border-tertiary)',
-                borderRadius: 10, padding: '14px 16px',
-                display: 'flex', alignItems: 'center', gap: 12,
-              }}>
+              <div key={app.id} style={{ background: 'var(--color-background-secondary)', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 10, padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
                     <span style={{ fontSize: 14, fontWeight: 600 }}>{app.company}</span>
                     <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>·</span>
                     <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>{app.title}</span>
-                    {app.url && (
-                      <a href={app.url} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink size={12} color="var(--color-text-tertiary)" />
-                      </a>
-                    )}
+                    {app.url && <a href={app.url} target="_blank" rel="noopener noreferrer"><ExternalLink size={12} color="var(--color-text-tertiary)" /></a>}
                   </div>
                   {app.salary && <span style={{ fontSize: 12, color: '#10b981' }}>{app.salary}</span>}
                   {app.notes && <p style={{ fontSize: 12, color: 'var(--color-text-tertiary)', margin: '4px 0 0' }}>{app.notes}</p>}
                 </div>
-                <select
-                  value={app.status}
-                  onChange={e => updateStatus(app.id, e.target.value as Status)}
-                  style={{
-                    background: cfg.bg, color: cfg.color,
-                    border: `1px solid ${cfg.color}33`,
-                    borderRadius: 6, padding: '5px 10px', fontSize: 12,
-                    fontWeight: 500, cursor: 'pointer', outline: 'none',
-                  }}
-                >
+                <select value={app.status} onChange={e => updateStatus(app.id, e.target.value as Status)} style={{ background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.color}33`, borderRadius: 6, padding: '5px 10px', fontSize: 12, fontWeight: 500, cursor: 'pointer', outline: 'none' }}>
                   {(Object.entries(STATUS_CONFIG) as [Status, typeof STATUS_CONFIG[Status]][]).map(([s, c]) => (
                     <option key={s} value={s}>{c.label}</option>
                   ))}
                 </select>
-                <button
-                  onClick={() => remove(app.id)}
-                  style={{
-                    background: 'transparent', border: 'none',
-                    cursor: 'pointer', padding: 6, color: 'var(--color-text-tertiary)',
-                    display: 'flex', alignItems: 'center',
-                  }}
-                >
+                <button onClick={() => remove(app.id)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 6, color: 'var(--color-text-tertiary)', display: 'flex', alignItems: 'center' }}>
                   <Trash2 size={14} />
                 </button>
               </div>

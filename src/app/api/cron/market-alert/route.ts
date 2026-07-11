@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
     .select('id, name, email, onboarding_role')
     .not('onboarding_role', 'is', null)
     .not('email', 'is', null)
+    .neq('market_alert_emails', false)
 
   let sent = 0
   const seen = new Set<string>()

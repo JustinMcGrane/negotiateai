@@ -15,8 +15,9 @@ export async function GET(req: NextRequest) {
   // Users who have never had a check-in (and signed up 90+ days ago) or whose last check-in was 90+ days ago
   const { data: users } = await supabase
     .from('profiles')
-    .select('id, name, email, plan, last_checkin_at, created_at')
+    .select('id, name, email, plan, last_checkin_at, created_at, checkin_emails')
     .in('plan', ['pro', 'elite'])
+    .neq('checkin_emails', false)
     .or(`last_checkin_at.is.null,last_checkin_at.lte.${ninetyDaysAgo}`)
 
   let sent = 0

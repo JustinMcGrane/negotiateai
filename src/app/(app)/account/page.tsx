@@ -152,6 +152,22 @@ export default function AccountPage() {
         </div>
       </div>
 
+      {/* Notifications */}
+      <div style={{ marginBottom: 16 }}>
+        <a href="/account/notifications" style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          background: '#fff', border: '0.5px solid var(--color-border-tertiary)',
+          borderRadius: 12, padding: '16px 20px', textDecoration: 'none',
+          color: 'var(--color-text-primary)',
+        }}>
+          <div>
+            <div style={{ fontSize: 14, fontWeight: 500 }}>Email notifications</div>
+            <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>Manage check-in reminders and market alerts</div>
+          </div>
+          <span style={{ color: 'var(--color-text-tertiary)', fontSize: 18 }}>›</span>
+        </a>
+      </div>
+
       {/* Sign out */}
       <button
         onClick={signOut}
