@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
   const { data: users } = await supabase
     .from('profiles')
-    .select('id, name, email:id')
+    .select('id, name')
     .neq('checkin_emails', false)
     .or(`last_checkin_at.is.null,last_checkin_at.lt.${thirtyDaysAgo}`)
     .limit(100)
