@@ -55,10 +55,9 @@ export default function RecruiterPage() {
         const res = await fetch('/api/sarah-memory')
         const data = await res.json()
         setMemory(data.memory ?? {})
-        const hasMemory = Object.keys(data.memory ?? {}).length > 0
-        // Detect Pro by checking if memory endpoint works with pro context
-        // We'll detect isPro from first API response
-        setMessages([{ role: 'assistant', content: FREE_INTRO }])
+        const proUser = data.isPro === true
+        setIsPro(proUser)
+        setMessages([{ role: 'assistant', content: proUser ? PRO_INTRO : FREE_INTRO }])
       } catch {
         setMessages([{ role: 'assistant', content: FREE_INTRO }])
       }
