@@ -57,6 +57,7 @@ function RecruiterInner() {
   const [showMemory, setShowMemory] = useState(false)
   const [initialized, setInitialized] = useState(false)
   const [assessment, setAssessment] = useState<Assessment | null>(null)
+  const [limitReached, setLimitReached] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -93,6 +94,11 @@ function RecruiterInner() {
         body: JSON.stringify({ messages: allMessages }),
       })
       const data = await res.json()
+
+      if (res.status === 429) {
+        setLimitReached(true)
+        return
+      }
 
       if (!res.ok || !data.content) {
         setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }])
@@ -364,8 +370,42 @@ function RecruiterInner() {
         <div ref={bottomRef} />
       </div>
 
+      {/* Limit reached upgrade banner */}
+      {limitReached && (
+        <div style={{ padding: '20px 0 24px', borderTop: '0.5px solid var(--color-border-tertiary)', flexShrink: 0 }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+            border: '1px solid rgba(102,126,234,0.3)',
+            borderRadius: 12, padding: '20px 24px',
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{
+                width: 36, height: 36, borderRadius: '50%',
+                background: 'rgba(102,126,234,0.2)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              }}>
+                <Lock size={16} color="#667eea" />
+              </div>
+              <div>
+                <p style={{ margin: 0, fontWeight: 600, fontSize: 14, color: '#fff' }}>You've used all 20 free messages this month</p>
+                <p style={{ margin: '2px 0 0', fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>Upgrade to Pro for unlimited coaching with Sarah</p>
+              </div>
+            </div>
+            <Link href="/upgrade" style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: '#fff', textDecoration: 'none',
+              borderRadius: 8, padding: '10px 20px',
+              fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0,
+            }}>
+              Upgrade to Pro
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* Input */}
-      {!assessment && !isPro && (
+      {!assessment && !isPro && !limitReached && (
         <div style={{ padding: '12px 0 24px', flexShrink: 0 }}>
           <div style={{
             display: 'flex', gap: 8,
