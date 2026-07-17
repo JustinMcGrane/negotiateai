@@ -39,12 +39,6 @@ const negotiationTools = [
   { icon: MessageSquare, color: '#141414', bg: '#f0f0f0', name: 'Interview Salary Coach', desc: 'Real-time coaching on how to answer salary questions at every stage of the interview process.' },
 ]
 
-const testimonials = [
-  { name: 'Priya S.', role: 'Senior Software Engineer', result: '+$18K base salary', quote: 'Sarah spotted three things wrong with my resume in two minutes that I had never noticed. Fixed them, applied to 8 roles, got 5 callbacks.' },
-  { name: 'Marcus J.', role: 'Product Manager', result: '+$12K + signing bonus', quote: 'The negotiation simulator felt eerily real. I practiced against the tough recruiter persona three times before my actual call. It worked.' },
-  { name: 'Elena V.', role: 'Data Scientist', result: '31st → 74th percentile', quote: 'The comp analyzer showed me exactly how underpaid I was. Six months later I negotiated a 28% raise at the same company.' },
-  { name: 'James T.', role: 'Sales Director', result: '+$25K total comp', quote: 'I uploaded my resume, got the score (54 — ouch), followed every suggestion, and landed three final-round interviews the next week.' },
-]
 
 export default function LandingPage() {
   return (
@@ -279,35 +273,6 @@ export default function LandingPage() {
                   <div style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', marginBottom: 3 }}>{name}</div>
                   <div style={{ fontSize: 12, color: '#64748b', lineHeight: 1.5 }}>{desc}</div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section style={{ background: '#f8fafc', padding: '80px 24px' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(22px, 4vw, 34px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', margin: '0 0 10px' }}>
-              Real results from real people
-            </h2>
-            <p style={{ fontSize: 15, color: '#64748b' }}>Not motivational quotes. Actual outcomes.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
-            {testimonials.map(t => (
-              <div key={t.name} style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 14, padding: 24 }}>
-                <div style={{
-                  display: 'inline-block',
-                  background: '#ecfdf5', color: '#059669',
-                  fontSize: 13, fontWeight: 700,
-                  borderRadius: 6, padding: '4px 10px', marginBottom: 14,
-                }}>
-                  {t.result}
-                </div>
-                <p style={{ fontSize: 13, color: '#475569', lineHeight: 1.7, marginBottom: 16 }}>&ldquo;{t.quote}&rdquo;</p>
-                <div style={{ fontSize: 13, fontWeight: 600, color: '#0f172a' }}>{t.name}</div>
-                <div style={{ fontSize: 12, color: '#94a3b8' }}>{t.role}</div>
               </div>
             ))}
           </div>
