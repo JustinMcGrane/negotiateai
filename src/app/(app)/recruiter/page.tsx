@@ -111,8 +111,9 @@ export default function RecruiterPage() {
       }
 
       setMessages(prev => [...prev, { role: 'assistant', content: data.content }])
-    } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }])
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      setMessages(prev => [...prev, { role: 'assistant', content: `Error: ${msg}` }])
     } finally {
       setLoading(false)
     }
