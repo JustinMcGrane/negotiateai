@@ -1,10 +1,10 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const FROM = 'NegotiateAI <hello@negotiateai.com>'
+function getResend() { return new Resend(process.env.RESEND_API_KEY) }
 
 export async function sendCheckinReminder(to: string, firstName: string) {
-  return resend.emails.send({
+  return getResend().emails.send({
     from: FROM,
     to,
     subject: 'Your quarterly check-in with Sarah is ready',
@@ -29,7 +29,7 @@ export async function sendCheckinReminder(to: string, firstName: string) {
 }
 
 export async function sendMarketAlert(to: string, firstName: string, role: string, alert: string) {
-  return resend.emails.send({
+  return getResend().emails.send({
     from: FROM,
     to,
     subject: `Market update for ${role}`,
