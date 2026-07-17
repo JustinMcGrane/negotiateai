@@ -33,10 +33,16 @@ export async function checkAndIncrementUsage(
   const used = data?.count ?? 0
   if (used >= limit) return { allowed: false, used, limit }
 
-  await supabase.from('usage_tracking').upsert(
-    { user_id: userId, feature, period, count: used + 1 },
-    { onConflict: 'user_id,feature,period' }
-  )
+  if (data) {
+    await supabase.from('usage_tracking')
+      .update({ count: used + 1 })
+      .eq('user_id', userId)
+      .eq('feature', feature)
+      .eq('period', period)
+  } else {
+    await supabase.from('usage_tracking')
+      .insert({ user_id: userId, feature, period, count: 1 })
+  }
 
   return { allowed: true, used: used + 1, limit }
 }
