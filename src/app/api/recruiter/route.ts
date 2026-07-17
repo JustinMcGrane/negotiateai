@@ -3,15 +3,43 @@ import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { checkAndIncrementUsage, FREE_LIMITS } from '@/lib/usage'
-import { getUserProfile, formatProfileContext } from '@/lib/profile-context'
+import { formatProfileContext } from '@/lib/profile-context'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
+function buildAssessmentSystemPrompt(profileContext: string) {
+  const profileSection = profileContext ? `\n\nWhat you already know about them:\n${profileContext}\n` : ''
+  return `You are Sarah, a personal recruiting assistant on the NegotiateAI platform. You are running a free salary assessment for a new user.${profileSection}
+
+YOUR GOAL: Collect enough information to give them a personalized salary assessment, then deliver it honestly and motivatingly.
+
+STEP 1 — COLLECT INFORMATION (naturally, conversationally):
+Learn their current role and title, years of experience, location, highest education level, and current salary (ask gently). Encourage them to paste their resume for more accurate recommendations. Ask one or two things at a time. Never interrogate.
+
+STEP 2 — DELIVER THE ASSESSMENT (only when you have enough info):
+Once you have their role, experience, and location, deliver the assessment. Include:
+1. Their current market salary range — what they should be earning right now
+2. A specific target role one level up with a realistic salary range for that title in their market
+3. An honest encouraging timeline — how long it typically takes to reach that role (be specific: "most people I work with in your position land this in 4 to 6 months")
+4. One or two specific things standing between them and that role — honest but not crushing
+5. A warm close acknowledging this is achievable and that the platform exists to help them get there faster
+
+Be genuinely encouraging. Give real hope based on real numbers. Do not be vague.
+
+When you have delivered the full assessment, end your message with this exact line on its own:
+[ASSESSMENT_COMPLETE]{"currentSalary":CURRENT_ESTIMATE,"currentTitle":"THEIR_CURRENT_TITLE","targetTitle":"TARGET_TITLE","targetSalary":TARGET_SALARY_MIDPOINT,"timeline":"X to Y months"}[/ASSESSMENT_COMPLETE]
+
+Replace values with real numbers and strings. currentSalary and targetSalary are integers (no $ sign). timeline is a short string like "4 to 6 months".
+
+HOW YOU COMMUNICATE:
+- Write like a human. Short paragraphs. Plain sentences.
+- Never use bullet points or headers.
+- No filler phrases. One question at a time.`
+}
+
 function buildFreeSystemPrompt(profileContext: string) {
   const profileSection = profileContext ? `\n\n${profileContext}\n\nUse this to make your advice specific to them. Reference it naturally — do not announce it or repeat it back verbatim.` : ''
-  return `You are Sarah, a senior recruiter with 12 years of experience. You have placed candidates at Google, Meta, Stripe, Airbnb, and hundreds of venture-backed startups. You have reviewed tens of thousands of resumes and conducted thousands of interviews across engineering, product, design, sales, and executive roles.
-
-You are talking to a job seeker one-on-one. This is a real conversation, not a report.${profileSection}
+  return `You are Sarah, a personal recruiting assistant on the NegotiateAI platform. You are talking to a job seeker one-on-one to help them accomplish their goals and get the most out of the platform.${profileSection}
 
 How you communicate:
 - Write like a human, not a consultant. Short paragraphs. Plain sentences.
@@ -57,9 +85,7 @@ function buildProSystemPrompt(memory: Record<string, string>, profileContext: st
     ? `\n\nWHAT YOU KNOW ABOUT THIS PERSON:\n${memoryLines.join('\n')}\n\nUse this context naturally. Reference it when relevant. Update your understanding as the conversation reveals more.`
     : ''
 
-  return `You are Sarah, a senior recruiter and career coach with 12 years of experience. You have placed candidates at Google, Meta, Stripe, Airbnb, and hundreds of venture-backed startups. You have conducted thousands of interviews and coached hundreds of professionals through career transitions, offer negotiations, and job searches.
-
-This person is a Pro member. They have full access to everything you can offer. Give them everything.${profileSection}${memorySection}
+  return `You are Sarah, a personal recruiting assistant on the NegotiateAI platform. This person is a Pro member with full access to everything the platform offers. Give them everything.${profileSection}${memorySection}
 
 YOUR COACHING CAPABILITIES:
 
@@ -140,11 +166,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role')
-      .eq('id', user.id)
-      .single()
+    const [{ data: profile }, { messages }] = await Promise.all([
+      supabase
+        .from('profiles')
+        .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role')
+        .eq('id', user.id)
+        .single(),
+      req.json(),
+    ])
 
     const isPro = profile?.plan === 'pro' || profile?.plan === 'elite'
     const usage = await checkAndIncrementUsage(user.id, 'recruiter', isPro)
@@ -158,8 +187,6 @@ export async function POST(req: NextRequest) {
       }, { status: 429 })
     }
 
-    const { messages } = await req.json()
-
     const onboardingProfile = {
       goal: profile?.onboarding_goal,
       situation: profile?.onboarding_situation,
@@ -167,10 +194,10 @@ export async function POST(req: NextRequest) {
       role: profile?.onboarding_role,
     }
 
-    const { formatProfileContext } = await import('@/lib/profile-context')
     const profileContext = formatProfileContext(onboardingProfile)
+    const isAssessmentMode = !isPro
 
-    let systemPrompt = buildFreeSystemPrompt(profileContext)
+    let systemPrompt = isAssessmentMode ? buildAssessmentSystemPrompt(profileContext) : buildFreeSystemPrompt(profileContext)
     let memory: Record<string, string> = {}
 
     if (isPro) {
@@ -202,21 +229,34 @@ export async function POST(req: NextRequest) {
     }
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: isPro ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001',
       max_tokens: isPro ? 2048 : 1024,
       system: systemPrompt,
       messages: anthropicMessages,
     })
 
-    const content = response.content[0].type === 'text' ? response.content[0].text : ''
+    const rawContent = response.content[0].type === 'text' ? response.content[0].text : ''
+
+    // Parse assessment completion signal for free users
+    let assessment = null
+    let content = rawContent
+    if (!isPro) {
+      const assessmentMatch = rawContent.match(/\[ASSESSMENT_COMPLETE\]([\s\S]*?)\[\/ASSESSMENT_COMPLETE\]/)
+      if (assessmentMatch) {
+        try {
+          assessment = JSON.parse(assessmentMatch[1])
+        } catch {}
+        content = rawContent.replace(/\[ASSESSMENT_COMPLETE\][\s\S]*?\[\/ASSESSMENT_COMPLETE\]/, '').trim()
+      }
+    }
 
     if (isPro && messages.length % 4 === 0) {
       extractAndSaveMemory(user.id, messages, memory)
     }
 
-    return NextResponse.json({ content, used: usage.used, limit: usage.limit, isPro })
+    return NextResponse.json({ content, used: usage.used, limit: usage.limit, isPro, assessment })
   } catch (err) {
-    console.error(err)
+    console.error('[recruiter] error:', err)
     return NextResponse.json({ error: 'Failed to get response' }, { status: 500 })
   }
 }

@@ -7,17 +7,13 @@ type Message = { role: 'user' | 'assistant'; content: string }
 
 const FREE_LIMIT = 20
 
-const FREE_INTRO = `Hi, I'm Sarah — your AI recruiter.
-
-I've spent 12 years placing talent at Google, Meta, Stripe, and hundreds of top startups. I know what hiring managers actually look for, what kills candidacies before they start, and how to position you to land the role and the offer you deserve.
+const FREE_INTRO = `Hey! I'm Sarah, your personal recruiting assistant, here to help you accomplish your goals and help you navigate the platform to get as much out of it as possible!
 
 What are you working on right now?`
 
-const PRO_INTRO = `Hi — good to connect. I'm Sarah.
+const PRO_INTRO = `Hey! I'm Sarah, your personal recruiting assistant, here to help you accomplish your goals and help you navigate the platform to get as much out of it as possible!
 
-I've got your profile pulled up and I'm ready to dig in. I can run mock interviews, coach you through a negotiation, tear apart your resume line by line, or just help you figure out your next move.
-
-I'll remember everything we talk about, so you never have to repeat yourself.
+I've got your profile pulled up and I'm ready to dig in. I can run mock interviews, coach you through a negotiation, review your resume, or help you figure out your next move. I'll remember everything we talk about so you never have to repeat yourself.
 
 What's the most pressing thing on your plate right now?`
 
@@ -164,7 +160,7 @@ export default function RecruiterPage() {
               </span>
             </div>
             <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: 0 }}>
-              12 years · Google, Meta, Stripe · 2,400+ placements
+              Your personal recruiting assistant
             </p>
           </div>
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -380,7 +376,7 @@ export default function RecruiterPage() {
           <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', textAlign: 'center', marginTop: 8 }}>
             {isPro
               ? 'Sarah remembers your context across sessions and coaches you through every stage of your search.'
-              : 'Sarah gives you recruiter-grade advice based on 12 years of real placements.'}
+              : 'Sarah is here to help you accomplish your goals and get the most out of the platform.'}
           </p>
         </div>
       )}
