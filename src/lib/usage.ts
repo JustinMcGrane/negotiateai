@@ -19,31 +19,32 @@ export async function checkAndIncrementUsage(
   const limit = FREE_LIMITS[feature] ?? 999
   if (isPro) return { allowed: true, used: 0, limit: 999 }
 
-  try {
-    const supabase = createServiceClient()
-    const period = getPeriod()
+  const supabase = createServiceClient()
+  const period = getPeriod()
 
-    const { data } = await supabase
-      .from('usage_tracking')
-      .select('count')
+  const { data } = await supabase
+    .from('usage_tracking')
+    .select('count')
+    .eq('user_id', userId)
+    .eq('feature', feature)
+    .eq('period', period)
+    .single()
+
+  const used = data?.count ?? 0
+  if (used >= limit) return { allowed: false, used, limit }
+
+  if (data) {
+    await supabase.from('usage_tracking')
+      .update({ count: used + 1 })
       .eq('user_id', userId)
       .eq('feature', feature)
       .eq('period', period)
-      .single()
-
-    const used = data?.count ?? 0
-    if (used >= limit) return { allowed: false, used, limit }
-
-    await supabase.from('usage_tracking').upsert(
-      { user_id: userId, feature, period, count: used + 1 },
-      { onConflict: 'user_id,feature,period' }
-    )
-
-    return { allowed: true, used: used + 1, limit }
-  } catch {
-    // If usage_tracking table doesn't exist or query fails, allow the request
-    return { allowed: true, used: 0, limit }
+  } else {
+    await supabase.from('usage_tracking')
+      .insert({ user_id: userId, feature, period, count: 1 })
   }
+
+  return { allowed: true, used: used + 1, limit }
 }
 
 export async function getUsage(userId: string): Promise<Record<string, number>> {
