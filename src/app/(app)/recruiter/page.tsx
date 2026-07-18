@@ -43,6 +43,7 @@ export default function RecruiterPage() {
   const [memory, setMemory] = useState<Record<string, string>>({})
   const [showMemory, setShowMemory] = useState(false)
   const [initialized, setInitialized] = useState(false)
+  const [userHasSent, setUserHasSent] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -63,15 +64,16 @@ export default function RecruiterPage() {
   }, [])
 
   useEffect(() => {
-    if (!initialized) return
+    if (!userHasSent) return
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages, initialized])
+  }, [messages, userHasSent])
 
   async function send(text?: string) {
     const content = (text ?? input).trim()
     if (!content || loading || limitReached) return
     const userMsg: Message = { role: 'user', content }
     setMessages(prev => [...prev, userMsg])
+    setUserHasSent(true)
     setInput('')
     setLoading(true)
 
