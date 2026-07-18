@@ -5,7 +5,7 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { checkAndIncrementUsage, FREE_LIMITS } from '@/lib/usage'
 import { formatProfileContext } from '@/lib/profile-context'
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, baseURL: 'https://api.anthropic.com' })
+const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 function buildAssessmentSystemPrompt(profileContext: string) {
   const profileSection = profileContext ? `\n\nWhat you already know about them:\n${profileContext}\n` : ''
