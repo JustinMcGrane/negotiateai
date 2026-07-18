@@ -131,7 +131,7 @@ async function extractAndSaveMemory(
       .join('\n')
 
     const extraction = await client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 256,
       messages: [{
         role: 'user',
@@ -229,7 +229,7 @@ export async function POST(req: NextRequest) {
     }
 
     const response = await client.messages.create({
-      model: isPro ? 'claude-opus-4-8-20251101' : 'claude-haiku-4-5-20251001',
+      model: isPro ? 'claude-3-5-sonnet-20241022' : 'claude-haiku-4-5-20251001',
       max_tokens: isPro ? 2048 : 1024,
       system: systemPrompt,
       messages: anthropicMessages,
