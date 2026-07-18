@@ -314,13 +314,13 @@ This is turn ${newTurn} of ${MAX_TURNS}. ${newTurn === MAX_TURNS - 1 ? 'This is 
           <pre style={{ fontFamily: 'monospace', fontSize: 12, lineHeight: 1.7, whiteSpace: 'pre-wrap', background: 'var(--color-background-secondary)', borderRadius: 8, padding: 16, marginBottom: 16, border: '0.5px solid var(--color-border-tertiary)' }}>{debrief.emailDraft}</pre>
 
           <div style={{ background: '#141414', color: '#fff', borderRadius: 10, padding: 20, marginBottom: 20 }}>
-            <div style={{ fontSize: 12, marginBottom: 12, opacity: 0.6 }}>NegotiateAI · {form.role} negotiation with {persona?.name}</div>
+            <div style={{ fontSize: 12, marginBottom: 12, opacity: 0.6 }}>Hayven · {form.role} negotiation with {persona?.name}</div>
             <div style={{ display: 'flex', gap: 16 }}>
               <div><div style={{ fontSize: 24, fontWeight: 500, color: scoreColor(debrief.overallScore) }}>{debrief.overallScore}</div><div style={{ fontSize: 10, opacity: 0.6 }}>Overall</div></div>
               <div><div style={{ fontSize: 24, fontWeight: 500, color: scoreColor(debrief.confidenceScore) }}>{debrief.confidenceScore}</div><div style={{ fontSize: 10, opacity: 0.6 }}>Confidence</div></div>
               <div><div style={{ fontSize: 24, fontWeight: 500, color: scoreColor(debrief.tacticsScore) }}>{debrief.tacticsScore}</div><div style={{ fontSize: 10, opacity: 0.6 }}>Tactics</div></div>
             </div>
-            <button onClick={() => { navigator.clipboard.writeText(`I just practiced salary negotiation on NegotiateAI. Scores: ${debrief.overallScore} overall, ${debrief.confidenceScore} confidence, ${debrief.tacticsScore} tactics.`); setCopied(true); setTimeout(() => setCopied(false), 2000) }}
+            <button onClick={() => { navigator.clipboard.writeText(`I just practiced salary negotiation on Hayven. Scores: ${debrief.overallScore} overall, ${debrief.confidenceScore} confidence, ${debrief.tacticsScore} tactics.`); setCopied(true); setTimeout(() => setCopied(false), 2000) }}
               style={{ marginTop: 14, height: 32, padding: '0 14px', background: 'rgba(255,255,255,0.15)', color: '#fff', border: 'none', borderRadius: 6, fontSize: 12 }}>
               {copied ? 'Copied!' : 'Copy results'}
             </button>

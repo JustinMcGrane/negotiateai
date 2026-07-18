@@ -60,7 +60,7 @@ export default function CounterOffer() {
           </div>
 
           <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', padding: '10px 14px', background: 'var(--color-background-secondary)', borderRadius: 6 }}>
-            Review and personalize before sending. NegotiateAI provides AI-generated guidance for informational purposes.
+            Review and personalize before sending. Hayven provides AI-generated guidance for informational purposes.
           </div>
         </div>
       )}

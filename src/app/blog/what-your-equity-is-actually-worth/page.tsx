@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'What your equity is actually worth: a realistic guide | NegotiateAI',
+  title: 'What your equity is actually worth: a realistic guide | Hayven',
   description: 'Most startup equity is worth less than the paper it\'s written on. Here\'s how to assess your equity honestly and ask the right questions.',
 }
 
@@ -41,7 +41,7 @@ export default function Article() {
 
       <div style={{ marginTop: 48, padding: '24px', background: 'var(--color-background-secondary)', borderRadius: 12 }}>
         <div style={{ fontSize: 15, fontWeight: 500, marginBottom: 8 }}>Model your equity across scenarios</div>
-        <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 16 }}>Use NegotiateAI&apos;s equity calculator to see conservative, base, and optimistic exit values for any grant.</div>
+        <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 16 }}>Use Hayven&apos;s equity calculator to see conservative, base, and optimistic exit values for any grant.</div>
         <Link href="/signup" style={{ display: 'inline-block', background: '#141414', color: '#fff', padding: '8px 18px', borderRadius: 8, fontSize: 13, textDecoration: 'none' }}>Calculate equity value →</Link>
       </div>
     </article>

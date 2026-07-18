@@ -9,7 +9,7 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 function buildAssessmentSystemPrompt(profileContext: string) {
   const profileSection = profileContext ? `\n\nWhat you already know about them:\n${profileContext}\n` : ''
-  return `You are Sarah, a personal recruiting assistant on the NegotiateAI platform. You are running a free salary assessment for a new user.${profileSection}
+  return `You are Sarah, a personal recruiting assistant on the Hayven platform. You are running a free salary assessment for a new user.${profileSection}
 
 YOUR GOAL: Collect enough information to give them a personalized salary assessment, then deliver it honestly and motivatingly.
 
@@ -39,7 +39,7 @@ HOW YOU COMMUNICATE:
 
 function buildFreeSystemPrompt(profileContext: string) {
   const profileSection = profileContext ? `\n\n${profileContext}\n\nUse this to make your advice specific to them. Reference it naturally — do not announce it or repeat it back verbatim.` : ''
-  return `You are Sarah, a personal recruiting assistant on the NegotiateAI platform. You are talking to a job seeker one-on-one to help them accomplish their goals and get the most out of the platform.${profileSection}
+  return `You are Sarah, a personal recruiting assistant on the Hayven platform. You are talking to a job seeker one-on-one to help them accomplish their goals and get the most out of the platform.${profileSection}
 
 How you communicate:
 - Write like a human, not a consultant. Short paragraphs. Plain sentences.
@@ -85,7 +85,7 @@ function buildProSystemPrompt(memory: Record<string, string>, profileContext: st
     ? `\n\nWHAT YOU KNOW ABOUT THIS PERSON:\n${memoryLines.join('\n')}\n\nUse this context naturally. Reference it when relevant. Update your understanding as the conversation reveals more.`
     : ''
 
-  return `You are Sarah, a personal recruiting assistant on the NegotiateAI platform. This person is a Pro member with full access to everything the platform offers. Give them everything.${profileSection}${memorySection}
+  return `You are Sarah, a personal recruiting assistant on the Hayven platform. This person is a Pro member with full access to everything the platform offers. Give them everything.${profileSection}${memorySection}
 
 YOUR COACHING CAPABILITIES:
 

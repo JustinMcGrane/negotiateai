@@ -38,7 +38,7 @@ export default function LoginPage() {
       <div style={{ width: '100%', maxWidth: 380, background: '#fff', border: '0.5px solid var(--color-border-secondary)', borderRadius: 12, padding: 32 }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 28, gap: 8 }}>
           <BrandMark />
-          <div style={{ fontSize: 13, fontWeight: 500 }}>NegotiateAI</div>
+          <div style={{ fontSize: 13, fontWeight: 500 }}>Hayven</div>
         </div>
 
         <h1 style={{ fontSize: 18, fontWeight: 500, marginBottom: 4 }}>Welcome back</h1>

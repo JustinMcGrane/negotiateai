@@ -1,6 +1,6 @@
 import { Resend } from 'resend'
 
-const FROM = 'NegotiateAI <hello@negotiateai.com>'
+const FROM = 'Hayven <hello@negotiateai.com>'
 function getResend() { return new Resend(process.env.RESEND_API_KEY) }
 
 export async function sendCheckinReminder(to: string, firstName: string) {
@@ -21,7 +21,7 @@ export async function sendCheckinReminder(to: string, firstName: string) {
           Start your check-in →
         </a>
         <p style="font-size: 13px; color: #94a3b8; margin: 32px 0 0;">
-          You are receiving this because you are a NegotiateAI member. <a href="https://negotiateai.com/settings" style="color: #94a3b8;">Manage preferences</a>
+          You are receiving this because you are a Hayven member. <a href="https://negotiateai.com/settings" style="color: #94a3b8;">Manage preferences</a>
         </p>
       </div>
     `,

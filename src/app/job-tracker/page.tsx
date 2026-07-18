@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle, LayoutDashboard, Bell, TrendingUp, Star } from
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Job Tracker — NegotiateAI',
+  title: 'Job Tracker — Hayven',
   description: 'Track every application in one place. Never lose track of where you stand, what comes next, or which opportunities to prioritize.',
 }
 
@@ -45,7 +45,7 @@ export default function JobTrackerPage() {
         position: 'sticky', top: 0, background: '#fff', zIndex: 50,
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image src="/logo.png" alt="NegotiateAI" width={160} height={44} style={{ objectFit: 'contain' }} priority />
+          <Image src="/logo.png" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
         </Link>
         <LandingNav />
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

@@ -6,7 +6,7 @@ import { TrendingUp, FileSearch, Play, ArrowRight, UserCircle, FileText, Search,
 import { LocalDate } from '@/components/negotiate/LocalDate'
 import { MarketAlertCard } from '@/components/negotiate/MarketAlertCard'
 
-export const metadata: Metadata = { title: 'Dashboard — NegotiateAI' }
+export const metadata: Metadata = { title: 'Dashboard — Hayven' }
 
 function computeHealthScore(profile: Record<string, string> | null): number {
   if (!profile) return 42

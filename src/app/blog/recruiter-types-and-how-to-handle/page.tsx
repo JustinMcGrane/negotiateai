@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'The 5 recruiter types and how to handle each | NegotiateAI',
+  title: 'The 5 recruiter types and how to handle each | Hayven',
   description: 'Not all recruiters negotiate the same way. Learn the 5 recruiter archetypes and the exact strategy for each.',
 }
 
@@ -38,7 +38,7 @@ export default function Article() {
 
       <div style={{ marginTop: 48, padding: '24px', background: 'var(--color-background-secondary)', borderRadius: 12 }}>
         <div style={{ fontSize: 15, fontWeight: 500, marginBottom: 8 }}>Practice against all 5 recruiter types</div>
-        <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 16 }}>NegotiateAI&apos;s simulator includes 5 distinct recruiter personas — from the flexible startup founder to the policy-driven Fortune 500 VP.</div>
+        <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 16 }}>Hayven&apos;s simulator includes 5 distinct recruiter personas — from the flexible startup founder to the policy-driven Fortune 500 VP.</div>
         <Link href="/signup" style={{ display: 'inline-block', background: '#141414', color: '#fff', padding: '8px 18px', borderRadius: 8, fontSize: 13, textDecoration: 'none' }}>Start free →</Link>
       </div>
     </article>

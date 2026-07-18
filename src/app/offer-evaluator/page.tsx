@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle, Scale, AlertCircle, TrendingUp, Star } from 'l
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Offer Evaluator — NegotiateAI',
+  title: 'Offer Evaluator — Hayven',
   description: 'Evaluate any job offer across salary, equity, benefits, and total comp — so you know exactly what to accept, counter, or walk away from.',
 }
 
@@ -25,7 +25,7 @@ export default function OfferEvaluatorPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
       <header style={{ borderBottom: '0.5px solid #e5e7eb', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: '#fff', zIndex: 50 }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}><Image src="/logo.png" alt="NegotiateAI" width={160} height={44} style={{ objectFit: 'contain' }} priority /></Link>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}><Image src="/logo.png" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority /></Link>
         <LandingNav />
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>Sign in</Link>

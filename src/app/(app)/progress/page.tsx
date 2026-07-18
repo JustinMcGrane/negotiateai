@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
-export const metadata: Metadata = { title: 'Progress — NegotiateAI' }
+export const metadata: Metadata = { title: 'Progress — Hayven' }
 
 function avg(nums: number[]) { return nums.length ? Math.round(nums.reduce((a, b) => a + b, 0) / nums.length) : 0 }
 function scoreColor(s: number) {

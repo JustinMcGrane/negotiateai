@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle, FileText, Zap, Target, Star } from 'lucide-rea
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'AI Resume Builder — NegotiateAI',
+  title: 'AI Resume Builder — Hayven',
   description: 'Get recruiter-grade resume feedback with ATS scoring, section-by-section breakdown, rewritten bullets, and a prioritized action plan.',
 }
 
@@ -45,7 +45,7 @@ export default function ResumeBuilderPage() {
         position: 'sticky', top: 0, background: '#fff', zIndex: 50,
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image src="/logo.png" alt="NegotiateAI" width={160} height={44} style={{ objectFit: 'contain' }} priority />
+          <Image src="/logo.png" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
         </Link>
         <LandingNav />
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

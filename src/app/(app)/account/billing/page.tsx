@@ -94,7 +94,7 @@ export default function BillingPage() {
       </div>
 
       <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)' }}>
-        Payments are processed securely by Stripe. Cancel anytime. NegotiateAI provides AI-generated guidance for informational purposes.
+        Payments are processed securely by Stripe. Cancel anytime. Hayven provides AI-generated guidance for informational purposes.
       </div>
     </div>
   )

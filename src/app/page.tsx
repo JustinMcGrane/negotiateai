@@ -9,10 +9,10 @@ import {
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'NegotiateAI — Your personal AI career platform',
+  title: 'Hayven — Your personal AI career platform',
   description: 'AI recruiter, resume analyzer, job search, cover letter generator, and salary negotiation tools. Everything you need to land the job and the offer you deserve.',
   openGraph: {
-    title: 'NegotiateAI — Your personal AI career platform',
+    title: 'Hayven — Your personal AI career platform',
     description: 'AI recruiter, resume analyzer, job search, and salary negotiation. Land the job and the offer you deserve.',
     url: 'https://negotiateai.com',
     type: 'website',
@@ -53,7 +53,7 @@ export default function LandingPage() {
         position: 'sticky', top: 0, background: '#fff', zIndex: 50,
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image src="/logo.png" alt="NegotiateAI" width={160} height={44} style={{ objectFit: 'contain' }} priority />
+          <Image src="/logo.png" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
         </Link>
         <LandingNav />
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -101,7 +101,7 @@ export default function LandingPage() {
           fontSize: 18, color: '#475569', lineHeight: 1.7,
           marginBottom: 40, maxWidth: 580, margin: '0 auto 40px',
         }}>
-          NegotiateAI gives you an AI recruiter, resume analyzer, job search, cover letter generator, and 10 negotiation tools — everything you need to take control of your career.
+          Hayven gives you an AI recruiter, resume analyzer, job search, cover letter generator, and 10 negotiation tools — everything you need to take control of your career.
         </p>
 
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 56 }}>
@@ -391,14 +391,14 @@ export default function LandingPage() {
       {/* Footer */}
       <footer style={{ borderTop: '1px solid #e2e8f0', padding: '36px 24px' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-          <Image src="/logo.png" alt="NegotiateAI" width={140} height={40} style={{ objectFit: 'contain' }} />
+          <Image src="/logo.png" alt="Hayven" width={140} height={40} style={{ objectFit: 'contain' }} />
           <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
             {[{ href: '/login', label: 'Sign in' }, { href: '/signup', label: 'Sign up' }].map(({ href, label }) => (
               <Link key={href} href={href} prefetch={true} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
             ))}
           </div>
           <div style={{ fontSize: 12, color: '#94a3b8', width: '100%', marginTop: 12 }}>
-            NegotiateAI provides AI-generated guidance for informational purposes. Results may vary. © {new Date().getFullYear()} NegotiateAI.
+            Hayven provides AI-generated guidance for informational purposes. Results may vary. © {new Date().getFullYear()} Hayven.
           </div>
         </div>
       </footer>

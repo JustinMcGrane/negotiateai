@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Why most professionals never negotiate their salary | NegotiateAI',
+  title: 'Why most professionals never negotiate their salary | Hayven',
   description: 'Research shows most professionals never negotiate their salary. Here\'s the psychology behind it — and how to overcome it.',
 }
 

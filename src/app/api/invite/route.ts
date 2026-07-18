@@ -15,8 +15,8 @@ export async function POST(req: NextRequest) {
         <div style="background: #141414; width: 48px; height: 48px; border-radius: 11px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
           <div style="color: white; font-size: 20px; font-weight: 700; line-height: 48px; text-align: center; width: 48px;">N</div>
         </div>
-        <h1 style="font-size: 24px; font-weight: 700; color: #111827; margin: 0 0 8px;">${inviterName} invited you to join NegotiateAI</h1>
-        <p style="color: #6b7280; font-size: 15px; line-height: 1.6; margin: 0 0 24px;">You've been invited by ${inviterName} to NegotiateAI — the compensation platform that helps you know your market rate, build your strategy, and negotiate with confidence.</p>
+        <h1 style="font-size: 24px; font-weight: 700; color: #111827; margin: 0 0 8px;">${inviterName} invited you to join Hayven</h1>
+        <p style="color: #6b7280; font-size: 15px; line-height: 1.6; margin: 0 0 24px;">You've been invited by ${inviterName} to Hayven — the compensation platform that helps you know your market rate, build your strategy, and negotiate with confidence.</p>
         <a href="${appUrl}/signup" style="display: inline-block; background: #141414; color: white; text-decoration: none; padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 14px; margin-bottom: 24px;">Accept invite →</a>
         <p style="color: #9ca3af; font-size: 12px; margin: 0;">If you weren't expecting this invite, you can ignore this email.</p>
       </div>
@@ -29,9 +29,9 @@ export async function POST(req: NextRequest) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'NegotiateAI <hello@negotiateai.com>',
+        from: 'Hayven <hello@negotiateai.com>',
         to: email,
-        subject: `${inviterName} invited you to NegotiateAI`,
+        subject: `${inviterName} invited you to Hayven`,
         html,
       }),
     })

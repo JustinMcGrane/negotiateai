@@ -3,7 +3,7 @@ import './globals.css'
 import { Providers } from './providers'
 
 export const metadata: Metadata = {
-  title: 'NegotiateAI — The compensation platform that pays for itself',
+  title: 'Hayven — The compensation platform that pays for itself',
   description: "Know your market rate. Build your strategy. Practice until you're ready.",
   icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
 }

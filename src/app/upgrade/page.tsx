@@ -88,7 +88,7 @@ export default function UpgradePage() {
             Choose your plan
           </h1>
           <p style={{ fontSize: 16, color: 'var(--color-text-secondary)', maxWidth: 500, margin: '0 auto' }}>
-            Most people who use NegotiateAI land a higher salary within 6 months. Pick the plan that matches where you are.
+            Most people who use Hayven land a higher salary within 6 months. Pick the plan that matches where you are.
           </p>
         </div>
 

@@ -62,7 +62,7 @@ export default function NotificationsPage() {
     <div style={{ maxWidth: 580, margin: '0 auto', padding: '32px 24px 80px' }}>
       <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 6px' }}>Email notifications</h1>
       <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: '0 0 28px' }}>
-        Control which emails you receive from NegotiateAI.
+        Control which emails you receive from Hayven.
       </p>
 
       <div style={{ background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, overflow: 'hidden', marginBottom: 20 }}>

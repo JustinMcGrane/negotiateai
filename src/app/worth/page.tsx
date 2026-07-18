@@ -72,7 +72,7 @@ export default function WorthPage() {
     <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
       <header className="border-b border-gray-100 px-6 py-4 flex items-center justify-between">
-        <a href="/" className="text-sm font-semibold text-gray-900 tracking-tight">NegotiateAI</a>
+        <a href="/" className="text-sm font-semibold text-gray-900 tracking-tight">Hayven</a>
         <a href="/recruiter" className="text-sm text-gray-500 hover:text-gray-800 transition-colors">Try the full platform →</a>
       </header>
 
@@ -212,7 +212,7 @@ export default function WorthPage() {
 
               <p className="text-center text-xs text-gray-400 mt-6">
                 Want to negotiate a raise or offer?{' '}
-                <a href="/recruiter" className="text-gray-700 font-medium underline underline-offset-2">Try NegotiateAI free →</a>
+                <a href="/recruiter" className="text-gray-700 font-medium underline underline-offset-2">Try Hayven free →</a>
               </p>
             </div>
           )}

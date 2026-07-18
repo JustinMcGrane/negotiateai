@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import PrintButton from './PrintButton'
 
-export const metadata: Metadata = { title: 'Compensation Report — NegotiateAI' }
+export const metadata: Metadata = { title: 'Compensation Report — Hayven' }
 
 export default async function ReportPage() {
   const supabase = await createClient()

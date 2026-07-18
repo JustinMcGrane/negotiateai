@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'How to negotiate your first SaaS job offer | NegotiateAI',
+  title: 'How to negotiate your first SaaS job offer | Hayven',
   description: 'A step-by-step guide to negotiating a SaaS job offer. Learn how to counter, what to ask for, and how to handle common recruiter objections.',
 }
 
@@ -47,7 +47,7 @@ export default function Article() {
 
       <div style={{ marginTop: 48, padding: '24px', background: 'var(--color-background-secondary)', borderRadius: 12 }}>
         <div style={{ fontSize: 15, fontWeight: 500, marginBottom: 8 }}>Practice your negotiation before the call</div>
-        <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 16 }}>Use NegotiateAI&apos;s simulator to practice with a realistic AI recruiter. Get a scored debrief and specific feedback.</div>
+        <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 16 }}>Use Hayven&apos;s simulator to practice with a realistic AI recruiter. Get a scored debrief and specific feedback.</div>
         <Link href="/signup" style={{ display: 'inline-block', background: '#141414', color: '#fff', padding: '8px 18px', borderRadius: 8, fontSize: 13, textDecoration: 'none' }}>Start free →</Link>
       </div>
     </article>
