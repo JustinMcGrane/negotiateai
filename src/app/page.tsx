@@ -121,7 +121,6 @@ export default function LandingPage() {
 
         <div style={{ display: 'flex', gap: 40, justifyContent: 'center', flexWrap: 'wrap' }}>
           {[
-            { stat: '$18K+', label: 'average negotiation gain' },
             { stat: '15+', label: 'AI-powered career tools' },
             { stat: '100%', label: 'free to start' },
           ].map(s => (
