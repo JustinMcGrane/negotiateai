@@ -176,6 +176,8 @@ export async function POST(req: NextRequest) {
     ])
 
     const isPro = ['pro', 'elite'].includes((profile?.plan ?? '').toLowerCase())
+    console.log('[recruiter] plan:', profile?.plan, 'isPro:', isPro)
+
     const usage = await checkAndIncrementUsage(user.id, 'recruiter', isPro)
 
     if (!usage.allowed) {
@@ -201,15 +203,20 @@ export async function POST(req: NextRequest) {
     let memory: Record<string, string> = {}
 
     if (isPro) {
+      console.log('[recruiter] fetching pro memory...')
       const serviceClient = createServiceClient()
-      const { data: memoryData } = await serviceClient
+      const { data: memoryData, error: memoryError } = await serviceClient
         .from('sarah_memory')
         .select('context')
         .eq('user_id', user.id)
         .single()
 
+      if (memoryError && memoryError.code !== 'PGRST116') {
+        console.log('[recruiter] memory error:', memoryError)
+      }
       memory = (memoryData?.context as Record<string, string>) ?? {}
       systemPrompt = buildProSystemPrompt(memory, profileContext)
+      console.log('[recruiter] pro system prompt built, calling claude...')
     }
 
     const anthropicMessages = messages
