@@ -95,6 +95,10 @@ export default function LandingPage() {
           Get what you deserve.
         </h1>
 
+        <p style={{ fontSize: 16, color: '#64748b', fontStyle: 'italic', marginBottom: 32, marginTop: 12 }}>
+          "The career companion that never clocks out."
+        </p>
+
         <p style={{
           fontSize: 18, color: '#475569', lineHeight: 1.7,
           marginBottom: 40, maxWidth: 580, margin: '0 auto 40px',
