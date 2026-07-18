@@ -73,7 +73,7 @@ export function LandingNav() {
       <Link href="/resume-builder" style={{ fontSize: 14, fontWeight: 500, color: '#374151', textDecoration: 'none', padding: '7px 10px', borderRadius: 6 }}>
         AI Resume Builder
       </Link>
-      <Link href="/tracker" style={{ fontSize: 14, fontWeight: 500, color: '#374151', textDecoration: 'none', padding: '7px 10px', borderRadius: 6 }}>
+      <Link href="/job-tracker" style={{ fontSize: 14, fontWeight: 500, color: '#374151', textDecoration: 'none', padding: '7px 10px', borderRadius: 6 }}>
         Job Tracker
       </Link>
       <Dropdown label="Tools" items={TOOLS} />
