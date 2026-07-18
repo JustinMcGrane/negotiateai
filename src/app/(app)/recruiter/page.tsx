@@ -63,8 +63,9 @@ export default function RecruiterPage() {
   }, [])
 
   useEffect(() => {
+    if (!initialized) return
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+  }, [messages, initialized])
 
   async function send(text?: string) {
     const content = (text ?? input).trim()
