@@ -400,6 +400,9 @@ export default function LandingPage() {
           <div style={{ fontSize: 12, color: '#94a3b8', width: '100%', marginTop: 12 }}>
             Hayven provides AI-generated guidance for informational purposes. Results may vary. © {new Date().getFullYear()} Hayven.
           </div>
+          <div style={{ fontSize: 12, color: '#94a3b8', width: '100%' }}>
+            Support: <a href="mailto:GetHayven@gmail.com" style={{ color: '#94a3b8', textDecoration: 'none' }}>GetHayven@gmail.com</a>
+          </div>
         </div>
       </footer>
     </div>
