@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
     }
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-5-20251101',
+      model: 'claude-sonnet-5',
       max_tokens: 200,
       system: systemPrompt,
       messages: anthropicMessages,
