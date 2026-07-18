@@ -134,8 +134,6 @@ export default function RecruiterPage() {
     challenges: 'Challenges',
   }
 
-  if (!initialized) return null
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', maxWidth: 800, margin: '0 auto', padding: '0 24px' }}>
       {/* Header */}
@@ -211,6 +209,24 @@ export default function RecruiterPage() {
 
       {/* Messages */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '20px 0', display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {!initialized && (
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+            <div style={{
+              width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <Briefcase size={13} color="#fff" />
+            </div>
+            <div style={{
+              background: 'var(--color-background-secondary)',
+              border: '0.5px solid var(--color-border-tertiary)',
+              borderRadius: '18px 18px 18px 4px',
+              padding: '12px 16px', width: 220, height: 44,
+              opacity: 0.5,
+            }} />
+          </div>
+        )}
         {messages.map((msg, i) => (
           <div key={i} style={{ display: 'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
             {msg.role === 'assistant' && (
