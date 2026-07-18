@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { createClient } from '@/lib/supabase/server'
 
 function getClient() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }) }
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const { data: profile } = await supabase.from('profiles').select('plan').eq('id', user.id).single()
+    if (profile?.plan !== 'elite') return NextResponse.json({ error: 'elite_required' }, { status: 403 })
+
     const { currentRole, currentSalary, experience, goal, location, companyType } = await req.json()
 
     const prompt = `You are an expert career strategist. Return ONLY valid JSON.

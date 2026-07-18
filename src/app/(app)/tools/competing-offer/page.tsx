@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { EliteGate } from '@/components/negotiate/EliteGate'
 
 type Result = { leverage: string; strategy: string; script: string; emailTemplate: string; risks: string[]; likelyOutcome: string }
 
@@ -26,6 +27,7 @@ export default function CompetingOfferPage() {
   }
 
   return (
+    <EliteGate>
     <ToolPage title="Competing Offer Tool" desc="Have an outside offer? Use it strategically to get a raise or counteroffer without burning bridges.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
@@ -108,5 +110,6 @@ export default function CompetingOfferPage() {
         </div>
       )}
     </ToolPage>
+    </EliteGate>
   )
 }

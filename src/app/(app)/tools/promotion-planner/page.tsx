@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { EliteGate } from '@/components/negotiate/EliteGate'
 
 type Result = { assessment: string; timeline: string; gaps: { area: string; action: string }[]; milestones: { month: string; goal: string }[]; script: string }
 
@@ -27,6 +28,7 @@ export default function PromotionPlannerPage() {
   }
 
   return (
+    <EliteGate>
     <ToolPage title="Promotion Planner" desc="Get a realistic, step-by-step plan to earn your next promotion with exact milestones and a timeline.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
@@ -118,5 +120,6 @@ export default function PromotionPlannerPage() {
         </div>
       )}
     </ToolPage>
+    </EliteGate>
   )
 }
