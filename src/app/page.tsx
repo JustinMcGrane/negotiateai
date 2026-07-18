@@ -6,6 +6,7 @@ import {
   Calculator, DollarSign, Mail, Shield, PenLine, MessageSquare,
   UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowRight, Star,
 } from 'lucide-react'
+import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
   title: 'NegotiateAI — Your personal AI career platform',
@@ -54,6 +55,7 @@ export default function LandingPage() {
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
           <Image src="/logo.png" alt="NegotiateAI" width={160} height={44} style={{ objectFit: 'contain' }} priority />
         </Link>
+        <LandingNav />
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
             Sign in
