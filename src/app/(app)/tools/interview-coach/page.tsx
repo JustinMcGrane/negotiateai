@@ -13,6 +13,7 @@ export default function InterviewCoach() {
   const [loading, setLoading] = useState(false)
   const [turn, setTurn] = useState(0)
   const [tips, setTips] = useState<string[]>([])
+  const [initMsg, setInitMsg] = useState<Message | null>(null)
   const chatRef = useRef<HTMLDivElement>(null)
   const MAX_TURNS = 5
 
@@ -36,8 +37,10 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
       body: JSON.stringify({ messages: [{ role: 'user', content: 'Start the interview.' }], systemPrompt }),
     })
     const data = await res.json()
-    setMessages([{ role: 'assistant', content: data.reply ?? 'Something went wrong. Please try again.' }])
-    setTurn(1)
+    const firstMsg: Message = { role: 'assistant', content: data.reply ?? 'Something went wrong. Please try again.' }
+    setInitMsg(firstMsg)
+    setMessages([firstMsg])
+    setTurn(0)
     setLoading(false)
   }
 
@@ -49,16 +52,25 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
     setInput('')
     setLoading(true)
 
-    const apiMessages = next.map((m) => ({ role: m.role, content: m.content }))
-    const isLast = turn >= MAX_TURNS
+    const newTurn = turn + 1
+    const isLast = newTurn >= MAX_TURNS
+
+    // Build messages for API: skip the initial assistant greeting, start with user messages
+    const apiMessages = next
+      .filter((m) => m !== initMsg)
+      .map((m) => ({ role: m.role, content: m.content }))
+
+    // Ensure starts with user message
+    const firstUserIdx = apiMessages.findIndex((m) => m.role === 'user')
+    const trimmed = firstUserIdx >= 0 ? apiMessages.slice(firstUserIdx) : apiMessages
 
     const res = await fetch('/api/negotiate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: apiMessages, systemPrompt: systemPrompt + (isLast ? '\n\nNow switch to COACHING FEEDBACK mode. Give 3 numbered tips.' : '') }),
+      body: JSON.stringify({ messages: trimmed, systemPrompt: systemPrompt + (isLast ? '\n\nThis is the final turn. Now give COACHING FEEDBACK: with 3 numbered tips.' : '') }),
     })
     const data = await res.json()
-    const reply = data.reply as string
+    const reply: string = data.reply ?? 'Something went wrong. Please try again.'
     const withReply = [...next, { role: 'assistant' as const, content: reply }]
     setMessages(withReply)
 
@@ -68,7 +80,7 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
       setTips(tipLines.map((t) => t.replace(/^\d+\.\s*/, '')))
     }
 
-    setTurn((t) => t + 1)
+    setTurn(newTurn)
     setLoading(false)
   }
 
@@ -98,7 +110,7 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
     <div style={{ padding: '24px 32px 80px', maxWidth: 700 }}>
       <div style={{ marginBottom: 16 }}>
         <h1 style={{ fontSize: 18, fontWeight: 500 }}>Interview salary coach</h1>
-        <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>Turn {Math.min(turn, MAX_TURNS)} of {MAX_TURNS} · {setup.role} · {setup.stage}</p>
+        <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>Question {Math.min(turn + 1, MAX_TURNS)} of {MAX_TURNS} · {setup.role} · {setup.stage}</p>
       </div>
 
       <div ref={chatRef} style={{ minHeight: 300, maxHeight: 480, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16, padding: 16, background: 'var(--color-background-secondary)', borderRadius: 12 }}>
