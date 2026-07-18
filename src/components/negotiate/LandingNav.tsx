@@ -4,15 +4,15 @@ import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
 
 const TOOLS = [
-  { label: 'Compensation Analyzer', href: '/tools/comp-analyzer' },
-  { label: 'Offer Evaluator', href: '/tools/offer-evaluator' },
-  { label: 'Counter-Offer Builder', href: '/tools/counter-offer' },
-  { label: 'Equity Calculator', href: '/tools/equity-calc' },
-  { label: 'Negotiation Simulator', href: '/tools/simulator' },
-  { label: 'Interview Salary Coach', href: '/tools/interview-coach' },
-  { label: 'Raise Request Builder', href: '/tools/raise-builder' },
-  { label: 'Objection Handler', href: '/tools/objections' },
-  { label: 'Negotiation Playbook', href: '/tools/playbook' },
+  { label: 'Compensation Analyzer', href: '/compensation-analyzer' },
+  { label: 'Offer Evaluator', href: '/offer-evaluator' },
+  { label: 'Counter-Offer Builder', href: '/counter-offer-builder' },
+  { label: 'Equity Calculator', href: '/equity-calculator' },
+  { label: 'Negotiation Simulator', href: '/negotiation-simulator' },
+  { label: 'Interview Salary Coach', href: '/interview-salary-coach' },
+  { label: 'Raise Request Builder', href: '/raise-request-builder' },
+  { label: 'Objection Handler', href: '/objection-handler' },
+  { label: 'Negotiation Playbook', href: '/negotiation-playbook' },
 ]
 
 const RESOURCES = [
