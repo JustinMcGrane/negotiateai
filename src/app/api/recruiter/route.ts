@@ -175,7 +175,7 @@ export async function POST(req: NextRequest) {
       req.json(),
     ])
 
-    const isPro = profile?.plan === 'pro' || profile?.plan === 'elite'
+    const isPro = ['pro', 'elite'].includes((profile?.plan ?? '').toLowerCase())
     const usage = await checkAndIncrementUsage(user.id, 'recruiter', isPro)
 
     if (!usage.allowed) {

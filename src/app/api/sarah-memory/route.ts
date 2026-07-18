@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
       serviceClient.from('profiles').select('plan').eq('id', user.id).single(),
     ])
 
-    const isPro = profile?.plan === 'pro' || profile?.plan === 'elite'
+    const isPro = ['pro', 'elite'].includes((profile?.plan ?? '').toLowerCase())
     return NextResponse.json({ memory: memoryData?.context ?? {}, isPro })
   } catch {
     return NextResponse.json({ memory: {} })
