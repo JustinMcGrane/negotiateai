@@ -92,6 +92,11 @@ export default function RecruiterPage() {
         return
       }
 
+      if (!res.ok) {
+        setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, I ran into an issue. Please try again in a moment." }])
+        return
+      }
+
       if (data.used !== undefined) setUsed(data.used)
 
       if (data.isPro && !isPro) {

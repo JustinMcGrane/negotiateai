@@ -9,13 +9,13 @@ export async function GET(req: NextRequest) {
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     const serviceClient = createServiceClient()
-    const { data } = await serviceClient
-      .from('sarah_memory')
-      .select('context')
-      .eq('user_id', user.id)
-      .single()
+    const [{ data: memoryData }, { data: profile }] = await Promise.all([
+      serviceClient.from('sarah_memory').select('context').eq('user_id', user.id).single(),
+      serviceClient.from('profiles').select('plan').eq('id', user.id).single(),
+    ])
 
-    return NextResponse.json({ memory: data?.context ?? {} })
+    const isPro = profile?.plan === 'pro' || profile?.plan === 'elite'
+    return NextResponse.json({ memory: memoryData?.context ?? {}, isPro })
   } catch {
     return NextResponse.json({ memory: {} })
   }
