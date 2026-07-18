@@ -19,9 +19,9 @@ export default function Article() {
 
         <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 12, marginTop: 32 }}>Why SaaS companies have more flexibility than you think</h2>
         <p style={{ marginBottom: 20 }}>SaaS companies operate on high-margin, recurring revenue models. The cost of a bad hire — or worse, losing a great candidate to a competitor over $10,000 in base salary — is enormous compared to the cost of simply paying market rate. Most hiring managers know this. The initial offer is rarely the final offer.</p>
-        <p style={{ marginBottom: 20 }}>A Glassdoor survey found that 85% of hiring managers have budget to increase their initial offer if a candidate negotiates. The number they put in the offer letter is a starting position, not a ceiling.</p>
+        <p style={{ marginBottom: 20 }}>The number they put in the offer letter is a starting position, not a ceiling. Companies build in room to negotiate precisely because they expect candidates to push back.</p>
 
-        <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 12, marginTop: 32 }}>The AI salary negotiation approach that actually works</h2>
+        <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 12, marginTop: 32 }}>The approach that actually works</h2>
         <p style={{ marginBottom: 20 }}>The most effective AI salary negotiation strategy isn&apos;t about being aggressive or playing hardball. It&apos;s about coming to the table with data. When you tell a recruiter &ldquo;I&apos;ve researched market rates for this role in this location, and the 75th percentile is $X,&rdquo; you shift the conversation from personal preference to objective data.</p>
         <p style={{ marginBottom: 20 }}>Here&apos;s the exact script that works: &ldquo;I&apos;m really excited about this role and the team. I&apos;ve done some research on market rates for this position in [city], and I was hoping we could discuss getting to [target]. Is that something you have flexibility on?&rdquo;</p>
 
