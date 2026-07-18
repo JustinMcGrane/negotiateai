@@ -55,7 +55,7 @@ export default function LandingPage() {
           <Image src="/logo.png" alt="NegotiateAI" width={160} height={44} style={{ objectFit: 'contain' }} priority />
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Link href="/login" style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
+          <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
             Sign in
           </Link>
           <Link href="/signup" style={{
@@ -393,7 +393,7 @@ export default function LandingPage() {
           <Image src="/logo.png" alt="NegotiateAI" width={140} height={40} style={{ objectFit: 'contain' }} />
           <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
             {[{ href: '/login', label: 'Sign in' }, { href: '/signup', label: 'Sign up' }].map(({ href, label }) => (
-              <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+              <Link key={href} href={href} prefetch={true} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
             ))}
           </div>
           <div style={{ fontSize: 12, color: '#94a3b8', width: '100%', marginTop: 12 }}>
