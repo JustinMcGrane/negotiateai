@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { TrendingUp, FileSearch, Play, ArrowRight, UserCircle, FileText, Search, Lock, CalendarCheck, Rocket, Briefcase, GitBranch } from 'lucide-react'
+import { LocalDate } from '@/components/negotiate/LocalDate'
 import { MarketAlertCard } from '@/components/negotiate/MarketAlertCard'
 
 export const metadata: Metadata = { title: 'Dashboard — NegotiateAI' }
@@ -121,7 +122,7 @@ export default async function DashboardPage() {
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 4px' }}>{greeting}, {firstName}</h1>
         <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
-          {plan === 'elite' ? 'Elite plan' : plan === 'pro' ? 'Pro plan' : 'Free plan'} · {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'America/New_York' })}
+          {plan === 'elite' ? 'Elite plan' : plan === 'pro' ? 'Pro plan' : 'Free plan'} · <LocalDate />
         </p>
       </div>
 
