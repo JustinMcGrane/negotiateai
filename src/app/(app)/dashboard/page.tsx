@@ -121,7 +121,7 @@ export default async function DashboardPage() {
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 4px' }}>{greeting}, {firstName}</h1>
         <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
-          {plan === 'pro' ? 'Pro plan' : 'Free plan'} · {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+          {plan === 'elite' ? 'Elite plan' : plan === 'pro' ? 'Pro plan' : 'Free plan'} · {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'America/New_York' })}
         </p>
       </div>
 
