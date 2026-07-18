@@ -33,10 +33,10 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
     const res = await fetch('/api/negotiate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: [], systemPrompt }),
+      body: JSON.stringify({ messages: [{ role: 'user', content: 'Start the interview.' }], systemPrompt }),
     })
     const data = await res.json()
-    setMessages([{ role: 'assistant', content: data.reply }])
+    setMessages([{ role: 'assistant', content: data.reply ?? 'Something went wrong. Please try again.' }])
     setTurn(1)
     setLoading(false)
   }
