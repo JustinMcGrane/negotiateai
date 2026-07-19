@@ -39,7 +39,7 @@ export default function SignupPage() {
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-background-secondary)', padding: 20 }}>
       <div style={{ width: '100%', maxWidth: 380, background: '#fff', border: '0.5px solid var(--color-border-secondary)', borderRadius: 12, padding: 32 }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 28 }}>
-          <Image src="/logo.png" alt="Hayven" width={160} height={48} style={{ objectFit: 'contain' }} priority />
+          <Image src="/logo.svg" alt="Hayven" width={160} height={48} style={{ objectFit: 'contain' }} priority />
         </div>
 
         <h1 style={{ fontSize: 18, fontWeight: 500, marginBottom: 4 }}>Create your account</h1>

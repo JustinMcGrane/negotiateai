@@ -53,7 +53,7 @@ export default function LandingPage() {
         position: 'sticky', top: 0, background: '#fff', zIndex: 50,
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image src="/logo.png" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
+          <Image src="/logo.svg" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
         </Link>
         <LandingNav />
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -391,7 +391,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer style={{ borderTop: '1px solid #e2e8f0', padding: '36px 24px' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-          <Image src="/logo.png" alt="Hayven" width={140} height={40} style={{ objectFit: 'contain' }} />
+          <Image src="/logo.svg" alt="Hayven" width={140} height={40} style={{ objectFit: 'contain' }} />
           <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
             {[{ href: '/login', label: 'Sign in' }, { href: '/signup', label: 'Sign up' }].map(({ href, label }) => (
               <Link key={href} href={href} prefetch={true} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>

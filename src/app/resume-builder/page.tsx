@@ -45,7 +45,7 @@ export default function ResumeBuilderPage() {
         position: 'sticky', top: 0, background: '#fff', zIndex: 50,
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image src="/logo.png" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
+          <Image src="/logo.svg" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
         </Link>
         <LandingNav />
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
