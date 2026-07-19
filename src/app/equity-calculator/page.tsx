@@ -33,12 +33,12 @@ export default function EquityCalculatorPage() {
         </div>
       </header>
 
-      <section style={{ maxWidth: 760, margin: '0 auto', padding: '88px 24px 72px', textAlign: 'center' }}>
+      <section style={{ maxWidth: 900, margin: '0 auto', padding: '56px 24px 72px', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 20, padding: '5px 14px', marginBottom: 28 }}>
           <Star size={12} color="#16a34a" fill="#16a34a" />
           <span style={{ fontSize: 12, color: '#15803d', fontWeight: 600 }}>Equity Calculator</span>
         </div>
-        <h1 style={{ fontSize: 'clamp(30px, 5vw, 50px)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.03em', marginBottom: 24, color: '#0f172a' }}>
+        <h1 style={{ fontSize: 'clamp(36px, 6.5vw, 76px)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: 24, color: '#0f172a', whiteSpace: 'nowrap' }}>
           What is your equity<br /><span style={{ color: '#2563eb' }}>actually worth?</span>
         </h1>
         <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.7, maxWidth: 560, margin: '0 auto 40px' }}>

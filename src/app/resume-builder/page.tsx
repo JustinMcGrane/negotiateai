@@ -64,7 +64,7 @@ export default function ResumeBuilderPage() {
       </header>
 
       {/* Hero */}
-      <section style={{ maxWidth: 760, margin: '0 auto', padding: '88px 24px 72px', textAlign: 'center' }}>
+      <section style={{ maxWidth: 900, margin: '0 auto', padding: '56px 24px 72px', textAlign: 'center' }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: 6,
           background: '#f0fdf4', border: '1px solid #bbf7d0',
