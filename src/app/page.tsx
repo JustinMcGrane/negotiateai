@@ -139,10 +139,38 @@ export default function LandingPage() {
         <div style={{ fontSize: 16, color: '#64748b', marginBottom: 24 }}>
           Most people have no idea. Here&apos;s what the data says about your role.
         </div>
-        <svg width="24" height="44" viewBox="0 0 24 44" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', margin: '0 auto' }}>
+        <svg width="24" height="44" viewBox="0 0 24 44" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', margin: '0 auto 40px' }}>
           <path d="M12 2v32" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="6 4"/>
           <path d="M3 28l9 12 9-12" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
+
+        {/* Compensation graphic */}
+        <div style={{ maxWidth: 720, margin: '0 auto', background: '#fff', border: '1px solid #e2e8f0', borderRadius: 20, padding: '40px 32px', boxShadow: '0 4px 40px rgba(37,99,235,0.08)' }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.1em', textAlign: 'center', marginBottom: 32 }}>
+            SOFTWARE ENGINEER II · SAN FRANCISCO
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 24 }}>
+            {[
+              { label: 'Your offer', value: '$158K', sub: 'below market', color: '#ef4444', bg: '#fef2f2' },
+              { label: 'Market rate', value: '$185K', sub: 'what you should earn', color: '#2563eb', bg: '#eff6ff' },
+              { label: "You're leaving", value: '$27K', sub: 'on the table', color: '#0f172a', bg: '#f8fafc' },
+            ].map(({ label, value, sub, color, bg }) => (
+              <div key={label} style={{ background: bg, padding: '24px 16px', textAlign: 'center', borderRadius: 14 }}>
+                <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 8 }}>{label}</div>
+                <div style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 800, color, letterSpacing: '-0.03em', lineHeight: 1 }}>{value}</div>
+                <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 6 }}>{sub}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 10, padding: '14px 20px', textAlign: 'center' }}>
+            <span style={{ fontSize: 15, color: '#1e40af', fontWeight: 600 }}>
+              Counter at $185K–$192K —{' '}
+              <Link href="/signup" style={{ color: '#2563eb', fontWeight: 700, textDecoration: 'none' }}>
+                Build your counter-offer →
+              </Link>
+            </span>
+          </div>
+        </div>
       </section>
 
       {/* Sarah feature */}
