@@ -9,10 +9,10 @@ import {
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Hayven — Your personal AI career platform',
+  title: 'Hayven — Get paid what you\'re worth',
   description: 'AI recruiter, resume analyzer, job search, cover letter generator, and salary negotiation tools. Everything you need to land the job and the offer you deserve.',
   openGraph: {
-    title: 'Hayven — Your personal AI career platform',
+    title: 'Hayven — Get paid what you\'re worth',
     description: 'AI recruiter, resume analyzer, job search, and salary negotiation. Land the job and the offer you deserve.',
     url: 'https://negotiateai.com',
     type: 'website',
@@ -74,17 +74,18 @@ export default function LandingPage() {
       {/* Hero */}
       <section style={{
         maxWidth: 760, margin: '0 auto',
-        padding: '96px 24px 80px',
+        padding: '56px 24px 80px',
         textAlign: 'center',
       }}>
         <h1 style={{
-          fontSize: 'clamp(40px, 6.5vw, 68px)',
-          fontWeight: 800, lineHeight: 1.1,
+          fontSize: 'clamp(48px, 7.5vw, 82px)',
+          fontWeight: 800, lineHeight: 1.12,
           letterSpacing: '-0.03em', marginBottom: 28,
           color: '#0f172a',
         }}>
-          Land the job. Negotiate the offer.<br />
-          Get what you&apos;re{' '}
+          Land the job.<br />
+          Negotiate the offer.<br />
+          Get paid what you&apos;re{' '}
           <span style={{
             display: 'inline-block',
             background: '#2563eb',
