@@ -80,24 +80,14 @@ export default function LandingPage() {
               letterSpacing: '-0.03em', marginBottom: 22,
               color: '#1c1209',
             }}>
-              Get paid what you&apos;re<br />
+              Get paid what you&apos;re{' '}
               <span style={{
-                color: '#2563eb',
                 display: 'inline-block',
-                position: 'relative',
-              }}>
-                <span style={{
-                  position: 'relative',
-                  zIndex: 1,
-                }}>worth.</span>
-                <span style={{
-                  position: 'absolute',
-                  inset: '-4px -10px -4px -10px',
-                  border: '3px solid #2563eb',
-                  borderRadius: 8,
-                  display: 'block',
-                }} />
-              </span>
+                background: '#2563eb',
+                color: '#fff',
+                borderRadius: 10,
+                padding: '0 16px 4px',
+              }}>worth.</span>
             </h1>
 
             <p style={{ fontSize: 20, color: '#78716c', lineHeight: 1.65, maxWidth: 540, margin: '0 auto 36px' }}>
@@ -131,75 +121,39 @@ export default function LandingPage() {
             </svg>
           </div>
 
-          {/* Product mockup — full width, prominent */}
+          {/* Product mockup */}
           <div style={{
             background: '#fff',
             borderRadius: '20px 20px 0 0',
             border: '1px solid #e2e8f0',
             borderBottom: 'none',
-            padding: '28px 32px 0',
-            textAlign: 'left',
-            boxShadow: '0 -4px 60px rgba(194,65,12,0.12), 0 0 0 1px rgba(0,0,0,0.04)',
-            maxWidth: 860,
+            padding: '40px 40px 48px',
+            boxShadow: '0 -4px 60px rgba(37,99,235,0.10), 0 0 0 1px rgba(0,0,0,0.04)',
+            maxWidth: 760,
             margin: '0 auto',
           }}>
-            {/* Browser chrome */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 24, paddingBottom: 20, borderBottom: '1px solid #f1f5f9' }}>
-              <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#fca5a5' }} />
-              <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#fcd34d' }} />
-              <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#6ee7b7' }} />
-              <div style={{ flex: 1, background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 6, padding: '4px 12px', marginLeft: 8, fontSize: 12, color: '#94a3b8' }}>gethayven.com/tools</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.1em', textAlign: 'center', marginBottom: 36 }}>
+              SOFTWARE ENGINEER II · SAN FRANCISCO
             </div>
 
-            {/* Comp analyzer output */}
-            <div style={{ marginBottom: 32 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.08em', marginBottom: 18 }}>COMPENSATION ANALYSIS · Software Engineer II · San Francisco</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2, marginBottom: 32 }}>
+              {[
+                { label: 'Your offer', value: '$158K', sub: 'below market', color: '#ef4444', bg: '#fef2f2' },
+                { label: 'Market rate', value: '$185K', sub: 'what you should earn', color: '#2563eb', bg: '#eff6ff' },
+                { label: 'You\'re leaving', value: '$27K', sub: 'on the table', color: '#1c1209', bg: '#fdf8f2' },
+              ].map(({ label, value, sub, color, bg }) => (
+                <div key={label} style={{ background: bg, padding: '28px 20px', textAlign: 'center', borderRadius: 14 }}>
+                  <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 10 }}>{label}</div>
+                  <div style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 800, color, letterSpacing: '-0.03em', lineHeight: 1 }}>{value}</div>
+                  <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 8 }}>{sub}</div>
+                </div>
+              ))}
+            </div>
 
-              {/* Range bar */}
-              <div style={{ marginBottom: 24 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                  {['25th', '50th', '75th', '90th'].map(p => <span key={p} style={{ fontSize: 12, color: '#64748b' }}>{p}</span>)}
-                </div>
-                <div style={{ height: 10, background: '#f1f5f9', borderRadius: 5, position: 'relative', marginBottom: 8 }}>
-                  <div style={{ position: 'absolute', left: 0, width: '100%', height: '100%', borderRadius: 5, background: 'linear-gradient(90deg, #fed7aa, #2563eb)' }} />
-                  <div style={{ position: 'absolute', left: '38%', top: -4, width: 18, height: 18, borderRadius: '50%', background: '#ef4444', border: '3px solid #fff', boxShadow: '0 0 0 2px #ef4444' }} />
-                  <div style={{ position: 'absolute', left: '68%', top: -4, width: 18, height: 18, borderRadius: '50%', background: '#10b981', border: '3px solid #fff', boxShadow: '0 0 0 2px #10b981' }} />
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  {['$142K', '$168K', '$195K', '$224K'].map(v => <span key={v} style={{ fontSize: 14, fontWeight: 700, color: '#1c1209' }}>{v}</span>)}
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', gap: 20, marginBottom: 20 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ef4444' }} />
-                  <span style={{ fontSize: 13, color: '#64748b' }}>Your offer: <strong style={{ color: '#1c1209' }}>$158K</strong></span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#10b981' }} />
-                  <span style={{ fontSize: 13, color: '#64748b' }}>Target ask: <strong style={{ color: '#1c1209' }}>$185K</strong></span>
-                </div>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 20 }}>
-                {[
-                  { label: 'Below market by', value: '$27K', color: '#ef4444', bg: '#fef2f2' },
-                  { label: 'Negotiation upside', value: '17%', color: '#2563eb', bg: '#fff7ed' },
-                  { label: 'Offer score', value: '61/100', color: '#d97706', bg: '#fffbeb' },
-                ].map(({ label, value, color, bg }) => (
-                  <div key={label} style={{ background: bg, borderRadius: 12, padding: '16px 18px' }}>
-                    <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6 }}>{label}</div>
-                    <div style={{ fontSize: 22, fontWeight: 800, color, letterSpacing: '-0.02em' }}>{value}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: 12, padding: '14px 18px', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                <CheckCircle size={17} color="#2563eb" style={{ flexShrink: 0, marginTop: 1 }} />
-                <span style={{ fontSize: 14, color: '#9a3412', lineHeight: 1.6 }}>
-                  <strong>Next step:</strong> Counter at $187K–$192K. Your 4 years of experience and the SF market rate support this range. Use the Counter-Offer Builder to generate your email →
-                </span>
-              </div>
+            <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 12, padding: '16px 20px', textAlign: 'center' }}>
+              <span style={{ fontSize: 15, color: '#1e40af', fontWeight: 600 }}>
+                Counter at $185K–$192K → <Link href="/signup" style={{ color: '#2563eb', textDecoration: 'underline' }}>Build your counter-offer</Link>
+              </span>
             </div>
           </div>
         </div>
