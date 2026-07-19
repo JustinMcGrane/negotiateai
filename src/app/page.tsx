@@ -101,14 +101,18 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Arrow pointing down to mockup */}
-          <div style={{ textAlign: 'center', marginBottom: 16 }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#c2410c', fontWeight: 600 }}>
-              <span>Here&apos;s what your compensation analysis looks like</span>
-              <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 0v16M2 10l6 8 6-8" stroke="#c2410c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+          {/* Question hook + arrow */}
+          <div style={{ textAlign: 'center', marginBottom: 24 }}>
+            <div style={{ fontSize: 'clamp(20px, 3vw, 28px)', fontWeight: 800, color: '#1c1209', marginBottom: 12, letterSpacing: '-0.02em' }}>
+              Are you being paid what you deserve?
             </div>
+            <div style={{ fontSize: 15, color: '#78716c', marginBottom: 20 }}>
+              Most people have no idea. Here&apos;s what the data says about your role.
+            </div>
+            <svg width="28" height="48" viewBox="0 0 28 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', margin: '0 auto' }}>
+              <path d="M14 2 C14 2, 14 38, 14 38" stroke="#c2410c" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="6 4"/>
+              <path d="M4 30 L14 44 L24 30" stroke="#c2410c" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
 
           {/* Product mockup — full width, prominent */}
