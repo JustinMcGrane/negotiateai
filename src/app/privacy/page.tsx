@@ -12,7 +12,7 @@ export default function PrivacyPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
       <header style={{ borderBottom: '0.5px solid #e5e7eb', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: '#fff', zIndex: 50 }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}><Image src="/logo.svg" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority /></Link>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}><Image src="/logo.svg" alt="Hayven" width={190} height={52} style={{ objectFit: 'contain' }} priority /></Link>
       </header>
 
       <main style={{ maxWidth: 720, margin: '0 auto', padding: '64px 24px 96px' }}>
