@@ -82,7 +82,7 @@ export default function LandingPage() {
             }}>
               Get paid what you&apos;re<br />
               <span style={{
-                color: '#c2410c',
+                color: '#2563eb',
                 display: 'inline-block',
                 position: 'relative',
               }}>
@@ -93,7 +93,7 @@ export default function LandingPage() {
                 <span style={{
                   position: 'absolute',
                   inset: '-4px -10px -4px -10px',
-                  border: '3px solid #c2410c',
+                  border: '3px solid #2563eb',
                   borderRadius: 8,
                   display: 'block',
                 }} />
@@ -107,7 +107,7 @@ export default function LandingPage() {
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
               <Link href="/signup" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 10,
-                background: '#c2410c', color: '#fff',
+                background: '#2563eb', color: '#fff',
                 padding: '16px 36px', borderRadius: 12,
                 fontSize: 17, fontWeight: 700, textDecoration: 'none',
               }}>
@@ -126,8 +126,8 @@ export default function LandingPage() {
               Most people have no idea. Here&apos;s what the data says about your role.
             </div>
             <svg width="28" height="48" viewBox="0 0 28 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', margin: '0 auto' }}>
-              <path d="M14 2 C14 2, 14 38, 14 38" stroke="#c2410c" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="6 4"/>
-              <path d="M4 30 L14 44 L24 30" stroke="#c2410c" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M14 2 C14 2, 14 38, 14 38" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="6 4"/>
+              <path d="M4 30 L14 44 L24 30" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
 
@@ -161,7 +161,7 @@ export default function LandingPage() {
                   {['25th', '50th', '75th', '90th'].map(p => <span key={p} style={{ fontSize: 12, color: '#64748b' }}>{p}</span>)}
                 </div>
                 <div style={{ height: 10, background: '#f1f5f9', borderRadius: 5, position: 'relative', marginBottom: 8 }}>
-                  <div style={{ position: 'absolute', left: 0, width: '100%', height: '100%', borderRadius: 5, background: 'linear-gradient(90deg, #fed7aa, #c2410c)' }} />
+                  <div style={{ position: 'absolute', left: 0, width: '100%', height: '100%', borderRadius: 5, background: 'linear-gradient(90deg, #fed7aa, #2563eb)' }} />
                   <div style={{ position: 'absolute', left: '38%', top: -4, width: 18, height: 18, borderRadius: '50%', background: '#ef4444', border: '3px solid #fff', boxShadow: '0 0 0 2px #ef4444' }} />
                   <div style={{ position: 'absolute', left: '68%', top: -4, width: 18, height: 18, borderRadius: '50%', background: '#10b981', border: '3px solid #fff', boxShadow: '0 0 0 2px #10b981' }} />
                 </div>
@@ -184,7 +184,7 @@ export default function LandingPage() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 20 }}>
                 {[
                   { label: 'Below market by', value: '$27K', color: '#ef4444', bg: '#fef2f2' },
-                  { label: 'Negotiation upside', value: '17%', color: '#c2410c', bg: '#fff7ed' },
+                  { label: 'Negotiation upside', value: '17%', color: '#2563eb', bg: '#fff7ed' },
                   { label: 'Offer score', value: '61/100', color: '#d97706', bg: '#fffbeb' },
                 ].map(({ label, value, color, bg }) => (
                   <div key={label} style={{ background: bg, borderRadius: 12, padding: '16px 18px' }}>
@@ -195,7 +195,7 @@ export default function LandingPage() {
               </div>
 
               <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: 12, padding: '14px 18px', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                <CheckCircle size={17} color="#c2410c" style={{ flexShrink: 0, marginTop: 1 }} />
+                <CheckCircle size={17} color="#2563eb" style={{ flexShrink: 0, marginTop: 1 }} />
                 <span style={{ fontSize: 14, color: '#9a3412', lineHeight: 1.6 }}>
                   <strong>Next step:</strong> Counter at $187K–$192K. Your 4 years of experience and the SF market rate support this range. Use the Counter-Offer Builder to generate your email →
                 </span>
@@ -268,7 +268,7 @@ export default function LandingPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
               <div style={{
                 width: 38, height: 38, borderRadius: '50%',
-                background: 'linear-gradient(135deg, #fb923c, #c2410c)',
+                background: 'linear-gradient(135deg, #fb923c, #2563eb)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
                 <UserCircle size={18} color="#fff" />
@@ -418,7 +418,7 @@ export default function LandingPage() {
           <p style={{ fontSize: 16, color: '#64748b', lineHeight: 1.7, marginBottom: 36 }}>
             Start free. Sarah will help you figure out exactly where to begin.
           </p>
-          <Link href="/signup" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#c2410c', color: '#fff', padding: '14px 32px', borderRadius: 10, fontSize: 15, fontWeight: 800, textDecoration: 'none' }}>
+          <Link href="/signup" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#2563eb', color: '#fff', padding: '14px 32px', borderRadius: 10, fontSize: 15, fontWeight: 800, textDecoration: 'none' }}>
             Get started free <ArrowRight size={15} />
           </Link>
           <div style={{ marginTop: 16, fontSize: 13, color: '#a8998a' }}>No credit card required. Free forever plan available.</div>
