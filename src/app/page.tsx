@@ -77,15 +77,6 @@ export default function LandingPage() {
         padding: '96px 24px 80px',
         textAlign: 'center',
       }}>
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 6,
-          background: '#f0fdf4', border: '1px solid #bbf7d0',
-          borderRadius: 20, padding: '5px 14px', marginBottom: 28,
-        }}>
-          <Star size={12} color="#16a34a" fill="#16a34a" />
-          <span style={{ fontSize: 12, color: '#15803d', fontWeight: 600 }}>Your personal AI career platform</span>
-        </div>
-
         <h1 style={{
           fontSize: 'clamp(32px, 5.5vw, 52px)',
           fontWeight: 800, lineHeight: 1.15,
