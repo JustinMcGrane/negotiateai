@@ -112,7 +112,7 @@ export default function OnboardingPage() {
         borderBottom: '0.5px solid var(--color-border-tertiary)',
         background: '#fff',
       }}>
-        <Image src="/logo.svg" alt="Hayven" width={140} height={42} style={{ objectFit: 'contain' }} priority />
+        <Image src="/logo.svg" alt="Hayven" width={190} height={52} style={{ objectFit: 'contain' }} priority />
       </div>
 
       {/* Chat area */}
