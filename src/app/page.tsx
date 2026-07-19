@@ -92,9 +92,15 @@ export default function LandingPage() {
           letterSpacing: '-0.03em', marginBottom: 24,
           color: '#0f172a',
         }}>
-          Land the job.<br />
-          <span style={{ color: '#2563eb' }}>Negotiate the offer.</span><br />
-          Get what you deserve.
+          Land the job. Negotiate the offer.<br />
+          Get what you&apos;re{' '}
+          <span style={{
+            display: 'inline-block',
+            background: '#2563eb',
+            color: '#fff',
+            borderRadius: 10,
+            padding: '2px 16px 6px',
+          }}>worth.</span>
         </h1>
 
         <p style={{
@@ -134,22 +140,36 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Question hook */}
+      <section style={{ padding: '64px 24px 0', textAlign: 'center' }}>
+        <div style={{ fontSize: 'clamp(22px, 3.5vw, 32px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 10 }}>
+          Are you being paid what you deserve?
+        </div>
+        <div style={{ fontSize: 16, color: '#64748b', marginBottom: 24 }}>
+          Most people have no idea. Here&apos;s what the data says about your role.
+        </div>
+        <svg width="24" height="44" viewBox="0 0 24 44" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', margin: '0 auto' }}>
+          <path d="M12 2v32" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="6 4"/>
+          <path d="M3 28l9 12 9-12" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </section>
+
       {/* Sarah feature */}
-      <section style={{ background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)', padding: '80px 24px' }}>
+      <section style={{ background: '#f8fafc', borderTop: '0.5px solid #e5e7eb', padding: '80px 24px', marginTop: 48 }}>
         <div style={{ maxWidth: 860, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 48, alignItems: 'center' }}>
           <div>
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
-              background: 'rgba(255,255,255,0.1)', borderRadius: 20, padding: '5px 14px', marginBottom: 20,
+              background: '#eef2ff', borderRadius: 20, padding: '5px 14px', marginBottom: 20,
             }}>
-              <UserCircle size={13} color="#a5b4fc" />
-              <span style={{ fontSize: 12, color: '#a5b4fc', fontWeight: 600 }}>AI RECRUITER</span>
+              <UserCircle size={13} color="#6366f1" />
+              <span style={{ fontSize: 12, color: '#6366f1', fontWeight: 600 }}>AI RECRUITER</span>
             </div>
-            <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 800, color: '#fff', lineHeight: 1.2, marginBottom: 16, letterSpacing: '-0.02em' }}>
+            <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 800, color: '#0f172a', lineHeight: 1.2, marginBottom: 16, letterSpacing: '-0.02em' }}>
               Meet Sarah.
               <br />Your personal recruiter.
             </h2>
-            <p style={{ fontSize: 15, color: '#c7d2fe', lineHeight: 1.8, marginBottom: 28 }}>
+            <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.8, marginBottom: 28 }}>
               Sarah has 12 years of recruiting experience at Google, Meta, and Stripe. She knows what hiring managers actually think, what kills candidacies silently, and exactly how to position you to win.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 32 }}>
@@ -159,15 +179,15 @@ export default function LandingPage() {
                 'Interview preparation and coaching',
                 'Offer negotiation and counter strategy',
               ].map(item => (
-                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#e0e7ff' }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#818cf8', flexShrink: 0 }} />
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#374151' }}>
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#6366f1', flexShrink: 0 }} />
                   {item}
                 </div>
               ))}
             </div>
             <Link href="/signup" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: '#fff', color: '#1e1b4b',
+              background: '#0f172a', color: '#fff',
               padding: '11px 22px', borderRadius: 9,
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
             }}>
@@ -175,11 +195,11 @@ export default function LandingPage() {
             </Link>
           </div>
           <div style={{
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.12)',
+            background: '#fff',
+            border: '1px solid #e2e8f0',
             borderRadius: 16, padding: 24,
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid #f1f5f9' }}>
               <div style={{
                 width: 38, height: 38, borderRadius: '50%',
                 background: 'linear-gradient(135deg, #818cf8, #6366f1)',
@@ -188,8 +208,8 @@ export default function LandingPage() {
                 <UserCircle size={18} color="#fff" />
               </div>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>Sarah</div>
-                <div style={{ fontSize: 11, color: '#a5b4fc' }}>AI Recruiter · Online now</div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Sarah</div>
+                <div style={{ fontSize: 11, color: '#6366f1' }}>AI Recruiter · Online now</div>
               </div>
             </div>
             {[
@@ -204,8 +224,8 @@ export default function LandingPage() {
               }}>
                 <div style={{
                   maxWidth: '85%',
-                  background: msg.from === 'user' ? '#4f46e5' : 'rgba(255,255,255,0.1)',
-                  color: '#fff', borderRadius: 10,
+                  background: msg.from === 'user' ? '#2563eb' : '#f8fafc',
+                  color: msg.from === 'user' ? '#fff' : '#0f172a', borderRadius: 10,
                   padding: '10px 14px', fontSize: 13, lineHeight: 1.6,
                 }}>
                   {msg.text}
@@ -368,23 +388,23 @@ export default function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: 'linear-gradient(135deg, #1e1b4b 0%, #1d4ed8 100%)', padding: '80px 24px', textAlign: 'center' }}>
+      <section style={{ background: '#f8fafc', borderTop: '0.5px solid #e5e7eb', padding: '80px 24px', textAlign: 'center' }}>
         <div style={{ maxWidth: 580, margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(24px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 16 }}>
+          <h2 style={{ fontSize: 'clamp(24px, 4vw, 38px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 16 }}>
             Your next job is waiting.
           </h2>
-          <p style={{ fontSize: 16, color: '#c7d2fe', lineHeight: 1.7, marginBottom: 36 }}>
+          <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.7, marginBottom: 36 }}>
             Start free today. Sarah will help you figure out exactly where to begin.
           </p>
           <Link href="/signup" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: '#fff', color: '#1e1b4b',
+            background: '#2563eb', color: '#fff',
             padding: '14px 32px', borderRadius: 10,
             fontSize: 15, fontWeight: 800, textDecoration: 'none',
           }}>
             Get started free <ArrowRight size={15} />
           </Link>
-          <div style={{ marginTop: 16, fontSize: 13, color: '#a5b4fc' }}>No credit card required. Free forever plan available.</div>
+          <div style={{ marginTop: 16, fontSize: 13, color: '#94a3b8' }}>No credit card required. Free forever plan available.</div>
         </div>
       </section>
 
