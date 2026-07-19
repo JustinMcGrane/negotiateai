@@ -80,8 +80,24 @@ export default function LandingPage() {
               letterSpacing: '-0.03em', marginBottom: 22,
               color: '#1c1209',
             }}>
-              Get paid<br />
-              <span style={{ color: '#c2410c' }}>what you&apos;re worth.</span>
+              Get paid what you&apos;re<br />
+              <span style={{
+                color: '#c2410c',
+                display: 'inline-block',
+                position: 'relative',
+              }}>
+                <span style={{
+                  position: 'relative',
+                  zIndex: 1,
+                }}>worth.</span>
+                <span style={{
+                  position: 'absolute',
+                  inset: '-4px -10px -4px -10px',
+                  border: '3px solid #c2410c',
+                  borderRadius: 8,
+                  display: 'block',
+                }} />
+              </span>
             </h1>
 
             <p style={{ fontSize: 20, color: '#78716c', lineHeight: 1.65, maxWidth: 540, margin: '0 auto 36px' }}>
