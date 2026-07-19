@@ -75,9 +75,10 @@ export default function ResumeBuilderPage() {
         </div>
 
         <h1 style={{
-          fontSize: 'clamp(30px, 5vw, 50px)',
-          fontWeight: 800, lineHeight: 1.15,
+          fontSize: 'clamp(36px, 6.5vw, 76px)',
+          fontWeight: 800, lineHeight: 1.12,
           letterSpacing: '-0.03em', marginBottom: 24, color: '#0f172a',
+          whiteSpace: 'nowrap',
         }}>
           Your resume, reviewed<br />
           <span style={{ color: '#2563eb' }}>the way recruiters see it.</span>
