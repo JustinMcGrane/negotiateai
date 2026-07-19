@@ -78,9 +78,9 @@ export default function LandingPage() {
         textAlign: 'center',
       }}>
         <h1 style={{
-          fontSize: 'clamp(32px, 5.5vw, 52px)',
-          fontWeight: 800, lineHeight: 1.15,
-          letterSpacing: '-0.03em', marginBottom: 24,
+          fontSize: 'clamp(40px, 6.5vw, 68px)',
+          fontWeight: 800, lineHeight: 1.1,
+          letterSpacing: '-0.03em', marginBottom: 28,
           color: '#0f172a',
         }}>
           Land the job. Negotiate the offer.<br />
@@ -90,12 +90,12 @@ export default function LandingPage() {
             background: '#2563eb',
             color: '#fff',
             borderRadius: 10,
-            padding: '2px 16px 6px',
+            padding: '2px 18px 8px',
           }}>worth.</span>
         </h1>
 
         <p style={{
-          fontSize: 18, color: '#475569', lineHeight: 1.7,
+          fontSize: 20, color: '#475569', lineHeight: 1.7,
           marginBottom: 40, maxWidth: 580, margin: '0 auto 40px',
         }}>
           Hayven gives you an AI recruiter, resume analyzer, job search, cover letter generator, and 10 negotiation tools — everything you need to take control of your career.
