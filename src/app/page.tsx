@@ -4,7 +4,7 @@ import Image from 'next/image'
 import {
   TrendingUp, BookOpen, Play, FileSearch,
   Calculator, DollarSign, Mail, Shield, PenLine, MessageSquare,
-  UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowRight, Star,
+  UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowRight,
 } from 'lucide-react'
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
@@ -179,13 +179,6 @@ export default function LandingPage() {
       <section style={{ background: '#f8fafc', borderTop: '0.5px solid #e5e7eb', padding: '80px 24px', marginTop: 48 }}>
         <div style={{ maxWidth: 860, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 48, alignItems: 'center' }}>
           <div>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              background: '#eef2ff', borderRadius: 20, padding: '5px 14px', marginBottom: 20,
-            }}>
-              <UserCircle size={13} color="#6366f1" />
-              <span style={{ fontSize: 12, color: '#6366f1', fontWeight: 600 }}>AI RECRUITER</span>
-            </div>
             <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 800, color: '#0f172a', lineHeight: 1.2, marginBottom: 16, letterSpacing: '-0.02em' }}>
               Meet Sarah.
               <br />Your personal recruiter.
@@ -223,14 +216,15 @@ export default function LandingPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid #f1f5f9' }}>
               <div style={{
                 width: 38, height: 38, borderRadius: '50%',
-                background: 'linear-gradient(135deg, #818cf8, #6366f1)',
+                background: '#0f172a',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
+                flexShrink: 0,
               }}>
-                <UserCircle size={18} color="#fff" />
+                <span style={{ fontSize: 14, fontWeight: 700, color: '#fff' }}>S</span>
               </div>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Sarah</div>
-                <div style={{ fontSize: 11, color: '#6366f1' }}>AI Recruiter · Online now</div>
+                <div style={{ fontSize: 11, color: '#94a3b8' }}>Career Recruiter</div>
               </div>
             </div>
             {[
@@ -261,7 +255,6 @@ export default function LandingPage() {
       <section id="features" style={{ padding: '80px 24px', background: '#f8fafc' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#6366f1', letterSpacing: '0.08em', marginBottom: 10 }}>CAREER HUB</div>
             <h2 style={{ fontSize: 'clamp(22px, 4vw, 34px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', margin: '0 0 14px' }}>
               Everything you need to land the job
             </h2>
@@ -272,15 +265,13 @@ export default function LandingPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
             {careerFeatures.map(({ icon: Icon, color, bg, name, desc }) => (
               <div key={name} style={{
-                background: '#fff', border: '1px solid #e2e8f0',
-                borderRadius: 14, padding: 22,
-                display: 'flex', flexDirection: 'column', gap: 12,
+                background: '#fff', border: '0.5px solid #e2e8f0',
+                borderRadius: 12, padding: '20px 22px',
+                display: 'flex', flexDirection: 'column', gap: 10,
               }}>
-                <div style={{ width: 42, height: 42, background: bg, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Icon size={20} color={color} />
-                </div>
+                <Icon size={18} color="#94a3b8" />
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', marginBottom: 5 }}>{name}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>{name}</div>
                   <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6 }}>{desc}</div>
                 </div>
               </div>
@@ -292,9 +283,8 @@ export default function LandingPage() {
       {/* Negotiation tools */}
       <section style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#0F6E56', letterSpacing: '0.08em', marginBottom: 10 }}>NEGOTIATION SUITE</div>
-            <h2 style={{ fontSize: 'clamp(22px, 4vw, 34px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', margin: '0 0 14px' }}>
+          <div style={{ textAlign: ‘center’, marginBottom: 48 }}>
+            <h2 style={{ fontSize: ‘clamp(22px, 4vw, 34px)’, fontWeight: 800, color: ‘#0f172a’, letterSpacing: ‘-0.02em’, margin: ‘0 0 14px’ }}>
               Get paid what you’re worth
             </h2>
             <p style={{ fontSize: 15, color: '#64748b', maxWidth: 500, margin: '0 auto' }}>
@@ -304,13 +294,11 @@ export default function LandingPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
             {negotiationTools.map(({ icon: Icon, color, bg, name, desc }) => (
               <div key={name} style={{
-                background: '#fff', border: '1px solid #e2e8f0',
-                borderRadius: 12, padding: 18,
-                display: 'flex', gap: 14, alignItems: 'flex-start',
+                background: '#fff', border: '0.5px solid #e2e8f0',
+                borderRadius: 10, padding: '14px 16px',
+                display: 'flex', gap: 12, alignItems: 'flex-start',
               }}>
-                <div style={{ width: 36, height: 36, background: bg, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Icon size={16} color={color} />
-                </div>
+                <Icon size={15} color="#94a3b8" style={{ flexShrink: 0, marginTop: 2 }} />
                 <div>
                   <div style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', marginBottom: 3 }}>{name}</div>
                   <div style={{ fontSize: 12, color: '#64748b', lineHeight: 1.5 }}>{desc}</div>
@@ -349,12 +337,6 @@ export default function LandingPage() {
             </div>
 
             <div style={{ background: '#0f172a', border: '2px solid #0f172a', borderRadius: 14, padding: 28, position: 'relative' }}>
-              <div style={{
-                position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                background: '#2563eb', color: '#fff',
-                fontSize: 11, fontWeight: 700, padding: '3px 12px', borderRadius: 20,
-                whiteSpace: 'nowrap',
-              }}>MOST POPULAR</div>
               <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 6 }}>Professional</div>
               <div style={{ fontSize: 32, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>$49<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
               <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>Unlimited coaching &amp; tools</div>
@@ -380,25 +362,19 @@ export default function LandingPage() {
               </Link>
             </div>
 
-            <div style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', border: '1px solid rgba(102,126,234,0.4)', borderRadius: 14, padding: 28, position: 'relative' }}>
-              <div style={{
-                position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                background: 'linear-gradient(135deg, #667eea, #764ba2)', color: '#fff',
-                fontSize: 11, fontWeight: 700, padding: '3px 12px', borderRadius: 20,
-                whiteSpace: 'nowrap',
-              }}>BEST RESULTS</div>
+            <div style={{ background: '#0f172a', border: '2px solid #0f172a', borderRadius: 14, padding: 28, position: 'relative' }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 6 }}>Elite</div>
               <div style={{ fontSize: 32, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>$79<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
               <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 24 }}>Everything in Professional, plus:</div>
               {['Sarah remembers you across sessions', 'Mock interview coaching with feedback', 'Live negotiation roleplay with Sarah', 'Annual Review Coach + Promotion Planner', 'PDF compensation report', 'Priority support'].map(f => (
                 <div key={f} style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ color: '#667eea', fontWeight: 700 }}>✓</span> {f}
+                  <span style={{ color: '#94a3b8', fontWeight: 700 }}>✓</span> {f}
                 </div>
               ))}
               <Link href="/signup" style={{
                 display: 'block', marginTop: 24, textAlign: 'center',
                 height: 42, lineHeight: '42px',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: 9,
+                background: '#2563eb', borderRadius: 9,
                 fontSize: 14, textDecoration: 'none', color: '#fff', fontWeight: 700,
               }}>
                 Get Elite →

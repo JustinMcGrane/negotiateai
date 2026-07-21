@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, CheckCircle, BookOpen, Map, Layers, Star } from 'lucide-react'
+import { ArrowRight, CheckCircle, BookOpen, Map, Layers } from 'lucide-react'
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
@@ -34,10 +34,6 @@ export default function NegotiationPlaybookPage() {
       </header>
 
       <section style={{ maxWidth: 900, margin: '0 auto', padding: '56px 24px 72px', textAlign: 'center' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 20, padding: '5px 14px', marginBottom: 28 }}>
-          <Star size={12} color="#16a34a" fill="#16a34a" />
-          <span style={{ fontSize: 12, color: '#15803d', fontWeight: 600 }}>Negotiation Playbook</span>
-        </div>
         <h1 style={{ fontSize: 'clamp(36px, 6.5vw, 76px)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: 24, color: '#0f172a', whiteSpace: 'nowrap' }}>
           Your complete strategy,<br /><span style={{ color: '#2563eb' }}>start to finish.</span>
         </h1>
@@ -61,7 +57,7 @@ export default function NegotiationPlaybookPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 24 }}>
             {benefits.map(b => (
               <div key={b.title} style={{ background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 14, padding: '28px 24px' }}>
-                <div style={{ width: 40, height: 40, background: '#f0f4ff', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}><b.icon size={18} color="#2563eb" /></div>
+                <b.icon size={18} color="#94a3b8" style={{ marginBottom: 16 }} />
                 <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>{b.title}</div>
                 <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{b.desc}</div>
               </div>
