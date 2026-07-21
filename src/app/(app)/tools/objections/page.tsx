@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { Copy, Check } from 'lucide-react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
 
 interface Response { label: string; text: string }
@@ -16,6 +17,13 @@ export default function ObjectionHandler() {
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [copiedLabel, setCopiedLabel] = useState<string | null>(null)
+
+  function copyResponse(label: string, text: string) {
+    navigator.clipboard.writeText(text)
+    setCopiedLabel(label)
+    setTimeout(() => setCopiedLabel(null), 2000)
+  }
 
   const inp: React.CSSProperties = { border: '0.5px solid var(--color-border-secondary)', borderRadius: 8, padding: '10px 12px', fontSize: 13, background: '#fff', width: '100%' }
   const lbl: React.CSSProperties = { fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 4 }
@@ -57,7 +65,13 @@ export default function ObjectionHandler() {
             const style = STYLE[r.label] || { bg: '#f5f5f5', color: '#333' }
             return (
               <div key={r.label} style={{ marginBottom: 14, border: '0.5px solid var(--color-border-tertiary)', borderRadius: 10, padding: 16 }}>
-                <div style={{ display: 'inline-block', background: style.bg, color: style.color, fontSize: 11, padding: '2px 8px', borderRadius: 4, marginBottom: 10, fontWeight: 500 }}>{r.label}</div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                  <div style={{ display: 'inline-block', background: style.bg, color: style.color, fontSize: 11, padding: '2px 8px', borderRadius: 4, fontWeight: 500 }}>{r.label}</div>
+                  <button onClick={() => copyResponse(r.label, r.text)} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: copiedLabel === r.label ? '#16a34a' : '#64748b', background: 'transparent', border: '0.5px solid #e2e8f0', borderRadius: 6, padding: '4px 10px', cursor: 'pointer' }}>
+                    {copiedLabel === r.label ? <Check size={12} /> : <Copy size={12} />}
+                    {copiedLabel === r.label ? 'Copied!' : 'Copy'}
+                  </button>
+                </div>
                 <div style={{ fontSize: 13, fontStyle: 'italic', color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>&ldquo;{r.text}&rdquo;</div>
               </div>
             )

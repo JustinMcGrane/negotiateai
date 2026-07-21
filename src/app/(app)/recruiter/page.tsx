@@ -1,7 +1,8 @@
 'use client'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, Suspense } from 'react'
 import { Send, Briefcase, Sparkles, Lock, ChevronDown, ChevronUp, Brain } from 'lucide-react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
@@ -33,7 +34,7 @@ const PRO_STARTERS = [
   { label: 'Career pivot', prompt: 'I\'m thinking about pivoting careers. Help me figure out if it makes sense and how to position myself.' },
 ]
 
-export default function RecruiterPage() {
+function RecruiterPageInner() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -44,7 +45,10 @@ export default function RecruiterPage() {
   const [showMemory, setShowMemory] = useState(false)
   const [initialized, setInitialized] = useState(false)
   const [userHasSent, setUserHasSent] = useState(false)
+  const [checkinTriggered, setCheckinTriggered] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
+  const searchParams = useSearchParams()
+  const isCheckin = searchParams.get('checkin') === 'true'
 
   useEffect(() => {
     async function init() {
@@ -62,6 +66,13 @@ export default function RecruiterPage() {
     }
     init()
   }, [])
+
+  useEffect(() => {
+    if (!initialized || !isCheckin || checkinTriggered) return
+    setCheckinTriggered(true)
+    const checkinMsg = "I'd like to do my quarterly check-in. Can you help me review my progress and update my career strategy?"
+    setTimeout(() => send(checkinMsg), 500)
+  }, [initialized, isCheckin, checkinTriggered]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!userHasSent) return
@@ -143,7 +154,7 @@ export default function RecruiterPage() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', maxWidth: 800, margin: '0 auto', padding: '0 24px', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', maxWidth: 800, margin: '0 auto', padding: '0 24px', overflow: 'hidden' }} data-component="recruiter-page">
       {/* Header */}
       <div style={{ padding: '24px 0 16px', borderBottom: '0.5px solid var(--color-border-tertiary)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -405,5 +416,13 @@ export default function RecruiterPage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function RecruiterPage() {
+  return (
+    <Suspense fallback={<div style={{ padding: 40 }}>Loading…</div>}>
+      <RecruiterPageInner />
+    </Suspense>
   )
 }

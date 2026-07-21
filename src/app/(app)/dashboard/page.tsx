@@ -338,25 +338,43 @@ export default async function DashboardPage() {
       })()}
 
       {/* Recent activity */}
-      {(toolUses?.length || 0) > 0 && (
-        <div style={{ marginBottom: 28 }}>
-          <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>RECENT ACTIVITY</div>
-          <div style={{ background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, overflow: 'hidden' }}>
-            {toolUses?.map((use: { id: string; tool_id: string; created_at: string }, i: number) => (
-              <div key={use.id} style={{
-                padding: '12px 16px',
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                borderBottom: i < (toolUses.length - 1) ? '0.5px solid var(--color-border-tertiary)' : 'none',
-              }}>
-                <div style={{ fontSize: 13 }}>{use.tool_id}</div>
-                <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)' }}>
-                  {new Date(use.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+      {(toolUses?.length || 0) > 0 && (() => {
+        const toolNames: Record<string, string> = {
+          'comp-analyze': 'Compensation Analyzer',
+          'offer-evaluate': 'Offer Evaluator',
+          'counter-offer': 'Counter-Offer Builder',
+          'objection-handler': 'Objection Handler',
+          'raise-builder': 'Raise Request Builder',
+          'playbook': 'Negotiation Playbook',
+          'equity-calc': 'Equity Calculator',
+          'cost-calculator': 'Cost of Not Negotiating',
+          'cover-letter': 'Cover Letter Generator',
+          'interview-coach': 'Interview Salary Coach',
+          'annual-review': 'Annual Review Coach',
+          'promotion-planner': 'Promotion Planner',
+          'competing-offer': 'Competing Offer Tool',
+          'career-timeline': 'Career Timeline',
+        }
+        return (
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>RECENT ACTIVITY</div>
+            <div style={{ background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, overflow: 'hidden' }}>
+              {toolUses?.map((use: { id: string; tool_id: string; created_at: string }, i: number) => (
+                <div key={use.id} style={{
+                  padding: '12px 16px',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  borderBottom: i < (toolUses.length - 1) ? '0.5px solid var(--color-border-tertiary)' : 'none',
+                }}>
+                  <div style={{ fontSize: 13 }}>{toolNames[use.tool_id] ?? use.tool_id}</div>
+                  <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)' }}>
+                    {new Date(use.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      })()}
 
       {/* Upgrade banner */}
       {plan === 'free' && !isNew && (

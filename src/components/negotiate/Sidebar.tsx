@@ -2,14 +2,16 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import {
   LayoutDashboard, TrendingUp, FileSearch, Calculator, DollarSign,
   BookOpen, Mail, Shield, PenLine, Play, MessageSquare,
   BarChart2, Settings, CreditCard, ChevronRight,
   UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowUpLeft,
-  Zap, Users,
+  Zap, Users, Star, Award, GitCompare, Map,
 } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 type NavItem = { label: string; href: string; icon: LucideIcon }
 type NavGroup = { label: string; items: NavItem[] }
@@ -54,6 +56,15 @@ const nav: NavEntry[] = [
       { label: 'Live call coaching', href: '/live-coach', icon: Zap },
     ],
   },
+  {
+    label: 'Elite',
+    items: [
+      { label: 'Annual Review Coach', href: '/tools/annual-review', icon: Star },
+      { label: 'Promotion Planner', href: '/tools/promotion-planner', icon: Award },
+      { label: 'Competing Offer', href: '/tools/competing-offer', icon: GitCompare },
+      { label: 'Career Timeline', href: '/tools/career-timeline', icon: Map },
+    ],
+  },
   { label: 'Progress', href: '/progress', icon: BarChart2 },
   { label: 'Settings', href: '/account', icon: Settings },
   { label: 'Billing', href: '/account/billing', icon: CreditCard },
@@ -61,6 +72,15 @@ const nav: NavEntry[] = [
 
 export function Sidebar() {
   const path = usePathname()
+  const [plan, setPlan] = useState<string | null>(null)
+
+  useEffect(() => {
+    createClient().auth.getUser().then(async ({ data }) => {
+      if (!data.user) return
+      const { data: profile } = await createClient().from('profiles').select('plan').eq('id', data.user.id).single()
+      setPlan(profile?.plan ?? 'free')
+    })
+  }, [])
 
   return (
     <aside
@@ -143,14 +163,16 @@ export function Sidebar() {
       </nav>
 
       <div style={{ padding: 12, borderTop: '0.5px solid var(--color-border-tertiary)', display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <Link href="/account/billing" style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          background: '#141414', color: '#fff', borderRadius: 8,
-          padding: '8px 12px', fontSize: 12, textDecoration: 'none',
-        }}>
-          Upgrade to Pro
-          <ChevronRight size={14} />
-        </Link>
+        {plan !== 'elite' && (
+          <Link href="/account/billing" style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            background: '#141414', color: '#fff', borderRadius: 8,
+            padding: '8px 12px', fontSize: 12, textDecoration: 'none',
+          }}>
+            {plan === 'pro' ? 'Upgrade to Elite' : 'Upgrade to Pro'}
+            <ChevronRight size={14} />
+          </Link>
+        )}
         <Link href="/" style={{
           display: 'flex', alignItems: 'center', gap: 6,
           padding: '6px 8px', fontSize: 12,

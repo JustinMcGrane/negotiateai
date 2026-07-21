@@ -130,6 +130,13 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
         {loading && <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', fontStyle: 'italic' }}>Thinking…</div>}
       </div>
 
+      {turn >= MAX_TURNS && (
+        <div style={{ marginBottom: 16, background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', border: '1px solid rgba(102,126,234,0.3)', borderRadius: 10, padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981', flexShrink: 0 }} />
+          <div style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>Session complete — your coaching feedback is below.</div>
+        </div>
+      )}
+
       {tips.length > 0 && (
         <div style={{ marginBottom: 16, border: '0.5px solid rgba(15,110,86,0.3)', borderRadius: 10, padding: 16, background: '#F0FBF7' }}>
           <div style={{ fontSize: 11, color: 'var(--color-success)', marginBottom: 10 }}>COACHING FEEDBACK</div>
@@ -142,7 +149,7 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
         </div>
       )}
 
-      {turn <= MAX_TURNS && (
+      {turn < MAX_TURNS && (
         <div style={{ display: 'flex', gap: 8 }}>
           <input style={{ flex: 1, height: 40, border: '0.5px solid var(--color-border-secondary)', borderRadius: 8, padding: '0 12px', fontSize: 13, background: '#fff' }} placeholder="Your answer…" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); send() } }} disabled={loading} />
           <button onClick={send} disabled={loading || !input.trim()} style={{ width: 40, height: 40, background: '#141414', color: '#fff', border: 'none', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

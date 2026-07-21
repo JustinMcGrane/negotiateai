@@ -29,6 +29,7 @@ export default function TrackerPage() {
   const [form, setForm] = useState({ company: '', title: '', url: '', salary: '', notes: '', status: 'saved' as Status })
   const [userId, setUserId] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null)
 
   useEffect(() => {
     async function load() {
@@ -94,7 +95,13 @@ export default function TrackerPage() {
     const supabase = createClient()
     await supabase.from('job_applications').delete().eq('id', id)
     setApps(prev => prev.filter(a => a.id !== id))
+    setConfirmDeleteId(null)
   }, [])
+
+  function requestDelete(id: string) {
+    setConfirmDeleteId(id)
+    setTimeout(() => setConfirmDeleteId(prev => prev === id ? null : prev), 3000)
+  }
 
   const inputStyle = {
     width: '100%', padding: '9px 12px', fontSize: 13,
@@ -208,9 +215,15 @@ export default function TrackerPage() {
                     <option key={s} value={s}>{c.label}</option>
                   ))}
                 </select>
-                <button onClick={() => remove(app.id)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 6, color: 'var(--color-text-tertiary)', display: 'flex', alignItems: 'center' }}>
-                  <Trash2 size={14} />
-                </button>
+                {confirmDeleteId === app.id ? (
+                  <button onClick={() => remove(app.id)} style={{ background: '#dc2626', border: 'none', cursor: 'pointer', padding: '4px 10px', borderRadius: 6, color: '#fff', fontSize: 12, fontWeight: 600, flexShrink: 0 }}>
+                    Confirm?
+                  </button>
+                ) : (
+                  <button onClick={() => requestDelete(app.id)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 6, color: 'var(--color-text-tertiary)', display: 'flex', alignItems: 'center' }}>
+                    <Trash2 size={14} />
+                  </button>
+                )}
               </div>
             )
           })}

@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { Copy, Check } from 'lucide-react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
 
 interface Step { title: string; body: string }
@@ -10,6 +11,15 @@ export default function Playbook() {
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [copied, setCopied] = useState(false)
+
+  function copyPlan() {
+    if (!result) return
+    const text = result.steps.map((s, i) => `${i + 1}. ${s.title}\n${s.body}`).join('\n\n')
+    navigator.clipboard.writeText(text)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   const inp: React.CSSProperties = { height: 40, border: '0.5px solid var(--color-border-secondary)', borderRadius: 8, padding: '0 12px', fontSize: 13, background: '#fff', width: '100%' }
   const lbl: React.CSSProperties = { fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 4 }
@@ -52,6 +62,12 @@ export default function Playbook() {
 
       {result && (
         <div style={{ marginTop: 32 }} className="animate-slide-up">
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 12 }}>
+            <button onClick={copyPlan} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: copied ? '#16a34a' : '#64748b', background: 'transparent', border: '0.5px solid #e2e8f0', borderRadius: 6, padding: '4px 10px', cursor: 'pointer' }}>
+              {copied ? <Check size={12} /> : <Copy size={12} />}
+              {copied ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
           {result.steps.map((step, i) => (
             <div key={i} style={{ display: 'flex', gap: 14, marginBottom: 20 }}>
               <div style={{ width: 28, height: 28, background: '#141414', color: '#fff', borderRadius: 6, fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>{i + 1}</div>

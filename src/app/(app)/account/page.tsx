@@ -11,6 +11,14 @@ export default function AccountPage() {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [showPasswordForm, setShowPasswordForm] = useState(false)
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [passwordSaving, setPasswordSaving] = useState(false)
+  const [passwordMsg, setPasswordMsg] = useState<{ text: string; ok: boolean } | null>(null)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false)
+  const [deleteMsg, setDeleteMsg] = useState('')
   const router = useRouter()
 
   useEffect(() => {
@@ -41,6 +49,38 @@ export default function AccountPage() {
     const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/login')
+  }
+
+  async function changePassword() {
+    if (!newPassword || newPassword !== confirmPassword) {
+      setPasswordMsg({ text: 'Passwords do not match.', ok: false })
+      return
+    }
+    if (newPassword.length < 6) {
+      setPasswordMsg({ text: 'Password must be at least 6 characters.', ok: false })
+      return
+    }
+    setPasswordSaving(true)
+    setPasswordMsg(null)
+    const supabase = createClient()
+    const { error } = await supabase.auth.updateUser({ password: newPassword })
+    setPasswordSaving(false)
+    if (error) {
+      setPasswordMsg({ text: error.message, ok: false })
+    } else {
+      setPasswordMsg({ text: 'Password updated successfully.', ok: true })
+      setNewPassword('')
+      setConfirmPassword('')
+      setTimeout(() => { setShowPasswordForm(false); setPasswordMsg(null) }, 2000)
+    }
+  }
+
+  async function deleteAccount() {
+    setDeleteLoading(true)
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    setDeleteLoading(false)
+    setDeleteMsg('To complete account deletion, email GetHayven@gmail.com')
   }
 
   const planLabel = { free: 'Free', pro: 'Professional', elite: 'Elite', report: 'Report' }[profile?.plan || 'free'] || 'Free'
@@ -168,18 +208,111 @@ export default function AccountPage() {
         </a>
       </div>
 
+      {/* Change Password */}
+      <div style={{
+        background: '#fff',
+        border: '0.5px solid var(--color-border-tertiary)',
+        borderRadius: 12, padding: 24, marginBottom: 16,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: showPasswordForm ? 18 : 0 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>CHANGE PASSWORD</div>
+          <button
+            onClick={() => { setShowPasswordForm(v => !v); setPasswordMsg(null) }}
+            style={{ background: 'transparent', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 7, padding: '6px 12px', fontSize: 12, cursor: 'pointer', color: 'var(--color-text-secondary)' }}
+          >
+            {showPasswordForm ? 'Cancel' : 'Change'}
+          </button>
+        </div>
+        {showPasswordForm && (
+          <div>
+            <div style={{ marginBottom: 12 }}>
+              <label style={{ fontSize: 13, color: 'var(--color-text-secondary)', display: 'block', marginBottom: 6 }}>New Password</label>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={e => setNewPassword(e.target.value)}
+                placeholder="At least 6 characters"
+                style={inputStyle}
+              />
+            </div>
+            <div style={{ marginBottom: 14 }}>
+              <label style={{ fontSize: 13, color: 'var(--color-text-secondary)', display: 'block', marginBottom: 6 }}>Confirm Password</label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
+                placeholder="Repeat new password"
+                style={inputStyle}
+              />
+            </div>
+            {passwordMsg && (
+              <div style={{ fontSize: 12, marginBottom: 12, padding: '8px 12px', borderRadius: 7, background: passwordMsg.ok ? '#f0fdf4' : '#fef2f2', color: passwordMsg.ok ? '#15803d' : '#dc2626' }}>
+                {passwordMsg.text}
+              </div>
+            )}
+            <button
+              onClick={changePassword}
+              disabled={passwordSaving}
+              style={{ height: 38, padding: '0 18px', background: '#141414', color: '#fff', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer', opacity: passwordSaving ? 0.6 : 1 }}
+            >
+              {passwordSaving ? 'Saving…' : 'Update Password'}
+            </button>
+          </div>
+        )}
+      </div>
+
       {/* Sign out */}
       <button
         onClick={signOut}
         style={{
           display: 'flex', alignItems: 'center', gap: 8,
           background: 'transparent', border: '0.5px solid var(--color-border-tertiary)',
-          borderRadius: 8, padding: '10px 16px',
+          borderRadius: 8, padding: '10px 16px', marginBottom: 32,
           fontSize: 13, color: 'var(--color-text-secondary)', cursor: 'pointer',
         }}
       >
         <LogOut size={14} /> Sign out
       </button>
+
+      {/* Danger Zone */}
+      <div style={{
+        border: '1px solid #fca5a5',
+        borderRadius: 12, padding: 24,
+      }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#dc2626', letterSpacing: '0.04em', marginBottom: 12 }}>DANGER ZONE</div>
+        <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 16, lineHeight: 1.6 }}>
+          Permanently delete your account and all associated data. This cannot be undone.
+        </p>
+        {deleteMsg ? (
+          <div style={{ fontSize: 13, color: '#dc2626', background: '#fef2f2', border: '0.5px solid #fca5a5', borderRadius: 8, padding: '12px 16px' }}>{deleteMsg}</div>
+        ) : showDeleteConfirm ? (
+          <div>
+            <p style={{ fontSize: 13, fontWeight: 600, color: '#dc2626', marginBottom: 12 }}>Are you sure? This action cannot be undone.</p>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <button
+                onClick={deleteAccount}
+                disabled={deleteLoading}
+                style={{ height: 36, padding: '0 16px', background: '#dc2626', color: '#fff', border: 'none', borderRadius: 7, fontSize: 13, fontWeight: 600, cursor: 'pointer', opacity: deleteLoading ? 0.6 : 1 }}
+              >
+                {deleteLoading ? 'Processing…' : 'Yes, delete my account'}
+              </button>
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
+                style={{ height: 36, padding: '0 14px', background: 'transparent', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 7, fontSize: 13, cursor: 'pointer', color: 'var(--color-text-secondary)' }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => setShowDeleteConfirm(true)}
+            style={{ height: 36, padding: '0 16px', background: 'transparent', border: '1px solid #fca5a5', color: '#dc2626', borderRadius: 7, fontSize: 13, fontWeight: 500, cursor: 'pointer' }}
+          >
+            Delete Account
+          </button>
+        )}
+      </div>
     </div>
   )
 }

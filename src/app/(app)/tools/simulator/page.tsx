@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { PERSONAS } from '@/lib/personas'
 import type { Persona } from '@/lib/personas'
-import { Send, RotateCcw } from 'lucide-react'
+import { Send, RotateCcw, Copy, Check } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
 interface Message { role: 'user' | 'assistant' | 'system'; content: string }
@@ -35,6 +35,7 @@ export default function Simulator() {
     createClient().auth.getUser().then(({ data }) => setUserId(data.user?.id ?? null))
   }, [])
   const [copied, setCopied] = useState(false)
+  const [copiedEmail, setCopiedEmail] = useState(false)
   const chatRef = useRef<HTMLDivElement>(null)
 
   const MAX_TURNS = 6
@@ -310,7 +311,13 @@ This is turn ${newTurn} of ${MAX_TURNS}. ${newTurn === MAX_TURNS - 1 ? 'This is 
             </div>
           </div>
 
-          <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8 }}>COUNTER-OFFER EMAIL</div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>COUNTER-OFFER EMAIL</div>
+            <button onClick={() => { navigator.clipboard.writeText(debrief.emailDraft); setCopiedEmail(true); setTimeout(() => setCopiedEmail(false), 2000) }} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: copiedEmail ? '#16a34a' : '#64748b', background: 'transparent', border: '0.5px solid #e2e8f0', borderRadius: 6, padding: '4px 10px', cursor: 'pointer' }}>
+              {copiedEmail ? <Check size={12} /> : <Copy size={12} />}
+              {copiedEmail ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
           <pre style={{ fontFamily: 'monospace', fontSize: 12, lineHeight: 1.7, whiteSpace: 'pre-wrap', background: 'var(--color-background-secondary)', borderRadius: 8, padding: 16, marginBottom: 16, border: '0.5px solid var(--color-border-tertiary)' }}>{debrief.emailDraft}</pre>
 
           <div style={{ background: '#141414', color: '#fff', borderRadius: 10, padding: 20, marginBottom: 20 }}>

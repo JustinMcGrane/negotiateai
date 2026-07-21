@@ -50,7 +50,10 @@ export default function LoginPage() {
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" required style={inp} autoFocus />
           </div>
           <div>
-            <div style={lbl}>PASSWORD</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+              <div style={lbl}>PASSWORD</div>
+              <Link href="/forgot-password" style={{ fontSize: 11, color: 'var(--color-text-tertiary)', textDecoration: 'none' }}>Forgot password?</Link>
+            </div>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" required style={inp} />
           </div>
 

@@ -1,9 +1,19 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Check } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 export default function BillingPage() {
   const [loading, setLoading] = useState<string | null>(null)
+  const [currentPlan, setCurrentPlan] = useState<string | null>(null)
+
+  useEffect(() => {
+    createClient().auth.getUser().then(async ({ data }) => {
+      if (!data.user) return
+      const { data: profile } = await createClient().from('profiles').select('plan').eq('id', data.user.id).single()
+      setCurrentPlan(profile?.plan ?? 'free')
+    })
+  }, [])
 
   async function checkout(priceId: string, key: string) {
     setLoading(key)
@@ -74,21 +84,32 @@ export default function BillingPage() {
                 <span style={{ fontSize: 12, color: plan.key === 'elite' ? 'rgba(255,255,255,0.7)' : 'var(--color-text-secondary)' }}>{f}</span>
               </div>
             ))}
-            <button
-              disabled={plan.disabled || loading === plan.key}
-              onClick={() => !plan.disabled && checkout(plan.priceId, plan.key)}
-              style={{
+            {currentPlan === plan.key ? (
+              <div style={{
                 marginTop: 20, width: '100%', height: 38,
-                background: plan.key === 'elite'
-                  ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                  : plan.highlight ? '#141414' : 'transparent',
-                color: plan.key === 'free' ? 'var(--color-text-primary)' : '#fff',
-                border: plan.key === 'free' ? '0.5px solid var(--color-border-primary)' : 'none',
-                borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: plan.disabled ? 'default' : 'pointer',
-                opacity: (plan.disabled || loading === plan.key) ? 0.5 : 1,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                border: '1.5px solid #16a34a', borderRadius: 8,
+                fontSize: 13, fontWeight: 700, color: '#16a34a',
               }}>
-              {loading === plan.key ? 'Loading…' : plan.cta}
-            </button>
+                <Check size={14} color="#16a34a" /> Current Plan
+              </div>
+            ) : (
+              <button
+                disabled={loading === plan.key}
+                onClick={() => checkout(plan.priceId, plan.key)}
+                style={{
+                  marginTop: 20, width: '100%', height: 38,
+                  background: plan.key === 'elite'
+                    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                    : plan.highlight ? '#141414' : 'transparent',
+                  color: plan.key === 'free' ? 'var(--color-text-primary)' : '#fff',
+                  border: plan.key === 'free' ? '0.5px solid var(--color-border-primary)' : 'none',
+                  borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: loading === plan.key ? 'default' : 'pointer',
+                  opacity: loading === plan.key ? 0.5 : 1,
+                }}>
+                {loading === plan.key ? 'Loading…' : plan.cta}
+              </button>
+            )}
           </div>
         ))}
       </div>

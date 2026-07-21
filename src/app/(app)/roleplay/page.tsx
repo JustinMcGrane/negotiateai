@@ -276,18 +276,32 @@ export default function RoleplayPage() {
               <div style={{ fontSize: 15, fontWeight: 700 }}>{character.name}</div>
               <div style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>{character.role}</div>
             </div>
-            <button
-              onClick={reset}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 5,
-                background: 'transparent', border: '0.5px solid var(--color-border-tertiary)',
-                borderRadius: 6, padding: '5px 10px', cursor: 'pointer',
-                fontSize: 12, color: 'var(--color-text-secondary)',
-              }}
-            >
-              <RotateCcw size={12} />
-              New session
-            </button>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <button
+                onClick={() => setStage('debrief')}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 5,
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  border: 'none',
+                  borderRadius: 6, padding: '5px 10px', cursor: 'pointer',
+                  fontSize: 12, color: '#fff',
+                }}
+              >
+                End & Debrief
+              </button>
+              <button
+                onClick={reset}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 5,
+                  background: 'transparent', border: '0.5px solid var(--color-border-tertiary)',
+                  borderRadius: 6, padding: '5px 10px', cursor: 'pointer',
+                  fontSize: 12, color: 'var(--color-text-secondary)',
+                }}
+              >
+                <RotateCcw size={12} />
+                New session
+              </button>
+            </div>
           </div>
         </div>
 
@@ -387,6 +401,92 @@ export default function RoleplayPage() {
           <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', textAlign: 'center', marginTop: 8 }}>
             {turnCount} turns · <button onClick={reset} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 11, color: 'var(--color-text-tertiary)', padding: 0, textDecoration: 'underline' }}>start over</button>
           </p>
+        </div>
+      </div>
+    )
+  }
+
+  if (stage === 'debrief') {
+    const userMessages = messages.filter(m => m.role === 'user')
+    const assistantMessages = messages.filter(m => m.role === 'assistant' && !Object.values(SARAH_HANDOFF).includes(m.content))
+    return (
+      <div style={{ maxWidth: 600, margin: '60px auto', padding: '0 24px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <div style={{
+            width: 64, height: 64, borderRadius: '50%',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            margin: '0 auto 16px',
+          }}>
+            <MessageSquare size={28} color="#fff" />
+          </div>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 8px' }}>Session Complete</h1>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
+            You practiced with {character?.name} — {character?.role}
+          </p>
+        </div>
+
+        <div style={{
+          background: 'var(--color-background-secondary)',
+          border: '0.5px solid var(--color-border-tertiary)',
+          borderRadius: 12, padding: 24, marginBottom: 20,
+        }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-tertiary)', marginBottom: 16, letterSpacing: '0.04em' }}>SESSION SUMMARY</div>
+          <div style={{ display: 'flex', gap: 20, marginBottom: 16 }}>
+            <div style={{ textAlign: 'center', flex: 1 }}>
+              <div style={{ fontSize: 32, fontWeight: 700 }}>{turnCount}</div>
+              <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>Turns completed</div>
+            </div>
+            <div style={{ textAlign: 'center', flex: 1 }}>
+              <div style={{ fontSize: 32, fontWeight: 700 }}>{userMessages.length}</div>
+              <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>Responses given</div>
+            </div>
+            <div style={{ textAlign: 'center', flex: 1 }}>
+              <div style={{ fontSize: 32, fontWeight: 700 }}>{assistantMessages.length}</div>
+              <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>AI messages</div>
+            </div>
+          </div>
+          {scenario && (
+            <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', background: '#f8fafc', borderRadius: 8, padding: '10px 14px', lineHeight: 1.6 }}>
+              <span style={{ fontWeight: 600, color: 'var(--color-text-primary)' }}>Your scenario: </span>{scenario}
+            </div>
+          )}
+        </div>
+
+        <div style={{
+          background: 'var(--color-background-secondary)',
+          border: '0.5px solid var(--color-border-tertiary)',
+          borderRadius: 12, padding: 20, marginBottom: 24,
+        }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-tertiary)', marginBottom: 12, letterSpacing: '0.04em' }}>WHAT TO WORK ON NEXT</div>
+          <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>
+            Review your responses and consider: Did you anchor confidently? Did you avoid giving a number first? Did you use your leverage? Practice again to sharpen your delivery.
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', gap: 10 }}>
+          <button
+            onClick={reset}
+            style={{
+              flex: 1,
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: '#fff', border: 'none', borderRadius: 8,
+              padding: '12px 20px', fontSize: 14, fontWeight: 600,
+              cursor: 'pointer',
+            }}
+          >
+            Start New Session
+          </button>
+          <Link href="/tools/simulator" style={{
+            flex: 1, textAlign: 'center',
+            background: 'var(--color-background-secondary)',
+            border: '0.5px solid var(--color-border-tertiary)',
+            color: 'var(--color-text-primary)', textDecoration: 'none',
+            borderRadius: 8, padding: '12px 20px', fontSize: 14,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            Full Simulator
+          </Link>
         </div>
       </div>
     )

@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { Copy, Check } from 'lucide-react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
 import { EliteGate } from '@/components/negotiate/EliteGate'
 
@@ -10,6 +11,21 @@ export default function AnnualReviewPage() {
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [copiedScript, setCopiedScript] = useState(false)
+  const [copiedEmail, setCopiedEmail] = useState(false)
+
+  function copyScript() {
+    if (!result) return
+    navigator.clipboard.writeText(result.script)
+    setCopiedScript(true)
+    setTimeout(() => setCopiedScript(false), 2000)
+  }
+  function copyEmail() {
+    if (!result) return
+    navigator.clipboard.writeText(result.emailDraft)
+    setCopiedEmail(true)
+    setTimeout(() => setCopiedEmail(false), 2000)
+  }
 
   const inp: React.CSSProperties = { height: 40, border: '0.5px solid var(--color-border-secondary)', borderRadius: 8, padding: '0 12px', fontSize: 13, background: '#fff', width: '100%' }
   const sel: React.CSSProperties = { ...inp }
@@ -97,12 +113,24 @@ export default function AnnualReviewPage() {
           </div>
 
           <div style={{ border: '0.5px solid var(--color-border-tertiary)', borderRadius: 10, padding: 16, marginBottom: 16 }}>
-            <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8 }}>CONVERSATION SCRIPT</div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+              <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>CONVERSATION SCRIPT</div>
+              <button onClick={copyScript} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: copiedScript ? '#16a34a' : '#64748b', background: 'transparent', border: '0.5px solid #e2e8f0', borderRadius: 6, padding: '4px 10px', cursor: 'pointer' }}>
+                {copiedScript ? <Check size={12} /> : <Copy size={12} />}
+                {copiedScript ? 'Copied!' : 'Copy'}
+              </button>
+            </div>
             <p style={{ fontSize: 13, lineHeight: 1.8, margin: 0, whiteSpace: 'pre-wrap' }}>{result.script}</p>
           </div>
 
           <div style={{ border: '0.5px solid var(--color-border-tertiary)', borderRadius: 10, padding: 16 }}>
-            <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8 }}>FOLLOW-UP EMAIL DRAFT</div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+              <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>FOLLOW-UP EMAIL DRAFT</div>
+              <button onClick={copyEmail} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: copiedEmail ? '#16a34a' : '#64748b', background: 'transparent', border: '0.5px solid #e2e8f0', borderRadius: 6, padding: '4px 10px', cursor: 'pointer' }}>
+                {copiedEmail ? <Check size={12} /> : <Copy size={12} />}
+                {copiedEmail ? 'Copied!' : 'Copy'}
+              </button>
+            </div>
             <pre style={{ fontSize: 13, lineHeight: 1.8, margin: 0, whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>{result.emailDraft}</pre>
           </div>
         </div>

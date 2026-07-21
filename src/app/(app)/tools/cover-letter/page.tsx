@@ -11,11 +11,13 @@ export default function CoverLetterPage() {
   const [loading, setLoading] = useState(false)
   const [letter, setLetter] = useState('')
   const [copied, setCopied] = useState(false)
+  const [error, setError] = useState('')
 
   async function generate() {
     if (!jobTitle || !company) return
     setLoading(true)
     setLetter('')
+    setError('')
     try {
       const res = await fetch('/api/cover-letter', {
         method: 'POST',
@@ -25,7 +27,7 @@ export default function CoverLetterPage() {
       const data = await res.json()
       setLetter(data.letter || '')
     } catch {
-      alert('Generation failed. Please try again.')
+      setError('Generation failed. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -122,6 +124,12 @@ export default function CoverLetterPage() {
         <Sparkles size={15} />
         {loading ? 'Generating…' : 'Generate Cover Letter'}
       </button>
+
+      {error && (
+        <div style={{ marginTop: 16, fontSize: 13, color: '#dc2626', background: '#fef2f2', border: '0.5px solid rgba(220,38,38,0.2)', borderRadius: 8, padding: '10px 14px' }}>
+          {error}
+        </div>
+      )}
 
       {letter && (
         <div style={{ marginTop: 40 }}>

@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { Copy, Check } from 'lucide-react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
 
 interface Result { email: string; script: string; tip: string }
@@ -9,6 +10,21 @@ export default function CounterOffer() {
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [copiedEmail, setCopiedEmail] = useState(false)
+  const [copiedScript, setCopiedScript] = useState(false)
+
+  function copyEmail() {
+    if (!result) return
+    navigator.clipboard.writeText(result.email)
+    setCopiedEmail(true)
+    setTimeout(() => setCopiedEmail(false), 2000)
+  }
+  function copyScript() {
+    if (!result) return
+    navigator.clipboard.writeText(result.script)
+    setCopiedScript(true)
+    setTimeout(() => setCopiedScript(false), 2000)
+  }
 
   const inp: React.CSSProperties = { height: 40, border: '0.5px solid var(--color-border-secondary)', borderRadius: 8, padding: '0 12px', fontSize: 13, background: '#fff', width: '100%' }
   const lbl: React.CSSProperties = { fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 4 }
@@ -46,10 +62,23 @@ export default function CounterOffer() {
 
       {result && (
         <div style={{ marginTop: 32 }} className="animate-slide-up">
-          <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8 }}>EMAIL</div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>EMAIL</div>
+            <button onClick={copyEmail} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: copiedEmail ? '#16a34a' : '#64748b', background: 'transparent', border: '0.5px solid #e2e8f0', borderRadius: 6, padding: '4px 10px', cursor: 'pointer' }}>
+              {copiedEmail ? <Check size={12} /> : <Copy size={12} />}
+              {copiedEmail ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
           <pre style={{ fontFamily: 'inherit', fontSize: 13, lineHeight: 1.7, whiteSpace: 'pre-wrap', background: 'var(--color-background-secondary)', borderRadius: 8, padding: 16, marginBottom: 20, border: '0.5px solid var(--color-border-tertiary)' }}>{result.email}</pre>
 
-          <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 8 }}>PHONE SCRIPT</div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>PHONE SCRIPT</div>
+            <button onClick={copyScript} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: copiedScript ? '#16a34a' : '#64748b', background: 'transparent', border: '0.5px solid #e2e8f0', borderRadius: 6, padding: '4px 10px', cursor: 'pointer' }}>
+              {copiedScript ? <Check size={12} /> : <Copy size={12} />}
+              {copiedScript ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
+          <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', display: 'none' }}>PHONE SCRIPT</div>
           <div style={{ fontStyle: 'italic', fontSize: 13, lineHeight: 1.7, color: 'var(--color-text-secondary)', background: 'var(--color-background-secondary)', borderRadius: 8, padding: 16, marginBottom: 20, border: '0.5px solid var(--color-border-tertiary)' }}>
             &ldquo;{result.script}&rdquo;
           </div>

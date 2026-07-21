@@ -16,7 +16,15 @@ export function EliteGate({ children }: { children: React.ReactNode }) {
     })
   }, [])
 
-  if (status === 'loading') return null
+  if (status === 'loading') return (
+    <div style={{
+      height: 400, background: '#f8fafc', borderRadius: 12,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: 'var(--color-text-tertiary)', fontSize: 13,
+    }}>
+      Loading…
+    </div>
+  )
 
   if (status === 'blocked') {
     return (
