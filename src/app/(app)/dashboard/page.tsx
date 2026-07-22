@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { TrendingUp, FileSearch, Play, ArrowRight, UserCircle, FileText, Search, Lock, CalendarCheck, Rocket, Briefcase, GitBranch } from 'lucide-react'
 import { LocalDate } from '@/components/negotiate/LocalDate'
 import { MarketAlertCard } from '@/components/negotiate/MarketAlertCard'
+import { PageHeader } from '@/components/negotiate/PageHeader'
 
 export const metadata: Metadata = { title: 'Dashboard — Hayven' }
 
@@ -115,23 +116,25 @@ export default async function DashboardPage() {
   const daysSinceCheckin = lastCheckin ? Math.floor((Date.now() - lastCheckin.getTime()) / (1000 * 60 * 60 * 24)) : null
   const checkinDue = isPro && (daysSinceCheckin === null || daysSinceCheckin >= 90)
 
-  return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 24px 80px' }}>
+  const userInitial = (profile?.name || user.email || '?')[0].toUpperCase()
 
-      {/* Header */}
-      <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 4px' }}>{greeting}, {firstName}</h1>
-        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
-          {plan === 'elite' ? 'Elite plan' : plan === 'pro' ? 'Pro plan' : 'Free plan'} · <LocalDate />
-        </p>
-      </div>
+  return (
+    <div>
+      <PageHeader
+        title={`${greeting}, ${firstName}`}
+        userInitial={userInitial}
+        plan={plan}
+      />
+
+    <div style={{ maxWidth: 900, margin: '0 auto', padding: '28px 24px 80px' }}>
 
       {/* Compensation Health Score */}
       <div style={{
-        background: 'var(--color-background-secondary)',
-        border: '0.5px solid var(--color-border-tertiary)',
+        background: '#fff',
+        border: '1px solid rgba(0,0,0,0.08)',
         borderRadius: 16, padding: '28px 32px',
         marginBottom: 28,
+        boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
         display: 'flex', alignItems: 'center', gap: 32,
       }}>
         <div>
@@ -221,8 +224,10 @@ export default async function DashboardPage() {
             { value: avgScore || '—', label: 'Avg score' },
           ].map((m) => (
             <div key={m.label} style={{
-              background: 'var(--color-background-secondary)',
+              background: '#fff',
+              border: '1px solid rgba(0,0,0,0.08)',
               borderRadius: 10, padding: '16px 18px', textAlign: 'center',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
             }}>
               <div style={{ fontSize: 24, fontWeight: 700 }}>{m.value}</div>
               <div style={{ fontSize: 11, color: 'var(--color-text-secondary)', marginTop: 3 }}>{m.label}</div>
@@ -241,9 +246,11 @@ export default async function DashboardPage() {
             { href: '/jobs', icon: Search, color: '#059669', bg: '#ecfdf5', name: 'Job Search', desc: 'Find roles that fit you' },
           ].map((t) => (
             <Link key={t.href} href={t.href} style={{
-              background: '#fff', border: '0.5px solid var(--color-border-tertiary)',
+              background: '#fff', border: '1px solid rgba(0,0,0,0.08)',
               borderRadius: 12, padding: 16,
               display: 'flex', gap: 12, textDecoration: 'none',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+              transition: 'box-shadow 0.15s',
             }}>
               <div style={{ width: 36, height: 36, background: t.bg, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <t.icon size={16} color={t.color} />
@@ -267,9 +274,11 @@ export default async function DashboardPage() {
             { href: '/tools/simulator', icon: Play, color: '#141414', bg: '#f0f0f0', name: 'Negotiation simulator', desc: 'Practice with an AI recruiter' },
           ].map((t) => (
             <Link key={t.href} href={t.href} style={{
-              background: '#fff', border: '0.5px solid var(--color-border-tertiary)',
+              background: '#fff', border: '1px solid rgba(0,0,0,0.08)',
               borderRadius: 12, padding: 16,
               display: 'flex', gap: 12, textDecoration: 'none',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+              transition: 'box-shadow 0.15s',
             }}>
               <div style={{ width: 36, height: 36, background: t.bg, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <t.icon size={16} color={t.color} />
@@ -304,9 +313,10 @@ export default async function DashboardPage() {
               {FEATURE_CARDS.map((card) => (
                 <Link key={card.title} href={isElite ? (cardLinks[card.title] || '/upgrade') : '/upgrade'} style={{ textDecoration: 'none' }}>
                   <div style={{
-                    background: 'var(--color-background-secondary)',
-                    border: '0.5px solid var(--color-border-tertiary)',
+                    background: '#fff',
+                    border: '1px solid rgba(0,0,0,0.08)',
                     borderRadius: 12, padding: 16,
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
                     opacity: isElite ? 1 : 0.85,
                     position: 'relative',
                     height: '100%',
@@ -358,7 +368,7 @@ export default async function DashboardPage() {
         return (
           <div style={{ marginBottom: 28 }}>
             <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>RECENT ACTIVITY</div>
-            <div style={{ background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, overflow: 'hidden' }}>
+            <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 12, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
               {toolUses?.map((use: { feature: string; period: string; count: number }, i: number) => (
                 <div key={`${use.feature}-${use.period}`} style={{
                   padding: '12px 16px',
@@ -398,6 +408,7 @@ export default async function DashboardPage() {
           </Link>
         </div>
       )}
+    </div>
     </div>
   )
 }

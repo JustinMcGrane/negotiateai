@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import { PageHeader } from '@/components/negotiate/PageHeader'
 
 export const metadata: Metadata = { title: 'Progress — Hayven' }
 
@@ -38,11 +39,9 @@ export default async function ProgressPage() {
   })
 
   return (
-    <div style={{ maxWidth: 860, margin: '0 auto', padding: '32px 24px 80px' }}>
-      <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 6px' }}>Progress</h1>
-      <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 28px' }}>
-        Track your negotiation performance over time.
-      </p>
+    <div>
+      <PageHeader title="Progress" description="Track your negotiation performance over time." plan={profile?.plan ?? 'free'} userInitial={(profile?.name || user.email || '?')[0].toUpperCase()} />
+    <div style={{ maxWidth: 860, margin: '0 auto', padding: '28px 24px 80px' }}>
 
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 12, marginBottom: 28 }}>
@@ -211,6 +210,7 @@ export default async function ProgressPage() {
           }}>Talk to Sarah</Link>
         </div>
       )}
+    </div>
     </div>
   )
 }
