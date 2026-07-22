@@ -89,103 +89,53 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* Hero — 2 column */}
-      <section className="landing-hero" style={{ maxWidth: 1100, margin: '0 auto', padding: '72px 40px 80px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}>
-        <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#EBF5FB', border: '1px solid #C9E2F5', borderRadius: 20, padding: '5px 14px', marginBottom: 28, fontSize: 12, fontWeight: 600, color: '#2D6EA8' }}>
-            AI-powered career platform
-          </div>
-          <h1 style={{
-            fontSize: 'clamp(36px, 4.5vw, 58px)',
-            fontWeight: 800, lineHeight: 1.1,
-            letterSpacing: '-0.03em', marginBottom: 24,
-            color: '#0f172a',
+      {/* Hero */}
+      <section style={{ maxWidth: 860, margin: '0 auto', padding: '72px 24px 88px', textAlign: 'center' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#EBF5FB', border: '1px solid #C9E2F5', borderRadius: 20, padding: '5px 14px', marginBottom: 32, fontSize: 12, fontWeight: 600, color: '#2D6EA8' }}>
+          AI-powered career platform
+        </div>
+        <h1 style={{
+          fontSize: 'clamp(40px, 6vw, 72px)',
+          fontWeight: 800, lineHeight: 1.1,
+          letterSpacing: '-0.03em', marginBottom: 28,
+          color: '#0f172a',
+        }}>
+          Land the job.<br />
+          Negotiate the offer.<br />
+          <span style={{ color: '#4A90D9' }}>Get paid what you&apos;re worth.</span>
+        </h1>
+
+        <p style={{ fontSize: 18, color: '#64748b', lineHeight: 1.75, maxWidth: 560, margin: '0 auto 40px' }}>
+          Hayven gives you an AI recruiter, resume analyzer, job search, cover letter generator, and 10 negotiation tools — everything you need to take control of your career.
+        </p>
+
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 56 }}>
+          <Link href="/signup" style={{
+            height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
+            padding: '0 30px', background: '#141414', color: '#fff',
+            borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
           }}>
-            Land the job.<br />
-            Negotiate the offer.<br />
-            <span style={{ color: '#4A90D9' }}>Get paid what you&apos;re worth.</span>
-          </h1>
-          <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 36, maxWidth: 460 }}>
-            Hayven gives you an AI recruiter, resume analyzer, job search, and 10 negotiation tools — everything you need to take control of your career.
-          </p>
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 40 }}>
-            <Link href="/signup" style={{
-              height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 28px', background: '#141414', color: '#fff',
-              borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
-            }}>
-              Start for free <ArrowRight size={15} />
-            </Link>
-            <Link href="/login" style={{
-              height: 50, display: 'inline-flex', alignItems: 'center',
-              padding: '0 24px', background: 'transparent', color: '#374151',
-              border: '1px solid #e2e8f0', borderRadius: 10, fontSize: 15, textDecoration: 'none', fontWeight: 500,
-            }}>
-              Sign in
-            </Link>
-          </div>
-          <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
-            {[
-              { stat: '15+', label: 'AI-powered tools' },
-              { stat: '$0', label: 'to get started' },
-            ].map(s => (
-              <div key={s.stat}>
-                <div style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
-                <div style={{ fontSize: 13, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
+            Start for free <ArrowRight size={15} />
+          </Link>
+          <Link href="#features" style={{
+            height: 50, display: 'inline-flex', alignItems: 'center',
+            padding: '0 26px', background: 'transparent', color: '#374151',
+            border: '1px solid #d1d5db', borderRadius: 10, fontSize: 15, textDecoration: 'none', fontWeight: 500,
+          }}>
+            See what&apos;s inside
+          </Link>
         </div>
 
-        {/* Product mockup — Sarah chat */}
-        <div className="landing-hero-mockup" style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 20, overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', position: 'relative' }}>
-          {/* Chat header */}
-          <div style={{ padding: '16px 20px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 12, background: '#fafbfc' }}>
-            <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#2D6EA8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <span style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>S</span>
+        <div style={{ display: 'flex', gap: 48, justifyContent: 'center', flexWrap: 'wrap' }}>
+          {[
+            { stat: '15+', label: 'AI-powered career tools' },
+            { stat: '100%', label: 'free to start' },
+          ].map(s => (
+            <div key={s.stat} style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
+              <div style={{ fontSize: 13, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
             </div>
-            <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Sarah</div>
-              <div style={{ fontSize: 11, color: '#10b981', fontWeight: 600 }}>● Online</div>
-            </div>
-          </div>
-          {/* Messages */}
-          <div style={{ padding: '20px 20px 12px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <div style={{ maxWidth: '85%', background: '#f8fafc', border: '1px solid #f1f5f9', borderRadius: '4px 12px 12px 12px', padding: '10px 14px', fontSize: 13, lineHeight: 1.6, color: '#0f172a' }}>
-              Hi! I looked at your resume — your experience bullets don&apos;t show impact. Hiring managers see 200 resumes a day. Numbers get attention. Let&apos;s fix that.
-            </div>
-            <div style={{ maxWidth: '85%', alignSelf: 'flex-end', background: '#4A90D9', borderRadius: '12px 4px 12px 12px', padding: '10px 14px', fontSize: 13, lineHeight: 1.6, color: '#fff' }}>
-              What should I change first?
-            </div>
-            <div style={{ maxWidth: '85%', background: '#f8fafc', border: '1px solid #f1f5f9', borderRadius: '4px 12px 12px 12px', padding: '10px 14px', fontSize: 13, lineHeight: 1.6, color: '#0f172a' }}>
-              Start with your last two roles. For each bullet, ask: what changed, and by how much? Even rough numbers like 20% or $50K work.
-            </div>
-          </div>
-          {/* Compensation card */}
-          <div style={{ margin: '0 16px 16px', background: '#EBF5FB', border: '1px solid #C9E2F5', borderRadius: 12, padding: '14px 16px' }}>
-            <div style={{ fontSize: 11, color: '#2D6EA8', fontWeight: 600, letterSpacing: '0.05em', marginBottom: 10 }}>YOUR MARKET ANALYSIS</div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-              {[
-                { label: 'Your offer', value: '$158K', color: '#ef4444' },
-                { label: 'Market rate', value: '$185K', color: '#4A90D9' },
-                { label: 'Gap', value: '$27K', color: '#0f172a' },
-              ].map(({ label, value, color }) => (
-                <div key={label} style={{ background: '#fff', borderRadius: 8, padding: '10px 8px', textAlign: 'center' }}>
-                  <div style={{ fontSize: 10, color: '#94a3b8', marginBottom: 4 }}>{label}</div>
-                  <div style={{ fontSize: 16, fontWeight: 800, color, letterSpacing: '-0.02em' }}>{value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* Input bar */}
-          <div style={{ padding: '0 16px 16px' }}>
-            <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: '10px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <span style={{ fontSize: 13, color: '#94a3b8' }}>Ask Sarah anything...</span>
-              <div style={{ width: 28, height: 28, background: '#4A90D9', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <ArrowRight size={13} color="#fff" />
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
