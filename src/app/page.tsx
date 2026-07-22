@@ -65,26 +65,26 @@ export default function LandingPage() {
 
       {/* Header */}
       <header style={{
-        borderBottom: '1px solid #f1f5f9',
-        padding: '0 40px', height: 64,
+        borderBottom: '0.5px solid #e5e7eb',
+        padding: '0 32px', height: 60,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         position: 'sticky', top: 0, background: '#fff', zIndex: 50,
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image src="/logo.svg" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
+          <Image src="/logo.svg" alt="Hayven" width={190} height={52} style={{ objectFit: 'contain' }} priority />
         </Link>
         <LandingNav />
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#64748b', textDecoration: 'none', padding: '8px 16px', fontWeight: 500 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
             Sign in
           </Link>
           <Link href="/signup" style={{
             fontSize: 14, fontWeight: 600,
-            background: '#2D6EA8', color: '#fff',
-            textDecoration: 'none', padding: '9px 20px', borderRadius: 9,
+            background: '#141414', color: '#fff',
+            textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
             display: 'flex', alignItems: 'center', gap: 6,
           }}>
-            Get started free
+            Get started free <ArrowRight size={14} />
           </Link>
         </div>
       </header>
@@ -111,7 +111,7 @@ export default function LandingPage() {
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 40 }}>
             <Link href="/signup" style={{
               height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 28px', background: '#2D6EA8', color: '#fff',
+              padding: '0 28px', background: '#141414', color: '#fff',
               borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
             }}>
               Start for free <ArrowRight size={15} />
@@ -141,7 +141,7 @@ export default function LandingPage() {
         <div className="landing-hero-mockup" style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 20, overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', position: 'relative' }}>
           {/* Chat header */}
           <div style={{ padding: '16px 20px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 12, background: '#fafbfc' }}>
-            <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#2D6EA8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <span style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>S</span>
             </div>
             <div>
@@ -181,7 +181,7 @@ export default function LandingPage() {
           <div style={{ padding: '0 16px 16px' }}>
             <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: '10px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <span style={{ fontSize: 13, color: '#94a3b8' }}>Ask Sarah anything...</span>
-              <div style={{ width: 28, height: 28, background: '#2D6EA8', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: 28, height: 28, background: '#4A90D9', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <ArrowRight size={13} color="#fff" />
               </div>
             </div>
