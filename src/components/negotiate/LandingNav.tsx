@@ -38,7 +38,7 @@ function Dropdown({ label, items }: { label: string; items: { label: string; hre
     <div ref={ref} style={{ position: 'relative' }}>
       <button
         onClick={() => setOpen(!open)}
-        style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 14, fontWeight: 500, color: '#374151', background: 'none', border: 'none', cursor: 'pointer', padding: '7px 10px', borderRadius: 6 }}
+        style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 14, fontWeight: 500, color: open ? '#4A90D9' : '#374151', background: 'none', border: 'none', cursor: 'pointer', padding: '7px 10px', borderRadius: 6 }}
       >
         {label} <ChevronDown size={14} style={{ transition: 'transform 0.15s', transform: open ? 'rotate(180deg)' : 'none' }} />
       </button>
@@ -55,8 +55,8 @@ function Dropdown({ label, items }: { label: string; items: { label: string; hre
               href={item.href}
               onClick={() => setOpen(false)}
               style={{ display: 'block', padding: '8px 16px', fontSize: 13, color: '#374151', textDecoration: 'none' }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#f9fafb')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+              onMouseEnter={e => { e.currentTarget.style.background = '#EBF5FB'; e.currentTarget.style.color = '#4A90D9' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#374151' }}
             >
               {item.label}
             </Link>
@@ -70,16 +70,17 @@ function Dropdown({ label, items }: { label: string; items: { label: string; hre
 export function LandingNav() {
   return (
     <nav style={{ display: 'flex', alignItems: 'center', gap: 4 }} className="landing-nav">
-      <Link href="/resume-builder" style={{ fontSize: 14, fontWeight: 500, color: '#374151', textDecoration: 'none', padding: '7px 10px', borderRadius: 6 }}>
+      <Link href="/resume-builder" className="landing-nav-link" style={{ fontSize: 14, fontWeight: 500, color: '#374151', textDecoration: 'none', padding: '7px 10px', borderRadius: 6 }}>
         AI Resume Builder
       </Link>
-      <Link href="/job-tracker" style={{ fontSize: 14, fontWeight: 500, color: '#374151', textDecoration: 'none', padding: '7px 10px', borderRadius: 6 }}>
+      <Link href="/job-tracker" className="landing-nav-link" style={{ fontSize: 14, fontWeight: 500, color: '#374151', textDecoration: 'none', padding: '7px 10px', borderRadius: 6 }}>
         Job Tracker
       </Link>
       <Dropdown label="Tools" items={TOOLS} />
       <Dropdown label="Resources" items={RESOURCES} />
       <style>{`
         @media (max-width: 767px) { .landing-nav { display: none !important; } }
+        .landing-nav-link:hover { color: #4A90D9 !important; }
       `}</style>
     </nav>
   )
