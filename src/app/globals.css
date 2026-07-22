@@ -85,6 +85,13 @@ input:focus, select:focus, textarea:focus { outline: none; }
   transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
 }
 
+/* Landing page responsive */
+@media (max-width: 768px) {
+  .landing-hero { grid-template-columns: 1fr !important; }
+  .landing-sarah { grid-template-columns: 1fr !important; }
+  .landing-hero-mockup { display: none !important; }
+}
+
 @media print {
   .no-print { display: none !important; }
   .print-only { display: block !important; }
