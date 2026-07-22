@@ -85,10 +85,10 @@ export default async function DashboardPage() {
     .limit(5)
 
   const { data: toolUses } = await supabase
-    .from('tool_uses')
+    .from('usage_tracking')
     .select('*')
     .eq('user_id', user.id)
-    .order('created_at', { ascending: false })
+    .order('period', { ascending: false })
     .limit(5)
 
   const firstName = (profile?.name || user.email || 'there').split(' ')[0]
@@ -359,15 +359,15 @@ export default async function DashboardPage() {
           <div style={{ marginBottom: 28 }}>
             <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>RECENT ACTIVITY</div>
             <div style={{ background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, overflow: 'hidden' }}>
-              {toolUses?.map((use: { id: string; tool_id: string; created_at: string }, i: number) => (
-                <div key={use.id} style={{
+              {toolUses?.map((use: { feature: string; period: string; count: number }, i: number) => (
+                <div key={`${use.feature}-${use.period}`} style={{
                   padding: '12px 16px',
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                   borderBottom: i < (toolUses.length - 1) ? '0.5px solid var(--color-border-tertiary)' : 'none',
                 }}>
-                  <div style={{ fontSize: 13 }}>{toolNames[use.tool_id] ?? use.tool_id}</div>
+                  <div style={{ fontSize: 13 }}>{toolNames[use.feature] ?? use.feature}</div>
                   <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)' }}>
-                    {new Date(use.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                    {use.count} {use.count === 1 ? 'use' : 'uses'} · {use.period}
                   </div>
                 </div>
               ))}

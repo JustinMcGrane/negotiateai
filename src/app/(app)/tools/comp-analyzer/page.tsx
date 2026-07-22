@@ -71,7 +71,7 @@ export default function CompAnalyzer() {
         </button>
       </form>
 
-      {error && <div style={{ marginTop: 16, fontSize: 13, color: 'var(--color-danger)', background: '#FDF2F2', padding: '10px 14px', borderRadius: 8 }}>{error} <button onClick={submit as never} style={{ marginLeft: 8, background: 'none', border: 'none', color: 'var(--color-danger)', textDecoration: 'underline', fontSize: 13 }}>Retry</button></div>}
+      {error && <div style={{ marginTop: 16, fontSize: 13, color: 'var(--color-danger)', background: '#FDF2F2', padding: '10px 14px', borderRadius: 8 }}>{error} <button onClick={() => submit({ preventDefault: () => {} } as React.FormEvent)} style={{ marginLeft: 8, background: 'none', border: 'none', color: 'var(--color-danger)', textDecoration: 'underline', fontSize: 13, cursor: 'pointer' }}>Retry</button></div>}
 
       {loading && !result && (
         <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 10 }}>

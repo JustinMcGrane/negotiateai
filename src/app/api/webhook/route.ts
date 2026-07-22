@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     let plan: string
     if (isReport) {
       plan = 'report'
-    } else if (session.metadata?.priceId === process.env.NEXT_PUBLIC_STRIPE_ELITE_PRICE_ID) {
+    } else if (session.metadata?.priceId === process.env.STRIPE_ELITE_PRICE_ID) {
       plan = 'elite'
     } else {
       plan = 'pro'

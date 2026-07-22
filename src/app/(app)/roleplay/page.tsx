@@ -29,6 +29,8 @@ export default function RoleplayPage() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [turnCount, setTurnCount] = useState(0)
+  const [debriefFeedback, setDebriefFeedback] = useState<{ strengths: string; improvements: string; verdict: string } | null>(null)
+  const [debriefLoading, setDebriefLoading] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -278,7 +280,28 @@ export default function RoleplayPage() {
             </div>
             <div style={{ display: 'flex', gap: 8 }}>
               <button
-                onClick={() => setStage('debrief')}
+                onClick={async () => {
+                  setStage('debrief')
+                  setDebriefLoading(true)
+                  try {
+                    const transcript = messages.map(m => `${m.role === 'user' ? 'Candidate' : character?.name ?? 'Interviewer'}: ${m.content}`).join('\n')
+                    const res = await fetch('/api/negotiate', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        systemPrompt: 'You are a negotiation coach giving feedback on a practice session. Return ONLY valid JSON, no markdown.',
+                        messages: [{
+                          role: 'user',
+                          content: `Review this negotiation practice transcript and give feedback.\n\nScenario: ${scenario}\nCharacter: ${character?.name} (${character?.role})\n\nTranscript:\n${transcript}\n\nReturn JSON: {"strengths": "2-3 sentences on what they did well", "improvements": "2-3 sentences on specific things to improve", "verdict": "one sentence overall assessment"}`
+                        }]
+                      })
+                    })
+                    const data = await res.json()
+                    const match = data.reply?.match(/\{[\s\S]*\}/)
+                    if (match) setDebriefFeedback(JSON.parse(match[0]))
+                  } catch {}
+                  setDebriefLoading(false)
+                }}
                 style={{
                   display: 'flex', alignItems: 'center', gap: 5,
                   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -453,16 +476,39 @@ export default function RoleplayPage() {
           )}
         </div>
 
-        <div style={{
-          background: 'var(--color-background-secondary)',
-          border: '0.5px solid var(--color-border-tertiary)',
-          borderRadius: 12, padding: 20, marginBottom: 24,
-        }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-tertiary)', marginBottom: 12, letterSpacing: '0.04em' }}>WHAT TO WORK ON NEXT</div>
-          <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>
-            Review your responses and consider: Did you anchor confidently? Did you avoid giving a number first? Did you use your leverage? Practice again to sharpen your delivery.
+        {debriefLoading && (
+          <div style={{ background: 'var(--color-background-secondary)', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 20, marginBottom: 24 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-tertiary)', marginBottom: 12, letterSpacing: '0.04em' }}>ANALYZING YOUR SESSION…</div>
+            <div className="skeleton" style={{ height: 16, marginBottom: 8 }} />
+            <div className="skeleton" style={{ height: 16, width: '80%' }} />
           </div>
-        </div>
+        )}
+
+        {debriefFeedback && !debriefLoading && (
+          <>
+            <div style={{ background: 'var(--color-background-secondary)', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 20, marginBottom: 12 }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: '#16a34a', marginBottom: 8, letterSpacing: '0.04em' }}>WHAT YOU DID WELL</div>
+              <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>{debriefFeedback.strengths}</div>
+            </div>
+            <div style={{ background: 'var(--color-background-secondary)', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 20, marginBottom: 12 }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 8, letterSpacing: '0.04em' }}>WHAT TO WORK ON</div>
+              <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>{debriefFeedback.improvements}</div>
+            </div>
+            <div style={{ background: 'var(--color-background-secondary)', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 20, marginBottom: 24 }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-tertiary)', marginBottom: 8, letterSpacing: '0.04em' }}>OVERALL</div>
+              <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>{debriefFeedback.verdict}</div>
+            </div>
+          </>
+        )}
+
+        {!debriefFeedback && !debriefLoading && (
+          <div style={{ background: 'var(--color-background-secondary)', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 20, marginBottom: 24 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-tertiary)', marginBottom: 12, letterSpacing: '0.04em' }}>WHAT TO WORK ON NEXT</div>
+            <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>
+              Review your responses and consider: Did you anchor confidently? Did you avoid giving a number first? Did you use your leverage? Practice again to sharpen your delivery.
+            </div>
+          </div>
+        )}
 
         <div style={{ display: 'flex', gap: 10 }}>
           <button
