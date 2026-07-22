@@ -220,17 +220,25 @@ export default function LandingPage() {
               From finding the right roles to submitting a polished application — all in one place.
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
-            {careerFeatures.map(({ icon: Icon, color, bg, name, desc }) => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(420px, 1fr))', gap: '4px 40px' }}>
+            {careerFeatures.map(({ icon: Icon, color, name, desc }) => (
               <div key={name} style={{
-                background: '#fff', border: '1px solid #e2e8f0',
-                borderRadius: 14, padding: '24px 26px',
+                display: 'flex', gap: 24, alignItems: 'flex-start',
+                padding: '28px 0',
+                borderBottom: '1px solid #f1f5f9',
               }}>
-                <div style={{ width: 40, height: 40, background: bg, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
-                  <Icon size={18} color={color} />
+                <div style={{
+                  width: 64, height: 64, borderRadius: '50%',
+                  background: '#f1f5f9',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0,
+                }}>
+                  <Icon size={26} color={color} />
                 </div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>{name}</div>
-                <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.65 }}>{desc}</div>
+                <div style={{ paddingTop: 6 }}>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>{name}</div>
+                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{desc}</div>
+                </div>
               </div>
             ))}
           </div>
@@ -300,19 +308,24 @@ export default function LandingPage() {
               10 tools to know your market rate, build your strategy, and practice until you&apos;re ready.
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(420px, 1fr))', gap: '4px 40px' }}>
             {negotiationTools.map(({ icon: Icon, name, desc }) => (
               <div key={name} style={{
-                background: '#fff', border: '1px solid #e2e8f0',
-                borderRadius: 12, padding: '18px 20px',
-                display: 'flex', gap: 14, alignItems: 'flex-start',
+                display: 'flex', gap: 24, alignItems: 'flex-start',
+                padding: '28px 0',
+                borderBottom: '1px solid #e9eef4',
               }}>
-                <div style={{ width: 36, height: 36, background: '#eff6ff', borderRadius: 9, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Icon size={16} color="#2563eb" />
+                <div style={{
+                  width: 64, height: 64, borderRadius: '50%',
+                  background: '#eef2f7',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0,
+                }}>
+                  <Icon size={26} color="#475569" />
                 </div>
-                <div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>{name}</div>
-                  <div style={{ fontSize: 12, color: '#64748b', lineHeight: 1.55 }}>{desc}</div>
+                <div style={{ paddingTop: 6 }}>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>{name}</div>
+                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{desc}</div>
                 </div>
               </div>
             ))}
