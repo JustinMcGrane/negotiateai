@@ -116,7 +116,7 @@ export default function LandingPage() {
             padding: '0 24px', background: 'transparent', color: '#374151',
             border: '1px solid #d1d5db', borderRadius: 10, fontSize: 15, textDecoration: 'none',
           }}>
-            See what’s inside
+            See what's inside
           </Link>
         </div>
 
@@ -283,12 +283,12 @@ export default function LandingPage() {
       {/* Negotiation tools */}
       <section style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <div style={{ textAlign: ‘center’, marginBottom: 48 }}>
-            <h2 style={{ fontSize: ‘clamp(22px, 4vw, 34px)’, fontWeight: 800, color: ‘#0f172a’, letterSpacing: ‘-0.02em’, margin: ‘0 0 14px’ }}>
-              Get paid what you’re worth
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <h2 style={{ fontSize: 'clamp(22px, 4vw, 34px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', margin: '0 0 14px' }}>
+              Get paid what you&apos;re worth
             </h2>
             <p style={{ fontSize: 15, color: '#64748b', maxWidth: 500, margin: '0 auto' }}>
-              10 tools to help you know your market rate, build your strategy, and practice until you’re ready.
+              10 tools to help you know your market rate, build your strategy, and practice until you're ready.
             </p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
