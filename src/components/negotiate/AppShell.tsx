@@ -4,11 +4,11 @@ import { MobileNav } from './MobileNav'
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ display: 'flex', height: '100dvh', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', height: '100dvh', overflow: 'hidden', background: '#f8fafc' }}>
       <div className="hidden md:flex">
         <Sidebar />
       </div>
-      <main style={{ flex: 1, minWidth: 0, overflowX: 'hidden', overflowY: 'auto', paddingBottom: 'var(--mobile-nav-height, 0)' }} className="mobile-main">
+      <main style={{ flex: 1, minWidth: 0, overflowX: 'hidden', overflowY: 'auto', paddingBottom: 'var(--mobile-nav-height, 0)', background: '#f8fafc' }} className="mobile-main">
         {children}
       </main>
       <div className="md:hidden">

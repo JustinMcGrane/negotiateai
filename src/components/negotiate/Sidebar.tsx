@@ -86,25 +86,26 @@ export function Sidebar() {
     <aside
       className="no-print"
       style={{
-        width: 220,
+        width: 224,
         minHeight: '100vh',
-        background: 'var(--color-background-secondary)',
-        borderRight: '0.5px solid var(--color-border-tertiary)',
+        background: '#0f172a',
+        borderRight: 'none',
         display: 'flex',
         flexDirection: 'column',
         flexShrink: 0,
       }}
     >
+      {/* Logo */}
       <div style={{
         padding: '20px 16px 18px',
-        borderBottom: '0.5px solid var(--color-border-tertiary)',
+        borderBottom: '1px solid rgba(255,255,255,0.07)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}>
         <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Image
-            src="/logo.svg"
+            src="/logo-light.svg"
             alt="Hayven"
             width={180}
             height={52}
@@ -114,6 +115,7 @@ export function Sidebar() {
         </Link>
       </div>
 
+      {/* Nav */}
       <nav style={{ flex: 1, padding: '10px 0', overflowY: 'auto' }}>
         {nav.map((item) => {
           if ('href' in item) {
@@ -121,13 +123,15 @@ export function Sidebar() {
             const Icon = item.icon
             return (
               <Link key={item.href} href={item.href} style={{
-                display: 'flex', alignItems: 'center', gap: 8,
-                padding: '7px 16px', fontSize: 13,
-                color: active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-                background: active ? 'rgba(0,0,0,0.05)' : 'transparent',
+                display: 'flex', alignItems: 'center', gap: 9,
+                padding: '7px 12px', fontSize: 13,
+                color: active ? '#fff' : 'rgba(255,255,255,0.5)',
+                background: active ? 'rgba(255,255,255,0.08)' : 'transparent',
                 textDecoration: 'none',
-                borderRadius: 6,
-                margin: '0 6px',
+                borderRadius: 7,
+                margin: '0 8px',
+                fontWeight: active ? 500 : 400,
+                transition: 'background 0.15s, color 0.15s',
               }}>
                 <Icon size={15} />
                 {item.label}
@@ -136,7 +140,13 @@ export function Sidebar() {
           }
           return (
             <div key={item.label}>
-              <div style={{ padding: '12px 16px 4px', fontSize: 11, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>
+              <div style={{
+                padding: '14px 20px 5px',
+                fontSize: 10,
+                color: 'rgba(255,255,255,0.3)',
+                letterSpacing: '0.08em',
+                fontWeight: 600,
+              }}>
                 {item.label.toUpperCase()}
               </div>
               {item.items.map((sub) => {
@@ -144,13 +154,15 @@ export function Sidebar() {
                 const SubIcon = sub.icon
                 return (
                   <Link key={sub.href} href={sub.href} style={{
-                    display: 'flex', alignItems: 'center', gap: 8,
-                    padding: '6px 16px', fontSize: 13,
-                    color: active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-                    background: active ? 'rgba(0,0,0,0.05)' : 'transparent',
+                    display: 'flex', alignItems: 'center', gap: 9,
+                    padding: '6px 12px', fontSize: 13,
+                    color: active ? '#fff' : 'rgba(255,255,255,0.5)',
+                    background: active ? 'rgba(255,255,255,0.08)' : 'transparent',
                     textDecoration: 'none',
-                    borderRadius: 6,
-                    margin: '0 6px',
+                    borderRadius: 7,
+                    margin: '0 8px',
+                    fontWeight: active ? 500 : 400,
+                    transition: 'background 0.15s, color 0.15s',
                   }}>
                     <SubIcon size={14} />
                     {sub.label}
@@ -162,12 +174,25 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div style={{ padding: 12, borderTop: '0.5px solid var(--color-border-tertiary)', display: 'flex', flexDirection: 'column', gap: 8 }}>
+      {/* Footer */}
+      <div style={{
+        padding: '12px 10px',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 6,
+      }}>
         {plan !== 'elite' && (
           <Link href="/account/billing" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            background: '#141414', color: '#fff', borderRadius: 8,
-            padding: '8px 12px', fontSize: 12, textDecoration: 'none',
+            background: 'rgba(255,255,255,0.1)',
+            color: '#fff',
+            borderRadius: 8,
+            padding: '8px 12px',
+            fontSize: 12,
+            fontWeight: 500,
+            textDecoration: 'none',
+            border: '1px solid rgba(255,255,255,0.12)',
           }}>
             {plan === 'pro' ? 'Upgrade to Elite' : 'Upgrade to Pro'}
             <ChevronRight size={14} />
@@ -176,9 +201,8 @@ export function Sidebar() {
         <Link href="/" style={{
           display: 'flex', alignItems: 'center', gap: 6,
           padding: '6px 8px', fontSize: 12,
-          color: 'var(--color-text-tertiary)',
+          color: 'rgba(255,255,255,0.3)',
           textDecoration: 'none', borderRadius: 6,
-          transition: 'color 0.15s',
         }}>
           <ArrowUpLeft size={13} />
           Back to website
