@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Search, MapPin, Building, ExternalLink, DollarSign, Clock, Bookmark, ChevronDown, ChevronUp } from 'lucide-react'
+import { ClientPageHeader } from '@/components/negotiate/ClientPageHeader'
 
 type Job = {
   title: string
@@ -230,6 +231,8 @@ export default function JobsPage() {
   const orderedJobs = [...savedJobs, ...unsavedJobs]
 
   return (
+    <div>
+      <ClientPageHeader title="Job Search" description="Find roles that match your target" />
     <div style={{ maxWidth: 860, margin: '0 auto', padding: '32px 24px' }}>
       <div style={{ marginBottom: 24 }}>
         <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0 }}>Job Search</h1>
@@ -339,6 +342,7 @@ export default function JobsPage() {
           </div>
         </div>
       )}
+    </div>
     </div>
   )
 }

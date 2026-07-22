@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Hayven <hello@negotiateai.com>',
+        from: process.env.RESEND_FROM_EMAIL ?? 'Hayven <hello@negotiateai.com>',
         to: email,
         subject: `${inviterName} invited you to Hayven`,
         html,

@@ -1,6 +1,6 @@
 import { Resend } from 'resend'
 
-const FROM = 'Hayven <hello@negotiateai.com>'
+const FROM = process.env.RESEND_FROM_EMAIL ?? 'Hayven <hello@negotiateai.com>'
 function getResend() { return new Resend(process.env.RESEND_API_KEY) }
 
 export async function sendCheckinReminder(to: string, firstName: string) {
@@ -17,11 +17,11 @@ export async function sendCheckinReminder(to: string, firstName: string) {
         <p style="font-size: 15px; line-height: 1.6; margin: 0 0 24px; color: #475569;">
           Sarah is ready to reassess where you stand and tell you what has changed in your market.
         </p>
-        <a href="https://negotiateai.com/recruiter?checkin=true" style="display: inline-block; background: #141414; color: #fff; padding: 12px 24px; border-radius: 9px; font-size: 14px; font-weight: 600; text-decoration: none;">
+        <a href="${process.env.NEXT_PUBLIC_APP_URL ?? 'https://gethayven.com'}/recruiter?checkin=true" style="display: inline-block; background: #141414; color: #fff; padding: 12px 24px; border-radius: 9px; font-size: 14px; font-weight: 600; text-decoration: none;">
           Start your check-in →
         </a>
         <p style="font-size: 13px; color: #94a3b8; margin: 32px 0 0;">
-          You are receiving this because you are a Hayven member. <a href="https://negotiateai.com/settings" style="color: #94a3b8;">Manage preferences</a>
+          You are receiving this because you are a Hayven member. <a href="${process.env.NEXT_PUBLIC_APP_URL ?? 'https://gethayven.com'}/account" style="color: #94a3b8;">Manage preferences</a>
         </p>
       </div>
     `,
@@ -40,11 +40,11 @@ export async function sendMarketAlert(to: string, firstName: string, role: strin
         <div style="background: #f8fafc; border-left: 3px solid #6366f1; padding: 16px 20px; border-radius: 0 8px 8px 0; margin-bottom: 24px;">
           <p style="font-size: 15px; line-height: 1.6; margin: 0; color: #334155;">${alert}</p>
         </div>
-        <a href="https://negotiateai.com/dashboard" style="display: inline-block; background: #141414; color: #fff; padding: 12px 24px; border-radius: 9px; font-size: 14px; font-weight: 600; text-decoration: none;">
+        <a href="${process.env.NEXT_PUBLIC_APP_URL ?? 'https://gethayven.com'}/dashboard" style="display: inline-block; background: #141414; color: #fff; padding: 12px 24px; border-radius: 9px; font-size: 14px; font-weight: 600; text-decoration: none;">
           View your dashboard →
         </a>
         <p style="font-size: 13px; color: #94a3b8; margin: 32px 0 0;">
-          You are receiving this because you have market alerts enabled. <a href="https://negotiateai.com/settings" style="color: #94a3b8;">Manage preferences</a>
+          You are receiving this because you have market alerts enabled. <a href="${process.env.NEXT_PUBLIC_APP_URL ?? 'https://gethayven.com'}/account" style="color: #94a3b8;">Manage preferences</a>
         </p>
       </div>
     `,

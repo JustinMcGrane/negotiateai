@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Hayven — Get paid what you\'re worth',
     description: 'AI recruiter, resume analyzer, job search, and salary negotiation. Land the job and the offer you deserve.',
-    url: 'https://negotiateai.com',
+    url: process.env.NEXT_PUBLIC_APP_URL ?? 'https://gethayven.com',
     type: 'website',
   },
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { CheckCircle, LogOut } from 'lucide-react'
+import { ClientPageHeader } from '@/components/negotiate/ClientPageHeader'
 
 export default function AccountPage() {
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
@@ -102,6 +103,8 @@ export default function AccountPage() {
   )
 
   return (
+    <div>
+      <ClientPageHeader title="Account" />
     <div style={{ maxWidth: 580, margin: '0 auto', padding: '32px 24px 80px' }}>
       <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 28px' }}>Account</h1>
 
@@ -313,6 +316,7 @@ export default function AccountPage() {
           </button>
         )}
       </div>
+    </div>
     </div>
   )
 }

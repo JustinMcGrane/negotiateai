@@ -39,6 +39,8 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/report') ||
     pathname.startsWith('/jobs') ||
     pathname.startsWith('/tracker') ||
+    pathname.startsWith('/roleplay') ||
+    pathname.startsWith('/live-coach') ||
     pathname.startsWith('/onboarding')
 
   if (!user && isProtected) {

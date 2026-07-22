@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Sparkles, CheckCircle, AlertCircle, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react'
+import { ClientPageHeader } from '@/components/negotiate/ClientPageHeader'
 
 type SectionScore = { name: string; score: number; feedback: string }
 type BulletRewrite = { original: string; rewritten: string; reason: string }
@@ -150,6 +151,8 @@ export default function ResumePage() {
   }
 
   return (
+    <div>
+      <ClientPageHeader title="Resume Analyzer" description="Recruiter-grade feedback and ATS scoring" />
     <div style={{ maxWidth: 820, margin: '0 auto', padding: '32px 24px 80px' }}>
       <div style={{ marginBottom: 28 }}>
         <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Resume Analyzer</h1>
@@ -378,6 +381,7 @@ export default function ResumePage() {
           </div>
         </div>
       )}
+    </div>
     </div>
   )
 }
