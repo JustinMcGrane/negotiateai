@@ -35,7 +35,7 @@ export default function CounterOfferBuilderPage() {
 
       <section style={{ maxWidth: 900, margin: '0 auto', padding: '56px 24px 72px', textAlign: 'center' }}>
         <h1 style={{ fontSize: 'clamp(36px, 6.5vw, 76px)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: 24, color: '#0f172a', whiteSpace: 'nowrap' }}>
-          Build your counter-offer<br /><span style={{ color: '#2563eb' }}>in minutes, not days.</span>
+          Build your counter-offer<br /><span style={{ color: '#4A90D9' }}>in minutes, not days.</span>
         </h1>
         <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.7, maxWidth: 560, margin: '0 auto 40px' }}>
           Get the exact words to say, the number to ask for, and the reasoning to back it up — so you walk in prepared, not panicked.

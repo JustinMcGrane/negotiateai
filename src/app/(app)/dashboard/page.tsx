@@ -268,8 +268,8 @@ export default async function DashboardPage() {
         <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>NEGOTIATION TOOLS</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
           {[
-            { href: '/tools/comp-analyzer', icon: TrendingUp, color: '#2563eb', bg: '#dbeafe', name: 'Compensation analyzer', desc: 'See your market rate' },
-            { href: '/tools/offer-evaluator', icon: FileSearch, color: '#2563eb', bg: '#dbeafe', name: 'Offer evaluator', desc: 'Score any job offer 0–100' },
+            { href: '/tools/comp-analyzer', icon: TrendingUp, color: '#4A90D9', bg: '#EBF5FB', name: 'Compensation analyzer', desc: 'See your market rate' },
+            { href: '/tools/offer-evaluator', icon: FileSearch, color: '#4A90D9', bg: '#EBF5FB', name: 'Offer evaluator', desc: 'Score any job offer 0–100' },
             { href: '/tools/simulator', icon: Play, color: '#6366f1', bg: '#eef2ff', name: 'Negotiation simulator', desc: 'Practice with an AI recruiter' },
           ].map((t) => (
             <Link key={t.href} href={t.href} className="portal-card" style={{

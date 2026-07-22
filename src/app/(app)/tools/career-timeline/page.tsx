@@ -109,9 +109,9 @@ export default function CareerTimelinePage() {
             </div>
           </div>
 
-          <div style={{ background: '#eff6ff', borderRadius: 10, padding: 16, marginBottom: 16 }}>
-            <div style={{ fontSize: 11, color: '#1e40af', fontWeight: 600, marginBottom: 6 }}>SALARY GROWTH PROJECTION</div>
-            <p style={{ fontSize: 13, color: '#1e40af', margin: 0, lineHeight: 1.6 }}>{result.salaryGrowth}</p>
+          <div style={{ background: '#EBF5FB', borderRadius: 10, padding: 16, marginBottom: 16 }}>
+            <div style={{ fontSize: 11, color: '#2D6EA8', fontWeight: 600, marginBottom: 6 }}>SALARY GROWTH PROJECTION</div>
+            <p style={{ fontSize: 13, color: '#2D6EA8', margin: 0, lineHeight: 1.6 }}>{result.salaryGrowth}</p>
           </div>
 
           <div style={{ marginBottom: 16 }}>

@@ -38,7 +38,7 @@ export function CookieConsent({ onConsent }: { onConsent: (granted: boolean) => 
     }}>
       <p style={{ margin: 0, fontSize: 13, color: '#475569', maxWidth: 600 }}>
         We use cookies and tracking technologies to improve your experience and measure performance.
-        See our <a href="/privacy" style={{ color: '#2563eb', textDecoration: 'none' }}>Privacy Policy</a>.
+        See our <a href="/privacy" style={{ color: '#4A90D9', textDecoration: 'none' }}>Privacy Policy</a>.
       </p>
       <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
         <button onClick={decline} style={{

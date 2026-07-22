@@ -72,7 +72,7 @@ export default function ResumeBuilderPage() {
           whiteSpace: 'nowrap',
         }}>
           Your resume, reviewed<br />
-          <span style={{ color: '#2563eb' }}>the way recruiters see it.</span>
+          <span style={{ color: '#4A90D9' }}>the way recruiters see it.</span>
         </h1>
 
         <p style={{

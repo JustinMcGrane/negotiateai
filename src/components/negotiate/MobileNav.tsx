@@ -16,8 +16,8 @@ export function MobileNav() {
   return (
     <nav style={{
       position: 'fixed', bottom: 0, left: 0, right: 0,
-      background: '#DBEAFE',
-      borderTop: '1px solid #BFDBFE',
+      background: '#EBF5FB',
+      borderTop: '1px solid #C9E2F5',
       display: 'flex', zIndex: 50,
       paddingBottom: 'env(safe-area-inset-bottom)',
       boxShadow: '0 -2px 12px rgba(37,99,235,0.08)',
@@ -28,7 +28,7 @@ export function MobileNav() {
           <Link key={item.href} href={item.href} style={{
             flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center',
             padding: '10px 4px 8px', gap: 4, textDecoration: 'none',
-            color: active ? '#1e3a8a' : '#60a5fa',
+            color: active ? '#2D6EA8' : '#7AB8E8',
             fontSize: 10, fontWeight: active ? 700 : 400,
             transition: 'color 0.15s',
           }}>

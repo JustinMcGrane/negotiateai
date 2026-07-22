@@ -10,9 +10,9 @@ interface Props {
 
 const planConfig: Record<string, { label: string; bg: string; color: string }> = {
   elite:  { label: 'Elite',  bg: '#ede9fe', color: '#6d28d9' },
-  pro:    { label: 'Pro',    bg: '#dbeafe', color: '#1d4ed8' },
+  pro:    { label: 'Pro',    bg: '#EBF5FB', color: '#2D6EA8' },
   free:   { label: 'Free',   bg: '#f1f5f9', color: '#64748b' },
-  report: { label: 'Report', bg: '#dbeafe', color: '#1d4ed8' },
+  report: { label: 'Report', bg: '#EBF5FB', color: '#2D6EA8' },
 }
 
 export function PageHeader({ title, description, userInitial, plan = 'free' }: Props) {
@@ -55,7 +55,7 @@ export function PageHeader({ title, description, userInitial, plan = 'free' }: P
         <Link href="/account" style={{ textDecoration: 'none' }}>
           <div style={{
             width: 32, height: 32, borderRadius: '50%',
-            background: '#1e3a8a',
+            background: '#2D6EA8',
             color: '#fff',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 13, fontWeight: 700,

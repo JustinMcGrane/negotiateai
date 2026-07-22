@@ -72,7 +72,7 @@ export default function JobTrackerPage() {
           whiteSpace: 'nowrap',
         }}>
           Your job search,<br />
-          <span style={{ color: '#2563eb' }}>finally under control.</span>
+          <span style={{ color: '#4A90D9' }}>finally under control.</span>
         </h1>
 
         <p style={{

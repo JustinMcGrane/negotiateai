@@ -67,12 +67,12 @@ textarea { resize: vertical; }
 }
 
 input:focus, select:focus, textarea:focus { outline: none; }
-::selection { background: #BFDBFE; color: #1e3a8a; }
+::selection { background: #C9E2F5; color: #2D6EA8; }
 
 /* Sidebar hover */
 .sidebar-link:hover {
   background: rgba(255,255,255,0.6) !important;
-  color: #1e3a8a !important;
+  color: #2D6EA8 !important;
 }
 
 /* Card hover */

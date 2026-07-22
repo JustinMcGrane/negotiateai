@@ -95,9 +95,9 @@ export default function PromotionPlannerPage() {
             <p style={{ fontSize: 13, lineHeight: 1.7, margin: 0 }}>{result.assessment}</p>
           </div>
 
-          <div style={{ background: '#eff6ff', borderRadius: 10, padding: 16, marginBottom: 16 }}>
-            <div style={{ fontSize: 11, color: '#1e40af', fontWeight: 600, marginBottom: 6 }}>REALISTIC TIMELINE</div>
-            <p style={{ fontSize: 13, color: '#1e40af', margin: 0 }}>{result.timeline}</p>
+          <div style={{ background: '#EBF5FB', borderRadius: 10, padding: 16, marginBottom: 16 }}>
+            <div style={{ fontSize: 11, color: '#2D6EA8', fontWeight: 600, marginBottom: 6 }}>REALISTIC TIMELINE</div>
+            <p style={{ fontSize: 13, color: '#2D6EA8', margin: 0 }}>{result.timeline}</p>
           </div>
 
           <div style={{ marginBottom: 16 }}>

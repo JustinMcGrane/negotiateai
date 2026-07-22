@@ -88,8 +88,8 @@ export function Sidebar() {
       style={{
         width: 224,
         minHeight: '100vh',
-        background: '#DBEAFE',
-        borderRight: '1px solid #BFDBFE',
+        background: '#EBF5FB',
+        borderRight: '1px solid #C9E2F5',
         display: 'flex',
         flexDirection: 'column',
         flexShrink: 0,
@@ -98,7 +98,7 @@ export function Sidebar() {
       {/* Logo */}
       <div style={{
         padding: '18px 16px 16px',
-        borderBottom: '1px solid #BFDBFE',
+        borderBottom: '1px solid #C9E2F5',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -125,7 +125,7 @@ export function Sidebar() {
               <Link key={item.href} href={item.href} className="sidebar-link" style={{
                 display: 'flex', alignItems: 'center', gap: 9,
                 padding: '7px 12px', fontSize: 13,
-                color: active ? '#1e3a8a' : '#3b5a9a',
+                color: active ? '#2D6EA8' : '#4A7FAB',
                 background: active ? '#fff' : 'transparent',
                 textDecoration: 'none',
                 borderRadius: 8,
@@ -133,7 +133,7 @@ export function Sidebar() {
                 fontWeight: active ? 600 : 400,
                 boxShadow: active ? '0 1px 3px rgba(30,58,138,0.12)' : 'none',
               }}>
-                <Icon size={15} color={active ? '#2563eb' : '#60a5fa'} />
+                <Icon size={15} color={active ? '#4A90D9' : '#7AB8E8'} />
                 {item.label}
               </Link>
             )
@@ -143,7 +143,7 @@ export function Sidebar() {
               <div style={{
                 padding: '13px 20px 4px',
                 fontSize: 10,
-                color: '#2563eb',
+                color: '#4A90D9',
                 letterSpacing: '0.08em',
                 fontWeight: 700,
               }}>
@@ -156,7 +156,7 @@ export function Sidebar() {
                   <Link key={sub.href} href={sub.href} className="sidebar-link" style={{
                     display: 'flex', alignItems: 'center', gap: 9,
                     padding: '6px 12px', fontSize: 13,
-                    color: active ? '#1e3a8a' : '#3b5a9a',
+                    color: active ? '#2D6EA8' : '#4A7FAB',
                     background: active ? '#fff' : 'transparent',
                     textDecoration: 'none',
                     borderRadius: 8,
@@ -164,7 +164,7 @@ export function Sidebar() {
                     fontWeight: active ? 600 : 400,
                     boxShadow: active ? '0 1px 3px rgba(30,58,138,0.12)' : 'none',
                   }}>
-                    <SubIcon size={14} color={active ? '#2563eb' : '#60a5fa'} />
+                    <SubIcon size={14} color={active ? '#4A90D9' : '#7AB8E8'} />
                     {sub.label}
                   </Link>
                 )
@@ -177,7 +177,7 @@ export function Sidebar() {
       {/* Footer */}
       <div style={{
         padding: '10px 10px 12px',
-        borderTop: '1px solid #BFDBFE',
+        borderTop: '1px solid #C9E2F5',
         display: 'flex',
         flexDirection: 'column',
         gap: 4,
@@ -185,7 +185,7 @@ export function Sidebar() {
         {plan !== 'elite' && (
           <Link href="/account/billing" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            background: '#2563eb',
+            background: '#4A90D9',
             color: '#fff',
             borderRadius: 8,
             padding: '8px 12px',
@@ -200,7 +200,7 @@ export function Sidebar() {
         <Link href="/" style={{
           display: 'flex', alignItems: 'center', gap: 6,
           padding: '6px 8px', fontSize: 12,
-          color: '#3b82f6',
+          color: '#4A90D9',
           textDecoration: 'none', borderRadius: 6,
         }}>
           <ArrowUpLeft size={13} />

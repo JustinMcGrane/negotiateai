@@ -107,9 +107,9 @@ export default function AnnualReviewPage() {
             </div>
           </div>
 
-          <div style={{ background: '#eff6ff', borderRadius: 10, padding: 16, marginBottom: 16 }}>
-            <div style={{ fontSize: 11, color: '#1e40af', fontWeight: 600, marginBottom: 6 }}>RECOMMENDED ASK</div>
-            <div style={{ fontSize: 22, fontWeight: 700, color: '#1e40af' }}>{result.askAmount}</div>
+          <div style={{ background: '#EBF5FB', borderRadius: 10, padding: 16, marginBottom: 16 }}>
+            <div style={{ fontSize: 11, color: '#2D6EA8', fontWeight: 600, marginBottom: 6 }}>RECOMMENDED ASK</div>
+            <div style={{ fontSize: 22, fontWeight: 700, color: '#2D6EA8' }}>{result.askAmount}</div>
           </div>
 
           <div style={{ border: '0.5px solid var(--color-border-tertiary)', borderRadius: 10, padding: 16, marginBottom: 16 }}>

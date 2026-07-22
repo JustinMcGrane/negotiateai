@@ -177,7 +177,7 @@ export default function ResumePage() {
             <label style={{ fontSize: 13, fontWeight: 500 }}>Job Description <span style={{ color: 'var(--color-text-tertiary)', fontWeight: 400 }}>(for ATS keyword matching)</span></label>
             <button
               onClick={() => setShowJD(!showJD)}
-              style={{ fontSize: 12, color: '#2563eb', background: 'none', border: 'none', cursor: 'pointer' }}
+              style={{ fontSize: 12, color: '#4A90D9', background: 'none', border: 'none', cursor: 'pointer' }}
             >
               {showJD ? 'Hide' : '+ Add job description'}
             </button>

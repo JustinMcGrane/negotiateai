@@ -21,7 +21,7 @@ export default function NotFound() {
       </div>
       <Link href="/dashboard" style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
-        background: '#1e3a8a', color: '#fff',
+        background: '#2D6EA8', color: '#fff',
         padding: '11px 22px', borderRadius: 9,
         fontSize: 14, fontWeight: 600, textDecoration: 'none',
       }}>

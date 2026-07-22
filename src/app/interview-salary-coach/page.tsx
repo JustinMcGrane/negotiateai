@@ -35,7 +35,7 @@ export default function InterviewSalaryCoachPage() {
 
       <section style={{ maxWidth: 900, margin: '0 auto', padding: '56px 24px 72px', textAlign: 'center' }}>
         <h1 style={{ fontSize: 'clamp(36px, 6.5vw, 76px)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: 24, color: '#0f172a', whiteSpace: 'nowrap' }}>
-          Never fumble the<br /><span style={{ color: '#2563eb' }}>salary question again.</span>
+          Never fumble the<br /><span style={{ color: '#4A90D9' }}>salary question again.</span>
         </h1>
         <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.7, maxWidth: 560, margin: '0 auto 40px' }}>
           Get coached on exactly what to say when salary comes up in an interview — so you stay in control of the conversation from the start.

@@ -18,7 +18,7 @@ type Application = {
 
 const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: string }> = {
   saved:        { label: 'Saved',        color: '#6b7280', bg: '#f3f4f6' },
-  applied:      { label: 'Applied',      color: '#2563eb', bg: '#eff6ff' },
+  applied:      { label: 'Applied',      color: '#4A90D9', bg: '#EBF5FB' },
   interviewing: { label: 'Interviewing', color: '#d97706', bg: '#fffbeb' },
   offer:        { label: 'Offer',        color: '#059669', bg: '#ecfdf5' },
   rejected:     { label: 'Rejected',     color: '#dc2626', bg: '#fef2f2' },

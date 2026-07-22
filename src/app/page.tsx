@@ -80,7 +80,7 @@ export default function LandingPage() {
           </Link>
           <Link href="/signup" style={{
             fontSize: 14, fontWeight: 600,
-            background: '#1e3a8a', color: '#fff',
+            background: '#2D6EA8', color: '#fff',
             textDecoration: 'none', padding: '9px 20px', borderRadius: 9,
             display: 'flex', alignItems: 'center', gap: 6,
           }}>
@@ -92,7 +92,7 @@ export default function LandingPage() {
       {/* Hero — 2 column */}
       <section className="landing-hero" style={{ maxWidth: 1100, margin: '0 auto', padding: '72px 40px 80px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}>
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 20, padding: '5px 14px', marginBottom: 28, fontSize: 12, fontWeight: 600, color: '#1d4ed8' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#EBF5FB', border: '1px solid #C9E2F5', borderRadius: 20, padding: '5px 14px', marginBottom: 28, fontSize: 12, fontWeight: 600, color: '#2D6EA8' }}>
             AI-powered career platform
           </div>
           <h1 style={{
@@ -103,7 +103,7 @@ export default function LandingPage() {
           }}>
             Land the job.<br />
             Negotiate the offer.<br />
-            <span style={{ color: '#2563eb' }}>Get paid what you&apos;re worth.</span>
+            <span style={{ color: '#4A90D9' }}>Get paid what you&apos;re worth.</span>
           </h1>
           <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 36, maxWidth: 460 }}>
             Hayven gives you an AI recruiter, resume analyzer, job search, and 10 negotiation tools — everything you need to take control of your career.
@@ -111,7 +111,7 @@ export default function LandingPage() {
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 40 }}>
             <Link href="/signup" style={{
               height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 28px', background: '#1e3a8a', color: '#fff',
+              padding: '0 28px', background: '#2D6EA8', color: '#fff',
               borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
             }}>
               Start for free <ArrowRight size={15} />
@@ -154,7 +154,7 @@ export default function LandingPage() {
             <div style={{ maxWidth: '85%', background: '#f8fafc', border: '1px solid #f1f5f9', borderRadius: '4px 12px 12px 12px', padding: '10px 14px', fontSize: 13, lineHeight: 1.6, color: '#0f172a' }}>
               Hi! I looked at your resume — your experience bullets don&apos;t show impact. Hiring managers see 200 resumes a day. Numbers get attention. Let&apos;s fix that.
             </div>
-            <div style={{ maxWidth: '85%', alignSelf: 'flex-end', background: '#2563eb', borderRadius: '12px 4px 12px 12px', padding: '10px 14px', fontSize: 13, lineHeight: 1.6, color: '#fff' }}>
+            <div style={{ maxWidth: '85%', alignSelf: 'flex-end', background: '#4A90D9', borderRadius: '12px 4px 12px 12px', padding: '10px 14px', fontSize: 13, lineHeight: 1.6, color: '#fff' }}>
               What should I change first?
             </div>
             <div style={{ maxWidth: '85%', background: '#f8fafc', border: '1px solid #f1f5f9', borderRadius: '4px 12px 12px 12px', padding: '10px 14px', fontSize: 13, lineHeight: 1.6, color: '#0f172a' }}>
@@ -162,12 +162,12 @@ export default function LandingPage() {
             </div>
           </div>
           {/* Compensation card */}
-          <div style={{ margin: '0 16px 16px', background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 12, padding: '14px 16px' }}>
-            <div style={{ fontSize: 11, color: '#1d4ed8', fontWeight: 600, letterSpacing: '0.05em', marginBottom: 10 }}>YOUR MARKET ANALYSIS</div>
+          <div style={{ margin: '0 16px 16px', background: '#EBF5FB', border: '1px solid #C9E2F5', borderRadius: 12, padding: '14px 16px' }}>
+            <div style={{ fontSize: 11, color: '#2D6EA8', fontWeight: 600, letterSpacing: '0.05em', marginBottom: 10 }}>YOUR MARKET ANALYSIS</div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
               {[
                 { label: 'Your offer', value: '$158K', color: '#ef4444' },
-                { label: 'Market rate', value: '$185K', color: '#2563eb' },
+                { label: 'Market rate', value: '$185K', color: '#4A90D9' },
                 { label: 'Gap', value: '$27K', color: '#0f172a' },
               ].map(({ label, value, color }) => (
                 <div key={label} style={{ background: '#fff', borderRadius: 8, padding: '10px 8px', textAlign: 'center' }}>
@@ -181,7 +181,7 @@ export default function LandingPage() {
           <div style={{ padding: '0 16px 16px' }}>
             <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: '10px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <span style={{ fontSize: 13, color: '#94a3b8' }}>Ask Sarah anything...</span>
-              <div style={{ width: 28, height: 28, background: '#1e3a8a', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: 28, height: 28, background: '#2D6EA8', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <ArrowRight size={13} color="#fff" />
               </div>
             </div>
@@ -201,7 +201,7 @@ export default function LandingPage() {
             'Offer scoring',
           ].map(item => (
             <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#64748b', fontWeight: 500 }}>
-              <CheckCircle size={14} color="#2563eb" />
+              <CheckCircle size={14} color="#4A90D9" />
               {item}
             </div>
           ))}
@@ -212,7 +212,7 @@ export default function LandingPage() {
       <section id="features" style={{ padding: '96px 40px' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div style={{ marginBottom: 64 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: '0.1em', marginBottom: 12 }}>CAREER HUB</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#4A90D9', letterSpacing: '0.1em', marginBottom: 12 }}>CAREER HUB</div>
             <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', margin: '0 0 16px' }}>
               Everything you need to land the job
             </h2>
@@ -249,7 +249,7 @@ export default function LandingPage() {
       <section style={{ background: '#0f172a', padding: '96px 40px' }}>
         <div className="landing-sarah" style={{ maxWidth: 1000, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#60a5fa', letterSpacing: '0.1em', marginBottom: 16 }}>AI RECRUITER</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#7AB8E8', letterSpacing: '0.1em', marginBottom: 16 }}>AI RECRUITER</div>
             <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, marginBottom: 20, letterSpacing: '-0.025em' }}>
               Meet Sarah.<br />Your personal recruiter.
             </h2>
@@ -264,14 +264,14 @@ export default function LandingPage() {
                 'Offer negotiation and counter strategy',
               ].map(item => (
                 <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#cbd5e1' }}>
-                  <CheckCircle size={15} color="#60a5fa" />
+                  <CheckCircle size={15} color="#7AB8E8" />
                   {item}
                 </div>
               ))}
             </div>
             <Link href="/signup" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: '#2563eb', color: '#fff',
+              background: '#4A90D9', color: '#fff',
               padding: '12px 24px', borderRadius: 9,
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
             }}>
@@ -300,7 +300,7 @@ export default function LandingPage() {
       <section style={{ padding: '96px 40px', background: '#f8fafc' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div style={{ marginBottom: 64 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: '0.1em', marginBottom: 12 }}>NEGOTIATION SUITE</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#4A90D9', letterSpacing: '0.1em', marginBottom: 12 }}>NEGOTIATION SUITE</div>
             <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', margin: '0 0 16px' }}>
               Get paid what you&apos;re worth
             </h2>
@@ -337,7 +337,7 @@ export default function LandingPage() {
       <section style={{ padding: '96px 40px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#2563eb', letterSpacing: '0.1em', marginBottom: 12 }}>PRICING</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#4A90D9', letterSpacing: '0.1em', marginBottom: 12 }}>PRICING</div>
             <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', margin: '0 0 12px' }}>Simple, transparent pricing</h2>
             <p style={{ fontSize: 16, color: '#64748b' }}>Start free. Upgrade when it pays off.</p>
           </div>
@@ -367,15 +367,15 @@ export default function LandingPage() {
             </div>
 
             {/* Pro */}
-            <div style={{ background: '#1e3a8a', border: '2px solid #1e3a8a', borderRadius: 16, padding: 32, position: 'relative', overflow: 'hidden' }}>
-              <div style={{ position: 'absolute', top: 20, right: 20, background: '#2563eb', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 20, letterSpacing: '0.05em' }}>MOST POPULAR</div>
+            <div style={{ background: '#2D6EA8', border: '2px solid #2D6EA8', borderRadius: 16, padding: 32, position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: 20, right: 20, background: '#4A90D9', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 20, letterSpacing: '0.05em' }}>MOST POPULAR</div>
               <div style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.6)', marginBottom: 20 }}>Professional</div>
               <div style={{ fontSize: 40, fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', marginBottom: 4 }}>$49<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
               <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 28 }}>Unlimited coaching and tools</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
                 {proFeatures.map(f => (
-                  <div key={f} style={{ fontSize: 13, color: '#bfdbfe', display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <CheckCircle size={14} color="#60a5fa" />
+                  <div key={f} style={{ fontSize: 13, color: '#C9E2F5', display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <CheckCircle size={14} color="#7AB8E8" />
                     {f}
                   </div>
                 ))}
@@ -384,7 +384,7 @@ export default function LandingPage() {
                 display: 'flex', justifyContent: 'center',
                 height: 44, lineHeight: '44px',
                 background: '#fff', borderRadius: 9,
-                fontSize: 14, textDecoration: 'none', color: '#1e3a8a', fontWeight: 700,
+                fontSize: 14, textDecoration: 'none', color: '#2D6EA8', fontWeight: 700,
               }}>
                 Get Professional
               </Link>
@@ -418,7 +418,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: '#eff6ff', borderTop: '1px solid #dbeafe', borderBottom: '1px solid #dbeafe', padding: '96px 40px', textAlign: 'center' }}>
+      <section style={{ background: '#EBF5FB', borderTop: '1px solid #EBF5FB', borderBottom: '1px solid #EBF5FB', padding: '96px 40px', textAlign: 'center' }}>
         <div style={{ maxWidth: 540, margin: '0 auto' }}>
           <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 42px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', marginBottom: 16 }}>
             Your next job is waiting.
@@ -428,7 +428,7 @@ export default function LandingPage() {
           </p>
           <Link href="/signup" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: '#1e3a8a', color: '#fff',
+            background: '#2D6EA8', color: '#fff',
             padding: '15px 36px', borderRadius: 10,
             fontSize: 16, fontWeight: 700, textDecoration: 'none',
           }}>

@@ -35,7 +35,7 @@ export default function CompensationAnalyzerPage() {
 
       <section style={{ maxWidth: 900, margin: '0 auto', padding: '56px 24px 72px', textAlign: 'center' }}>
         <h1 style={{ fontSize: 'clamp(36px, 6.5vw, 76px)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: 24, color: '#0f172a', whiteSpace: 'nowrap' }}>
-          Find out what you<br /><span style={{ color: '#2563eb' }}>should actually be earning.</span>
+          Find out what you<br /><span style={{ color: '#4A90D9' }}>should actually be earning.</span>
         </h1>
         <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.7, maxWidth: 560, margin: '0 auto 40px' }}>
           See your market rate at the 25th through 90th percentile for your exact role, level, and location — so you can negotiate from data, not instinct.
