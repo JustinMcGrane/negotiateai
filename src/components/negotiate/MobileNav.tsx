@@ -16,11 +16,11 @@ export function MobileNav() {
   return (
     <nav style={{
       position: 'fixed', bottom: 0, left: 0, right: 0,
-      background: '#0f172a',
-      borderTop: '1px solid rgba(255,255,255,0.08)',
+      background: '#DBEAFE',
+      borderTop: '1px solid #BFDBFE',
       display: 'flex', zIndex: 50,
       paddingBottom: 'env(safe-area-inset-bottom)',
-      boxShadow: '0 -4px 24px rgba(0,0,0,0.18)',
+      boxShadow: '0 -2px 12px rgba(37,99,235,0.08)',
     }}>
       {items.map((item) => {
         const active = path === item.href || path.startsWith(item.href + '/')
@@ -28,8 +28,8 @@ export function MobileNav() {
           <Link key={item.href} href={item.href} style={{
             flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center',
             padding: '10px 4px 8px', gap: 4, textDecoration: 'none',
-            color: active ? '#fff' : 'rgba(255,255,255,0.4)',
-            fontSize: 10, fontWeight: active ? 600 : 400,
+            color: active ? '#1e3a8a' : '#60a5fa',
+            fontSize: 10, fontWeight: active ? 700 : 400,
             transition: 'color 0.15s',
           }}>
             <item.icon size={20} strokeWidth={active ? 2.5 : 1.8} />

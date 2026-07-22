@@ -88,8 +88,8 @@ export function Sidebar() {
       style={{
         width: 224,
         minHeight: '100vh',
-        background: '#0f172a',
-        borderRight: 'none',
+        background: '#DBEAFE',
+        borderRight: '1px solid #BFDBFE',
         display: 'flex',
         flexDirection: 'column',
         flexShrink: 0,
@@ -97,18 +97,18 @@ export function Sidebar() {
     >
       {/* Logo */}
       <div style={{
-        padding: '20px 16px 18px',
-        borderBottom: '1px solid rgba(255,255,255,0.07)',
+        padding: '18px 16px 16px',
+        borderBottom: '1px solid #BFDBFE',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}>
         <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Image
-            src="/logo-light.svg"
+            src="/logo.svg"
             alt="Hayven"
-            width={180}
-            height={52}
+            width={150}
+            height={44}
             style={{ objectFit: 'contain' }}
             priority
           />
@@ -116,24 +116,24 @@ export function Sidebar() {
       </div>
 
       {/* Nav */}
-      <nav style={{ flex: 1, padding: '10px 0', overflowY: 'auto' }}>
+      <nav style={{ flex: 1, padding: '8px 0', overflowY: 'auto' }}>
         {nav.map((item) => {
           if ('href' in item) {
             const active = path === item.href
             const Icon = item.icon
             return (
-              <Link key={item.href} href={item.href} style={{
+              <Link key={item.href} href={item.href} className="sidebar-link" style={{
                 display: 'flex', alignItems: 'center', gap: 9,
                 padding: '7px 12px', fontSize: 13,
-                color: active ? '#fff' : 'rgba(255,255,255,0.5)',
-                background: active ? 'rgba(255,255,255,0.08)' : 'transparent',
+                color: active ? '#1e3a8a' : '#3b5a9a',
+                background: active ? '#fff' : 'transparent',
                 textDecoration: 'none',
-                borderRadius: 7,
-                margin: '0 8px',
-                fontWeight: active ? 500 : 400,
-                transition: 'background 0.15s, color 0.15s',
+                borderRadius: 8,
+                margin: '1px 8px',
+                fontWeight: active ? 600 : 400,
+                boxShadow: active ? '0 1px 3px rgba(30,58,138,0.12)' : 'none',
               }}>
-                <Icon size={15} />
+                <Icon size={15} color={active ? '#2563eb' : '#60a5fa'} />
                 {item.label}
               </Link>
             )
@@ -141,11 +141,11 @@ export function Sidebar() {
           return (
             <div key={item.label}>
               <div style={{
-                padding: '14px 20px 5px',
+                padding: '13px 20px 4px',
                 fontSize: 10,
-                color: 'rgba(255,255,255,0.3)',
+                color: '#2563eb',
                 letterSpacing: '0.08em',
-                fontWeight: 600,
+                fontWeight: 700,
               }}>
                 {item.label.toUpperCase()}
               </div>
@@ -153,18 +153,18 @@ export function Sidebar() {
                 const active = path === sub.href
                 const SubIcon = sub.icon
                 return (
-                  <Link key={sub.href} href={sub.href} style={{
+                  <Link key={sub.href} href={sub.href} className="sidebar-link" style={{
                     display: 'flex', alignItems: 'center', gap: 9,
                     padding: '6px 12px', fontSize: 13,
-                    color: active ? '#fff' : 'rgba(255,255,255,0.5)',
-                    background: active ? 'rgba(255,255,255,0.08)' : 'transparent',
+                    color: active ? '#1e3a8a' : '#3b5a9a',
+                    background: active ? '#fff' : 'transparent',
                     textDecoration: 'none',
-                    borderRadius: 7,
-                    margin: '0 8px',
-                    fontWeight: active ? 500 : 400,
-                    transition: 'background 0.15s, color 0.15s',
+                    borderRadius: 8,
+                    margin: '1px 8px',
+                    fontWeight: active ? 600 : 400,
+                    boxShadow: active ? '0 1px 3px rgba(30,58,138,0.12)' : 'none',
                   }}>
-                    <SubIcon size={14} />
+                    <SubIcon size={14} color={active ? '#2563eb' : '#60a5fa'} />
                     {sub.label}
                   </Link>
                 )
@@ -176,23 +176,22 @@ export function Sidebar() {
 
       {/* Footer */}
       <div style={{
-        padding: '12px 10px',
-        borderTop: '1px solid rgba(255,255,255,0.07)',
+        padding: '10px 10px 12px',
+        borderTop: '1px solid #BFDBFE',
         display: 'flex',
         flexDirection: 'column',
-        gap: 6,
+        gap: 4,
       }}>
         {plan !== 'elite' && (
           <Link href="/account/billing" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            background: 'rgba(255,255,255,0.1)',
+            background: '#2563eb',
             color: '#fff',
             borderRadius: 8,
             padding: '8px 12px',
             fontSize: 12,
-            fontWeight: 500,
+            fontWeight: 600,
             textDecoration: 'none',
-            border: '1px solid rgba(255,255,255,0.12)',
           }}>
             {plan === 'pro' ? 'Upgrade to Elite' : 'Upgrade to Pro'}
             <ChevronRight size={14} />
@@ -201,7 +200,7 @@ export function Sidebar() {
         <Link href="/" style={{
           display: 'flex', alignItems: 'center', gap: 6,
           padding: '6px 8px', fontSize: 12,
-          color: 'rgba(255,255,255,0.3)',
+          color: '#3b82f6',
           textDecoration: 'none', borderRadius: 6,
         }}>
           <ArrowUpLeft size={13} />

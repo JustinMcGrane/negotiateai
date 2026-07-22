@@ -131,10 +131,10 @@ export default async function DashboardPage() {
       {/* Compensation Health Score */}
       <div style={{
         background: '#fff',
-        border: '1px solid rgba(0,0,0,0.08)',
+        border: '1px solid #e2e8f0',
         borderRadius: 16, padding: '28px 32px',
         marginBottom: 28,
-        boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+        boxShadow: '0 1px 6px rgba(0,0,0,0.05)',
         display: 'flex', alignItems: 'center', gap: 32,
       }}>
         <div>
@@ -225,9 +225,9 @@ export default async function DashboardPage() {
           ].map((m) => (
             <div key={m.label} style={{
               background: '#fff',
-              border: '1px solid rgba(0,0,0,0.08)',
+              border: '1px solid #e2e8f0',
               borderRadius: 10, padding: '16px 18px', textAlign: 'center',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+              boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
             }}>
               <div style={{ fontSize: 24, fontWeight: 700 }}>{m.value}</div>
               <div style={{ fontSize: 11, color: 'var(--color-text-secondary)', marginTop: 3 }}>{m.label}</div>
@@ -245,12 +245,11 @@ export default async function DashboardPage() {
             { href: '/resume', icon: FileText, color: '#0891b2', bg: '#e0f2fe', name: 'Resume Analyzer', desc: 'Get recruiter-grade feedback' },
             { href: '/jobs', icon: Search, color: '#059669', bg: '#ecfdf5', name: 'Job Search', desc: 'Find roles that fit you' },
           ].map((t) => (
-            <Link key={t.href} href={t.href} style={{
-              background: '#fff', border: '1px solid rgba(0,0,0,0.08)',
+            <Link key={t.href} href={t.href} className="portal-card" style={{
+              background: '#fff', border: '1px solid #e2e8f0',
               borderRadius: 12, padding: 16,
               display: 'flex', gap: 12, textDecoration: 'none',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-              transition: 'box-shadow 0.15s',
+              boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
             }}>
               <div style={{ width: 36, height: 36, background: t.bg, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <t.icon size={16} color={t.color} />
@@ -269,16 +268,15 @@ export default async function DashboardPage() {
         <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>NEGOTIATION TOOLS</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
           {[
-            { href: '/tools/comp-analyzer', icon: TrendingUp, color: '#0F6E56', bg: '#E8F5F0', name: 'Compensation analyzer', desc: 'See your market rate' },
-            { href: '/tools/offer-evaluator', icon: FileSearch, color: '#0F6E56', bg: '#E8F5F0', name: 'Offer evaluator', desc: 'Score any job offer 0–100' },
-            { href: '/tools/simulator', icon: Play, color: '#141414', bg: '#f0f0f0', name: 'Negotiation simulator', desc: 'Practice with an AI recruiter' },
+            { href: '/tools/comp-analyzer', icon: TrendingUp, color: '#2563eb', bg: '#dbeafe', name: 'Compensation analyzer', desc: 'See your market rate' },
+            { href: '/tools/offer-evaluator', icon: FileSearch, color: '#2563eb', bg: '#dbeafe', name: 'Offer evaluator', desc: 'Score any job offer 0–100' },
+            { href: '/tools/simulator', icon: Play, color: '#6366f1', bg: '#eef2ff', name: 'Negotiation simulator', desc: 'Practice with an AI recruiter' },
           ].map((t) => (
-            <Link key={t.href} href={t.href} style={{
-              background: '#fff', border: '1px solid rgba(0,0,0,0.08)',
+            <Link key={t.href} href={t.href} className="portal-card" style={{
+              background: '#fff', border: '1px solid #e2e8f0',
               borderRadius: 12, padding: 16,
               display: 'flex', gap: 12, textDecoration: 'none',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-              transition: 'box-shadow 0.15s',
+              boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
             }}>
               <div style={{ width: 36, height: 36, background: t.bg, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <t.icon size={16} color={t.color} />
@@ -312,11 +310,11 @@ export default async function DashboardPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
               {FEATURE_CARDS.map((card) => (
                 <Link key={card.title} href={isElite ? (cardLinks[card.title] || '/upgrade') : '/upgrade'} style={{ textDecoration: 'none' }}>
-                  <div style={{
+                  <div className="portal-card" style={{
                     background: '#fff',
-                    border: '1px solid rgba(0,0,0,0.08)',
+                    border: '1px solid #e2e8f0',
                     borderRadius: 12, padding: 16,
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                    boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
                     opacity: isElite ? 1 : 0.85,
                     position: 'relative',
                     height: '100%',
@@ -368,7 +366,7 @@ export default async function DashboardPage() {
         return (
           <div style={{ marginBottom: 28 }}>
             <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>RECENT ACTIVITY</div>
-            <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 12, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, overflow: 'hidden', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}>
               {toolUses?.map((use: { feature: string; period: string; count: number }, i: number) => (
                 <div key={`${use.feature}-${use.period}`} style={{
                   padding: '12px 16px',

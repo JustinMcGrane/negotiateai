@@ -4,64 +4,62 @@ import type React from 'react'
 interface Props {
   title: string
   description?: string | React.ReactNode
-  userName?: string
   userInitial?: string
   plan?: string
 }
 
-const planLabel: Record<string, string> = {
-  elite: 'Elite',
-  pro: 'Pro',
-  free: 'Free',
-  report: 'Report',
+const planConfig: Record<string, { label: string; bg: string; color: string }> = {
+  elite:  { label: 'Elite',  bg: '#ede9fe', color: '#6d28d9' },
+  pro:    { label: 'Pro',    bg: '#dbeafe', color: '#1d4ed8' },
+  free:   { label: 'Free',   bg: '#f1f5f9', color: '#64748b' },
+  report: { label: 'Report', bg: '#dbeafe', color: '#1d4ed8' },
 }
 
-const planColors: Record<string, { bg: string; color: string }> = {
-  elite: { bg: 'rgba(139,92,246,0.12)', color: '#7c3aed' },
-  pro: { bg: 'rgba(37,99,235,0.1)', color: '#2563eb' },
-  free: { bg: 'rgba(0,0,0,0.06)', color: '#6b7280' },
-  report: { bg: 'rgba(37,99,235,0.1)', color: '#2563eb' },
-}
-
-export function PageHeader({ title, description, userName, userInitial, plan = 'free' }: Props) {
-  const colors = planColors[plan] ?? planColors.free
-  const initial = userInitial || (userName ? userName[0].toUpperCase() : '?')
+export function PageHeader({ title, description, userInitial, plan = 'free' }: Props) {
+  const pc = planConfig[plan] ?? planConfig.free
+  const initial = userInitial ?? '?'
 
   return (
     <div style={{
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '0 32px',
-      height: 56,
-      borderBottom: '1px solid rgba(0,0,0,0.07)',
+      padding: '0 28px',
+      height: 58,
       background: '#fff',
+      borderBottom: '1px solid #e2e8f0',
       flexShrink: 0,
+      position: 'sticky',
+      top: 0,
+      zIndex: 20,
       gap: 16,
     }}>
-      <div>
-        <div style={{ fontSize: 15, fontWeight: 600, color: '#0f172a', lineHeight: 1.2 }}>{title}</div>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
+        <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', lineHeight: 1.25, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {title}
+        </div>
         {description && (
-          <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 1 }}>{description}</div>
+          <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 1, lineHeight: 1.3 }}>{description}</div>
         )}
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-        {plan && (
-          <span style={{
-            fontSize: 11, fontWeight: 600, padding: '3px 9px',
-            borderRadius: 20, background: colors.bg, color: colors.color,
-            letterSpacing: '0.02em',
-          }}>
-            {planLabel[plan] ?? plan}
-          </span>
-        )}
+        <span style={{
+          fontSize: 11, fontWeight: 600,
+          padding: '3px 10px', borderRadius: 20,
+          background: pc.bg, color: pc.color,
+          letterSpacing: '0.03em',
+        }}>
+          {pc.label}
+        </span>
         <Link href="/account" style={{ textDecoration: 'none' }}>
           <div style={{
             width: 32, height: 32, borderRadius: '50%',
-            background: '#0f172a', color: '#fff',
+            background: '#1e3a8a',
+            color: '#fff',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 13, fontWeight: 700,
+            flexShrink: 0,
           }}>
             {initial}
           </div>
