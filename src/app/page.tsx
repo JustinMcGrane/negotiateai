@@ -102,7 +102,8 @@ export default function LandingPage() {
         }}>
           Land the job.<br />
           Negotiate the offer.<br />
-          <span style={{ color: '#4A90D9' }}>Get paid what you&apos;re worth.</span>
+          Get paid what you&apos;re{' '}
+          <span style={{ display: 'inline-block', background: '#4A90D9', color: '#fff', borderRadius: 10, padding: '2px 18px 8px' }}>worth.</span>
         </h1>
 
         <p style={{ fontSize: 18, color: '#64748b', lineHeight: 1.75, maxWidth: 560, margin: '0 auto 40px' }}>
