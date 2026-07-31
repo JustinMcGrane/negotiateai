@@ -34,8 +34,8 @@ export default async function ProgressPage() {
   const isPro = profile?.plan === 'pro' || profile?.plan === 'elite'
 
   const toolUseCounts: Record<string, number> = {}
-  ;(toolUses || []).forEach((t: { tool_id: string }) => {
-    toolUseCounts[t.tool_id] = (toolUseCounts[t.tool_id] || 0) + 1
+  ;(toolUses || []).forEach((t: { feature: string }) => {
+    toolUseCounts[t.feature] = (toolUseCounts[t.feature] || 0) + 1
   })
 
   return (

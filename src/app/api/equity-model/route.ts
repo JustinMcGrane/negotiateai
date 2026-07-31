@@ -18,6 +18,10 @@ async function trackUsage(feature: string) {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
     const { type, amount, valuation, strikePrice, vestingSchedule, stage } = await req.json()
 
     const prompt = `You are a startup equity expert. Return ONLY valid JSON.

@@ -7,6 +7,10 @@ function getClient() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
     const { role, company, offer, counter, leverage } = await req.json()
 
     const profile = await getUserProfile().catch(() => null)

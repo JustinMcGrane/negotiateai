@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
 
 type JSearchJob = {
   job_title?: string
@@ -55,6 +56,10 @@ function formatPosted(dateStr?: string): string {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
     const { query, location, jobType, datePosted } = await req.json()
     const apiKey = process.env.RAPIDAPI_KEY
 

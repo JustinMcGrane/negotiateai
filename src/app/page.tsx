@@ -91,9 +91,6 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section style={{ maxWidth: 860, margin: '0 auto', padding: '72px 24px 88px', textAlign: 'center' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#EBF5FB', border: '1px solid #C9E2F5', borderRadius: 20, padding: '5px 14px', marginBottom: 32, fontSize: 12, fontWeight: 600, color: '#2D6EA8' }}>
-          AI-powered career platform
-        </div>
         <h1 style={{
           fontSize: 'clamp(40px, 6vw, 72px)',
           fontWeight: 800, lineHeight: 1.1,

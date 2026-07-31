@@ -35,11 +35,11 @@ export function PageHeader({ title, description, userInitial, plan = 'free' }: P
       gap: 16,
     }}>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
-        <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', lineHeight: 1.25, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.25, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {title}
         </div>
         {description && (
-          <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 1, lineHeight: 1.3 }}>{description}</div>
+          <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginTop: 1, lineHeight: 1.3 }}>{description}</div>
         )}
       </div>
 

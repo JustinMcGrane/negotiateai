@@ -82,8 +82,10 @@ export default function LiveCoachPage() {
   }
 
   function renderContent(text: string) {
-    // Bold SAY: and DO: prefixes
     return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
       .replace(/^SAY:/gm, '<strong style="color:#667eea">SAY:</strong>')
       .replace(/^DO:/gm, '<strong style="color:#f59e0b">DO:</strong>')
       .replace(/\n/g, '<br />')
