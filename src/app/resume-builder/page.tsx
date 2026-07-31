@@ -83,7 +83,7 @@ export default function ResumeBuilderPage() {
         </p>
 
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}>
-          <Link href="/signup" style={{
+          <Link href="/resume" style={{
             height: 48, display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '0 28px', background: '#141414', color: '#fff',
             borderRadius: 10, fontSize: 15, fontWeight: 600, textDecoration: 'none',
@@ -149,7 +149,7 @@ export default function ResumeBuilderPage() {
         <p style={{ fontSize: 16, color: '#94a3b8', marginBottom: 36, maxWidth: 480, margin: '0 auto 36px' }}>
           Find out exactly what's holding your resume back — and get the fixes to do something about it.
         </p>
-        <Link href="/signup" style={{
+        <Link href="/resume" style={{
           height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
           padding: '0 32px', background: '#fff', color: '#0f172a',
           borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
