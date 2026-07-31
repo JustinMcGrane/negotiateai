@@ -97,8 +97,8 @@ export default function LandingPage() {
           color: '#0f172a',
         }}>
           Land the job.<br />
-          <span style={{ color: '#2563eb' }}>Negotiate the offer.</span><br />
-          Get what you deserve.
+          Negotiate the offer.<br />
+          <span style={{ whiteSpace: 'nowrap' }}>Get paid what you&apos;re <span style={{ display: 'inline-block', background: '#1D6FD1', color: '#fff', borderRadius: 10, padding: '2px 18px 8px' }}>worth.</span></span>
         </h1>
 
         <p style={{
