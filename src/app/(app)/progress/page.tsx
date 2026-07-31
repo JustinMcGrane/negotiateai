@@ -20,7 +20,7 @@ export default async function ProgressPage() {
 
   const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single()
   const { data: sessions } = await supabase.from('sessions').select('*').eq('user_id', user.id).order('created_at', { ascending: false })
-  const { data: toolUses } = await supabase.from('tool_uses').select('*').eq('user_id', user.id).order('created_at', { ascending: false })
+  const { data: toolUses } = await supabase.from('usage_tracking').select('*').eq('user_id', user.id).order('period', { ascending: false })
 
   const allSessions = sessions || []
   const scores = allSessions.map((s) => s.overall_score || 0)

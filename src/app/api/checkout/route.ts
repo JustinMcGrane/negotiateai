@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
 
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
     const isOneTime = priceId === process.env.STRIPE_REPORT_PRICE_ID

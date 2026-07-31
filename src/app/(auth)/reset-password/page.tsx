@@ -1,12 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { Logo } from '@/components/ui/Logo'
-
-const INPUT = 'bg-c-surface2 border-[1.5px] border-c-border rounded-app-sm text-c-text text-[14px] px-3 py-[11px] outline-none focus:border-c-purple focus:bg-c-surface transition-all w-full'
-const LABEL = 'text-[11px] text-c-text3 uppercase tracking-[.07em] font-semibold'
+import Link from 'next/link'
+import Image from 'next/image'
 
 export default function ResetPasswordPage() {
   const router = useRouter()
@@ -15,10 +13,6 @@ export default function ResetPasswordPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
-
-  useEffect(() => {
-    // Supabase handles the token from the URL hash automatically
-  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,46 +31,61 @@ export default function ResetPasswordPage() {
     }
   }
 
+  const inputStyle = {
+    width: '100%', padding: '10px 12px', fontSize: 14,
+    background: 'var(--color-background-secondary)',
+    border: '0.5px solid var(--color-border-tertiary)',
+    borderRadius: 8, color: 'var(--color-text-primary)',
+    outline: 'none', boxSizing: 'border-box' as const,
+  }
+
   return (
-    <div
-      className="bg-c-surface border border-c-border rounded-[20px] p-10 w-full max-w-md"
-      style={{ boxShadow: '0 24px 64px rgba(30,27,58,.12)' }}
-    >
-      <div className="mb-9">
-        <Logo width={160} />
+    <div style={{
+      background: '#fff', border: '0.5px solid var(--color-border-tertiary)',
+      borderRadius: 16, padding: '40px 36px', width: '100%', maxWidth: 400,
+      boxShadow: '0 8px 32px rgba(0,0,0,0.07)',
+    }}>
+      <div style={{ marginBottom: 28 }}>
+        <Link href="/">
+          <Image src="/logo.svg" alt="Hayven" width={140} height={40} style={{ objectFit: 'contain' }} />
+        </Link>
       </div>
 
       {done ? (
-        <div className="animate-fade-in">
-          <div className="w-14 h-14 bg-c-green-d rounded-[16px] flex items-center justify-center mb-5">
-            <span className="text-c-green text-[22px]">✓</span>
+        <div>
+          <div style={{ width: 48, height: 48, background: '#ecfdf5', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+            <span style={{ color: '#10b981', fontSize: 22 }}>✓</span>
           </div>
-          <h1 className="font-display text-[26px] font-bold tracking-[-0.03em] text-c-text mb-2">Password updated</h1>
-          <p className="text-[14px] text-c-text3 leading-[1.6]">Redirecting you to your dashboard…</p>
+          <h1 style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 8 }}>Password updated</h1>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>Redirecting you to your dashboard…</p>
         </div>
       ) : (
         <>
-          <h1 className="font-display text-[26px] font-bold tracking-[-0.03em] text-c-text mb-[6px]">Set new password</h1>
-          <p className="text-[14px] text-c-text3 mb-7">Choose a strong password for your account.</p>
+          <h1 style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 6 }}>Set new password</h1>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', marginBottom: 24 }}>Choose a strong password for your account.</p>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div className="flex flex-col gap-[7px]">
-              <label className={LABEL}>New password</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Min. 8 characters" required className={INPUT} autoFocus />
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <div>
+              <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-tertiary)', letterSpacing: '0.07em', display: 'block', marginBottom: 6 }}>NEW PASSWORD</label>
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Min. 8 characters" required style={inputStyle} autoFocus />
             </div>
-            <div className="flex flex-col gap-[7px]">
-              <label className={LABEL}>Confirm password</label>
-              <input type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} placeholder="Repeat password" required className={INPUT} />
+            <div>
+              <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-tertiary)', letterSpacing: '0.07em', display: 'block', marginBottom: 6 }}>CONFIRM PASSWORD</label>
+              <input type="password" value={confirm} onChange={e => setConfirm(e.target.value)} placeholder="Repeat password" required style={inputStyle} />
             </div>
 
             {error && (
-              <div className="bg-c-red-d text-c-red text-[13px] px-4 py-[10px] rounded-app-sm border border-[#F0997B44]">{error}</div>
+              <div style={{ background: '#fef2f2', border: '0.5px solid #fecaca', borderRadius: 8, padding: '10px 14px', fontSize: 13, color: '#dc2626' }}>{error}</div>
             )}
 
             <button
               type="submit"
               disabled={loading}
-              className="bg-c-purple text-white rounded-app-sm px-4 py-[11px] text-[14px] font-semibold cursor-pointer hover:bg-c-purple-l transition-all disabled:opacity-60 mt-1"
+              style={{
+                background: '#141414', color: '#fff', border: 'none',
+                borderRadius: 8, padding: '11px', fontSize: 14, fontWeight: 600,
+                cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.6 : 1, marginTop: 4,
+              }}
             >
               {loading ? 'Updating…' : 'Update password'}
             </button>

@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 })
+
     const { email, name, workspaceName, inviterName } = await req.json()
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY

@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
-import { createServiceClient } from '@/lib/supabase/server'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
 
 function getClient() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }) }
 
 export async function POST(req: NextRequest) {
   try {
-    const { transcript, role, offer, target, personaLabel, userId } = await req.json()
+    const supabaseAuth = await createClient()
+    const { data: { user } } = await supabaseAuth.auth.getUser()
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+    const { transcript, role, offer, target, personaLabel } = await req.json()
+    const userId = user.id
 
     const prompt = `You are a salary negotiation coach. Analyze this negotiation transcript and return ONLY valid JSON.
 
