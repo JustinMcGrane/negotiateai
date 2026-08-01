@@ -202,9 +202,9 @@ export default function LandingPage() {
           <Link href="/signup" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
             marginTop: 12, background: '#4169E1', color: '#fff',
-            borderRadius: 10, padding: '13px 0',
+            borderRadius: 10, padding: '13px 20px',
             fontSize: 14, fontWeight: 700, textDecoration: 'none',
-            whiteSpace: 'nowrap',
+            whiteSpace: 'nowrap', width: '100%', boxSizing: 'border-box' as const,
           }}>
             See my real market value <ArrowRight size={14} />
           </Link>
