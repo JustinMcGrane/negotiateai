@@ -196,7 +196,7 @@ export default function LandingPage() {
             padding: '13px 16px',
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           }}>
-            <span style={{ fontSize: 13, color: '#b91c1c', fontWeight: 500 }}>You&apos;re leaving on the table</span>
+            <span style={{ fontSize: 13, color: '#b91c1c', fontWeight: 500 }}>Money left on the table</span>
             <span style={{ fontSize: 17, fontWeight: 800, color: '#dc2626' }}>$36,000 / yr</span>
           </div>
 
