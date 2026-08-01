@@ -1,10 +1,14 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 type Result = {
+  message: string
   underpaid_by: number
-  percentile: number
+  market_median: number
   market_range: { min: number; max: number }
+  percentile: number
 }
 
 function fmt(n: number) {
@@ -13,13 +17,11 @@ function fmt(n: number) {
 
 export default function WorthPage() {
   const [title, setTitle] = useState('')
-  const [company, setCompany] = useState('')
   const [location, setLocation] = useState('')
   const [salary, setSalary] = useState('')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<Result | null>(null)
   const [error, setError] = useState('')
-  const [copied, setCopied] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -30,7 +32,7 @@ export default function WorthPage() {
       const res = await fetch('/api/worth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, company, location, salary: Number(salary.replace(/[^0-9]/g, '')) }),
+        body: JSON.stringify({ title, location, salary: Number(salary.replace(/[^0-9]/g, '')) }),
       })
       const data = await res.json()
       if (!res.ok || data.error) throw new Error(data.error || 'Failed')
@@ -42,181 +44,226 @@ export default function WorthPage() {
     }
   }
 
-  function getTweetText() {
-    if (!result) return ''
-    const diff = result.underpaid_by
-    const rangeStr = `${fmt(result.market_range.min)}–${fmt(result.market_range.max)}`
-    const diffStr = diff > 0 ? `I'm underpaid by ${fmt(diff)}.` : diff < 0 ? `I'm actually above market by ${fmt(Math.abs(diff))}.` : `I'm right at market rate.`
-    return `I just checked my salary as a ${title} in ${location}. ${diffStr} Market range is ${rangeStr} (${result.percentile}th percentile). Check yours 👇`
-  }
-
-  function handleTweet() {
-    const text = encodeURIComponent(getTweetText())
-    const url = encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://negotiateai.co/worth')
-    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank')
-  }
-
-  function handleCopy() {
-    if (typeof window !== 'undefined') {
-      navigator.clipboard.writeText(window.location.href)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
-  }
-
-  const diff = result?.underpaid_by ?? 0
-  const isUnder = diff > 0
-  const isOver = diff < 0
+  const isUnder = (result?.underpaid_by ?? 0) > 0
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div style={{ background: '#f8fafc', minHeight: '100vh', fontFamily: '-apple-system, BlinkMacSystemFont, Inter, sans-serif' }}>
+
       {/* Header */}
-      <header className="border-b border-gray-100 px-6 py-4 flex items-center justify-between">
-        <a href="/" className="text-sm font-semibold text-gray-900 tracking-tight">Hayven</a>
-        <a href="/recruiter" className="text-sm text-gray-500 hover:text-gray-800 transition-colors">Try the full platform →</a>
+      <header style={{
+        background: '#fff', borderBottom: '1px solid #e2e8f0',
+        padding: '0 24px', height: 56,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      }}>
+        <Link href="/" style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', textDecoration: 'none' }}>Hayven</Link>
+        <Link href="/signup" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none', fontWeight: 500 }}>
+          Sign up free →
+        </Link>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-start px-6 py-16">
-        <div className="w-full max-w-lg">
-          <div className="mb-10 text-center">
-            <h1 className="text-4xl font-bold text-gray-900 tracking-tight mb-3">Are you paid what you're worth?</h1>
-            <p className="text-gray-500 text-base">Enter your details and find out in seconds.</p>
-          </div>
+      <main style={{ maxWidth: 520, margin: '0 auto', padding: '48px 20px 80px' }}>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Sarah intro */}
+        <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', marginBottom: 32 }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
+            background: 'linear-gradient(135deg, #4169E1, #6366f1)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 18, color: '#fff', fontWeight: 700,
+          }}>S</div>
+          <div style={{
+            background: '#fff', border: '1px solid #e2e8f0',
+            borderRadius: '4px 16px 16px 16px',
+            padding: '14px 18px',
+            boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
+          }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>Sarah · AI Career Coach</div>
+            <div style={{ fontSize: 14, color: '#374151', lineHeight: 1.65 }}>
+              Hi! I&apos;m Sarah. Tell me your role and what you&apos;re currently making — I&apos;ll tell you exactly where you stand in the market and whether you&apos;re leaving money on the table.
+            </div>
+          </div>
+        </div>
+
+        {/* Form */}
+        {!result && (
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
+              <label style={{ fontSize: 12, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>Job title</label>
               <input
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 placeholder="e.g. Senior Product Manager"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
+                style={{
+                  width: '100%', padding: '11px 14px', fontSize: 14,
+                  border: '1px solid #e2e8f0', borderRadius: 10,
+                  background: '#fff', color: '#0f172a', outline: 'none',
+                  boxSizing: 'border-box',
+                }}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
-              <input
-                value={company}
-                onChange={e => setCompany(e.target.value)}
-                placeholder="e.g. Google"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+              <label style={{ fontSize: 12, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>Location <span style={{ fontWeight: 400, color: '#94a3b8' }}>(optional)</span></label>
               <input
                 value={location}
                 onChange={e => setLocation(e.target.value)}
                 placeholder="e.g. San Francisco, CA"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
+                style={{
+                  width: '100%', padding: '11px 14px', fontSize: 14,
+                  border: '1px solid #e2e8f0', borderRadius: 10,
+                  background: '#fff', color: '#0f172a', outline: 'none',
+                  boxSizing: 'border-box',
+                }}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Current Salary</label>
+              <label style={{ fontSize: 12, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>Current salary</label>
               <input
                 value={salary}
                 onChange={e => setSalary(e.target.value)}
-                placeholder="e.g. 120000"
+                placeholder="e.g. 120,000"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent placeholder-gray-400"
+                style={{
+                  width: '100%', padding: '11px 14px', fontSize: 14,
+                  border: '1px solid #e2e8f0', borderRadius: 10,
+                  background: '#fff', color: '#0f172a', outline: 'none',
+                  boxSizing: 'border-box',
+                }}
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{
+                marginTop: 4, padding: '13px 0', background: '#141414', color: '#fff',
+                border: 'none', borderRadius: 10, fontSize: 14, fontWeight: 700,
+                cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+              }}
             >
-              {loading ? 'Analyzing...' : 'Check My Salary'}
+              {loading ? 'Sarah is analyzing...' : <><span>Check my market value</span> <ArrowRight size={14} /></>}
             </button>
           </form>
+        )}
 
-          {error && (
-            <div className="mt-6 p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm text-center">
-              {error}
-            </div>
-          )}
+        {error && (
+          <div style={{ marginTop: 16, padding: '12px 16px', background: '#fef2f2', borderRadius: 10, fontSize: 13, color: '#dc2626' }}>
+            {error}
+          </div>
+        )}
 
-          {result && (
-            <div className="mt-10">
-              {/* Main result */}
-              <div className={`rounded-2xl p-8 text-center mb-6 ${
-                isUnder ? 'bg-red-50' : isOver ? 'bg-green-50' : 'bg-gray-50'
-              }`}>
-                <p className="text-sm font-medium text-gray-500 mb-2 uppercase tracking-widest">
-                  {isUnder ? 'Underpaid by' : isOver ? 'Above market by' : 'Right at market'}
-                </p>
-                {diff !== 0 && (
-                  <p className={`text-6xl font-black mb-2 ${
-                    isUnder ? 'text-red-500' : 'text-green-500'
-                  }`}>
-                    {fmt(Math.abs(diff))}
-                  </p>
-                )}
-                {diff === 0 && (
-                  <p className="text-5xl font-black text-gray-700 mb-2">Right on target</p>
-                )}
-                <p className="text-gray-500 text-sm">You're at the <span className="font-semibold text-gray-800">{result.percentile}th percentile</span> for this role</p>
+        {/* Result */}
+        {result && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+
+            {/* Sarah's message */}
+            <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+              <div style={{
+                width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
+                background: 'linear-gradient(135deg, #4169E1, #6366f1)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 18, color: '#fff', fontWeight: 700,
+              }}>S</div>
+              <div style={{
+                background: '#fff', border: '1px solid #e2e8f0',
+                borderRadius: '4px 16px 16px 16px',
+                padding: '14px 18px',
+                boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
+                flex: 1,
+              }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>Sarah · AI Career Coach</div>
+                <div style={{ fontSize: 14, color: '#374151', lineHeight: 1.7 }}>{result.message}</div>
               </div>
+            </div>
 
-              {/* Market range */}
-              <div className="bg-gray-50 rounded-2xl p-6 mb-6">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">Market Range</p>
-                <div className="flex items-center justify-between">
-                  <div className="text-center">
-                    <p className="text-xs text-gray-400 mb-1">25th percentile</p>
-                    <p className="text-2xl font-bold text-gray-900">{fmt(result.market_range.min)}</p>
-                  </div>
-                  <div className="flex-1 mx-4 h-1.5 bg-gray-200 rounded-full relative">
-                    <div
-                      className="absolute top-0 h-1.5 bg-gray-900 rounded-full"
-                      style={{
-                        left: '0%',
-                        width: `${Math.min(100, Math.max(0, result.percentile))}%`,
-                      }}
-                    />
-                    <div
-                      className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-gray-900 rounded-full border-2 border-white shadow"
-                      style={{ left: `calc(${Math.min(100, Math.max(0, result.percentile))}% - 6px)` }}
-                    />
-                  </div>
-                  <div className="text-center">
-                    <p className="text-xs text-gray-400 mb-1">75th percentile</p>
-                    <p className="text-2xl font-bold text-gray-900">{fmt(result.market_range.max)}</p>
-                  </div>
+            {/* Numbers card */}
+            <div style={{
+              background: '#fff', border: '1px solid #e2e8f0',
+              borderRadius: 14, padding: '20px 20px 16px',
+              boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
+              marginLeft: 58,
+            }}>
+              {/* Range bar */}
+              <div style={{ marginBottom: 18 }}>
+                <div style={{ position: 'relative', height: 8, borderRadius: 99, background: '#f1f5f9', marginBottom: 10, overflow: 'visible' }}>
+                  <div style={{ position: 'absolute', inset: 0, borderRadius: 99, background: 'linear-gradient(to right, #fca5a5, #fde68a 45%, #6ee7b7)' }} />
+                  <div style={{
+                    position: 'absolute', top: '50%', left: `${Math.min(95, Math.max(5, result.percentile))}%`,
+                    transform: 'translate(-50%, -50%)',
+                    width: 16, height: 16,
+                    background: '#fff', border: '3px solid #0f172a',
+                    borderRadius: '50%', boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+                    zIndex: 1,
+                  }} />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, fontWeight: 600, color: '#cbd5e1', letterSpacing: '0.06em' }}>
+                  <span>BELOW MARKET</span>
+                  <span>MARKET RATE</span>
+                  <span>ABOVE MARKET</span>
                 </div>
               </div>
 
-              {/* Action buttons */}
-              <div className="flex gap-3">
-                <button
-                  onClick={handleTweet}
-                  className="flex-1 flex items-center justify-center gap-2 py-3 bg-black text-white text-sm font-semibold rounded-xl hover:bg-gray-800 transition-colors"
-                >
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.912-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                  Share on X
-                </button>
-                <button
-                  onClick={handleCopy}
-                  className="flex-1 flex items-center justify-center gap-2 py-3 border border-gray-200 text-gray-700 text-sm font-semibold rounded-xl hover:bg-gray-50 transition-colors"
-                >
-                  {copied ? (
-                    <><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!</>
-                  ) : (
-                    <><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Link</>
-                  )}
-                </button>
-              </div>
+              {/* Stats */}
+              {[
+                { label: 'Your current salary', value: fmt(Number(salary.replace(/[^0-9]/g, ''))), color: isUnder ? '#ef4444' : '#10b981' },
+                { label: 'Market median', value: fmt(result.market_median), color: '#0f172a' },
+                { label: 'Market range (25th–75th)', value: `${fmt(result.market_range.min)} – ${fmt(result.market_range.max)}`, color: '#64748b' },
+              ].map((row, i, arr) => (
+                <div key={row.label} style={{
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  padding: '9px 0',
+                  borderBottom: i < arr.length - 1 ? '1px solid #f1f5f9' : 'none',
+                }}>
+                  <span style={{ fontSize: 13, color: '#64748b' }}>{row.label}</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: row.color }}>{row.value}</span>
+                </div>
+              ))}
 
-              <p className="text-center text-xs text-gray-400 mt-6">
-                Want to negotiate a raise or offer?{' '}
-                <a href="/recruiter" className="text-gray-700 font-medium underline underline-offset-2">Try Hayven free →</a>
-              </p>
+              {/* Gap callout */}
+              {isUnder && (
+                <div style={{
+                  marginTop: 14, background: '#fef2f2', borderRadius: 10, padding: '12px 14px',
+                }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: '#b91c1c', letterSpacing: '0.08em', marginBottom: 3 }}>MONEY LEFT ON THE TABLE</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: '#dc2626', letterSpacing: '-0.02em' }}>{fmt(result.underpaid_by)} / year</div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
+
+            {/* Signup CTA */}
+            <div style={{
+              marginLeft: 58,
+              background: '#0f172a', borderRadius: 14,
+              padding: '20px 20px',
+            }}>
+              <div style={{ fontSize: 15, fontWeight: 700, color: '#fff', marginBottom: 6 }}>
+                Ready to do something about it?
+              </div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, marginBottom: 16 }}>
+                Talk to Sarah in full — she&apos;ll build you a negotiation strategy, prep you for the conversation, and help you get what you&apos;re worth.
+              </div>
+              <Link href="/signup" style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                background: '#4169E1', color: '#fff',
+                borderRadius: 9, padding: '12px 0',
+                fontSize: 14, fontWeight: 700, textDecoration: 'none',
+              }}>
+                Get started free <ArrowRight size={14} />
+              </Link>
+              <div style={{ textAlign: 'center', marginTop: 10, fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>
+                No credit card required
+              </div>
+            </div>
+
+            {/* Try again */}
+            <button
+              onClick={() => { setResult(null); setTitle(''); setSalary(''); setLocation('') }}
+              style={{ background: 'none', border: 'none', fontSize: 13, color: '#94a3b8', cursor: 'pointer', textAlign: 'center', marginTop: 4 }}
+            >
+              ← Check a different role
+            </button>
+          </div>
+        )}
       </main>
     </div>
   )

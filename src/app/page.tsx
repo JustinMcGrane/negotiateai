@@ -109,7 +109,7 @@ export default function LandingPage() {
           </p>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44 }}>
-            <Link href="/signup" style={{
+            <Link href="/worth" style={{
               height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
               padding: '0 28px', background: '#141414', color: '#fff',
               borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
@@ -199,7 +199,7 @@ export default function LandingPage() {
             <div style={{ fontSize: 22, fontWeight: 800, color: '#dc2626', letterSpacing: '-0.02em' }}>$36,000 / year</div>
           </div>
 
-          <Link href="/signup" style={{
+          <Link href="/worth" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
             marginTop: 12, background: '#4169E1', color: '#fff',
             borderRadius: 10, padding: '13px 20px',

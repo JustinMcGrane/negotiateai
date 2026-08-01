@@ -1,40 +1,40 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
-import { createClient } from '@/lib/supabase/server'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const { title, location, salary } = await req.json()
 
-    const { title, company, location, salary } = await req.json()
-
-    if (!title || !location || !salary) {
+    if (!title || !salary) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
     const response = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 256,
-      system: `You are a compensation data analyst with access to aggregated salary data from LinkedIn, Glassdoor, Levels.fyi, and Payscale. When given a job title, company, location, and current salary, return ONLY a valid JSON object with these exact fields:
+      max_tokens: 400,
+      system: `You are Sarah, a sharp and direct AI career coach who specializes in salary negotiation. You have access to aggregated compensation data from LinkedIn, Glassdoor, Levels.fyi, and Payscale.
+
+When given a job title, location, and current salary, respond with a JSON object in this exact shape:
 {
-  "underpaid_by": number (positive = underpaid, negative = above market, 0 = at market; this is market_median minus current_salary),
-  "percentile": number (0-100, where the current salary sits in the market distribution),
-  "market_range": { "min": number, "max": number } (25th to 75th percentile range for this role/location)
+  "message": "2-3 sentence conversational response from Sarah — be direct and specific. If they're underpaid, tell them clearly and make it feel urgent. If they're at or above market, acknowledge it but point out there's still room to negotiate. Always end with a hook that makes them want to take action.",
+  "underpaid_by": number (positive = underpaid, negative = above market, 0 = at market),
+  "market_median": number,
+  "market_range": { "min": number, "max": number },
+  "percentile": number (0-100)
 }
-Base your estimates on real market data patterns. Be accurate and realistic. Return only the JSON object, no explanation.`,
+
+Be realistic and accurate. Use real market data patterns. Return only the JSON object, no extra text.`,
       messages: [{
         role: 'user',
-        content: `Job title: ${title}\nCompany: ${company}\nLocation: ${location}\nCurrent salary: $${salary}`,
+        content: `Job title: ${title}\nLocation: ${location || 'United States'}\nCurrent salary: $${salary}`,
       }],
     })
 
     const text = response.content[0].type === 'text' ? response.content[0].text : '{}'
     const match = text.match(/\{[\s\S]*\}/)
-    if (!match) throw new Error('Invalid response from AI')
+    if (!match) throw new Error('Invalid response')
 
     const result = JSON.parse(match[0])
     return NextResponse.json(result)
