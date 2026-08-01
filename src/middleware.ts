@@ -33,7 +33,7 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/dashboard') ||
     pathname.startsWith('/tools') ||
     pathname.startsWith('/recruiter') ||
-    pathname.startsWith('/resume') ||
+    (pathname === '/resume' || pathname.startsWith('/resume/')) ||
     pathname.startsWith('/progress') ||
     pathname.startsWith('/account') ||
     pathname.startsWith('/report') ||
