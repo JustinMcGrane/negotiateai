@@ -134,73 +134,61 @@ export default function LandingPage() {
         {/* Right: salary analysis mockup */}
         <div style={{
           background: '#fff',
-          border: '1px solid #e2e8f0',
+          border: '1px solid #e8edf3',
           borderRadius: 20,
-          padding: 28,
-          boxShadow: '0 8px 40px rgba(0,0,0,0.08)',
+          padding: '32px 28px',
+          boxShadow: '0 4px 32px rgba(0,0,0,0.07)',
         }}>
-          {/* Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
-            <div>
-              <div style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.08em', marginBottom: 4 }}>SALARY ANALYSIS</div>
-              <div style={{ fontSize: 17, fontWeight: 700, color: '#0f172a' }}>Software Engineer</div>
-              <div style={{ fontSize: 12, color: '#64748b', marginTop: 2 }}>San Francisco, CA · 4 years exp.</div>
-            </div>
-            <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8, padding: '5px 11px', fontSize: 12, fontWeight: 700, color: '#dc2626' }}>
-              Underpaid
-            </div>
+          {/* Title row */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.1em', marginBottom: 8 }}>SALARY ANALYSIS</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 3 }}>Software Engineer</div>
+            <div style={{ fontSize: 13, color: '#94a3b8' }}>San Francisco, CA · 4 yrs experience</div>
           </div>
 
-          {/* Range bar */}
-          <div style={{ marginBottom: 20 }}>
-            <div style={{ position: 'relative', height: 10, background: 'linear-gradient(to right, #fef2f2, #fefce8, #f0fdf4)', borderRadius: 99, marginBottom: 8, overflow: 'hidden' }}>
-              {/* colored segments */}
-              <div style={{ position: 'absolute', left: 0, top: 0, width: '33%', height: '100%', background: '#fca5a5', borderRadius: '99px 0 0 99px' }} />
-              <div style={{ position: 'absolute', left: '33%', top: 0, width: '34%', height: '100%', background: '#fcd34d' }} />
-              <div style={{ position: 'absolute', left: '67%', top: 0, width: '33%', height: '100%', background: '#86efac', borderRadius: '0 99px 99px 0' }} />
-              {/* Your salary marker */}
-              <div style={{ position: 'absolute', top: -3, left: '22%', transform: 'translateX(-50%)', width: 16, height: 16, background: '#141414', border: '3px solid #fff', borderRadius: '50%', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }} />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.05em' }}>
-              <span>BELOW MARKET</span>
-              <span>MARKET RATE</span>
-              <span>ABOVE MARKET</span>
-            </div>
-          </div>
-
-          {/* Salary rows */}
+          {/* Range rows */}
           {[
-            { label: 'Your current salary', value: '$112,000', color: '#dc2626', bold: true },
-            { label: 'Market median', value: '$148,000', color: '#0f172a', bold: false },
-            { label: 'Top 25%', value: '$171,000', color: '#059669', bold: false },
+            { label: 'Below market', range: '$95k – $125k', pct: 30, bg: '#fef2f2', fill: '#fca5a5', tag: 'You', tagBg: '#dc2626' },
+            { label: 'Market rate', range: '$126k – $155k', pct: 65, bg: '#f0fdf4', fill: '#4ade80', tag: null, tagBg: null },
+            { label: 'Above market', range: '$156k – $190k', pct: 90, bg: '#eff6ff', fill: '#93c5fd', tag: null, tagBg: null },
           ].map(row => (
-            <div key={row.label} style={{
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-              padding: '10px 0',
-              borderBottom: '1px solid #f1f5f9',
-            }}>
-              <span style={{ fontSize: 13, color: '#64748b' }}>{row.label}</span>
-              <span style={{ fontSize: 14, fontWeight: row.bold ? 700 : 600, color: row.color }}>{row.value}</span>
+            <div key={row.label} style={{ marginBottom: 14 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontSize: 13, fontWeight: 500, color: '#374151' }}>{row.label}</span>
+                  {row.tag && (
+                    <span style={{ fontSize: 10, fontWeight: 700, background: row.tagBg!, color: '#fff', borderRadius: 4, padding: '2px 7px', letterSpacing: '0.04em' }}>
+                      YOU
+                    </span>
+                  )}
+                </div>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#64748b' }}>{row.range}</span>
+              </div>
+              <div style={{ height: 8, background: '#f1f5f9', borderRadius: 99, overflow: 'hidden' }}>
+                <div style={{ height: '100%', width: `${row.pct}%`, background: row.fill, borderRadius: 99, transition: 'width 0.6s ease' }} />
+              </div>
             </div>
           ))}
 
+          {/* Divider */}
+          <div style={{ borderTop: '1px solid #f1f5f9', margin: '20px 0' }} />
+
           {/* Gap callout */}
-          <div style={{
-            marginTop: 16,
-            background: '#fef2f2',
-            border: '1px solid #fecaca',
-            borderRadius: 10,
-            padding: '12px 16px',
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          }}>
-            <div style={{ fontSize: 13, color: '#7f1d1d', fontWeight: 500 }}>You&apos;re leaving on the table</div>
-            <div style={{ fontSize: 18, fontWeight: 800, color: '#dc2626' }}>$36,000/yr</div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+            <div>
+              <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 3 }}>Potential annual increase</div>
+              <div style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>$36,000 <span style={{ fontSize: 14, fontWeight: 500, color: '#94a3b8' }}>/yr</span></div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 3 }}>Market median</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: '#059669' }}>$148,000</div>
+            </div>
           </div>
 
           <Link href="/signup" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-            marginTop: 14, background: '#4169E1', color: '#fff',
-            borderRadius: 10, padding: '12px 0',
+            background: '#4169E1', color: '#fff',
+            borderRadius: 10, padding: '13px 0',
             fontSize: 14, fontWeight: 700, textDecoration: 'none',
           }}>
             See my real market value <ArrowRight size={14} />
