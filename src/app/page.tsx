@@ -90,49 +90,121 @@ export default function LandingPage() {
       </header>
 
       {/* Hero */}
-      <section style={{ maxWidth: 860, margin: '0 auto', padding: '72px 24px 88px', textAlign: 'center' }}>
-        <h1 style={{
-          fontSize: 'clamp(40px, 6vw, 72px)',
-          fontWeight: 800, lineHeight: 1.1,
-          letterSpacing: '-0.03em', marginBottom: 28,
-          color: '#0f172a',
-        }}>
-          Land the job.<br />
-          Negotiate the offer.<br />
-          <span style={{ whiteSpace: 'nowrap' }}>Get paid what you&apos;re <span style={{ display: 'inline-block', background: '#4169E1', color: '#fff', borderRadius: 10, padding: '2px 18px 8px' }}>worth.</span></span>
-        </h1>
-
-        <p style={{ fontSize: 18, color: '#64748b', lineHeight: 1.75, maxWidth: 560, margin: '0 auto 40px' }}>
-          Hayven gives you an AI recruiter, resume analyzer, job search, cover letter generator, and 10 negotiation tools — everything you need to take control of your career.
-        </p>
-
-        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 56 }}>
-          <Link href="/signup" style={{
-            height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '0 30px', background: '#141414', color: '#fff',
-            borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
+      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '72px 32px 88px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }} className="landing-hero">
+        {/* Left: copy */}
+        <div>
+          <h1 style={{
+            fontSize: 'clamp(36px, 4.5vw, 62px)',
+            fontWeight: 800, lineHeight: 1.1,
+            letterSpacing: '-0.03em', marginBottom: 24,
+            color: '#0f172a',
           }}>
-            Start for free <ArrowRight size={15} />
-          </Link>
-          <Link href="#features" style={{
-            height: 50, display: 'inline-flex', alignItems: 'center',
-            padding: '0 26px', background: 'transparent', color: '#374151',
-            border: '1px solid #d1d5db', borderRadius: 10, fontSize: 15, textDecoration: 'none', fontWeight: 500,
-          }}>
-            See what&apos;s inside
-          </Link>
+            Land the job.<br />
+            Negotiate the offer.<br />
+            <span style={{ whiteSpace: 'nowrap' }}>Get paid what you&apos;re <span style={{ display: 'inline-block', background: '#4169E1', color: '#fff', borderRadius: 10, padding: '2px 18px 8px' }}>worth.</span></span>
+          </h1>
+
+          <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 36, maxWidth: 480 }}>
+            Hayven gives you an AI recruiter, resume analyzer, job search, cover letter generator, and 10 negotiation tools — everything you need to take control of your career.
+          </p>
+
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44 }}>
+            <Link href="/signup" style={{
+              height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '0 28px', background: '#141414', color: '#fff',
+              borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
+            }}>
+              Find out what you&apos;re worth <ArrowRight size={15} />
+            </Link>
+          </div>
+
+          <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
+            {[
+              { stat: '15+', label: 'AI career tools' },
+              { stat: '100%', label: 'free to start' },
+            ].map(s => (
+              <div key={s.stat}>
+                <div style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
+                <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div style={{ display: 'flex', gap: 48, justifyContent: 'center', flexWrap: 'wrap' }}>
+        {/* Right: salary analysis mockup */}
+        <div style={{
+          background: '#fff',
+          border: '1px solid #e2e8f0',
+          borderRadius: 20,
+          padding: 28,
+          boxShadow: '0 8px 40px rgba(0,0,0,0.08)',
+        }}>
+          {/* Header */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.08em', marginBottom: 4 }}>SALARY ANALYSIS</div>
+              <div style={{ fontSize: 17, fontWeight: 700, color: '#0f172a' }}>Software Engineer</div>
+              <div style={{ fontSize: 12, color: '#64748b', marginTop: 2 }}>San Francisco, CA · 4 years exp.</div>
+            </div>
+            <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8, padding: '5px 11px', fontSize: 12, fontWeight: 700, color: '#dc2626' }}>
+              Underpaid
+            </div>
+          </div>
+
+          {/* Range bar */}
+          <div style={{ marginBottom: 20 }}>
+            <div style={{ position: 'relative', height: 10, background: 'linear-gradient(to right, #fef2f2, #fefce8, #f0fdf4)', borderRadius: 99, marginBottom: 8, overflow: 'hidden' }}>
+              {/* colored segments */}
+              <div style={{ position: 'absolute', left: 0, top: 0, width: '33%', height: '100%', background: '#fca5a5', borderRadius: '99px 0 0 99px' }} />
+              <div style={{ position: 'absolute', left: '33%', top: 0, width: '34%', height: '100%', background: '#fcd34d' }} />
+              <div style={{ position: 'absolute', left: '67%', top: 0, width: '33%', height: '100%', background: '#86efac', borderRadius: '0 99px 99px 0' }} />
+              {/* Your salary marker */}
+              <div style={{ position: 'absolute', top: -3, left: '22%', transform: 'translateX(-50%)', width: 16, height: 16, background: '#141414', border: '3px solid #fff', borderRadius: '50%', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }} />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.05em' }}>
+              <span>BELOW MARKET</span>
+              <span>MARKET RATE</span>
+              <span>ABOVE MARKET</span>
+            </div>
+          </div>
+
+          {/* Salary rows */}
           {[
-            { stat: '15+', label: 'AI-powered career tools' },
-            { stat: '100%', label: 'free to start' },
-          ].map(s => (
-            <div key={s.stat} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
-              <div style={{ fontSize: 13, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
+            { label: 'Your current salary', value: '$112,000', color: '#dc2626', bold: true },
+            { label: 'Market median', value: '$148,000', color: '#0f172a', bold: false },
+            { label: 'Top 25%', value: '$171,000', color: '#059669', bold: false },
+          ].map(row => (
+            <div key={row.label} style={{
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              padding: '10px 0',
+              borderBottom: '1px solid #f1f5f9',
+            }}>
+              <span style={{ fontSize: 13, color: '#64748b' }}>{row.label}</span>
+              <span style={{ fontSize: 14, fontWeight: row.bold ? 700 : 600, color: row.color }}>{row.value}</span>
             </div>
           ))}
+
+          {/* Gap callout */}
+          <div style={{
+            marginTop: 16,
+            background: '#fef2f2',
+            border: '1px solid #fecaca',
+            borderRadius: 10,
+            padding: '12px 16px',
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          }}>
+            <div style={{ fontSize: 13, color: '#7f1d1d', fontWeight: 500 }}>You&apos;re leaving on the table</div>
+            <div style={{ fontSize: 18, fontWeight: 800, color: '#dc2626' }}>$36,000/yr</div>
+          </div>
+
+          <Link href="/signup" style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+            marginTop: 14, background: '#4169E1', color: '#fff',
+            borderRadius: 10, padding: '12px 0',
+            fontSize: 14, fontWeight: 700, textDecoration: 'none',
+          }}>
+            See my real market value <ArrowRight size={14} />
+          </Link>
         </div>
       </section>
 
