@@ -193,18 +193,18 @@ export default function LandingPage() {
             marginTop: 18,
             background: '#fef2f2',
             borderRadius: 10,
-            padding: '13px 16px',
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+            padding: '14px 16px',
           }}>
-            <span style={{ fontSize: 13, color: '#b91c1c', fontWeight: 500 }}>Money left on the table</span>
-            <span style={{ fontSize: 17, fontWeight: 800, color: '#dc2626' }}>$36,000 / yr</span>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#b91c1c', letterSpacing: '0.06em', marginBottom: 4 }}>MONEY LEFT ON THE TABLE</div>
+            <div style={{ fontSize: 22, fontWeight: 800, color: '#dc2626', letterSpacing: '-0.02em' }}>$36,000 / year</div>
           </div>
 
           <Link href="/signup" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-            marginTop: 14, background: '#4169E1', color: '#fff',
+            marginTop: 12, background: '#4169E1', color: '#fff',
             borderRadius: 10, padding: '13px 0',
             fontSize: 14, fontWeight: 700, textDecoration: 'none',
+            whiteSpace: 'nowrap',
           }}>
             See my real market value <ArrowRight size={14} />
           </Link>
