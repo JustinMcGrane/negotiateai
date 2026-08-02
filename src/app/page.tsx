@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import { NewsletterForm } from '@/components/negotiate/NewsletterForm'
 import {
   TrendingUp, BookOpen, Play, FileSearch,
   Calculator, DollarSign, Mail, Shield, PenLine, MessageSquare,
@@ -419,6 +420,25 @@ export default function LandingPage() {
             Get started free <ArrowRight size={15} />
           </Link>
           <div style={{ marginTop: 16, fontSize: 13, color: '#a5b4fc' }}>No credit card required. Free forever plan available.</div>
+        </div>
+      </section>
+
+      {/* Early Access */}
+      <section style={{ padding: '80px 24px', background: '#0f172a' }}>
+        <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ display: 'inline-block', fontSize: 12, fontWeight: 700, color: '#f59e0b', background: 'rgba(245,158,11,0.15)', padding: '4px 12px', borderRadius: 20, letterSpacing: '0.08em', marginBottom: 20 }}>
+            LIMITED — FIRST 1,000 MEMBERS ONLY
+          </div>
+          <h2 style={{ fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 12px', lineHeight: 1.2 }}>
+            Lock in Pro at $40/month — forever.
+          </h2>
+          <p style={{ fontSize: 16, color: '#94a3b8', marginBottom: 8, lineHeight: 1.7 }}>
+            Pro is $49/month. The first 1,000 members get it at $40/month, locked in for life — even when the price goes up.
+          </p>
+          <p style={{ fontSize: 14, color: '#64748b', marginBottom: 36 }}>
+            Enter your email to claim your spot. We&apos;ll send you the activation link.
+          </p>
+          <NewsletterForm />
         </div>
       </section>
 
