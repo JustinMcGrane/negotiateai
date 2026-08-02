@@ -20,6 +20,11 @@ const RESOURCES = [
   { label: 'How to Negotiate a SaaS Job Offer', href: '/blog/how-to-negotiate-saas-job-offer' },
   { label: 'What Your Equity Is Actually Worth', href: '/blog/what-your-equity-is-actually-worth' },
   { label: 'Recruiter Types and How to Handle Them', href: '/blog/recruiter-types-and-how-to-handle' },
+  { label: 'What to Say When a Recruiter Asks Your Salary', href: '/blog/what-to-say-when-recruiter-asks-current-salary' },
+  { label: 'How to Negotiate a Remote Job Offer', href: '/blog/how-to-negotiate-remote-job-offer' },
+  { label: 'Software Engineer Salary by City (2026)', href: '/blog/average-software-engineer-salary-by-city' },
+  { label: 'How to Ask for a Raise: Scripts That Work', href: '/blog/how-to-ask-for-a-raise-scripts-that-work' },
+  { label: 'How to Evaluate a Job Offer', href: '/blog/how-to-evaluate-a-job-offer' },
 ]
 
 function Dropdown({ label, items }: { label: string; items: { label: string; href: string }[] }) {
