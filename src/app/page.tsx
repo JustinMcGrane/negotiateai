@@ -119,8 +119,14 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <a href="#early-access" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#f59e0b', textDecoration: 'none', fontWeight: 600 }}>
-            🔒 Early access: first 1,000 members get Pro at $40/month →
+          <a href="#early-access" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 10,
+            fontSize: 15, fontWeight: 700, textDecoration: 'none',
+            background: 'linear-gradient(135deg, #f59e0b, #ef4444)',
+            color: '#fff', padding: '12px 22px', borderRadius: 10,
+            boxShadow: '0 4px 20px rgba(245,158,11,0.35)',
+          }}>
+            🔒 First 1,000 members: Pro at $40/month forever — claim your spot →
           </a>
 
           <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
