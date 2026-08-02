@@ -119,6 +119,10 @@ export default function LandingPage() {
             </Link>
           </div>
 
+          <a href="#early-access" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#f59e0b', textDecoration: 'none', fontWeight: 600 }}>
+            🔒 Early access: first 1,000 members get Pro at $40/month →
+          </a>
+
           <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
             {[
               { stat: '15+', label: 'AI career tools' },
@@ -232,7 +236,7 @@ export default function LandingPage() {
       </div>
 
       {/* Early Access */}
-      <section style={{ padding: '80px 24px', background: '#0f172a' }}>
+      <section id="early-access" style={{ padding: '80px 24px', background: '#0f172a' }}>
         <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
           <div style={{ display: 'inline-block', fontSize: 12, fontWeight: 700, color: '#f59e0b', background: 'rgba(245,158,11,0.15)', padding: '4px 12px', borderRadius: 20, letterSpacing: '0.08em', marginBottom: 20 }}>
             LIMITED — FIRST 1,000 MEMBERS ONLY
