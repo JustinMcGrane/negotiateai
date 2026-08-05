@@ -126,7 +126,7 @@ export default function LandingPage() {
             color: '#fff', padding: '12px 22px', borderRadius: 10,
             boxShadow: '0 4px 20px rgba(245,158,11,0.35)',
           }}>
-            🔒 First 1,000 members: Pro at $40/month forever — claim your spot →
+            🔒 First 1,000 members: Pro at $40/month — claim your spot →
           </a>
 
           <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
@@ -248,10 +248,10 @@ export default function LandingPage() {
             LIMITED — FIRST 1,000 MEMBERS ONLY
           </div>
           <h2 style={{ fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 12px', lineHeight: 1.2 }}>
-            Lock in Pro at $40/month — forever.
+            First 1,000 members get Pro at $40/month.
           </h2>
           <p style={{ fontSize: 16, color: '#94a3b8', marginBottom: 8, lineHeight: 1.7 }}>
-            Pro is $49/month. The first 1,000 members get it at $40/month, locked in for life — even when the price goes up.
+            Pro is $49/month. The first 1,000 members get it at $40/month — your rate stays the same as the price rises.
           </p>
           <p style={{ fontSize: 14, color: '#64748b', marginBottom: 36 }}>
             Enter your email to claim your spot. We&apos;ll send you the activation link.

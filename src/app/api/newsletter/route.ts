@@ -64,24 +64,37 @@ export async function POST(req: NextRequest) {
     let resendResult: { status: number; body: unknown } | null = null
 
     if (resendKey) {
-      const html = `
-        <div style="font-family: -apple-system, sans-serif; max-width: 520px; margin: 0 auto; padding: 40px 24px; background: #fafafa;">
-          <div style="background: #141414; width: 40px; height: 40px; border-radius: 10px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
-            <span style="color: #fff; font-size: 18px; font-weight: 700;">H</span>
-          </div>
-          <h1 style="font-size: 22px; font-weight: 800; color: #0f172a; margin: 0 0 8px; letter-spacing: -0.02em;">You're locked in at $40/month — forever.</h1>
-          <p style="color: #475569; font-size: 15px; line-height: 1.7; margin: 0 0 16px;">
-            You've claimed your early access rate. Once you activate, you'll pay $40/month for Hayven Pro — locked in for life, even when the price goes up to $49.
-          </p>
-          <p style="color: #475569; font-size: 15px; line-height: 1.7; margin: 0 0 28px;">
-            Click below to create your account and activate your rate.
-          </p>
-          <a href="${appUrl}/signup?early=1" style="display: inline-block; background: #141414; color: #fff; text-decoration: none; padding: 13px 28px; border-radius: 9px; font-weight: 700; font-size: 15px; margin-bottom: 32px;">Activate my $40/month rate →</a>
-          <p style="color: #94a3b8; font-size: 12px; line-height: 1.6; margin: 0;">
-            You signed up for early access to Hayven. <a href="${appUrl}/unsubscribe" style="color: #94a3b8;">Unsubscribe</a>
-          </p>
-        </div>
-      `
+      const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Early access confirmed</title></head>
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:40px 16px;">
+    <tr><td align="center">
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border-radius:12px;overflow:hidden;">
+        <!-- Header -->
+        <tr><td style="padding:32px 40px 0;">
+          <p style="margin:0;font-size:18px;font-weight:700;color:#0f172a;letter-spacing:-0.02em;">Hayven</p>
+        </td></tr>
+        <!-- Body -->
+        <tr><td style="padding:28px 40px 32px;">
+          <h1 style="margin:0 0 16px;font-size:22px;font-weight:700;color:#0f172a;line-height:1.3;letter-spacing:-0.02em;">Your early access spot is confirmed.</h1>
+          <p style="margin:0 0 12px;font-size:15px;color:#475569;line-height:1.7;">You're one of the first 1,000 members to sign up for Hayven Pro at $40/month — $9 less than the regular price.</p>
+          <p style="margin:0 0 28px;font-size:15px;color:#475569;line-height:1.7;">Click the button below to create your account and activate your rate.</p>
+          <table cellpadding="0" cellspacing="0"><tr><td style="border-radius:8px;background:#141414;">
+            <a href="${appUrl}/signup?early=1" style="display:inline-block;padding:13px 28px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;">Create your account</a>
+          </td></tr></table>
+        </td></tr>
+        <!-- Divider -->
+        <tr><td style="padding:0 40px;"><hr style="border:none;border-top:1px solid #e2e8f0;margin:0;"></td></tr>
+        <!-- Footer -->
+        <tr><td style="padding:24px 40px;">
+          <p style="margin:0;font-size:12px;color:#94a3b8;line-height:1.6;">You received this because you signed up for early access at gethayven.com. <a href="${appUrl}/unsubscribe" style="color:#94a3b8;text-decoration:underline;">Unsubscribe</a></p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
 
       const resendRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -89,7 +102,7 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify({
           from: 'Hayven <onboarding@resend.dev>',
           to: email,
-          subject: "You're locked in at $40/month — forever",
+          subject: "Your early access spot is confirmed",
           html,
         }),
       })
