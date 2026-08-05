@@ -61,6 +61,7 @@ export async function POST(req: NextRequest) {
     // Send welcome email via Resend
     const resendKey = process.env.RESEND_API_KEY
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://gethayven.com'
+    let resendResult: { status: number; body: unknown } | null = null
 
     if (resendKey) {
       const html = `
@@ -82,7 +83,7 @@ export async function POST(req: NextRequest) {
         </div>
       `
 
-      await fetch('https://api.resend.com/emails', {
+      const resendRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -92,9 +93,12 @@ export async function POST(req: NextRequest) {
           html,
         }),
       })
+      const resendBody = await resendRes.json()
+      resendResult = { status: resendRes.status, body: resendBody }
+      console.error('Resend response:', resendRes.status, JSON.stringify(resendBody))
     }
 
-    return NextResponse.json({ ok: true, spot: (count ?? 0) + 1, hasResendKey: !!resendKey })
+    return NextResponse.json({ ok: true, spot: (count ?? 0) + 1, hasResendKey: !!resendKey, resend: resendResult })
   } catch (e) {
     console.error(e)
     return NextResponse.json({ error: 'Failed' }, { status: 500 })
