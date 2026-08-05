@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
         method: 'POST',
         headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          from: 'Hayven <hello@gethayven.com>',
+          from: 'Hayven <onboarding@resend.dev>',
           to: email,
           subject: "You're locked in at $40/month — forever",
           html,
