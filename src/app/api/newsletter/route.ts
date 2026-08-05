@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
       })
     }
 
-    return NextResponse.json({ ok: true, spot: (count ?? 0) + 1 })
+    return NextResponse.json({ ok: true, spot: (count ?? 0) + 1, hasResendKey: !!resendKey })
   } catch (e) {
     console.error(e)
     return NextResponse.json({ error: 'Failed' }, { status: 500 })
