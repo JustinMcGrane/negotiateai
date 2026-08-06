@@ -41,7 +41,8 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/tracker') ||
     pathname.startsWith('/roleplay') ||
     pathname.startsWith('/live-coach') ||
-    pathname.startsWith('/onboarding')
+    pathname.startsWith('/onboarding') ||
+    pathname.startsWith('/analyze')
 
   if (!user && isProtected) {
     return NextResponse.redirect(new URL('/login', request.url))

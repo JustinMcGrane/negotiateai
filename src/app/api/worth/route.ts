@@ -3,7 +3,27 @@ import Anthropic from '@anthropic-ai/sdk'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
+const rateLimit = new Map<string, { count: number; reset: number }>()
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now()
+  const window = 60_000 // 1 minute
+  const limit = 5
+  const entry = rateLimit.get(ip)
+  if (!entry || now > entry.reset) {
+    rateLimit.set(ip, { count: 1, reset: now + window })
+    return true
+  }
+  if (entry.count >= limit) return false
+  entry.count++
+  return true
+}
+
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown'
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json({ error: 'Too many requests. Please wait a minute.' }, { status: 429 })
+  }
   try {
     const { title, location, salary } = await req.json()
 
