@@ -23,6 +23,11 @@ export default function SignupPage() {
       setError(error.message)
       setLoading(false)
     } else {
+      fetch('/api/welcome', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name }),
+      }).catch(() => {})
       router.push('/onboarding')
       router.refresh()
     }
