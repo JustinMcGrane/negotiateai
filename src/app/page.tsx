@@ -321,7 +321,7 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-            <Link href="/signup" style={{
+            <Link href="/recruiter" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: '#4A90D9', color: '#fff',
               padding: '12px 24px', borderRadius: 9,

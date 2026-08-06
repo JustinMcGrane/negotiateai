@@ -157,23 +157,64 @@ async function extractAndSaveMemory(
   }
 }
 
+const GUEST_LIMIT = 10
+const guestUsage = new Map<string, { count: number; reset: number }>()
+
+function checkGuestLimit(ip: string): { allowed: boolean; used: number } {
+  const now = Date.now()
+  const window = 24 * 60 * 60 * 1000 // 24 hours
+  const entry = guestUsage.get(ip)
+  if (!entry || now > entry.reset) {
+    guestUsage.set(ip, { count: 1, reset: now + window })
+    return { allowed: true, used: 1 }
+  }
+  if (entry.count >= GUEST_LIMIT) return { allowed: false, used: entry.count }
+  entry.count++
+  return { allowed: true, used: entry.count }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
+    const body = await req.json()
+    const { messages } = body
 
+    // Guest (unauthenticated) path
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+      const guest = checkGuestLimit(ip)
+      if (!guest.allowed) {
+        return NextResponse.json({ error: 'limit_reached', used: guest.used, limit: GUEST_LIMIT }, { status: 429 })
+      }
+      const systemPrompt = buildAssessmentSystemPrompt('')
+      const anthropicMessages = messages
+        .filter((m: { role: string }) => m.role !== 'system')
+        .map((m: { role: string; content: string }) => ({ role: m.role as 'user' | 'assistant', content: m.content }))
+      while (anthropicMessages.length > 0 && anthropicMessages[0].role === 'assistant') anthropicMessages.shift()
+      if (anthropicMessages.length === 0) return NextResponse.json({ error: 'No messages' }, { status: 400 })
+      const response = await client.messages.create({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1024,
+        system: systemPrompt,
+        messages: anthropicMessages,
+      })
+      const rawContent = response.content[0].type === 'text' ? response.content[0].text : ''
+      let assessment = null
+      let content = rawContent
+      const assessmentMatch = rawContent.match(/\[ASSESSMENT_COMPLETE\]([\s\S]*?)\[\/ASSESSMENT_COMPLETE\]/)
+      if (assessmentMatch) {
+        try { assessment = JSON.parse(assessmentMatch[1]) } catch {}
+        content = rawContent.replace(/\[ASSESSMENT_COMPLETE\][\s\S]*?\[\/ASSESSMENT_COMPLETE\]/, '').trim()
+      }
+      return NextResponse.json({ content, used: guest.used, limit: GUEST_LIMIT, isPro: false, assessment })
     }
 
-    const [{ data: profile }, { messages }] = await Promise.all([
-      supabase
-        .from('profiles')
-        .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role')
-        .eq('id', user.id)
-        .single(),
-      req.json(),
-    ])
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role')
+      .eq('id', user.id)
+      .single()
 
     const isPro = ['pro', 'elite'].includes((profile?.plan ?? '').toLowerCase())
     console.log('[recruiter] plan:', profile?.plan, 'isPro:', isPro)

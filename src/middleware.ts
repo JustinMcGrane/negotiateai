@@ -32,7 +32,6 @@ export async function middleware(request: NextRequest) {
   const isProtected =
     pathname.startsWith('/dashboard') ||
     pathname.startsWith('/tools') ||
-    pathname.startsWith('/recruiter') ||
     (pathname === '/resume' || pathname.startsWith('/resume/')) ||
     pathname.startsWith('/progress') ||
     pathname.startsWith('/account') ||
