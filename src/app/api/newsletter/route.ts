@@ -65,29 +65,58 @@ export async function POST(req: NextRequest) {
       const html = `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Early access confirmed</title></head>
-<body style="margin:0;padding:0;background:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:40px 16px;">
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;padding:48px 16px;">
     <tr><td align="center">
-      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border-radius:12px;overflow:hidden;">
-        <!-- Header -->
-        <tr><td style="padding:32px 40px 0;">
-          <p style="margin:0;font-size:18px;font-weight:700;color:#0f172a;letter-spacing:-0.02em;">Hayven</p>
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;">
+
+        <!-- Logo row -->
+        <tr><td style="padding:0 0 24px;">
+          <p style="margin:0;font-size:20px;font-weight:700;color:#0f172a;letter-spacing:-0.03em;">Hayven</p>
         </td></tr>
-        <!-- Body -->
-        <tr><td style="padding:28px 40px 32px;">
-          <h1 style="margin:0 0 16px;font-size:22px;font-weight:700;color:#0f172a;line-height:1.3;letter-spacing:-0.02em;">Your early access spot is confirmed.</h1>
-          <p style="margin:0 0 12px;font-size:15px;color:#475569;line-height:1.7;">You're one of the first 1,000 members to sign up for Hayven Pro at $40/month — $9 less than the regular price.</p>
-          <p style="margin:0 0 28px;font-size:15px;color:#475569;line-height:1.7;">Click the button below to create your account and activate your rate.</p>
-          <table cellpadding="0" cellspacing="0"><tr><td style="border-radius:8px;background:#141414;">
-            <a href="${appUrl}/signup?early=1" style="display:inline-block;padding:13px 28px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;">Create your account</a>
-          </td></tr></table>
+
+        <!-- Card -->
+        <tr><td style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:40px 40px 32px;">
+
+          <!-- Badge -->
+          <p style="margin:0 0 20px;display:inline-block;font-size:11px;font-weight:700;color:#16a34a;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:4px 12px;letter-spacing:0.05em;text-transform:uppercase;">Early access confirmed</p>
+
+          <!-- Heading -->
+          <h1 style="margin:0 0 16px;font-size:24px;font-weight:700;color:#0f172a;line-height:1.3;letter-spacing:-0.02em;">Welcome to Hayven — your $40/month rate is reserved.</h1>
+
+          <!-- Body -->
+          <p style="margin:0 0 12px;font-size:15px;color:#475569;line-height:1.75;">You're one of the first 1,000 members to claim early access. When you create your account, you'll be subscribed at $40/month — that's $9 less than the standard Pro rate.</p>
+          <p style="margin:0 0 32px;font-size:15px;color:#475569;line-height:1.75;">Create your account below to lock it in.</p>
+
+          <!-- Button -->
+          <table cellpadding="0" cellspacing="0">
+            <tr><td style="border-radius:8px;background:#0f172a;">
+              <a href="${appUrl}/signup?early=1" style="display:inline-block;padding:14px 28px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;letter-spacing:-0.01em;">Create your account →</a>
+            </td></tr>
+          </table>
+
+          <!-- Divider -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin:32px 0 24px;">
+            <tr><td style="border-top:1px solid #f1f5f9;"></td></tr>
+          </table>
+
+          <!-- What you get -->
+          <p style="margin:0 0 12px;font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;">What's included in Pro</p>
+          <table cellpadding="0" cellspacing="0" width="100%">
+            <tr><td style="padding:4px 0;font-size:14px;color:#475569;">✓&nbsp; Compensation analyzer &amp; market data</td></tr>
+            <tr><td style="padding:4px 0;font-size:14px;color:#475569;">✓&nbsp; AI negotiation simulator</td></tr>
+            <tr><td style="padding:4px 0;font-size:14px;color:#475569;">✓&nbsp; Counter-offer builder &amp; scripts</td></tr>
+            <tr><td style="padding:4px 0;font-size:14px;color:#475569;">✓&nbsp; Equity calculator &amp; offer evaluator</td></tr>
+            <tr><td style="padding:4px 0;font-size:14px;color:#475569;">✓&nbsp; All 15+ career tools</td></tr>
+          </table>
+
         </td></tr>
-        <!-- Divider -->
-        <tr><td style="padding:0 40px;"><hr style="border:none;border-top:1px solid #e2e8f0;margin:0;"></td></tr>
+
         <!-- Footer -->
-        <tr><td style="padding:24px 40px;">
-          <p style="margin:0;font-size:12px;color:#94a3b8;line-height:1.6;">You received this because you signed up for early access at gethayven.com. <a href="${appUrl}/unsubscribe" style="color:#94a3b8;text-decoration:underline;">Unsubscribe</a></p>
+        <tr><td style="padding:24px 0 0;">
+          <p style="margin:0;font-size:12px;color:#94a3b8;line-height:1.6;">You received this because you signed up for early access at <a href="https://gethayven.com" style="color:#94a3b8;text-decoration:none;">gethayven.com</a>. &nbsp;<a href="${appUrl}/unsubscribe" style="color:#94a3b8;text-decoration:underline;">Unsubscribe</a></p>
         </td></tr>
+
       </table>
     </td></tr>
   </table>
