@@ -6,6 +6,22 @@ Disallow: /dashboard
 Disallow: /tools/
 Disallow: /account
 Disallow: /progress
-Sitemap: ${process.env.NEXT_PUBLIC_APP_URL || 'https://negotiateai.com'}/sitemap.xml`
+Disallow: /jobs
+Disallow: /resume
+Disallow: /goals
+Disallow: /team
+Disallow: /development
+Disallow: /tasks
+Disallow: /report
+Disallow: /tracker
+Disallow: /settings
+Disallow: /roleplay
+Disallow: /payments
+Disallow: /brand-deals
+Disallow: /live-coach
+Disallow: /calendar
+Disallow: /recruiter
+Disallow: /api/
+Sitemap: https://gethayven.com/sitemap.xml`
   return new Response(body, { headers: { 'Content-Type': 'text/plain' } })
 }
