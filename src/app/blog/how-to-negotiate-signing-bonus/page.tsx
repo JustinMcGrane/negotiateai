@@ -1,0 +1,61 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'How to Negotiate a Signing Bonus | Hayven',
+  description: 'Signing bonuses are easier to negotiate than base salary. Here\'s how to ask for one — and how much to ask for.',
+}
+
+const tag = 'Salary negotiation'
+const readTime = '4 min read'
+
+export default function Article() {
+  return (
+    <article>
+      <div style={{ marginBottom: 40 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>{tag}</span>
+          <span style={{ fontSize: 12, color: '#94a3b8' }}>{readTime}</span>
+        </div>
+        <h1 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.03em', color: '#0f172a', marginBottom: 20 }}>
+          How to negotiate a signing bonus
+        </h1>
+        <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.75, borderLeft: '3px solid #e2e8f0', paddingLeft: 20, margin: 0 }}>
+          Signing bonuses are one-time payments that don&apos;t affect headcount budgets — which makes them easier to get than a base salary increase. Here&apos;s how to ask.
+        </p>
+      </div>
+
+      <div style={{ fontSize: 16, lineHeight: 1.85, color: '#334155' }}>
+        <p style={{ marginBottom: 24 }}>When a company can&apos;t move on base salary — either because of internal pay bands or budget constraints — a signing bonus is often the path of least resistance. It&apos;s a one-time cost that doesn&apos;t compound, doesn&apos;t affect benefits calculations, and often comes from a different budget than ongoing headcount costs.</p>
+        <p style={{ marginBottom: 24 }}>That makes it the easiest lever to pull when everything else is fixed.</p>
+
+        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>When to ask for a signing bonus</h2>
+        <p style={{ marginBottom: 24 }}>The best time to bring up a signing bonus is after they&apos;ve made their best offer on base salary and you still have a gap. Don&apos;t lead with it — exhaust the base salary conversation first. Then use the bonus to bridge the difference.</p>
+        <p style={{ marginBottom: 24 }}>You can also use a signing bonus to cover money you&apos;re leaving behind — unvested equity, a year-end bonus you won&apos;t receive, or PTO payout. This gives you a concrete reason to ask that&apos;s hard to argue with.</p>
+
+        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>How much to ask for</h2>
+        <p style={{ marginBottom: 24 }}>A reasonable signing bonus is typically 10–20% of your base salary. For senior roles it can go higher. If you&apos;re leaving unvested equity or a bonus behind, calculate the exact amount and ask for that specifically — it&apos;s a much stronger position than a round number pulled from thin air.</p>
+        <p style={{ marginBottom: 24 }}>Ask for more than you need. If you want $15,000, ask for $20,000. You&apos;ll likely meet somewhere in between.</p>
+
+        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>What to say</h2>
+        <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, padding: '20px 24px', marginBottom: 24 }}>
+          <p style={{ margin: 0, fontStyle: 'italic', color: '#0f172a' }}>&ldquo;I understand the base salary is fixed at this level. I&apos;m leaving behind [unvested equity / a year-end bonus / X weeks of PTO] worth approximately $[amount]. Would you be able to offer a signing bonus to help offset that? Something in the range of $[amount] would make this an easy decision.&rdquo;</p>
+        </div>
+        <p style={{ marginBottom: 24 }}>If you don&apos;t have a specific dollar amount you&apos;re leaving behind, you can still ask:</p>
+        <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, padding: '20px 24px', marginBottom: 24 }}>
+          <p style={{ margin: 0, fontStyle: 'italic', color: '#0f172a' }}>&ldquo;The base salary is a bit below what I was targeting. If there&apos;s no flexibility there, is a signing bonus something you could consider? Even $[amount] would go a long way toward making this work.&rdquo;</p>
+        </div>
+
+        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Watch out for clawback clauses</h2>
+        <p style={{ marginBottom: 24 }}>Most signing bonuses come with a clawback clause — if you leave within 12 or 24 months, you have to repay the bonus (sometimes pro-rated, sometimes in full). Read this carefully before signing. A $20,000 signing bonus with a 2-year clawback is less valuable than it appears if you&apos;re not certain you&apos;ll stay.</p>
+        <p style={{ marginBottom: 24 }}>You can also negotiate the clawback terms — asking for a shorter clawback window or a pro-rated repayment schedule is reasonable.</p>
+      </div>
+
+      <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>
+        <div style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>Evaluate your full offer — not just base salary</div>
+        <div style={{ fontSize: 15, color: '#64748b', marginBottom: 24, lineHeight: 1.65 }}>Hayven&apos;s offer evaluator breaks down your total compensation including bonus, equity, and benefits — so you know exactly what you&apos;re saying yes to.</div>
+        <Link href="/offer-evaluator" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#141414', color: '#fff', padding: '10px 22px', borderRadius: 9, fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>Evaluate my offer →</Link>
+      </div>
+    </article>
+  )
+}

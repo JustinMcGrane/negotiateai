@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
+import { BlogEarlyAccessBanner } from '@/components/negotiate/BlogEarlyAccessBanner'
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,12 +24,13 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
           }}>Get started free <ArrowRight size={14} /></Link>
         </div>
       </header>
-      <main style={{ maxWidth: 720, margin: '0 auto', padding: '64px 24px 96px' }}>
+      <main style={{ maxWidth: 720, margin: '0 auto', padding: '64px 24px 120px' }}>
         {children}
       </main>
       <footer style={{ borderTop: '0.5px solid #e5e7eb', padding: '32px 24px', textAlign: 'center' }}>
         <Link href="/" style={{ fontSize: 13, color: '#94a3b8', textDecoration: 'none' }}>← Back to Hayven</Link>
       </footer>
+      <BlogEarlyAccessBanner />
     </div>
   )
 }
