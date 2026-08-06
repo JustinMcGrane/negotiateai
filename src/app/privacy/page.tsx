@@ -1,82 +1,65 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowLeft } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — Hayven',
-  description: 'How Hayven collects, uses, and protects your information.',
+  title: 'Privacy Policy | Hayven',
+  description: 'Privacy Policy for Hayven.',
 }
 
 export default function PrivacyPage() {
   return (
-    <div style={{ background: '#fff', minHeight: '100vh' }}>
-      <header style={{ borderBottom: '0.5px solid #e5e7eb', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: '#fff', zIndex: 50 }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}><Image src="/logo.svg" alt="Hayven" width={190} height={52} style={{ objectFit: 'contain' }} priority /></Link>
-      </header>
+    <div style={{ minHeight: '100vh', background: '#fff', padding: '60px 16px' }}>
+      <div style={{ maxWidth: 680, margin: '0 auto' }}>
+        <Link href="/" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none', display: 'block', marginBottom: 40 }}>← Back to Hayven</Link>
+        <h1 style={{ fontSize: 32, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 8 }}>Privacy Policy</h1>
+        <p style={{ fontSize: 14, color: '#94a3b8', marginBottom: 48 }}>Last updated: August 6, 2026</p>
 
-      <main style={{ maxWidth: 720, margin: '0 auto', padding: '64px 24px 96px' }}>
-        <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#64748b', textDecoration: 'none', marginBottom: 40 }}>
-          <ArrowLeft size={14} /> Back to Hayven
-        </Link>
+        <div style={{ fontSize: 15, lineHeight: 1.8, color: '#334155' }}>
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0f172a', marginBottom: 12, marginTop: 40 }}>1. Information We Collect</h2>
+          <p style={{ marginBottom: 16 }}>We collect information you provide directly, including your email address, name, job title, salary information, and career details you enter into the Service. We also collect usage data such as which tools you use and when.</p>
 
-        <h1 style={{ fontSize: 32, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 8 }}>Privacy Policy</h1>
-        <p style={{ fontSize: 14, color: '#94a3b8', marginBottom: 48 }}>Last updated: July 19, 2026</p>
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0f172a', marginBottom: 12, marginTop: 40 }}>2. How We Use Your Information</h2>
+          <p style={{ marginBottom: 16 }}>We use your information to:</p>
+          <ul style={{ marginBottom: 16, paddingLeft: 24 }}>
+            <li style={{ marginBottom: 8 }}>Provide and improve the Service</li>
+            <li style={{ marginBottom: 8 }}>Generate personalized salary analysis and career recommendations</li>
+            <li style={{ marginBottom: 8 }}>Send transactional emails related to your account</li>
+            <li style={{ marginBottom: 8 }}>Send product updates and tips (you can opt out at any time)</li>
+            <li style={{ marginBottom: 8 }}>Process payments</li>
+          </ul>
 
-        {[
-          {
-            title: '1. Information We Collect',
-            body: `We collect information you provide directly — such as your name, email address, and any content you enter while using Hayven's tools. We also collect usage data (pages visited, features used, session duration) to improve the product. If you choose to accept cookies, we may also receive data through third-party tracking tools such as Meta Pixel and Google Ads tags.`,
-          },
-          {
-            title: '2. How We Use Your Information',
-            body: `We use your information to provide and improve Hayven's services, send you product updates and support messages, process payments, and measure marketing performance. We do not sell your personal information to third parties.`,
-          },
-          {
-            title: '3. Cookies and Tracking',
-            body: `We use cookies to keep you signed in and to understand how visitors use our site. With your consent, we also use Meta Pixel and Google Ads tags to measure the effectiveness of our advertising. You can decline tracking at any time via the cookie banner or by clearing your browser's local storage. Declining does not affect your ability to use Hayven.`,
-          },
-          {
-            title: '4. Data Sharing',
-            body: `We share data with service providers who help us operate Hayven — including Supabase (database), Stripe (payments), and Anthropic (AI). These providers process data only as needed to deliver their services and are bound by their own privacy policies. We may disclose information if required by law.`,
-          },
-          {
-            title: '5. Data Retention',
-            body: `We retain your account data for as long as your account is active. You may request deletion of your account and associated data at any time by emailing us at GetHayven@gmail.com.`,
-          },
-          {
-            title: '6. Security',
-            body: `We use industry-standard measures to protect your data, including encrypted connections (HTTPS) and access controls. No system is perfectly secure, and we cannot guarantee absolute security.`,
-          },
-          {
-            title: '7. Your Rights',
-            body: `Depending on your location, you may have the right to access, correct, or delete your personal data, or to opt out of certain processing. To exercise these rights, contact us at GetHayven@gmail.com.`,
-          },
-          {
-            title: '8. Children',
-            body: `Hayven is not directed at children under 13. We do not knowingly collect personal information from anyone under 13.`,
-          },
-          {
-            title: '9. Changes to This Policy',
-            body: `We may update this policy from time to time. When we do, we'll update the date at the top of this page. Continued use of Hayven after changes constitutes acceptance of the updated policy.`,
-          },
-          {
-            title: '10. Contact',
-            body: `Questions about this policy? Email us at GetHayven@gmail.com.`,
-          },
-        ].map(({ title, body }) => (
-          <section key={title} style={{ marginBottom: 36 }}>
-            <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 10 }}>{title}</h2>
-            <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.75, margin: 0 }}>{body}</p>
-          </section>
-        ))}
-      </main>
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0f172a', marginBottom: 12, marginTop: 40 }}>3. Data Storage</h2>
+          <p style={{ marginBottom: 16 }}>Your data is stored securely using Supabase (PostgreSQL). Salary and career data you enter is used solely to power your experience on the platform and is not sold to third parties.</p>
 
-      <footer style={{ borderTop: '0.5px solid #e5e7eb', padding: '32px 24px', display: 'flex', justifyContent: 'center', gap: 24 }}>
-        {[{ href: '/login', label: 'Sign in' }, { href: '/signup', label: 'Sign up' }].map(({ href, label }) => (
-          <Link key={href} href={href} prefetch={true} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
-        ))}
-      </footer>
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0f172a', marginBottom: 12, marginTop: 40 }}>4. Third-Party Services</h2>
+          <p style={{ marginBottom: 16 }}>We use the following third-party services:</p>
+          <ul style={{ marginBottom: 16, paddingLeft: 24 }}>
+            <li style={{ marginBottom: 8 }}><strong>Stripe</strong> — payment processing</li>
+            <li style={{ marginBottom: 8 }}><strong>Resend</strong> — transactional email</li>
+            <li style={{ marginBottom: 8 }}><strong>Anthropic</strong> — AI analysis and recommendations</li>
+            <li style={{ marginBottom: 8 }}><strong>Vercel</strong> — hosting and infrastructure</li>
+          </ul>
+          <p style={{ marginBottom: 16 }}>Each of these services has its own privacy policy governing their use of your data.</p>
+
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0f172a', marginBottom: 12, marginTop: 40 }}>5. Cookies</h2>
+          <p style={{ marginBottom: 16 }}>We use cookies solely for authentication purposes (to keep you logged in). We do not use tracking or advertising cookies.</p>
+
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0f172a', marginBottom: 12, marginTop: 40 }}>6. Your Rights</h2>
+          <p style={{ marginBottom: 16 }}>You may request deletion of your account and associated data at any time by emailing <a href="mailto:hello@gethayven.com" style={{ color: '#4169E1' }}>hello@gethayven.com</a>. We will process deletion requests within 30 days.</p>
+
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0f172a', marginBottom: 12, marginTop: 40 }}>7. Data Retention</h2>
+          <p style={{ marginBottom: 16 }}>We retain your data for as long as your account is active. If you delete your account, your data is removed within 30 days.</p>
+
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0f172a', marginBottom: 12, marginTop: 40 }}>8. Children's Privacy</h2>
+          <p style={{ marginBottom: 16 }}>The Service is not directed to children under 13. We do not knowingly collect information from children under 13.</p>
+
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0f172a', marginBottom: 12, marginTop: 40 }}>9. Changes to This Policy</h2>
+          <p style={{ marginBottom: 16 }}>We may update this Privacy Policy from time to time. We will notify you of significant changes via email.</p>
+
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0f172a', marginBottom: 12, marginTop: 40 }}>10. Contact</h2>
+          <p style={{ marginBottom: 16 }}>For privacy questions, contact us at <a href="mailto:hello@gethayven.com" style={{ color: '#4169E1' }}>hello@gethayven.com</a>.</p>
+        </div>
+      </div>
     </div>
   )
 }
