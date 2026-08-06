@@ -99,6 +99,9 @@ export function NewsletterForm() {
           {status === 'loading' ? 'Reserving…' : <><span>Claim early access</span> <ArrowRight size={14} /></>}
         </button>
         {status === 'error' && <div style={{ width: '100%', fontSize: 13, color: '#fca5a5', textAlign: 'center' }}>Something went wrong. Please try again.</div>}
+        <p style={{ width: '100%', fontSize: 11, color: '#94a3b8', textAlign: 'center', margin: '8px 0 0' }}>
+          By signing up, you agree to receive updates from Hayven. Unsubscribe anytime.
+        </p>
       </form>
     </div>
   )
