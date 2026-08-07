@@ -108,7 +108,10 @@ Return only valid JSON. No markdown code blocks. No commentary outside the JSON.
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) throw new Error('No JSON in response')
     const parsed = JSON.parse(jsonMatch[0])
-    return NextResponse.json({ ...parsed, used: usage.used, limit: usage.limit })
+
+    const sarahUpgradeMessage = !isPro ? `\n\n---\n\n**Ready to make these changes?**\n\nI've identified exactly what's holding your resume back. With Pro, I can rewrite your entire resume line by line, tailor it to specific job descriptions, and help you practice talking through every bullet in an interview. The changes above could be the difference between getting ignored and getting the interview.\n\nUpgrade to Pro to implement everything I just told you.` : null
+
+    return NextResponse.json({ ...parsed, used: usage.used, limit: usage.limit, sarahUpgradeMessage })
   } catch (err) {
     console.error(err)
     return NextResponse.json({ error: 'Analysis failed' }, { status: 500 })

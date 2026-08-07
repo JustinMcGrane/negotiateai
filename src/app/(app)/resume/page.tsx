@@ -18,6 +18,7 @@ type Analysis = {
   missingKeywords: string[]
   topPriorities: string[]
   interviewReadiness: string
+  sarahUpgradeMessage?: string | null
 }
 
 function ScoreCircle({ score, label }: { score: number; label: string }) {
@@ -379,6 +380,38 @@ export default function ResumePage() {
               <div style={{ fontSize: 14, lineHeight: 1.6 }}>{analysis.interviewReadiness}</div>
             </div>
           </div>
+
+          {/* Sarah upgrade prompt for free users */}
+          {analysis.sarahUpgradeMessage && (
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%)',
+              border: '1px solid rgba(102,126,234,0.3)',
+              borderRadius: 16, padding: '28px 24px',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                <div style={{
+                  width: 32, height: 32, borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                }}>
+                  <span style={{ fontSize: 14 }}>✦</span>
+                </div>
+                <div style={{ fontSize: 15, fontWeight: 700 }}>Sarah has more to say</div>
+              </div>
+              <p style={{ fontSize: 14, lineHeight: 1.75, marginBottom: 20, opacity: 0.8 }}>
+                I&apos;ve identified exactly what&apos;s holding your resume back. With Pro, I can rewrite your entire resume line by line, tailor it to specific job descriptions, and help you practice talking through every bullet in an interview. The changes above could be the difference between getting ignored and getting the interview.
+              </p>
+              <a href="/account/billing" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: '#fff', textDecoration: 'none',
+                borderRadius: 10, padding: '12px 24px',
+                fontSize: 14, fontWeight: 600,
+              }}>
+                Upgrade to Pro — implement everything →
+              </a>
+            </div>
+          )}
         </div>
       )}
     </div>
