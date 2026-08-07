@@ -7,12 +7,6 @@ import { createClient } from '@/lib/supabase/client'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
-const FIRST_STEPS: Record<string, string> = {
-  new_job: '/recruiter',
-  negotiate: '/tools/offer-evaluator',
-  raise: '/tools/raise-builder',
-  resume: '/resume',
-}
 
 const OPENING_MESSAGE = `Hey! I'm Sarah — I'll be your AI recruiter and career coach on the platform.
 
@@ -87,8 +81,7 @@ export default function OnboardingPage() {
         }
       } catch {}
     }
-    const dest = FIRST_STEPS[profile.goal ?? ''] ?? '/dashboard'
-    router.push(dest)
+    router.push('/dashboard')
   }
 
   function renderContent(text: string) {
