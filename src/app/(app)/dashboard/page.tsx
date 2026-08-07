@@ -187,32 +187,67 @@ export default async function DashboardPage() {
       {/* Market alert card */}
       <MarketAlertCard role={role} />
 
-      {/* New user welcome */}
-      {isNew && (
-        <div style={{
-          background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)',
-          borderRadius: 16, padding: '28px 32px', marginBottom: 28,
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          flexWrap: 'wrap', gap: 20,
-        }}>
-          <div>
-            <div style={{ fontSize: 11, color: '#a5b4fc', fontWeight: 600, letterSpacing: '0.06em', marginBottom: 8 }}>GET STARTED</div>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#fff', margin: '0 0 8px' }}>Sarah is ready for you.</h2>
-            <p style={{ fontSize: 14, color: '#c7d2fe', margin: 0, lineHeight: 1.6, maxWidth: 380 }}>
-              Your AI recruiter is waiting. Tell her where you are in your job search and she will tell you exactly what to do next.
-            </p>
-          </div>
-          <Link href="/recruiter" style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: '#fff', color: '#1e1b4b',
-            padding: '12px 22px', borderRadius: 10,
-            fontSize: 14, fontWeight: 700, textDecoration: 'none',
-            flexShrink: 0,
+      {/* Next step card — personalized for new users */}
+      {isNew && (() => {
+        const situation = profile?.onboarding_situation
+        const goal = profile?.onboarding_goal
+
+        type NextStep = { label: string; heading: string; body: string; href: string; cta: string }
+        const nextStep: NextStep = (() => {
+          if (situation === 'have_offer' || goal === 'negotiate') return {
+            label: 'YOUR NEXT STEP',
+            heading: `You have an offer — let's make sure you negotiate it.`,
+            body: `Most people leave $10k–$30k on the table by accepting the first number. Use the offer evaluator to see exactly what you should counter with.`,
+            href: '/tools/offer-evaluator',
+            cta: 'Evaluate my offer →',
+          }
+          if (situation === 'actively_looking' || situation === 'casually_looking' || goal === 'new_job') return {
+            label: 'YOUR NEXT STEP',
+            heading: `Let's get your resume ready to land interviews.`,
+            body: `Before you apply anywhere, make sure your resume passes ATS screening and positions you for the salary you want. Get a recruiter-grade review in 60 seconds.`,
+            href: '/resume',
+            cta: 'Analyze my resume →',
+          }
+          if (goal === 'raise') return {
+            label: 'YOUR NEXT STEP',
+            heading: `Ready to ask for a raise? Let's build your case.`,
+            body: `The raise request builder helps you put together a compelling argument backed by market data — so you walk in confident and walk out with more money.`,
+            href: '/tools/raise-builder',
+            cta: 'Build my raise request →',
+          }
+          return {
+            label: 'YOUR NEXT STEP',
+            heading: `Start with your compensation health score.`,
+            body: `Your score is ${healthScore}/100. Let's figure out what's holding it back and what you can do this week to improve your position.`,
+            href: '/tools/comp-analyzer',
+            cta: 'Analyze my compensation →',
+          }
+        })()
+
+        return (
+          <div style={{
+            background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)',
+            borderRadius: 16, padding: '28px 32px', marginBottom: 28,
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+            flexWrap: 'wrap', gap: 20,
           }}>
-            Talk to Sarah <ArrowRight size={15} />
-          </Link>
-        </div>
-      )}
+            <div>
+              <div style={{ fontSize: 11, color: '#a5b4fc', fontWeight: 600, letterSpacing: '0.06em', marginBottom: 8 }}>{nextStep.label}</div>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#fff', margin: '0 0 8px', maxWidth: 420 }}>{nextStep.heading}</h2>
+              <p style={{ fontSize: 14, color: '#c7d2fe', margin: 0, lineHeight: 1.6, maxWidth: 400 }}>{nextStep.body}</p>
+            </div>
+            <Link href={nextStep.href} style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              background: '#fff', color: '#1e1b4b',
+              padding: '12px 22px', borderRadius: 10,
+              fontSize: 14, fontWeight: 700, textDecoration: 'none',
+              flexShrink: 0,
+            }}>
+              {nextStep.cta}
+            </Link>
+          </div>
+        )
+      })()}
 
       {/* Stats */}
       {!isNew && (
