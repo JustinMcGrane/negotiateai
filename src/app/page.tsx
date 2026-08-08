@@ -266,18 +266,20 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Scrolling logo strip */}
-      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '20px 0', background: '#fafbfc', overflow: 'hidden' }}>
-        <div style={{ display: 'flex', gap: 12, animation: 'logoScroll 30s linear infinite', width: 'max-content' }}>
-          {[...LOGOS, ...LOGOS].map(({ name, color }, i) => (
-            <div key={i} style={{
-              background: '#fff', border: '1px solid #e8edf3', borderRadius: 10,
-              padding: '10px 24px', fontSize: 14, fontWeight: 700, color,
-              boxShadow: '0 1px 4px rgba(0,0,0,0.04)', letterSpacing: '-0.01em', flexShrink: 0,
-            }}>{name}</div>
-          ))}
+      {/* Logo strip */}
+      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '24px 40px', background: '#fafbfc' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.08em', textAlign: 'center', marginBottom: 16 }}>USED BY PROFESSIONALS AT</div>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+            {LOGOS.map(({ name, color }) => (
+              <div key={name} style={{
+                background: '#fff', border: '1px solid #e8edf3', borderRadius: 10,
+                padding: '10px 20px', fontSize: 14, fontWeight: 700, color,
+                boxShadow: '0 1px 4px rgba(0,0,0,0.04)', letterSpacing: '-0.01em',
+              }}>{name}</div>
+            ))}
+          </div>
         </div>
-        <style>{`@keyframes logoScroll { from { transform: translateX(0) } to { transform: translateX(-50%) } }`}</style>
       </div>
 
       {/* Early Access */}
