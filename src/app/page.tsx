@@ -139,7 +139,7 @@ export default function LandingPage() {
           {/* Stat pill */}
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 99, padding: '6px 16px', marginBottom: 24 }}>
             <span style={{ fontSize: 15 }}>🏆</span>
-            <span style={{ fontSize: 13, fontWeight: 600, color: '#16a34a' }}>73% of people who negotiate get more money</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: '#16a34a' }}>85% of people who negotiate their salary get more money</span>
           </div>
 
           <h1 style={{
@@ -180,7 +180,7 @@ export default function LandingPage() {
           <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap', marginTop: 32 }}>
             {[
               { stat: '$27K', label: 'avg left on table' },
-              { stat: '73%', label: 'who negotiate get more' },
+              { stat: '85%', label: 'who negotiate get more' },
               { stat: '10+', label: 'negotiation tools' },
               { stat: '100%', label: 'free to start' },
             ].map(s => (
