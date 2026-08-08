@@ -141,6 +141,37 @@ export default function ResumeBuilderPage() {
         </div>
       </section>
 
+      {/* Resume Guides by Role */}
+      <section style={{ background: '#f8fafc', borderTop: '0.5px solid #e5e7eb', padding: '72px 24px' }}>
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+          <h2 style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', textAlign: 'center', marginBottom: 12 }}>
+            Resume guides by role
+          </h2>
+          <p style={{ fontSize: 16, color: '#64748b', textAlign: 'center', maxWidth: 480, margin: '0 auto 48px', lineHeight: 1.7 }}>
+            Before you analyze, read the guide for your role. See exactly what metrics and structure hiring managers expect.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+            {[
+              { role: 'Software Engineer', color: '#6366f1', bg: '#eef2ff', href: '/blog/software-engineer-resume', desc: 'Tech stack placement, impact bullets, ATS keywords, and GitHub links.' },
+              { role: 'Account Executive', color: '#059669', bg: '#ecfdf5', href: '/blog/account-executive-resume', desc: 'Quota attainment, ACV, pipeline metrics, and deal size context.' },
+              { role: 'Marketing Manager', color: '#d97706', bg: '#fffbeb', href: '/blog/marketing-manager-resume', desc: 'Campaign results, budget ownership, channel-specific numbers, and ROAS.' },
+            ].map(g => (
+              <Link key={g.role} href={g.href} style={{ textDecoration: 'none' }}>
+                <div style={{ background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 14, padding: '24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: g.bg, color: g.color, fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 20, width: 'fit-content' }}>
+                    {g.role}
+                  </div>
+                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{g.desc}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, fontWeight: 600, color: g.color, marginTop: 4 }}>
+                    Read guide <ArrowRight size={13} />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section style={{ background: '#0f172a', padding: '72px 24px', textAlign: 'center' }}>
         <h2 style={{ fontSize: 'clamp(24px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 16 }}>
