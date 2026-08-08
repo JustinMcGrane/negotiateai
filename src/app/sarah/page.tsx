@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Send, Briefcase, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
@@ -86,21 +87,26 @@ export default function SarahPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#0f172a', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '16px 24px', display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 12 }}>
+        {/* Hayven branding */}
+        <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
+          <Image src="/logo-light.svg" alt="Hayven" width={100} height={28} style={{ objectFit: 'contain' }} />
+        </Link>
+        <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.15)', margin: '0 4px' }} />
         <div style={{
-          width: 36, height: 36, borderRadius: '50%',
+          width: 28, height: 28, borderRadius: '50%',
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
         }}>
-          <Briefcase size={16} color="#fff" />
+          <Briefcase size={13} color="#fff" />
         </div>
         <div>
-          <div style={{ fontSize: 15, fontWeight: 600, color: '#fff' }}>Sarah</div>
-          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>AI Recruiter · Hayven</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>Sarah</div>
+          <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)' }}>AI Recruiter</div>
         </div>
         <Link href="/signup" style={{
           marginLeft: 'auto', fontSize: 13, fontWeight: 600,
-          color: '#667eea', textDecoration: 'none',
+          color: '#667eea', textDecoration: 'none', whiteSpace: 'nowrap',
         }}>
           Create free account →
         </Link>
