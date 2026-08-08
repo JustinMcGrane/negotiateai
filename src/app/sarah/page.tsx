@@ -104,7 +104,7 @@ export default function SarahPage() {
       </div>
 
       {/* Messages */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '24px 16px', maxWidth: 720, width: '100%', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div style={{ flex: 1, overflowY: 'auto', padding: messages.length === 1 ? '0 16px' : '24px 16px', maxWidth: 720, width: '100%', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 16, justifyContent: messages.length === 1 ? 'flex-end' : 'flex-start', paddingBottom: 24 }}>
         {messages.map((msg, i) => (
           <div key={i} style={{ display: 'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start', gap: 10 }}>
             {msg.role === 'assistant' && (

@@ -303,10 +303,10 @@ export default function LandingPage() {
           <div>
             <div style={{ fontSize: 12, fontWeight: 700, color: '#7AB8E8', letterSpacing: '0.1em', marginBottom: 16 }}>CAREER COACH</div>
             <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, marginBottom: 20, letterSpacing: '-0.025em' }}>
-              Meet Sarah.<br />Your personal recruiter.
+              Meet Sarah.<br />Your personal career coach.
             </h2>
             <p style={{ fontSize: 15, color: '#94a3b8', lineHeight: 1.8, marginBottom: 32 }}>
-              Sarah has 12 years of recruiting experience at Google, Meta, and Stripe. She knows what hiring managers actually think, what kills candidacies silently, and exactly how to position you to win.
+              Sarah has 12 years of experience at Google, Meta, and Stripe. She knows what hiring managers actually think, what kills candidacies silently, and exactly how to position you to win.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 36 }}>
               {[
@@ -335,7 +335,7 @@ export default function LandingPage() {
             {[
               { value: '24/7', label: 'Always available', sub: 'No scheduling. No waiting.' },
               { value: '$27K', label: 'Avg money left behind', sub: 'Without negotiating.' },
-              { value: '10x', label: 'More offer data', sub: 'Than a typical recruiter.' },
+              { value: '10x', label: 'More offer data', sub: 'Than a typical career coach.' },
               { value: '100%', label: 'Personalized', sub: 'To your role and market.' },
             ].map(({ value, label, sub }) => (
               <div key={label} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: '24px 20px' }}>
