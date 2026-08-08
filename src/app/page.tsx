@@ -129,9 +129,11 @@ export default function LandingPage() {
             🔒 First 1,000 members: Pro at $40/month — claim your spot →
           </a>
 
-          <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap', marginTop: 32 }}>
             {[
-              { stat: '15+', label: 'AI career tools' },
+              { stat: '$27K', label: 'avg left on table' },
+              { stat: '73%', label: 'who negotiate get more' },
+              { stat: '10+', label: 'negotiation tools' },
               { stat: '100%', label: 'free to start' },
             ].map(s => (
               <div key={s.stat}>
@@ -223,21 +225,14 @@ export default function LandingPage() {
       </section>
 
       {/* Social proof bar */}
-      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '20px 40px', background: '#fafbfc' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', gap: 40, justifyContent: 'center', flexWrap: 'wrap' }}>
-          {[
-            'Resume analysis',
-            'AI job matching',
-            'Salary benchmarking',
-            'Negotiation coaching',
-            'Live roleplay practice',
-            'Offer scoring',
-          ].map(item => (
-            <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#64748b', fontWeight: 500 }}>
-              <CheckCircle size={14} color="#4A90D9" />
-              {item}
-            </div>
-          ))}
+      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '28px 40px', background: '#fafbfc' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.08em', marginBottom: 20 }}>USED BY PROFESSIONALS FROM</div>
+          <div style={{ display: 'flex', gap: 48, justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
+            {['Google', 'Meta', 'Amazon', 'Salesforce', 'Microsoft', 'Apple'].map(company => (
+              <div key={company} style={{ fontSize: 15, fontWeight: 700, color: '#94a3b8', letterSpacing: '-0.01em' }}>{company}</div>
+            ))}
+          </div>
         </div>
       </div>
 
