@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 }
 
 const tag = 'Equity & compensation'
-const readTime = '7 min read'
+const readTime = '8 min read'
 
 export default function Article() {
   return (
@@ -27,11 +27,12 @@ export default function Article() {
 
       <div style={{ fontSize: 16, lineHeight: 1.85, color: '#334155' }}>
         <p style={{ marginBottom: 24 }}>Startup equity is one of the most misunderstood components of compensation. Founders use it to offset lower base salaries. Candidates accept it as though it&apos;s real money. And most of the time, it turns out to be worth nothing.</p>
-        <p style={{ marginBottom: 24 }}>That&apos;s not cynicism — it&apos;s math. About 75% of VC-backed startups don&apos;t return the capital invested, which means most equity granted to employees also returns nothing.</p>
+        <p style={{ marginBottom: 24 }}>That&apos;s not cynicism — it&apos;s math. About 75% of VC-backed startups don&apos;t return the capital invested, which means most equity granted to employees also returns nothing. Before you trade salary for equity, you need to understand what you&apos;re actually getting.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>The equity calculator startup companies don&apos;t want you to use</h2>
         <p style={{ marginBottom: 24 }}>When you receive an equity grant, the company will tell you two numbers: the number of shares (or options) and the current valuation. What they won&apos;t tell you is what that grant represents as a percentage of the company — or what that percentage is worth after the inevitable dilution from future funding rounds.</p>
         <p style={{ marginBottom: 24 }}>A 0.5% stake at a $20M valuation sounds like $100,000. But after Series B, C, and D dilution, that 0.5% is likely 0.15%. And the preferred liquidation preferences from investors mean common stockholders (employees) often get zero even in a modest exit.</p>
+        <p style={{ marginBottom: 24 }}>Use Hayven&apos;s <Link href="/tools/equity-calc" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Equity Calculator</Link> to model your grant across conservative, base, and optimistic exit scenarios — with dilution and liquidation preferences factored in. It&apos;s the number you need before any negotiation.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>ISOs vs NSOs vs RSUs: what&apos;s the difference</h2>
         <p style={{ marginBottom: 24 }}><strong>ISOs (Incentive Stock Options):</strong> Common at early-stage companies. You have the right to buy shares at a set price (the strike price). If the company exits above that price, you profit. Tax treatment is favorable if you hold long enough.</p>
@@ -49,11 +50,22 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>When to negotiate equity vs. base</h2>
         <p style={{ marginBottom: 24 }}>If you&apos;re joining a pre-Series A startup, equity is speculative — treat it that way. Negotiate for the best base you can get and treat equity as a lottery ticket. If you&apos;re joining a Series C+ company with a clear path to IPO, equity becomes more meaningful and worth fighting for. At public companies, RSUs are cash equivalents and should be treated as such in your total comp calculation.</p>
+        <p style={{ marginBottom: 24 }}>When evaluating where your offer stands overall, don&apos;t just look at equity in isolation. Use Hayven&apos;s <Link href="/tools/offer-evaluator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Offer Evaluator</Link> to score your complete package — base, bonus, equity, and benefits — so you know exactly what you have before you decide what to push on.</p>
+
+        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>How to negotiate equity</h2>
+        <p style={{ marginBottom: 24 }}>If you want more equity, ask for it directly and explain why. &ldquo;I&apos;m excited about the company&apos;s trajectory and I&apos;d like to increase my ownership stake. Is there flexibility to increase the grant from X to Y shares?&rdquo;</p>
+        <p style={{ marginBottom: 24 }}>If they can&apos;t move on the grant size, negotiate the vesting schedule instead. A 1-year cliff with monthly vesting after is standard — but you can sometimes negotiate a shorter cliff or an accelerated vesting provision if the company is acquired.</p>
+        <p style={{ marginBottom: 24 }}>And if you&apos;re leaving unvested equity behind at your current company to take this role, that becomes leverage for a <Link href="/blog/how-to-negotiate-signing-bonus" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>signing bonus</Link>. Calculate what you&apos;re leaving behind and present the specific number.</p>
+
+        <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>The bottom line on startup equity</h2>
+        <p style={{ marginBottom: 24 }}>Equity can be life-changing — but only at companies that actually exit at significant multiples. Before you accept a lower base salary in exchange for equity upside, run the math honestly. Most of the time, the base salary compounds more reliably than the equity.</p>
+        <p style={{ marginBottom: 24 }}>The candidates who come out ahead are the ones who negotiate both — they push for the highest base the company will support, then push for equity on top. Don&apos;t accept a false choice between the two.</p>
+        <p style={{ marginBottom: 24 }}>For a complete guide to evaluating everything in your offer package, read <Link href="/blog/how-to-evaluate-a-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>how to evaluate a job offer beyond the base salary</Link>.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>
         <div style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>Model your equity across scenarios</div>
-        <div style={{ fontSize: 15, color: '#64748b', marginBottom: 24, lineHeight: 1.65 }}>Use Hayven&apos;s equity calculator to see conservative, base, and optimistic exit values for any grant.</div>
+        <div style={{ fontSize: 15, color: '#64748b', marginBottom: 24, lineHeight: 1.65 }}>Use Hayven&apos;s equity calculator to see conservative, base, and optimistic exit values for any grant — with dilution and liquidation preferences factored in.</div>
         <Link href="/signup" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#141414', color: '#fff', padding: '10px 22px', borderRadius: 9, fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>Calculate equity value →</Link>
       </div>
     </article>

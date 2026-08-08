@@ -67,7 +67,8 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>One thing most people forget</h2>
         <p style={{ marginBottom: 24 }}>Raises compound. If you get $10,000 more this year, that&apos;s not just $10,000 — it&apos;s a higher base for every future raise, every future offer, and every future comp conversation. The cost of not asking isn&apos;t just this year&apos;s delta. It&apos;s every year that follows.</p>
-        <p style={{ marginBottom: 24 }}>Most people dramatically underestimate how much they leave on the table over a career by avoiding this conversation. Even a single successful ask early in your career can be worth $100,000+ in lifetime earnings.</p>
+        <p style={{ marginBottom: 24 }}>Most people dramatically underestimate how much they leave on the table over a career by avoiding this conversation. Even a single successful ask early in your career can be worth $100,000+ in lifetime earnings. Use Hayven&apos;s <Link href="/tools/cost-calculator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Cost of Not Negotiating calculator</Link> to see the compounding dollar impact over your career.</p>
+        <p style={{ marginBottom: 24 }}>If you want a fully built raise request — with your wins, market data, and talking points organized — Hayven&apos;s <Link href="/tools/raise-builder" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Raise Builder</Link> generates a complete raise case in minutes.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

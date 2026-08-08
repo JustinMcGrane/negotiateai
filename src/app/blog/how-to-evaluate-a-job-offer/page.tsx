@@ -73,7 +73,8 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>What to negotiate</h2>
         <p style={{ marginBottom: 24 }}>Everything on the offer is negotiable — but pick your top two or three and lead with those. Trying to negotiate everything signals a difficult-to-work-with candidate. Negotiating the most important things signals a confident, prepared one.</p>
-        <p style={{ marginBottom: 24 }}>If base is non-negotiable (some companies have fixed bands), ask for a higher sign-on, accelerated vesting, or more equity. There&apos;s almost always something they can move on — you just need to ask.</p>
+        <p style={{ marginBottom: 24 }}>If base is non-negotiable (some companies have fixed bands), ask for a higher sign-on, accelerated vesting, or more equity. There&apos;s almost always something they can move on — you just need to ask. For a full guide on signing bonuses specifically, read <Link href="/blog/how-to-negotiate-signing-bonus" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>how to negotiate a signing bonus</Link>.</p>
+        <p style={{ marginBottom: 24 }}>Once you know what you want to push on, read <Link href="/blog/how-to-negotiate-salary-after-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>how to negotiate salary after a job offer</Link> for the exact scripts to use in the conversation.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

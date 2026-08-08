@@ -54,7 +54,8 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Practice before the call</h2>
         <p style={{ marginBottom: 24 }}>The biggest obstacle to negotiating isn&apos;t knowledge — it&apos;s anxiety. The silence after you name a number feels unbearable. The recruiter&apos;s hesitation feels like rejection. These moments are where most negotiations fall apart.</p>
-        <p style={{ marginBottom: 24 }}>The only way to get comfortable with discomfort is to practice. Use a negotiation simulator to run through the conversation before it happens. Run it multiple times. By the time you get on the actual call, it will feel familiar.</p>
+        <p style={{ marginBottom: 24 }}>The only way to get comfortable with discomfort is to practice. Hayven&apos;s <Link href="/tools/simulator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Negotiation Simulator</Link> lets you run through the conversation against a realistic AI coach and get scored feedback. Run it multiple times. By the time you get on the actual call, it will feel familiar.</p>
+        <p style={{ marginBottom: 24 }}>Before you practice, make sure you know your market rate. Hayven&apos;s <Link href="/tools/comp-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> gives you a precise number for your role and city — the foundation of any negotiation. And for a complete guide to the negotiation itself, read <Link href="/blog/how-to-negotiate-salary-after-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>how to negotiate salary after a job offer</Link>.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

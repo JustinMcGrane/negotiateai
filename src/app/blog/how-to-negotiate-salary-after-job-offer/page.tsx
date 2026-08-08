@@ -37,8 +37,8 @@ export default function Article() {
         <p style={{ marginBottom: 24 }}>Never negotiate on the spot. You need time to research, prepare your counter, and think clearly.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Step 2: Research your market rate</h2>
-        <p style={{ marginBottom: 24 }}>Before you counter, you need a number backed by data — not just what feels fair. Check Levels.fyi, Glassdoor, LinkedIn Salary, and Payscale for your specific role, level, and location. Don&apos;t average the results — aim for the 75th percentile. That&apos;s your target.</p>
-        <p style={{ marginBottom: 24 }}>If the offer is below market, that&apos;s your leverage. If it&apos;s at or above market, you can still negotiate — but focus on other components like signing bonus, equity, or remote flexibility instead of base salary.</p>
+        <p style={{ marginBottom: 24 }}>Before you counter, you need a number backed by data — not just what feels fair. Check Levels.fyi, Glassdoor, LinkedIn Salary, and Payscale for your specific role, level, and location. Don&apos;t average the results — aim for the 75th percentile. That&apos;s your target. Hayven&apos;s <Link href="/tools/comp-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> gives you a precise market rate for your role and city so you go in with real data.</p>
+        <p style={{ marginBottom: 24 }}>If the offer is below market, that&apos;s your leverage. If it&apos;s at or above market, you can still negotiate — but focus on other components like <Link href="/blog/how-to-negotiate-signing-bonus" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>signing bonus</Link>, equity, or remote flexibility instead of base salary.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Step 3: Make your counter</h2>
         <p style={{ marginBottom: 16 }}>Counter by phone if possible — it&apos;s faster and more personal. Email works too. Here&apos;s a script that works:</p>
@@ -48,7 +48,7 @@ export default function Article() {
         <p style={{ marginBottom: 24 }}>A few rules: always counter higher than your target (leave room to land where you want), give a specific number not a range, and never apologize for negotiating.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Step 4: Negotiate the full package</h2>
-        <p style={{ marginBottom: 24 }}>If they can&apos;t move on base salary, shift to other components. Signing bonus, extra vacation days, remote work flexibility, an earlier performance review, and equity are all negotiable — and sometimes easier to get than base pay because they don&apos;t affect your ongoing salary budget.</p>
+        <p style={{ marginBottom: 24 }}>If they can&apos;t move on base salary, shift to other components. Signing bonus, extra vacation days, remote work flexibility, an earlier performance review, and equity are all negotiable — and sometimes easier to get than base pay because they don&apos;t affect your ongoing salary budget. For a full breakdown of everything worth evaluating, read <Link href="/blog/how-to-evaluate-a-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>how to evaluate a job offer beyond the base salary</Link>.</p>
         <p style={{ marginBottom: 24 }}>A $10,000 signing bonus isn&apos;t as good as $10,000 more in base salary (since base compounds), but it&apos;s far better than nothing. Always ask.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>What if they say no?</h2>

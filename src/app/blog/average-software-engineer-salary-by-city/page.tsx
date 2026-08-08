@@ -82,7 +82,8 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>How to use this data in a negotiation</h2>
         <p style={{ marginBottom: 24 }}>When you get an offer, compare it to the 75th percentile for your city — not the median. You want to aim high in the negotiation, and citing specific data gives you credibility. &ldquo;Based on market data for senior engineers in Seattle, the 75th percentile base is around $215,000. I&apos;d like to discuss getting to $200,000&rdquo; is a much stronger position than &ldquo;I was hoping for more.&rdquo;</p>
-        <p style={{ marginBottom: 24 }}>If you&apos;re in a remote role, you have more leverage than a local candidate. Push for the national rate or the rate for the city where the company is headquartered — especially if the company has a location-blind pay policy.</p>
+        <p style={{ marginBottom: 24 }}>If you&apos;re in a remote role, you have more leverage than a local candidate. Push for the national rate or the rate for the city where the company is headquartered — especially if the company has a location-blind pay policy. Read <Link href="/blog/how-to-negotiate-remote-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>how to negotiate a remote job offer</Link> for the full strategy.</p>
+        <p style={{ marginBottom: 24 }}>Once you have your number, <Link href="/blog/how-to-negotiate-salary-after-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>here&apos;s how to negotiate salary after a job offer</Link> — including the exact scripts to use when you make your counter.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

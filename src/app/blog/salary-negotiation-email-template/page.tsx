@@ -69,6 +69,7 @@ export default function Article() {
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>What makes these templates work</h2>
         <p style={{ marginBottom: 24 }}>Each template follows the same principles: express genuine enthusiasm first, make a specific ask backed by a reason, and leave the door open for continued conversation. The tone is collaborative, not adversarial. You&apos;re not demanding — you&apos;re problem-solving together.</p>
         <p style={{ marginBottom: 24 }}>The biggest mistake people make in negotiation emails is being vague. &ldquo;I was hoping for a bit more&rdquo; gives the employer nothing to work with. A specific number with a reason gives them something to take to their manager.</p>
+        <p style={{ marginBottom: 24 }}>Before you send anything, make sure you have a number backed by market data. Hayven&apos;s <Link href="/tools/comp-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> gives you your precise market rate so your counter is grounded in evidence. And if you want a full walkthrough of the negotiation process before you put words on paper, read <Link href="/blog/how-to-negotiate-salary-after-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>how to negotiate salary after a job offer</Link>.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>
