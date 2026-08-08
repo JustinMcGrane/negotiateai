@@ -60,9 +60,51 @@ const eliteFeatures = [
   'PDF compensation report',
 ]
 
+const TICKER_ITEMS = [
+  { name: 'Michael R.', title: 'Product Manager', company: 'Google', result: 'negotiated $18K more' },
+  { name: 'Priya S.', title: 'Software Engineer', company: 'Stripe', result: 'discovered she was $31K underpaid' },
+  { name: 'James T.', title: 'Account Executive', company: 'Salesforce', result: 'negotiated $14K more + signing bonus' },
+  { name: 'Aisha K.', title: 'Data Scientist', company: 'Meta', result: 'negotiated $22K more in equity' },
+  { name: 'Carlos M.', title: 'Marketing Manager', company: 'Amazon', result: 'got a $12K raise approved' },
+  { name: 'Rachel W.', title: 'UX Designer', company: 'Airbnb', result: 'negotiated $9K more + remote flexibility' },
+  { name: 'David L.', title: 'Engineering Manager', company: 'Microsoft', result: 'negotiated $27K more' },
+  { name: 'Sofia B.', title: 'Operations Lead', company: 'Uber', result: 'discovered she was $19K underpaid' },
+]
+
+const LOGOS = [
+  { name: 'Google', color: '#4285F4' },
+  { name: 'Meta', color: '#0866FF' },
+  { name: 'Amazon', color: '#FF9900' },
+  { name: 'Salesforce', color: '#00A1E0' },
+  { name: 'Microsoft', color: '#00A4EF' },
+  { name: 'Apple', color: '#555555' },
+  { name: 'Stripe', color: '#635BFF' },
+  { name: 'Airbnb', color: '#FF5A5F' },
+  { name: 'Netflix', color: '#E50914' },
+  { name: 'Uber', color: '#000000' },
+]
+
 export default function LandingPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
+
+      {/* Top ticker */}
+      <div style={{ background: '#0f172a', overflow: 'hidden', height: 36, display: 'flex', alignItems: 'center' }}>
+        <div style={{
+          display: 'flex', gap: 48, whiteSpace: 'nowrap',
+          animation: 'ticker 40s linear infinite',
+        }}>
+          {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+            <span key={i} style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', flexShrink: 0 }}>
+              <span style={{ color: '#7AB8E8', fontWeight: 600 }}>{item.name}</span>
+              {' '}({item.title} · {item.company}){' '}
+              <span style={{ color: '#4ade80' }}>{item.result}</span>
+              <span style={{ marginLeft: 48, color: 'rgba(255,255,255,0.2)' }}>·</span>
+            </span>
+          ))}
+        </div>
+        <style>{`@keyframes ticker { from { transform: translateX(0) } to { transform: translateX(-50%) } }`}</style>
+      </div>
 
       {/* Header */}
       <header style={{
@@ -230,35 +272,18 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Social proof bar */}
-      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '32px 40px', background: '#fafbfc' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.08em', marginBottom: 20 }}>GET PAID MORE AT TOP COMPANIES</div>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
-            {[
-              { name: 'Google', color: '#4285F4' },
-              { name: 'Meta', color: '#0866FF' },
-              { name: 'Amazon', color: '#FF9900' },
-              { name: 'Salesforce', color: '#00A1E0' },
-              { name: 'Microsoft', color: '#00A4EF' },
-              { name: 'Apple', color: '#555555' },
-              { name: 'Stripe', color: '#635BFF' },
-              { name: 'Airbnb', color: '#FF5A5F' },
-            ].map(({ name, color }) => (
-              <div key={name} style={{
-                background: '#fff',
-                border: '1px solid #e8edf3',
-                borderRadius: 10,
-                padding: '10px 20px',
-                fontSize: 14,
-                fontWeight: 700,
-                color,
-                boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
-                letterSpacing: '-0.01em',
-              }}>{name}</div>
-            ))}
-          </div>
+      {/* Scrolling logo strip */}
+      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '20px 0', background: '#fafbfc', overflow: 'hidden' }}>
+        <div style={{ display: 'flex', gap: 12, animation: 'logoScroll 30s linear infinite', width: 'max-content' }}>
+          {[...LOGOS, ...LOGOS].map(({ name, color }, i) => (
+            <div key={i} style={{
+              background: '#fff', border: '1px solid #e8edf3', borderRadius: 10,
+              padding: '10px 24px', fontSize: 14, fontWeight: 700, color,
+              boxShadow: '0 1px 4px rgba(0,0,0,0.04)', letterSpacing: '-0.01em', flexShrink: 0,
+            }}>{name}</div>
+          ))}
         </div>
+        <style>{`@keyframes logoScroll { from { transform: translateX(0) } to { transform: translateX(-50%) } }`}</style>
       </div>
 
       {/* Early Access */}
