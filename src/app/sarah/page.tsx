@@ -99,7 +99,7 @@ export default function SarahPage() {
           }}>
             <Briefcase size={11} color="#fff" />
           </div>
-          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Sarah · AI Recruiter</div>
+          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Sarah · Personalized Career Coach</div>
         </div>
       </div>
 
