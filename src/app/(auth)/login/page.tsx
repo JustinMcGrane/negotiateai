@@ -49,9 +49,9 @@ export default function LoginPage() {
 
       {/* Left — Form */}
       <div style={{ flex: '0 0 480px', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '48px 56px', background: '#fff' }}>
-        <div style={{ marginBottom: 40 }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 44 }}>
           <Link href="/">
-            <Image src="/logo.svg" alt="Hayven" width={130} height={36} style={{ objectFit: 'contain' }} priority />
+            <Image src="/logo.svg" alt="Hayven" width={200} height={56} style={{ objectFit: 'contain' }} priority />
           </Link>
         </div>
 
