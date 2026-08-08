@@ -22,7 +22,7 @@ const nav: NavEntry[] = [
   {
     label: 'Career Hub',
     items: [
-      { label: 'AI Recruiter', href: '/recruiter', icon: UserCircle },
+      { label: 'Career Coach', href: '/recruiter', icon: UserCircle },
       { label: 'Resume Analyzer', href: '/resume', icon: FileText },
       { label: 'Job Search', href: '/jobs', icon: Search },
       { label: 'Cover Letter', href: '/tools/cover-letter', icon: PenSquare },

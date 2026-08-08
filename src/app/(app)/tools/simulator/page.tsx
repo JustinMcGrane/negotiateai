@@ -152,7 +152,7 @@ This is turn ${newTurn} of ${MAX_TURNS}. ${newTurn === MAX_TURNS - 1 ? 'This is 
     <div style={{ padding: '32px 32px 80px', maxWidth: 780 }}>
       <div style={{ marginBottom: 24 }}>
         <h1 style={{ fontSize: 18, fontWeight: 500 }}>Negotiation simulator</h1>
-        <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>Practice a live negotiation with a realistic AI recruiter. Get a scored debrief after 6 turns.</p>
+        <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>Practice a live negotiation with a realistic AI coach. Get a scored debrief after 6 turns.</p>
       </div>
 
       <div style={{ background: '#fff', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 24, marginBottom: 16 }}>

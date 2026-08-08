@@ -12,17 +12,17 @@ import { NewsletterForm } from '@/components/negotiate/NewsletterForm'
 
 export const metadata: Metadata = {
   title: 'Hayven — Get paid what you\'re worth',
-  description: 'AI recruiter, resume analyzer, job search, cover letter generator, and salary negotiation tools. Everything you need to land the job and the offer you deserve.',
+  description: 'Personalized career coach, resume analyzer, job search, cover letter generator, and salary negotiation tools. Everything you need to land the job and the offer you deserve.',
   openGraph: {
     title: 'Hayven — Get paid what you\'re worth',
-    description: 'AI recruiter, resume analyzer, job search, and salary negotiation. Land the job and the offer you deserve.',
+    description: 'Personalized career coach, resume analyzer, job search, and salary negotiation. Land the job and the offer you deserve.',
     url: process.env.NEXT_PUBLIC_APP_URL ?? 'https://gethayven.com',
     type: 'website',
   },
 }
 
 const careerFeatures = [
-  { icon: UserCircle, color: '#6366f1', bg: '#eef2ff', name: 'AI Recruiter — Sarah', desc: 'Your personal recruiter available 24/7. Resume feedback, job targeting, interview prep, and offer strategy — all in one conversation.' },
+  { icon: UserCircle, color: '#6366f1', bg: '#eef2ff', name: 'Career Coach — Sarah', desc: 'Your personalized career coach available 24/7. Resume feedback, job targeting, interview prep, and offer strategy — all in one conversation.' },
   { icon: FileText, color: '#0891b2', bg: '#e0f2fe', name: 'Resume Analyzer', desc: 'Recruiter-grade feedback with ATS scoring, section-by-section breakdown, rewritten bullets, and a prioritized action plan.' },
   { icon: Search, color: '#059669', bg: '#ecfdf5', name: 'Job Search', desc: 'Search real job listings and get matched to roles that fit your background. Apply in one click.' },
   { icon: PenSquare, color: '#d97706', bg: '#fffbeb', name: 'Cover Letter Generator', desc: 'Generate a tailored, compelling cover letter for any role in seconds. Professional, warm, or bold — your tone.' },
@@ -38,12 +38,12 @@ const negotiationTools = [
   { icon: Mail, name: 'Counter-Offer Builder', desc: 'Ready-to-send counter-offer email and script.' },
   { icon: Shield, name: 'Objection Handler', desc: 'Three responses to any recruiter pushback.' },
   { icon: PenLine, name: 'Raise Request Builder', desc: 'Build a compelling raise request from your wins.' },
-  { icon: Play, name: 'Negotiation Simulator', desc: 'Practice with an AI recruiter. Get scored.' },
+  { icon: Play, name: 'Negotiation Simulator', desc: 'Practice with an AI coach. Get scored.' },
   { icon: MessageSquare, name: 'Interview Salary Coach', desc: 'Real-time coaching on salary questions.' },
 ]
 
 const proFeatures = [
-  'Sarah AI recruiter — unlimited',
+  'Sarah career coach — unlimited',
   'All 10 negotiation tools — unlimited',
   'Resume analyzer + cover letter generator',
   'Offer evaluator + counter-offer builder',
@@ -106,7 +106,7 @@ export default function LandingPage() {
           </h1>
 
           <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 36, maxWidth: 480 }}>
-            Hayven gives you an AI recruiter, resume analyzer, job search, cover letter generator, and 10 negotiation tools — everything you need to take control of your career.
+            Hayven gives you a personalized career coach, resume analyzer, job search, cover letter generator, and 10 negotiation tools — everything you need to take control of your career.
           </p>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44 }}>
@@ -301,7 +301,7 @@ export default function LandingPage() {
       <section style={{ background: '#0f172a', padding: '96px 40px' }}>
         <div className="landing-sarah" style={{ maxWidth: 1000, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#7AB8E8', letterSpacing: '0.1em', marginBottom: 16 }}>AI RECRUITER</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#7AB8E8', letterSpacing: '0.1em', marginBottom: 16 }}>CAREER COACH</div>
             <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, marginBottom: 20, letterSpacing: '-0.025em' }}>
               Meet Sarah.<br />Your personal recruiter.
             </h2>

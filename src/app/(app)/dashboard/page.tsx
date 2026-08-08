@@ -276,7 +276,7 @@ export default async function DashboardPage() {
         <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>CAREER HUB</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
           {[
-            { href: '/recruiter', icon: UserCircle, color: '#6366f1', bg: '#eef2ff', name: 'AI Recruiter — Sarah', desc: 'Get personalized career advice' },
+            { href: '/recruiter', icon: UserCircle, color: '#6366f1', bg: '#eef2ff', name: 'Career Coach — Sarah', desc: 'Get personalized career advice' },
             { href: '/resume', icon: FileText, color: '#0891b2', bg: '#e0f2fe', name: 'Resume Analyzer', desc: 'Get recruiter-grade feedback' },
             { href: '/jobs', icon: Search, color: '#059669', bg: '#ecfdf5', name: 'Job Search', desc: 'Find roles that fit you' },
           ].map((t) => (
@@ -305,7 +305,7 @@ export default async function DashboardPage() {
           {[
             { href: '/tools/comp-analyzer', icon: TrendingUp, color: '#4A90D9', bg: '#EBF5FB', name: 'Compensation analyzer', desc: 'See your market rate' },
             { href: '/tools/offer-evaluator', icon: FileSearch, color: '#4A90D9', bg: '#EBF5FB', name: 'Offer evaluator', desc: 'Score any job offer 0–100' },
-            { href: '/tools/simulator', icon: Play, color: '#6366f1', bg: '#eef2ff', name: 'Negotiation simulator', desc: 'Practice with an AI recruiter' },
+            { href: '/tools/simulator', icon: Play, color: '#6366f1', bg: '#eef2ff', name: 'Negotiation simulator', desc: 'Practice with an AI coach' },
           ].map((t) => (
             <Link key={t.href} href={t.href} className="portal-card" style={{
               background: '#fff', border: '1px solid #e2e8f0',

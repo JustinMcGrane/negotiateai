@@ -6,18 +6,18 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
   title: 'Negotiation Simulator — Hayven',
-  description: 'Practice salary negotiation with a realistic AI recruiter. Get scored feedback so you walk into the real conversation prepared.',
+  description: 'Practice salary negotiation with a realistic AI career coach. Get scored feedback so you walk into the real conversation prepared.',
 }
 
 const benefits = [
-  { icon: Mic, title: 'Realistic AI recruiter', desc: 'Practice against a recruiter who pushes back, throws objections, and responds like a real hiring manager.' },
+  { icon: Mic, title: 'Realistic AI coach', desc: 'Practice against a recruiter who pushes back, throws objections, and responds like a real hiring manager.' },
   { icon: BarChart2, title: 'Scored debrief', desc: 'Get a score and specific feedback on every session — what landed, what fell flat, and what to do differently.' },
   { icon: RefreshCw, title: 'Run it as many times as you need', desc: 'Repetition builds confidence. Run the same scenario until the silence after your ask stops feeling threatening.' },
 ]
 
 const steps = [
   { number: '01', title: 'Set up your scenario', desc: 'Tell us about your role, the offer you received, and your target number.' },
-  { number: '02', title: 'Practice the conversation', desc: 'Negotiate with Sarah, our AI recruiter, in a realistic back-and-forth simulation.' },
+  { number: '02', title: 'Practice the conversation', desc: 'Negotiate with Sarah, our AI coach, in a realistic back-and-forth simulation.' },
   { number: '03', title: 'Get your debrief', desc: 'See your score, what worked, what didn\'t, and specific lines to improve for next time.' },
 ]
 
@@ -38,13 +38,13 @@ export default function NegotiationSimulatorPage() {
           Practice until<br /><span style={{ color: '#4169E1' }}>it feels easy.</span>
         </h1>
         <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.7, maxWidth: 560, margin: '0 auto 40px' }}>
-          Negotiate with a realistic AI recruiter, get scored feedback, and walk into the real conversation knowing exactly what to say.
+          Negotiate with a realistic AI coach, get scored feedback, and walk into the real conversation knowing exactly what to say.
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}>
           <Link href="/signup" style={{ height: 48, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '0 28px', background: '#141414', color: '#fff', borderRadius: 10, fontSize: 15, fontWeight: 600, textDecoration: 'none' }}>Start practicing free <ArrowRight size={15} /></Link>
         </div>
         <div style={{ display: 'flex', gap: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
-          {['Realistic AI recruiter', 'Scored feedback', 'Free to start'].map(t => (
+          {['Realistic AI coach', 'Scored feedback', 'Free to start'].map(t => (
             <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#64748b' }}><CheckCircle size={14} color="#16a34a" />{t}</div>
           ))}
         </div>

@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
                     <td style="width:32px;font-size:18px;vertical-align:top;padding-top:1px;">🎯</td>
                     <td>
                       <p style="margin:0 0 2px;font-size:14px;font-weight:600;color:#0f172a;">Run the negotiation simulator</p>
-                      <p style="margin:0;font-size:13px;color:#64748b;">Practice your negotiation against an AI recruiter before the real conversation.</p>
+                      <p style="margin:0;font-size:13px;color:#64748b;">Practice your negotiation against an AI coach before the real conversation.</p>
                     </td>
                   </tr>
                 </table>

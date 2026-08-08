@@ -8,7 +8,7 @@ type Message = { role: 'user' | 'assistant'; content: string }
 
 const SIGNUP_AFTER = 5 // show signup prompt after this many user messages
 
-const INTRO = `Hey! I'm Sarah, your personal recruiting assistant.
+const INTRO = `Hey! I'm Sarah, your personalized career coach.
 
 I help people figure out what they're worth, how to negotiate their salary, and how to land their next role.
 

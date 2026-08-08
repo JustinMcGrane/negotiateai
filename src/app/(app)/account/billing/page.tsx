@@ -43,7 +43,7 @@ export default function BillingPage() {
       name: 'Professional',
       price: '$49',
       sub: '/month',
-      features: ['Sarah AI recruiter — unlimited coaching', 'All 10 negotiation tools — unlimited', 'Resume analyzer + cover letter generator', 'Offer evaluator + counter-offer builder', 'Raise builder + negotiation playbook', 'Session history'],
+      features: ['Sarah career coach — unlimited coaching', 'All 10 negotiation tools — unlimited', 'Resume analyzer + cover letter generator', 'Offer evaluator + counter-offer builder', 'Raise builder + negotiation playbook', 'Session history'],
       cta: 'Get Professional',
       disabled: false,
       priceId: process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || '',

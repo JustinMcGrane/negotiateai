@@ -8,11 +8,11 @@ type Message = { role: 'user' | 'assistant'; content: string }
 
 const FREE_LIMIT = 20
 
-const FREE_INTRO = `Hey! I'm Sarah, your personal recruiting assistant, here to help you accomplish your goals and help you navigate the platform to get as much out of it as possible!
+const FREE_INTRO = `Hey! I'm Sarah, your personalized career coach, here to help you accomplish your goals and get the most out of the platform!
 
 What are you working on right now?`
 
-const PRO_INTRO = `Hey! I'm Sarah, your personal recruiting assistant, here to help you accomplish your goals and help you navigate the platform to get as much out of it as possible!
+const PRO_INTRO = `Hey! I'm Sarah, your personalized career coach, here to help you accomplish your goals and get the most out of the platform!
 
 I've got your profile pulled up and I'm ready to dig in. I can run mock interviews, coach you through a negotiation, review your resume, or help you figure out your next move. I'll remember everything we talk about so you never have to repeat yourself.
 
@@ -176,11 +176,11 @@ function RecruiterPageInner() {
                 background: isPro ? 'linear-gradient(135deg, #667eea, #764ba2)' : '#10b981',
                 color: '#fff', borderRadius: 4, padding: '2px 6px', fontWeight: 600,
               }}>
-                {isPro ? 'PRO COACH' : 'AI RECRUITER'}
+                {isPro ? 'PRO COACH' : 'CAREER COACH'}
               </span>
             </div>
             <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: 0 }}>
-              Your personal recruiting assistant
+              Your personalized career coach
             </p>
           </div>
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>

@@ -41,7 +41,7 @@ export default function UpgradePage() {
       price: '$49',
       sub: '/month',
       features: [
-        'Sarah AI recruiter — unlimited coaching',
+        'Sarah career coach — unlimited coaching',
         'All 10 negotiation tools — unlimited',
         'Resume analyzer',
         'Cover letter generator',

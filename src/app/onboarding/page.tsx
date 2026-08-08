@@ -8,7 +8,7 @@ import { createClient } from '@/lib/supabase/client'
 type Message = { role: 'user' | 'assistant'; content: string }
 
 
-const OPENING_MESSAGE = `Hey! I'm Sarah — I'll be your AI recruiter and career coach on the platform.
+const OPENING_MESSAGE = `Hey! I'm Sarah — I'll be your personalized career coach on the platform.
 
 Before we get started, I want to learn a bit about you so everything here is actually useful to you. It'll just take a minute.
 
