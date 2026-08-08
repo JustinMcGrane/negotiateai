@@ -130,12 +130,6 @@ export default function LandingPage() {
       <section style={{ maxWidth: 1100, margin: '0 auto', padding: '72px 32px 88px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }} className="landing-hero">
         {/* Left: copy */}
         <div>
-          {/* Stat pill */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 99, padding: '6px 16px', marginBottom: 24 }}>
-            <span style={{ fontSize: 15 }}>🏆</span>
-            <span style={{ fontSize: 13, fontWeight: 600, color: '#16a34a' }}>85% of people who negotiate their salary get more money</span>
-          </div>
-
           <h1 style={{
             fontSize: 'clamp(36px, 4.5vw, 62px)',
             fontWeight: 800, lineHeight: 1.1,
