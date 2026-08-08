@@ -88,22 +88,16 @@ export default function LandingPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
 
-      {/* Top ticker */}
-      <div style={{ background: '#0f172a', overflow: 'hidden', height: 36, display: 'flex', alignItems: 'center' }}>
-        <div style={{
-          display: 'flex', gap: 48, whiteSpace: 'nowrap',
-          animation: 'ticker 40s linear infinite',
-        }}>
-          {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
-            <span key={i} style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', flexShrink: 0 }}>
-              <span style={{ color: '#7AB8E8', fontWeight: 600 }}>{item.name}</span>
-              {' '}({item.title} · {item.company}){' '}
-              <span style={{ color: '#4ade80' }}>{item.result}</span>
-              <span style={{ marginLeft: 48, color: 'rgba(255,255,255,0.2)' }}>·</span>
-            </span>
-          ))}
+      {/* Top announcement bar */}
+      <div style={{ background: '#0f172a', width: '100%', padding: '12px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>🏆 </span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>85% of people who negotiate their salary get more money</span>
+          <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}> — are you leaving money on the table?</span>
         </div>
-        <style>{`@keyframes ticker { from { transform: translateX(0) } to { transform: translateX(-50%) } }`}</style>
+        <Link href="/sarah" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
+          Find out free →
+        </Link>
       </div>
 
       {/* Header */}
