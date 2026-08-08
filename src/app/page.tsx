@@ -94,6 +94,12 @@ export default function LandingPage() {
       <section style={{ maxWidth: 1100, margin: '0 auto', padding: '72px 32px 88px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }} className="landing-hero">
         {/* Left: copy */}
         <div>
+          {/* Stat pill */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 99, padding: '6px 16px', marginBottom: 24 }}>
+            <span style={{ fontSize: 15 }}>🏆</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: '#16a34a' }}>73% of people who negotiate get more money</span>
+          </div>
+
           <h1 style={{
             fontSize: 'clamp(36px, 4.5vw, 62px)',
             fontWeight: 800, lineHeight: 1.1,
@@ -225,12 +231,31 @@ export default function LandingPage() {
       </section>
 
       {/* Social proof bar */}
-      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '28px 40px', background: '#fafbfc' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.08em', marginBottom: 20 }}>USED BY PROFESSIONALS FROM</div>
-          <div style={{ display: 'flex', gap: 48, justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
-            {['Google', 'Meta', 'Amazon', 'Salesforce', 'Microsoft', 'Apple'].map(company => (
-              <div key={company} style={{ fontSize: 15, fontWeight: 700, color: '#94a3b8', letterSpacing: '-0.01em' }}>{company}</div>
+      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '32px 40px', background: '#fafbfc' }}>
+        <div style={{ maxWidth: 960, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.08em', marginBottom: 20 }}>GET PAID MORE AT TOP COMPANIES</div>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
+            {[
+              { name: 'Google', color: '#4285F4' },
+              { name: 'Meta', color: '#0866FF' },
+              { name: 'Amazon', color: '#FF9900' },
+              { name: 'Salesforce', color: '#00A1E0' },
+              { name: 'Microsoft', color: '#00A4EF' },
+              { name: 'Apple', color: '#555555' },
+              { name: 'Stripe', color: '#635BFF' },
+              { name: 'Airbnb', color: '#FF5A5F' },
+            ].map(({ name, color }) => (
+              <div key={name} style={{
+                background: '#fff',
+                border: '1px solid #e8edf3',
+                borderRadius: 10,
+                padding: '10px 20px',
+                fontSize: 14,
+                fontWeight: 700,
+                color,
+                boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
+                letterSpacing: '-0.01em',
+              }}>{name}</div>
             ))}
           </div>
         </div>
