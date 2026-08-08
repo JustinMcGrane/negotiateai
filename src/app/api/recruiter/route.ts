@@ -194,7 +194,7 @@ export async function POST(req: NextRequest) {
       while (anthropicMessages.length > 0 && anthropicMessages[0].role === 'assistant') anthropicMessages.shift()
       if (anthropicMessages.length === 0) return NextResponse.json({ error: 'No messages' }, { status: 400 })
       const response = await client.messages.create({
-        model: 'claude-haiku-4-5-20251001',
+        model: 'claude-sonnet-4-6',
         max_tokens: 1024,
         system: systemPrompt,
         messages: anthropicMessages,
