@@ -5,7 +5,16 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import Image from 'next/image'
 
-const COMPANIES = ['Google', 'Amazon', 'Microsoft', 'Meta', 'Apple', 'Stripe', 'Salesforce', 'Netflix']
+const COMPANIES = [
+  { name: 'Google', color: '#4285F4', bg: 'rgba(66,133,244,0.12)' },
+  { name: 'Amazon', color: '#FF9900', bg: 'rgba(255,153,0,0.12)' },
+  { name: 'Microsoft', color: '#00A4EF', bg: 'rgba(0,164,239,0.12)' },
+  { name: 'Meta', color: '#0082FB', bg: 'rgba(0,130,251,0.12)' },
+  { name: 'Apple', color: '#a8a8a8', bg: 'rgba(168,168,168,0.12)' },
+  { name: 'Stripe', color: '#635BFF', bg: 'rgba(99,91,255,0.12)' },
+  { name: 'Salesforce', color: '#00A1E0', bg: 'rgba(0,161,224,0.12)' },
+  { name: 'Netflix', color: '#E50914', bg: 'rgba(229,9,20,0.12)' },
+]
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -166,12 +175,12 @@ export default function LoginPage() {
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {COMPANIES.map(c => (
-              <div key={c} style={{
-                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)',
+              <div key={c.name} style={{
+                background: c.bg, border: `1px solid ${c.color}30`,
                 borderRadius: 8, padding: '6px 14px', fontSize: 12, fontWeight: 600,
-                color: 'rgba(255,255,255,0.5)',
+                color: c.color,
               }}>
-                {c}
+                {c.name}
               </div>
             ))}
           </div>
