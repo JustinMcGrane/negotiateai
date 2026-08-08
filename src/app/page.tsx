@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import { LandingNav } from '@/components/negotiate/LandingNav'
 import { NewsletterForm } from '@/components/negotiate/NewsletterForm'
+import { FAQ } from '@/components/negotiate/FAQ'
 
 export const metadata: Metadata = {
   title: 'Hayven — Get paid what you\'re worth',
@@ -503,6 +504,8 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      <FAQ />
 
       {/* CTA */}
       <section style={{ background: '#EBF5FB', borderTop: '1px solid #EBF5FB', borderBottom: '1px solid #EBF5FB', padding: '96px 40px', textAlign: 'center' }}>
