@@ -20,6 +20,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </PostHogProvider>
         <Suspense><PostHogPageview /></Suspense>
         <Suspense><TrackingScripts /></Suspense>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="8d072771-7f71-417d-a1ab-fc79a523ed4b";(function(){var d=document;var s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`,
+          }}
+        />
       </body>
     </html>
   )
