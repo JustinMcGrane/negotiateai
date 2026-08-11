@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
 
 const TOOLS = [
+  { label: 'Career Coach', href: '/ai-career-coach' },
   { label: 'Compensation Analyzer', href: '/compensation-analyzer' },
   { label: 'Offer Evaluator', href: '/offer-evaluator' },
   { label: 'Counter-Offer Builder', href: '/counter-offer-builder' },

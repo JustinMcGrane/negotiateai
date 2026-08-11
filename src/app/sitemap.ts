@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: base, lastModified: now, priority: 1.0 },
+    { url: `${base}/ai-career-coach`, lastModified: now, priority: 0.9 },
     { url: `${base}/compensation-analyzer`, lastModified: now, priority: 0.7 },
     { url: `${base}/offer-evaluator`, lastModified: now, priority: 0.7 },
     { url: `${base}/counter-offer-builder`, lastModified: now, priority: 0.7 },

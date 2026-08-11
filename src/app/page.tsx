@@ -672,7 +672,7 @@ export default function LandingPage() {
               <div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>PRODUCT</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {[{ href: '/signup', label: 'Sign up free' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }].map(({ href, label }) => (
+                  {[{ href: '/signup', label: 'Sign up free' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/ai-career-coach', label: 'Career Coach' }].map(({ href, label }) => (
                     <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
                   ))}
                 </div>
