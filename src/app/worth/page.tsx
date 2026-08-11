@@ -53,10 +53,10 @@ export default function WorthPage() {
       <header style={{
         background: '#fff', borderBottom: '1px solid #e2e8f0',
         padding: '0 24px', height: 56,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative',
       }}>
-        <Link href="/" style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', textDecoration: 'none' }}>Hayven</Link>
-        <Link href="/signup" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none', fontWeight: 500 }}>
+        <Link href="/" style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', textDecoration: 'none', letterSpacing: '-0.02em' }}>Hayven</Link>
+        <Link href="/signup" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none', fontWeight: 500, position: 'absolute', right: 24 }}>
           Sign up free →
         </Link>
       </header>
