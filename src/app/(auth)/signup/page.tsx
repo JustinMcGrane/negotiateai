@@ -82,14 +82,14 @@ export default function SignupPage() {
           Free to get started. No credit card required.
         </p>
 
-        {/* Google OAuth */}
+        {/* Google OAuth — primary */}
         <button
           onClick={handleGoogleSignup}
           type="button"
           style={{
-            height: 46, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-            background: '#fff', border: '1px solid #e2e8f0', borderRadius: 10,
-            fontSize: 14, fontWeight: 600, color: '#0f172a', cursor: 'pointer', marginBottom: 20,
+            height: 50, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+            background: '#0f172a', border: 'none', borderRadius: 10,
+            fontSize: 14, fontWeight: 700, color: '#fff', cursor: 'pointer', marginBottom: 14,
           }}
         >
           <svg width="18" height="18" viewBox="0 0 18 18">
@@ -101,9 +101,9 @@ export default function SignupPage() {
           Continue with Google
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
           <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
-          <span style={{ fontSize: 12, color: '#94a3b8', fontWeight: 500 }}>OR</span>
+          <span style={{ fontSize: 12, color: '#94a3b8', fontWeight: 500 }}>or sign up with email</span>
           <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
         </div>
 
