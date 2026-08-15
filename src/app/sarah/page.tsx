@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Send, Briefcase, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -8,7 +9,7 @@ type Message = { role: 'user' | 'assistant'; content: string }
 
 const SIGNUP_AFTER = 5 // show signup prompt after this many user messages
 
-const INTRO = `Hey! I'm Sarah, your personalized career coach.
+const DEFAULT_INTRO = `Hey! I'm Sarah, your personalized career coach.
 
 I help people figure out what they're worth, how to negotiate their salary, and how to land their next role.
 
@@ -21,6 +22,36 @@ const STARTERS = [
   'I just got a job offer — what do I do?',
 ]
 
+function fmt(n: number) {
+  return '$' + Math.round(n).toLocaleString()
+}
+
+function buildWorthContext(title: string, location: string, salary: string, median: string, gap: string) {
+  const salaryNum = Number(salary)
+  const medianNum = Number(median)
+  const gapNum = Number(gap)
+  if (!title || !salaryNum || !medianNum) return null
+
+  const locationStr = location ? ` in ${location}` : ''
+  const gapStr = gapNum > 0
+    ? ` That's a **${fmt(gapNum)}/year gap** — you're being underpaid.`
+    : ` You're actually being paid at or above market rate.`
+
+  return {
+    intro: `Hey! I just looked at your numbers — you're a **${title}**${locationStr} making **${fmt(salaryNum)}**, and the market median for your role is **${fmt(medianNum)}**.${gapStr}
+
+I want to help you close that gap. First question: are you thinking about negotiating your current salary, or are you open to finding a new role that pays you what you're worth?`,
+    systemContext: `The user just came from the salary checker tool. Here is their data:
+- Job title: ${title}
+- Location: ${location || 'not specified'}
+- Current salary: ${fmt(salaryNum)}
+- Market median: ${fmt(medianNum)}
+- Gap: ${gapNum > 0 ? fmt(gapNum) + ' underpaid' : 'at or above market'}
+
+Start the conversation knowing this context. Do not ask them what their salary is — you already know it. Focus immediately on actionable next steps to help them close the gap or improve their position.`,
+  }
+}
+
 function renderContent(text: string) {
   return text
     .replace(/&/g, '&amp;')
@@ -31,7 +62,17 @@ function renderContent(text: string) {
 }
 
 export default function SarahPage() {
-  const [messages, setMessages] = useState<Message[]>([{ role: 'assistant', content: INTRO }])
+  const searchParams = useSearchParams()
+  const worthContext = buildWorthContext(
+    searchParams.get('title') ?? '',
+    searchParams.get('location') ?? '',
+    searchParams.get('salary') ?? '',
+    searchParams.get('median') ?? '',
+    searchParams.get('gap') ?? '',
+  )
+  const intro = worthContext?.intro ?? DEFAULT_INTRO
+
+  const [messages, setMessages] = useState<Message[]>([{ role: 'assistant', content: intro }])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [userMessageCount, setUserMessageCount] = useState(0)
@@ -59,7 +100,10 @@ export default function SarahPage() {
       const res = await fetch('/api/recruiter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: newMessages }),
+        body: JSON.stringify({
+          messages: newMessages,
+          ...(worthContext?.systemContext ? { contextNote: worthContext.systemContext } : {}),
+        }),
       })
       const data = await res.json()
 

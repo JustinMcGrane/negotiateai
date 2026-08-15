@@ -243,7 +243,7 @@ export default function WorthPage() {
                   : 'Talk to Sarah — she\'ll show you how to protect your position, get promoted, or land an even better role.'
                 }
               </div>
-              <Link href="/sarah" style={{
+              <Link href={`/sarah?title=${encodeURIComponent(title)}&location=${encodeURIComponent(location)}&salary=${salary.replace(/[^0-9]/g, '')}&median=${Math.round(result.market_median)}&gap=${Math.round(result.underpaid_by)}`} style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                 background: '#4169E1', color: '#fff',
                 borderRadius: 9, padding: '12px 0',
