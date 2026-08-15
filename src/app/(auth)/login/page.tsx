@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import Image from 'next/image'
+import posthog from 'posthog-js'
 
 const COMPANIES = [
   { name: 'Google', color: '#4285F4', bg: 'rgba(66,133,244,0.12)' },
@@ -28,11 +29,12 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
     const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
       setError(error.message)
       setLoading(false)
     } else {
+      if (data.user) posthog.identify(data.user.id, { email: data.user.email })
       router.push('/dashboard')
     }
   }

@@ -2,6 +2,7 @@
 import { useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import posthog from 'posthog-js'
+import { createClient } from '@/lib/supabase/client'
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -10,6 +11,16 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
       person_profiles: 'identified_only',
       capture_pageview: false,
     })
+
+    const supabase = createClient()
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        posthog.identify(session.user.id, { email: session.user.email })
+      } else {
+        posthog.reset()
+      }
+    })
+    return () => subscription.unsubscribe()
   }, [])
 
   return <>{children}</>

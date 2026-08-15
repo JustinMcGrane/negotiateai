@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import Image from 'next/image'
+import posthog from 'posthog-js'
 
 const COMPANIES = [
   { name: 'Google', color: '#4285F4', bg: 'rgba(66,133,244,0.12)' },
@@ -34,6 +35,9 @@ export default function SignupPage() {
       setError(error.message)
       setLoading(false)
     } else {
+      const supabase2 = createClient()
+      const { data: { user } } = await supabase2.auth.getUser()
+      if (user) posthog.identify(user.id, { email: user.email, name })
       fetch('/api/welcome', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
