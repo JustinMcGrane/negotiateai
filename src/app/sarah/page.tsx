@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Send, Briefcase, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
@@ -61,7 +61,7 @@ function renderContent(text: string) {
     .replace(/\n/g, '<br />')
 }
 
-export default function SarahPage() {
+function SarahChat() {
   const searchParams = useSearchParams()
   const worthContext = buildWorthContext(
     searchParams.get('title') ?? '',
@@ -284,5 +284,13 @@ export default function SarahPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function SarahPage() {
+  return (
+    <Suspense>
+      <SarahChat />
+    </Suspense>
   )
 }
