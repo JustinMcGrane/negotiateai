@@ -235,22 +235,22 @@ export default function WorthPage() {
               padding: '20px 20px',
             }}>
               <div style={{ fontSize: 15, fontWeight: 700, color: '#fff', marginBottom: 6 }}>
-                Ready to do something about it?
+                {isUnder ? `You're leaving ${fmt(result.underpaid_by)} on the table every year.` : 'You\'re in a strong position.'}
               </div>
               <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, marginBottom: 16 }}>
-                Talk to Sarah in full — she&apos;ll build you a negotiation strategy, prep you for the conversation, and help you get what you&apos;re worth.
+                {isUnder
+                  ? 'Talk to Sarah — she\'ll assess your situation and tell you exactly what to do to get that money back, whether that\'s negotiating your current salary or finding a role that pays you fairly.'
+                  : 'Talk to Sarah — she\'ll show you how to protect your position, get promoted, or land an even better role.'
+                }
               </div>
-              <Link href="/signup" style={{
+              <Link href="/sarah" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                 background: '#4169E1', color: '#fff',
                 borderRadius: 9, padding: '12px 0',
                 fontSize: 14, fontWeight: 700, textDecoration: 'none',
               }}>
-                Get started free <ArrowRight size={14} />
+                Talk to Sarah <ArrowRight size={14} />
               </Link>
-              <div style={{ textAlign: 'center', marginTop: 10, fontSize: 12, color: 'rgba(255,255,255,0.25)' }}>
-                No credit card required
-              </div>
             </div>
 
             {/* Try again */}
