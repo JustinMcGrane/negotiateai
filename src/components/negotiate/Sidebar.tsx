@@ -182,18 +182,19 @@ export function Sidebar() {
         flexDirection: 'column',
         gap: 4,
       }}>
-        {plan !== 'elite' && (
-          <Link href="/account/billing" style={{
+        {plan !== 'pro' && plan !== 'elite' && (
+          <Link href="/upgrade" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            background: '#4A90D9',
+            background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
             color: '#fff',
             borderRadius: 8,
             padding: '8px 12px',
             fontSize: 12,
-            fontWeight: 600,
+            fontWeight: 700,
             textDecoration: 'none',
+            boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
           }}>
-            {plan === 'pro' ? 'Upgrade to Elite' : 'Upgrade to Pro'}
+            ✦ Try 7 days for $4.99
             <ChevronRight size={14} />
           </Link>
         )}

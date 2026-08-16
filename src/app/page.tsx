@@ -108,12 +108,14 @@ export default function LandingPage() {
             Sign in
           </Link>
           <Link href="/upgrade" style={{
-            fontSize: 14, fontWeight: 600,
-            background: '#141414', color: '#fff',
+            fontSize: 14, fontWeight: 700,
+            background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+            color: '#fff',
             textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
             display: 'flex', alignItems: 'center', gap: 6,
+            boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
           }}>
-            Try for $4.99 <ArrowRight size={14} />
+            ✦ Try 7 days for $4.99 <ArrowRight size={14} />
           </Link>
         </div>
       </header>
