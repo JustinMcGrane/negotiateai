@@ -121,14 +121,12 @@ export default function LandingPage() {
       {/* Hero */}
       <section style={{ maxWidth: 860, margin: '0 auto', padding: '96px 32px 88px', textAlign: 'center' }} className="landing-hero">
           <h1 style={{
-            fontSize: 'clamp(56px, 8vw, 96px)',
-            fontWeight: 900, lineHeight: 1.0,
+            fontWeight: 900, lineHeight: 1.05,
             letterSpacing: '-0.04em', marginBottom: 24,
             color: '#0f172a',
           }}>
-            Meet Sarah.<br />
-            <span style={{ color: '#4169E1' }}>The career companion</span><br />
-            that never clocks out.
+            <span style={{ display: 'block', fontSize: 'clamp(56px, 8vw, 96px)' }}>Meet Sarah.</span>
+            <span style={{ display: 'block', fontSize: 'clamp(28px, 4vw, 52px)', color: '#4169E1', whiteSpace: 'nowrap' }}>The career companion that never clocks out.</span>
           </h1>
 
           <p style={{ fontSize: 19, color: '#64748b', lineHeight: 1.75, maxWidth: 520, margin: '0 auto 36px' }}>
