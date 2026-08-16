@@ -138,7 +138,7 @@ export default function LandingPage() {
               background: 'rgba(245,158,11,0.07)',
               padding: '6px 14px', borderRadius: 20,
             }}>
-              ★ Limited intro offer — 7 days full access <ArrowRight size={11} />
+              ★ Intro offer — 7 days full access to Sarah + all tools <ArrowRight size={11} />
             </span>
           </div>
 
