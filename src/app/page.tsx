@@ -51,14 +51,6 @@ const proFeatures = [
   'Session history',
 ]
 
-const eliteFeatures = [
-  'Everything in Professional',
-  'Sarah remembers you across sessions',
-  'Mock interview coaching with feedback',
-  'Live negotiation roleplay',
-  'Annual Review Coach + Promotion Planner',
-  'PDF compensation report',
-]
 
 const TICKER_ITEMS = [
   { name: 'Michael R.', title: 'Product Manager', company: 'Google', result: 'negotiated $18K more' },
@@ -430,28 +422,6 @@ export default function LandingPage() {
               </Link>
             </div>
 
-            {/* Elite */}
-            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 16, padding: 32 }}>
-              <div style={{ fontSize: 13, fontWeight: 600, color: '#7c3aed', marginBottom: 20 }}>Elite</div>
-              <div style={{ fontSize: 40, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.03em', marginBottom: 4 }}>$49<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 28 }}>Everything in Pro, plus:</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
-                {eliteFeatures.map(f => (
-                  <div key={f} style={{ fontSize: 13, color: '#374151', display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <CheckCircle size={14} color="#7c3aed" />
-                    {f}
-                  </div>
-                ))}
-              </div>
-              <Link href="/signup" style={{
-                display: 'flex', justifyContent: 'center',
-                height: 44, lineHeight: '44px',
-                background: '#f5f3ff', borderRadius: 9,
-                fontSize: 14, textDecoration: 'none', color: '#7c3aed', fontWeight: 700,
-              }}>
-                Get Elite
-              </Link>
-            </div>
 
           </div>
         </div>

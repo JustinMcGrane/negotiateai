@@ -22,7 +22,8 @@ export async function POST(req: NextRequest) {
       ? `${baseUrl}${returnPath}`
       : `${baseUrl}/dashboard?upgraded=1`
 
-    const session = await getStripe().checkout.sessions.create({
+    const isTrialPrice = priceId === process.env.STRIPE_PRO_TRIAL_PRICE_ID
+    const sessionParams: Stripe.Checkout.SessionCreateParams = {
       mode: isOneTime ? 'payment' : 'subscription',
       payment_method_types: ['card'],
       line_items: [{ price: priceId, quantity: 1 }],
@@ -30,7 +31,16 @@ export async function POST(req: NextRequest) {
       cancel_url: `${baseUrl}/upgrade`,
       metadata: { userId: user?.id || '', priceId },
       customer_email: user?.email,
-    })
+    }
+
+    if (isTrialPrice) {
+      sessionParams.subscription_data = {
+        trial_period_days: 7,
+        trial_settings: { end_behavior: { missing_payment_method: 'cancel' } },
+      }
+    }
+
+    const session = await getStripe().checkout.sessions.create(sessionParams)
 
     return NextResponse.json({ url: session.url })
   } catch (e) {
