@@ -47,10 +47,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  if (!user && pathname === '/upgrade') {
-    return NextResponse.redirect(new URL('/signup?redirect=/upgrade', request.url))
-  }
-
   if (user && isAuthRoute) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
