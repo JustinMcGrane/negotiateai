@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import Image from 'next/image'
 import posthog from 'posthog-js'
@@ -24,6 +24,8 @@ export default function SignupPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get('redirect') || '/onboarding'
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -43,7 +45,7 @@ export default function SignupPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, name }),
       }).catch(() => {})
-      router.push('/onboarding')
+      router.push(redirectTo)
       router.refresh()
     }
   }
