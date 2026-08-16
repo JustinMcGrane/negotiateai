@@ -6,7 +6,8 @@ interface Props {
 }
 
 export function UpgradeModal({ onClose }: Props) {
-  async function handleUpgrade(priceId: string) {
+  async function handleUpgrade() {
+    const priceId = process.env.NEXT_PUBLIC_STRIPE_PRO_TRIAL_PRICE_ID || process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || ''
     const res = await fetch('/api/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -28,9 +29,9 @@ export function UpgradeModal({ onClose }: Props) {
       }} onClick={(e) => e.stopPropagation()} className="animate-slide-up">
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 500 }}>Upgrade your plan</div>
+            <div style={{ fontSize: 16, fontWeight: 500 }}>Upgrade to Pro</div>
             <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>
-              You've reached the free plan limit for this tool.
+              You've reached the free limit. Try Pro for 7 days.
             </div>
           </div>
           <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--color-text-tertiary)', padding: 4 }}>
@@ -38,51 +39,32 @@ export function UpgradeModal({ onClose }: Props) {
           </button>
         </div>
 
-        <div style={{ display: 'grid', gap: 12 }}>
-          <div style={{
-            border: '2px solid #141414', borderRadius: 10, padding: 20,
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 600 }}>Professional</div>
-                <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>
-                  Unlimited coaching + all 10 negotiation tools
-                </div>
+        <div style={{
+          border: '2px solid #141414', borderRadius: 10, padding: 20,
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 600 }}>Professional</div>
+              <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>
+                Unlimited coaching + all 10 negotiation tools
               </div>
-              <div style={{ fontSize: 18, fontWeight: 600 }}>$49<span style={{ fontSize: 12, fontWeight: 400 }}>/mo</span></div>
             </div>
-            <button onClick={() => handleUpgrade(process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || '')}
-              style={{
-                marginTop: 14, width: '100%', height: 38, background: '#141414', color: '#fff',
-                border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer',
-              }}>
-              Get Professional
-            </button>
-          </div>
-
-          <div style={{ border: '0.5px solid var(--color-border-tertiary)', borderRadius: 10, padding: 20, background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>Elite</div>
-                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 2 }}>
-                  Everything + memory, mock interviews, roleplay
-                </div>
-              </div>
-              <div style={{ fontSize: 18, fontWeight: 600, color: '#fff' }}>$79<span style={{ fontSize: 12, fontWeight: 400 }}>/mo</span></div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: 18, fontWeight: 600 }}>$4.99</div>
+              <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>then $19.99/mo</div>
             </div>
-            <button onClick={() => handleUpgrade(process.env.NEXT_PUBLIC_STRIPE_ELITE_PRICE_ID || '')}
-              style={{
-                marginTop: 14, width: '100%', height: 38,
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff',
-                border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer',
-              }}>
-              Get Elite
-            </button>
           </div>
+          <button onClick={handleUpgrade}
+            style={{
+              marginTop: 14, width: '100%', height: 38, background: '#141414', color: '#fff',
+              border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: 'pointer',
+            }}>
+            Try 7 days for $4.99
+          </button>
         </div>
 
         <div style={{ marginTop: 16, fontSize: 12, color: 'var(--color-text-tertiary)', textAlign: 'center' }}>
-          <a href="/upgrade" style={{ color: 'var(--color-text-secondary)', textDecoration: 'underline' }}>See full plan comparison</a>
+          Cancel anytime. <a href="/upgrade" style={{ color: 'var(--color-text-secondary)', textDecoration: 'underline' }}>See what's included</a>
         </div>
       </div>
     </div>
