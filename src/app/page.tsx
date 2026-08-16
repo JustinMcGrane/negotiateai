@@ -139,11 +139,13 @@ export default function LandingPage() {
             </Link>
             <Link href="/worth" style={{
               height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 28px', background: '#fff', color: '#141414',
-              border: '1.5px solid #d1d5db',
+              padding: '0 28px',
+              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+              color: '#fff',
               borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
+              boxShadow: '0 4px 14px rgba(239,68,68,0.35)',
             }}>
-              Try 7 days for $4.99
+              ✦ Try 7 days for $4.99
             </Link>
           </div>
 
