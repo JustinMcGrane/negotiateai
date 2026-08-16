@@ -121,11 +121,11 @@ export default function LandingPage() {
       {/* Hero */}
       <section style={{ maxWidth: 1100, margin: '0 auto', padding: '72px 32px 88px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }} className="landing-hero">
         {/* Left: copy */}
-        <div>
+        <div style={{ textAlign: 'center' }}>
           <h1 style={{
-            fontSize: 'clamp(36px, 4.5vw, 62px)',
-            fontWeight: 800, lineHeight: 1.1,
-            letterSpacing: '-0.03em', marginBottom: 24,
+            fontSize: 'clamp(40px, 5vw, 68px)',
+            fontWeight: 900, lineHeight: 1.05,
+            letterSpacing: '-0.04em', marginBottom: 24,
             color: '#0f172a',
           }}>
             Meet Sarah.<br />
@@ -133,14 +133,14 @@ export default function LandingPage() {
             that never clocks out.
           </h1>
 
-          <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 36, maxWidth: 480 }}>
+          <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 36, maxWidth: 440, margin: '0 auto 36px' }}>
             Find out if you&apos;re being underpaid — and get a step-by-step plan to close the gap.
           </p>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20, justifyContent: 'center' }}>
             <Link href="/worth" style={{
-              height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 28px', background: '#141414', color: '#fff',
+              height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '0 32px', background: '#141414', color: '#fff',
               borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
             }}>
               Find out what you&apos;re worth <ArrowRight size={15} />
@@ -151,7 +151,7 @@ export default function LandingPage() {
             Try 7 days for $4.99 — then $19.99/month. Cancel anytime.
           </div>
 
-          <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap', justifyContent: 'center' }}>
             {[
               { stat: '$27K', label: 'avg left on table' },
               { stat: '85%', label: 'who negotiate get more' },
