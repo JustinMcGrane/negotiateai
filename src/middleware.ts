@@ -48,7 +48,8 @@ export async function middleware(request: NextRequest) {
   }
 
   if (user && isAuthRoute) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
+    const redirect = request.nextUrl.searchParams.get('redirect')
+    return NextResponse.redirect(new URL(redirect || '/dashboard', request.url))
   }
 
   return supabaseResponse
