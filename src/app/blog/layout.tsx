@@ -16,11 +16,14 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Link href="/login" style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>Sign in</Link>
-          <Link href="/signup" style={{
-            fontSize: 14, fontWeight: 600, background: '#141414', color: '#fff',
+          <Link href="/upgrade" style={{
+            fontSize: 14, fontWeight: 700,
+            background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+            color: '#fff',
             textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
             display: 'flex', alignItems: 'center', gap: 6,
-          }}>Get started free <ArrowRight size={14} /></Link>
+            boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
+          }}>✦ Try 7 days for $4.99 <ArrowRight size={14} /></Link>
         </div>
       </header>
       <main style={{ maxWidth: 720, margin: '0 auto', padding: '64px 24px 120px' }}>
