@@ -1,7 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import Image from 'next/image'
 import posthog from 'posthog-js'
@@ -18,11 +18,17 @@ const COMPANIES = [
 ]
 
 export default function LoginPage() {
+  return <Suspense><LoginForm /></Suspense>
+}
+
+function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get('redirect') || '/dashboard'
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -35,7 +41,7 @@ export default function LoginPage() {
       setLoading(false)
     } else {
       if (data.user) posthog.identify(data.user.id, { email: data.user.email })
-      router.push('/dashboard')
+      router.push(redirectTo)
     }
   }
 

@@ -10,7 +10,7 @@ export default function UpgradePage() {
   async function checkout() {
     const { data: { user } } = await createClient().auth.getUser()
     if (!user) {
-      window.location.href = '/signup?redirect=/upgrade'
+      window.location.href = '/login?redirect=/upgrade'
       return
     }
     const priceId = process.env.NEXT_PUBLIC_STRIPE_PRO_TRIAL_PRICE_ID || process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || ''
