@@ -8,7 +8,6 @@ import {
   CheckCircle,
 } from 'lucide-react'
 import { LandingNav } from '@/components/negotiate/LandingNav'
-import { NewsletterForm } from '@/components/negotiate/NewsletterForm'
 import { FAQ } from '@/components/negotiate/FAQ'
 
 export const metadata: Metadata = {
@@ -96,8 +95,8 @@ export default function LandingPage() {
           <span style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>85% of people who negotiate their salary get more money</span>
           <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}> — are you leaving money on the table?</span>
         </div>
-        <Link href="/sarah" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
-          Find out free →
+        <Link href="/worth" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
+          Find out →
         </Link>
       </div>
 
@@ -116,13 +115,13 @@ export default function LandingPage() {
           <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
             Sign in
           </Link>
-          <Link href="/signup" style={{
+          <Link href="/worth" style={{
             fontSize: 14, fontWeight: 600,
             background: '#141414', color: '#fff',
             textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
             display: 'flex', alignItems: 'center', gap: 6,
           }}>
-            Get started free <ArrowRight size={14} />
+            Try for $4.99 <ArrowRight size={14} />
           </Link>
         </div>
       </header>
@@ -143,10 +142,10 @@ export default function LandingPage() {
           </h1>
 
           <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 36, maxWidth: 480 }}>
-            Hayven gives you a personalized career coach, resume analyzer, job search, cover letter generator, and 10 negotiation tools — everything you need to take control of your career.
+            Your personal career coach. Know your market rate, build your negotiation strategy, and practice until you&apos;re ready.
           </p>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44 }}>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
             <Link href="/worth" style={{
               height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
               padding: '0 28px', background: '#141414', color: '#fff',
@@ -156,22 +155,16 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <a href="#early-access" style={{
-            display: 'inline-flex', alignItems: 'center', gap: 10,
-            fontSize: 15, fontWeight: 700, textDecoration: 'none',
-            background: 'linear-gradient(135deg, #f59e0b, #ef4444)',
-            color: '#fff', padding: '12px 22px', borderRadius: 10,
-            boxShadow: '0 4px 20px rgba(245,158,11,0.35)',
-          }}>
-            🔒 First 1,000 members: Pro at $40/month — claim your spot →
-          </a>
+          <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 36 }}>
+            Try 7 days for $4.99 — then $19.99/month. Cancel anytime.
+          </div>
 
-          <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap', marginTop: 32 }}>
+          <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
             {[
               { stat: '$27K', label: 'avg left on table' },
               { stat: '85%', label: 'who negotiate get more' },
               { stat: '10+', label: 'negotiation tools' },
-              { stat: '100%', label: 'free to start' },
+              { stat: '24/7', label: 'always available' },
             ].map(s => (
               <div key={s.stat}>
                 <div style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
@@ -276,25 +269,6 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
-
-      {/* Early Access */}
-      <section id="early-access" style={{ padding: '80px 24px', background: '#0f172a' }}>
-        <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ display: 'inline-block', fontSize: 12, fontWeight: 700, color: '#f59e0b', background: 'rgba(245,158,11,0.15)', padding: '4px 12px', borderRadius: 20, letterSpacing: '0.08em', marginBottom: 20 }}>
-            LIMITED — FIRST 1,000 MEMBERS ONLY
-          </div>
-          <h2 style={{ fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 12px', lineHeight: 1.2 }}>
-            First 1,000 members get Pro at $40/month.
-          </h2>
-          <p style={{ fontSize: 16, color: '#94a3b8', marginBottom: 8, lineHeight: 1.7 }}>
-            Pro is $49/month. The first 1,000 members get it at $40/month — your rate stays the same as the price rises.
-          </p>
-          <p style={{ fontSize: 14, color: '#64748b', marginBottom: 36 }}>
-            Enter your email to claim your spot. We&apos;ll send you the activation link.
-          </p>
-          <NewsletterForm />
-        </div>
-      </section>
 
       {/* Career Hub */}
       <section id="features" style={{ padding: '96px 40px' }}>
@@ -427,39 +401,17 @@ export default function LandingPage() {
           <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: '#4A90D9', letterSpacing: '0.1em', marginBottom: 12 }}>PRICING</div>
             <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', margin: '0 0 12px' }}>Simple, transparent pricing</h2>
-            <p style={{ fontSize: 16, color: '#64748b' }}>Start free. Upgrade when it pays off.</p>
+            <p style={{ fontSize: 16, color: '#64748b' }}>Try for 7 days. Cancel anytime.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
-
-            {/* Free */}
-            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 16, padding: 32 }}>
-              <div style={{ fontSize: 13, fontWeight: 600, color: '#64748b', marginBottom: 20 }}>Free</div>
-              <div style={{ fontSize: 40, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.03em', marginBottom: 4 }}>$0</div>
-              <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 28 }}>No credit card required</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
-                {['One session with Sarah', 'See your current market value', 'Get your target role and salary', 'Realistic timeline to get there'].map(f => (
-                  <div key={f} style={{ fontSize: 13, color: '#374151', display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <CheckCircle size={14} color="#10b981" />
-                    {f}
-                  </div>
-                ))}
-              </div>
-              <Link href="/signup" style={{
-                display: 'flex', justifyContent: 'center',
-                height: 44, lineHeight: '44px',
-                border: '1px solid #e2e8f0', borderRadius: 9,
-                fontSize: 14, textDecoration: 'none', color: '#374151', fontWeight: 600,
-              }}>
-                Get started free
-              </Link>
-            </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20, maxWidth: 640, margin: '0 auto' }}>
 
             {/* Pro */}
             <div style={{ background: '#2D6EA8', border: '2px solid #2D6EA8', borderRadius: 16, padding: 32, position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', top: 20, right: 20, background: '#4A90D9', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 20, letterSpacing: '0.05em' }}>MOST POPULAR</div>
               <div style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.6)', marginBottom: 20 }}>Professional</div>
-              <div style={{ fontSize: 40, fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', marginBottom: 4 }}>$49<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 28 }}>Unlimited coaching and tools</div>
+              <div style={{ fontSize: 40, fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', marginBottom: 4 }}>$19.99<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', marginBottom: 4 }}>First 7 days for $4.99</div>
+              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', marginBottom: 28 }}>Then $19.99/month. Cancel anytime.</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
                 {proFeatures.map(f => (
                   <div key={f} style={{ fontSize: 13, color: '#C9E2F5', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -474,14 +426,14 @@ export default function LandingPage() {
                 background: '#fff', borderRadius: 9,
                 fontSize: 14, textDecoration: 'none', color: '#2D6EA8', fontWeight: 700,
               }}>
-                Get Professional
+                Try 7 days for $4.99
               </Link>
             </div>
 
             {/* Elite */}
             <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 16, padding: 32 }}>
               <div style={{ fontSize: 13, fontWeight: 600, color: '#7c3aed', marginBottom: 20 }}>Elite</div>
-              <div style={{ fontSize: 40, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.03em', marginBottom: 4 }}>$79<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: 40, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.03em', marginBottom: 4 }}>$49<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
               <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 28 }}>Everything in Pro, plus:</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
                 {eliteFeatures.map(f => (
@@ -641,20 +593,20 @@ export default function LandingPage() {
       <section style={{ background: '#EBF5FB', borderTop: '1px solid #EBF5FB', borderBottom: '1px solid #EBF5FB', padding: '96px 40px', textAlign: 'center' }}>
         <div style={{ maxWidth: 540, margin: '0 auto' }}>
           <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 42px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', marginBottom: 16 }}>
-            Your next job is waiting.
+            Find out what you&apos;re worth.
           </h2>
           <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.7, marginBottom: 36 }}>
-            Start free today. Sarah will help you figure out exactly where to begin.
+            Sarah will tell you your market rate, what&apos;s holding you back, and exactly what to do next.
           </p>
-          <Link href="/signup" style={{
+          <Link href="/worth" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             background: '#2D6EA8', color: '#fff',
             padding: '15px 36px', borderRadius: 10,
             fontSize: 16, fontWeight: 700, textDecoration: 'none',
           }}>
-            Get started free <ArrowRight size={16} />
+            See my market value <ArrowRight size={16} />
           </Link>
-          <div style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>No credit card required. Free forever plan available.</div>
+          <div style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>7 days for $4.99 — then $19.99/month. Cancel anytime.</div>
         </div>
       </section>
 
@@ -672,7 +624,7 @@ export default function LandingPage() {
               <div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>PRODUCT</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {[{ href: '/signup', label: 'Sign up free' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/ai-career-coach', label: 'Career Coach' }].map(({ href, label }) => (
+                  {[{ href: '/worth', label: 'Get started' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/ai-career-coach', label: 'Career Coach' }].map(({ href, label }) => (
                     <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
                   ))}
                 </div>
