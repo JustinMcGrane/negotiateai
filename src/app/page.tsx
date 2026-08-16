@@ -128,13 +128,13 @@ export default function LandingPage() {
             letterSpacing: '-0.03em', marginBottom: 24,
             color: '#0f172a',
           }}>
-            Land the job.<br />
-            Negotiate the offer.<br />
-            <span style={{ whiteSpace: 'nowrap' }}>Get paid what you&apos;re <span style={{ display: 'inline-block', background: '#4169E1', color: '#fff', borderRadius: 10, padding: '2px 18px 8px' }}>worth.</span></span>
+            Meet Sarah.<br />
+            <span style={{ color: '#4169E1' }}>The career companion</span><br />
+            that never clocks out.
           </h1>
 
           <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 36, maxWidth: 480 }}>
-            Your personal career coach. Know your market rate, build your negotiation strategy, and practice until you&apos;re ready.
+            Find out if you&apos;re being underpaid — and get a step-by-step plan to close the gap.
           </p>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
