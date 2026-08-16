@@ -121,30 +121,38 @@ export default function LandingPage() {
       {/* Hero */}
       <section style={{ maxWidth: 860, margin: '0 auto', padding: '96px 32px 88px', textAlign: 'center' }} className="landing-hero">
           <h1 style={{
-            fontWeight: 900, lineHeight: 1.05,
-            letterSpacing: '-0.04em', marginBottom: 24,
+            fontWeight: 800, lineHeight: 1.1,
+            letterSpacing: '-0.03em', marginBottom: 28,
             color: '#0f172a',
           }}>
-            <span style={{ display: 'block', fontSize: 'clamp(44px, 6.5vw, 80px)' }}>Meet Sarah.</span>
-            <span style={{ display: 'block', fontSize: 'clamp(22px, 3.2vw, 44px)', color: '#4169E1', whiteSpace: 'nowrap', fontWeight: 800, textAlign: 'center', letterSpacing: '-0.03em' }}>The career companion that never clocks out.</span>
+            <span style={{ display: 'block', fontSize: 'clamp(40px, 5.5vw, 72px)' }}>Meet Sarah.</span>
+            <span style={{ display: 'block', fontSize: 'clamp(40px, 5.5vw, 72px)', color: '#4169E1' }}>The career companion that never clocks out.</span>
           </h1>
 
-          <p style={{ fontSize: 19, color: '#64748b', lineHeight: 1.75, maxWidth: 520, margin: '0 auto 36px' }}>
+          <p style={{ fontSize: 18, color: '#64748b', lineHeight: 1.75, maxWidth: 520, margin: '0 auto 36px' }}>
             Find out if you&apos;re being underpaid — and get a step-by-step plan to close the gap.
           </p>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 12, justifyContent: 'center' }}>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32, justifyContent: 'center' }}>
             <Link href="/worth" style={{
-              height: 58, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 40px', background: '#141414', color: '#fff',
-              borderRadius: 12, fontSize: 17, fontWeight: 700, textDecoration: 'none',
+              height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '0 28px', background: '#141414', color: '#fff',
+              borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
             }}>
-              Find out what you&apos;re worth <ArrowRight size={16} />
+              Find out what you&apos;re worth <ArrowRight size={15} />
+            </Link>
+            <Link href="/signup" style={{
+              height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '0 28px', background: '#fff', color: '#141414',
+              border: '1.5px solid #d1d5db',
+              borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
+            }}>
+              Try 7 days for $4.99
             </Link>
           </div>
 
-          <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 72 }}>
-            Try 7 days for $4.99 — then $19.99/month. Cancel anytime.
+          <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 72 }}>
+            Then $19.99/month. Cancel anytime.
           </div>
 
           <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 72 }}>
