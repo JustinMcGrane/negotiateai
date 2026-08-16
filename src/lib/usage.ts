@@ -1,9 +1,9 @@
 import { createServiceClient } from '@/lib/supabase/server'
 
 const FREE_LIMITS: Record<string, number> = {
-  recruiter: 20,
-  resume: 1,
-  'cover-letter': 5,
+  recruiter: 0,
+  resume: 0,
+  'cover-letter': 0,
 }
 
 function getPeriod() {

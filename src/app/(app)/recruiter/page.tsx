@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
-const FREE_LIMIT = 20
+const FREE_LIMIT = 0
 
 const FREE_INTRO = `Hey! I'm Sarah, your personalized career coach, here to help you accomplish your goals and get the most out of the platform!
 
