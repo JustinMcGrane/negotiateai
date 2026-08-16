@@ -122,7 +122,7 @@ export default function LandingPage() {
       <section style={{ maxWidth: 860, margin: '0 auto', padding: '96px 32px 88px', textAlign: 'center' }} className="landing-hero">
           <h1 style={{ fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 28, color: '#0f172a' }}>
             <span style={{ display: 'block', fontSize: 'clamp(56px, 7vw, 88px)' }}>Meet Sarah.</span>
-            <span style={{ display: 'block', fontSize: 'clamp(24px, 3.2vw, 42px)', color: '#4169E1', letterSpacing: '0.01em', fontWeight: 500, marginTop: 10, fontStyle: 'italic' }}>The career companion that never clocks out.</span>
+            <span style={{ display: 'block', fontSize: 'clamp(26px, 3.4vw, 46px)', color: '#2952CC', fontWeight: 800, letterSpacing: '-0.03em', marginTop: 6 }}>The career companion that never clocks out.</span>
           </h1>
 
           <p style={{ fontSize: 18, color: '#64748b', lineHeight: 1.75, maxWidth: 520, margin: '0 auto 36px' }}>
