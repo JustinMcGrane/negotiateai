@@ -1,19 +1,10 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Check, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/client'
 
 export default function UpgradePage() {
   const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    createClient().auth.getUser().then(({ data }) => {
-      if (!data.user) {
-        window.location.href = '/signup?redirect=/upgrade'
-      }
-    })
-  }, [])
 
   async function checkout() {
     const priceId = process.env.NEXT_PUBLIC_STRIPE_PRO_TRIAL_PRICE_ID || process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || ''
