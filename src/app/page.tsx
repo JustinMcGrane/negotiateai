@@ -129,6 +129,19 @@ export default function LandingPage() {
             Find out if you&apos;re being underpaid — and get a step-by-step plan to close the gap.
           </p>
 
+          <div style={{ marginBottom: 20 }}>
+            <span style={{
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
+              color: '#f59e0b', textTransform: 'uppercase',
+              border: '1px solid rgba(245,158,11,0.3)',
+              background: 'rgba(245,158,11,0.07)',
+              padding: '6px 14px', borderRadius: 20,
+            }}>
+              ★ Limited intro offer — 7 days full access <ArrowRight size={11} />
+            </span>
+          </div>
+
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32, justifyContent: 'center' }}>
             <Link href="/worth" style={{
               height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
