@@ -154,7 +154,7 @@ export default function LandingPage() {
               borderRadius: 12, fontSize: 16, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
             }}>
-              ✦ Find out your worth for $4.99
+              ✦ FIND OUT YOUR WORTH FOR $4.99
             </Link>
           </div>
 
