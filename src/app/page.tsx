@@ -129,34 +129,15 @@ export default function LandingPage() {
             Find out if you&apos;re being underpaid — and get a step-by-step plan to close the gap.
           </p>
 
-          <div style={{ marginBottom: 20 }}>
-            <span style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              fontSize: 12, fontWeight: 700, letterSpacing: '0.1em',
-              color: '#f59e0b', textTransform: 'uppercase',
-              border: '1px solid rgba(245,158,11,0.3)',
-              background: 'rgba(245,158,11,0.07)',
-              padding: '6px 14px', borderRadius: 20,
-            }}>
-              ★ LIMITED INTRO OFFER — 7 DAYS FULL ACCESS — FIND OUT YOUR WORTH NOW <ArrowRight size={11} />
-            </span>
-          </div>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32, justifyContent: 'center' }}>
             <Link href="/upgrade" style={{
-              height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 28px', background: '#141414', color: '#fff',
-              borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
-            }}>
-              Find out what you&apos;re worth <ArrowRight size={15} />
-            </Link>
-            <Link href="/upgrade" style={{
-              height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 28px',
+              height: 56, display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '0 40px',
               background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
               color: '#fff',
-              borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
-              boxShadow: '0 4px 14px rgba(239,68,68,0.35)',
+              borderRadius: 12, fontSize: 16, fontWeight: 700, textDecoration: 'none',
+              boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
             }}>
               ✦ Try 7 days for $4.99
             </Link>
