@@ -399,7 +399,7 @@ export default function LandingPage() {
                   </div>
                 ))}
               </div>
-              <Link href="/worth" style={{
+              <Link href="/signup" style={{
                 display: 'flex', justifyContent: 'center',
                 height: 44, lineHeight: '44px',
                 background: '#fff', borderRadius: 9,
