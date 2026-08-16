@@ -408,7 +408,7 @@ export default function ResumePage() {
                 borderRadius: 10, padding: '12px 24px',
                 fontSize: 14, fontWeight: 600,
               }}>
-                Upgrade to Pro — implement everything →
+                ✦ FIND OUT YOUR WORTH FOR $4.99 →
               </a>
             </div>
           )}

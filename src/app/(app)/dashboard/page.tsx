@@ -428,7 +428,7 @@ export default async function DashboardPage() {
           <div>
             <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>You are on the free plan</div>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>
-              Upgrade to Pro for unlimited access to all tools and the features above.
+              Start your 7-day trial for $4.99 and get full access to Sarah + all tools.
             </div>
           </div>
           <Link href="/account/billing" style={{

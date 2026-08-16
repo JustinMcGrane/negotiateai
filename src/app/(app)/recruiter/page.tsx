@@ -362,7 +362,7 @@ function RecruiterPageInner() {
                   You've used all {FREE_LIMIT} free messages this month
                 </p>
                 <p style={{ margin: '2px 0 0', fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>
-                  Upgrade to Pro for unlimited coaching with Sarah
+                  Start your 7-day trial for $4.99 — unlimited coaching with Sarah
                 </p>
               </div>
             </div>
@@ -372,7 +372,7 @@ function RecruiterPageInner() {
               borderRadius: 8, padding: '10px 20px',
               fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0,
             }}>
-              Upgrade to Pro
+              ✦ FIND OUT YOUR WORTH FOR $4.99
             </Link>
           </div>
         </div>

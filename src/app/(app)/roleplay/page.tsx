@@ -143,7 +143,7 @@ export default function RoleplayPage() {
           borderRadius: 8, padding: '12px 28px',
           fontSize: 14, fontWeight: 600,
         }}>
-          Upgrade to Pro
+          ✦ FIND OUT YOUR WORTH FOR $4.99
         </Link>
       </div>
     )
