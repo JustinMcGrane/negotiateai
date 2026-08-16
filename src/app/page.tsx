@@ -87,7 +87,7 @@ export default function LandingPage() {
           <span style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>85% of people who negotiate their salary get more money</span>
           <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}> — are you leaving money on the table?</span>
         </div>
-        <Link href="/worth" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
+        <Link href="/upgrade" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
           Find out →
         </Link>
       </div>
@@ -107,7 +107,7 @@ export default function LandingPage() {
           <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
             Sign in
           </Link>
-          <Link href="/worth" style={{
+          <Link href="/upgrade" style={{
             fontSize: 14, fontWeight: 600,
             background: '#141414', color: '#fff',
             textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
@@ -143,7 +143,7 @@ export default function LandingPage() {
           </div>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32, justifyContent: 'center' }}>
-            <Link href="/worth" style={{
+            <Link href="/upgrade" style={{
               height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
               padding: '0 28px', background: '#141414', color: '#fff',
               borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
@@ -238,7 +238,7 @@ export default function LandingPage() {
             <div style={{ fontSize: 22, fontWeight: 800, color: '#dc2626', letterSpacing: '-0.02em' }}>$36,000 / year</div>
           </div>
 
-          <Link href="/worth" style={{
+          <Link href="/upgrade" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
             marginTop: 12, background: '#4169E1', color: '#fff',
             borderRadius: 10, padding: '13px 20px',
@@ -572,7 +572,7 @@ export default function LandingPage() {
           <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.7, marginBottom: 36 }}>
             Sarah will tell you your market rate, what&apos;s holding you back, and exactly what to do next.
           </p>
-          <Link href="/worth" style={{
+          <Link href="/upgrade" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             background: '#2D6EA8', color: '#fff',
             padding: '15px 36px', borderRadius: 10,
