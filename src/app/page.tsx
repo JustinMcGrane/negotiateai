@@ -125,8 +125,8 @@ export default function LandingPage() {
             letterSpacing: '-0.04em', marginBottom: 24,
             color: '#0f172a',
           }}>
-            <span style={{ display: 'block', fontSize: 'clamp(56px, 8vw, 96px)' }}>Meet Sarah.</span>
-            <span style={{ display: 'block', fontSize: 'clamp(18px, 2.8vw, 36px)', color: '#4169E1', whiteSpace: 'nowrap', fontWeight: 800, textAlign: 'center', fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", sans-serif', letterSpacing: '-0.02em' }}>The career companion that never clocks out.</span>
+            <span style={{ display: 'block', fontSize: 'clamp(44px, 6.5vw, 80px)' }}>Meet Sarah.</span>
+            <span style={{ display: 'block', fontSize: 'clamp(22px, 3.2vw, 44px)', color: '#4169E1', whiteSpace: 'nowrap', fontWeight: 800, textAlign: 'center', letterSpacing: '-0.03em' }}>The career companion that never clocks out.</span>
           </h1>
 
           <p style={{ fontSize: 19, color: '#64748b', lineHeight: 1.75, maxWidth: 520, margin: '0 auto 36px' }}>
