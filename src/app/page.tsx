@@ -137,7 +137,7 @@ export default function LandingPage() {
             }}>
               Find out what you&apos;re worth <ArrowRight size={15} />
             </Link>
-            <Link href="/signup" style={{
+            <Link href="/worth" style={{
               height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
               padding: '0 28px', background: '#fff', color: '#141414',
               border: '1.5px solid #d1d5db',
