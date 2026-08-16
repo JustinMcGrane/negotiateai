@@ -119,12 +119,10 @@ export default function LandingPage() {
       </header>
 
       {/* Hero */}
-      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '72px 32px 88px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }} className="landing-hero">
-        {/* Left: copy */}
-        <div style={{ textAlign: 'center' }}>
+      <section style={{ maxWidth: 860, margin: '0 auto', padding: '96px 32px 88px', textAlign: 'center' }} className="landing-hero">
           <h1 style={{
-            fontSize: 'clamp(40px, 5vw, 68px)',
-            fontWeight: 900, lineHeight: 1.05,
+            fontSize: 'clamp(56px, 8vw, 96px)',
+            fontWeight: 900, lineHeight: 1.0,
             letterSpacing: '-0.04em', marginBottom: 24,
             color: '#0f172a',
           }}>
@@ -133,25 +131,25 @@ export default function LandingPage() {
             that never clocks out.
           </h1>
 
-          <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 36, maxWidth: 440, margin: '0 auto 36px' }}>
+          <p style={{ fontSize: 19, color: '#64748b', lineHeight: 1.75, maxWidth: 520, margin: '0 auto 36px' }}>
             Find out if you&apos;re being underpaid — and get a step-by-step plan to close the gap.
           </p>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20, justifyContent: 'center' }}>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 12, justifyContent: 'center' }}>
             <Link href="/worth" style={{
-              height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 32px', background: '#141414', color: '#fff',
-              borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
+              height: 58, display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '0 40px', background: '#141414', color: '#fff',
+              borderRadius: 12, fontSize: 17, fontWeight: 700, textDecoration: 'none',
             }}>
-              Find out what you&apos;re worth <ArrowRight size={15} />
+              Find out what you&apos;re worth <ArrowRight size={16} />
             </Link>
           </div>
 
-          <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 36 }}>
+          <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 72 }}>
             Try 7 days for $4.99 — then $19.99/month. Cancel anytime.
           </div>
 
-          <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 72 }}>
             {[
               { stat: '$27K', label: 'avg left on table' },
               { stat: '85%', label: 'who negotiate get more' },
@@ -159,22 +157,22 @@ export default function LandingPage() {
               { stat: '24/7', label: 'always available' },
             ].map(s => (
               <div key={s.stat}>
-                <div style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
+                <div style={{ fontSize: 28, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
                 <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
               </div>
             ))}
           </div>
-        </div>
 
-        {/* Right: salary analysis mockup */}
-        <div style={{
-          background: '#fff',
-          border: '1px solid #e8edf3',
-          borderRadius: 20,
-          padding: '28px 28px 24px',
-          boxShadow: '0 4px 32px rgba(0,0,0,0.07)',
-        }}>
-          {/* Header */}
+          {/* Salary analysis mockup */}
+          <div style={{
+            background: '#fff',
+            border: '1px solid #e8edf3',
+            borderRadius: 20,
+            padding: '28px 28px 24px',
+            boxShadow: '0 4px 32px rgba(0,0,0,0.07)',
+            maxWidth: 480, margin: '0 auto',
+            textAlign: 'left',
+          }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
             <div>
               <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.1em', marginBottom: 6 }}>SALARY ANALYSIS</div>
@@ -186,11 +184,9 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Range bar */}
           <div style={{ marginBottom: 22 }}>
             <div style={{ position: 'relative', height: 8, borderRadius: 99, overflow: 'visible', marginBottom: 10, background: '#f1f5f9' }}>
               <div style={{ position: 'absolute', inset: 0, borderRadius: 99, background: 'linear-gradient(to right, #fca5a5 0%, #fde68a 45%, #6ee7b7 100%)' }} />
-              {/* marker */}
               <div style={{
                 position: 'absolute', top: '50%', left: '22%',
                 transform: 'translate(-50%, -50%)',
@@ -201,17 +197,14 @@ export default function LandingPage() {
               }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, fontWeight: 600, color: '#cbd5e1', letterSpacing: '0.06em' }}>
-              <span>BELOW MARKET</span>
-              <span>MARKET RATE</span>
-              <span>ABOVE MARKET</span>
+              <span>BELOW MARKET</span><span>MARKET RATE</span><span>ABOVE MARKET</span>
             </div>
           </div>
 
-          {/* Salary rows */}
           {[
-            { label: 'Your current salary', value: '$112,000', color: '#ef4444', highlight: true },
-            { label: 'Market median',        value: '$148,000', color: '#0f172a', highlight: false },
-            { label: 'Top 25%',              value: '$171,000', color: '#10b981', highlight: false },
+            { label: 'Your current salary', value: '$112,000', color: '#ef4444' },
+            { label: 'Market median', value: '$148,000', color: '#0f172a' },
+            { label: 'Top 25%', value: '$171,000', color: '#10b981' },
           ].map((row, i, arr) => (
             <div key={row.label} style={{
               display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -223,13 +216,7 @@ export default function LandingPage() {
             </div>
           ))}
 
-          {/* Gap callout */}
-          <div style={{
-            marginTop: 18,
-            background: '#fef2f2',
-            borderRadius: 10,
-            padding: '14px 16px',
-          }}>
+          <div style={{ marginTop: 18, background: '#fef2f2', borderRadius: 10, padding: '14px 16px' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#b91c1c', letterSpacing: '0.06em', marginBottom: 4 }}>MONEY LEFT ON THE TABLE</div>
             <div style={{ fontSize: 22, fontWeight: 800, color: '#dc2626', letterSpacing: '-0.02em' }}>$36,000 / year</div>
           </div>
@@ -239,7 +226,7 @@ export default function LandingPage() {
             marginTop: 12, background: '#4169E1', color: '#fff',
             borderRadius: 10, padding: '13px 20px',
             fontSize: 14, fontWeight: 700, textDecoration: 'none',
-            whiteSpace: 'nowrap', width: '100%', boxSizing: 'border-box' as const,
+            width: '100%', boxSizing: 'border-box' as const,
           }}>
             See my real market value <ArrowRight size={14} />
           </Link>
@@ -412,7 +399,7 @@ export default function LandingPage() {
                   </div>
                 ))}
               </div>
-              <Link href="/signup" style={{
+              <Link href="/worth" style={{
                 display: 'flex', justifyContent: 'center',
                 height: 44, lineHeight: '44px',
                 background: '#fff', borderRadius: 9,
