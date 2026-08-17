@@ -186,13 +186,15 @@ export default function AICareerCoachPage() {
                 </div>
               ))}
             </div>
-            <Link href="/counter-offer-builder" style={{
+            <Link href="/upgrade" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: '#4A90D9', color: '#fff',
+              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+              color: '#fff',
               padding: '12px 24px', borderRadius: 9,
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
+              boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              Build my counter-offer <ArrowRight size={14} />
+              ✦ Try 7 days for $4.99 <ArrowRight size={14} />
             </Link>
           </div>
         </section>
@@ -212,13 +214,15 @@ export default function AICareerCoachPage() {
             <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, marginBottom: 32 }}>
               The average professional leaves $27,000 on the table by not negotiating their first offer. That number compounds every year through raises, bonuses, and future job offers — all of which are anchored to what you&apos;re making now. The sooner you get your compensation right, the more it pays off.
             </p>
-            <Link href="/worth" style={{
+            <Link href="/upgrade" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: '#141414', color: '#fff',
+              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+              color: '#fff',
               padding: '12px 24px', borderRadius: 9,
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
+              boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              See my market rate <ArrowRight size={14} />
+              ✦ Try 7 days for $4.99 <ArrowRight size={14} />
             </Link>
           </div>
         </section>
