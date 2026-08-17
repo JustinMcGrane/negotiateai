@@ -127,8 +127,8 @@ export default function LandingPage() {
           {/* Left — text */}
           <div>
             <h1 style={{ fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 20, color: '#0f172a' }}>
-              <span style={{ display: 'block', fontSize: 'clamp(48px, 6vw, 80px)' }}>Meet Sarah.</span>
-              <span style={{ display: 'block', fontSize: 'clamp(22px, 3vw, 40px)', color: '#2952CC', fontWeight: 800, letterSpacing: '-0.03em', marginTop: 6 }}>The career companion that never clocks out.</span>
+              <span style={{ display: 'block', fontSize: 'clamp(48px, 6vw, 80px)' }}>You&apos;re worth more.</span>
+              <span style={{ display: 'block', fontSize: 'clamp(22px, 3vw, 40px)', color: '#2952CC', fontWeight: 800, letterSpacing: '-0.03em', marginTop: 6 }}>Find out how much — and go get it.</span>
             </h1>
 
             <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 32, maxWidth: 460 }}>
@@ -156,7 +156,7 @@ export default function LandingPage() {
               borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
             }}>
-              ✦ FIND OUT YOUR WORTH FOR $4.99
+              ✦ FIND OUT YOUR WORTH HERE
             </Link>
             <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
               Then $19.99/month. Cancel anytime.
