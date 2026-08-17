@@ -127,7 +127,7 @@ export default function LandingPage() {
           {/* Left — text */}
           <div>
             <h1 style={{ fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 20, color: '#0f172a' }}>
-              <span style={{ display: 'block', fontSize: 'clamp(48px, 6vw, 80px)' }}>You&apos;re worth more.</span>
+              <span style={{ display: 'block', fontSize: 'clamp(48px, 8vw, 96px)' }}>You&apos;re worth more.</span>
               <span style={{ display: 'block', fontSize: 'clamp(22px, 3vw, 40px)', color: '#2952CC', fontWeight: 800, letterSpacing: '-0.03em', marginTop: 6 }}>Find out how much — and go get it.</span>
             </h1>
 
