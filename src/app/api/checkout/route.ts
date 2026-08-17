@@ -14,13 +14,16 @@ export async function POST(req: NextRequest) {
 
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
     const isOneTime = priceId === process.env.STRIPE_REPORT_PRICE_ID
-    const successUrl = returnPath
-      ? `${baseUrl}${returnPath}`
-      : `${baseUrl}/dashboard?upgraded=1`
+    const isGuest = !user
+
+    const successUrl = isGuest
+      ? `${baseUrl}/upgrade/success?session_id={CHECKOUT_SESSION_ID}`
+      : returnPath
+        ? `${baseUrl}${returnPath}`
+        : `${baseUrl}/dashboard?upgraded=1`
 
     const isTrialPrice = priceId === process.env.STRIPE_PRO_TRIAL_PRICE_ID
     const sessionParams: Stripe.Checkout.SessionCreateParams = {
@@ -30,7 +33,7 @@ export async function POST(req: NextRequest) {
       success_url: successUrl,
       cancel_url: `${baseUrl}/upgrade`,
       metadata: { userId: user?.id || '', priceId },
-      customer_email: user?.email,
+      ...(user?.email ? { customer_email: user.email } : {}),
     }
 
     if (isTrialPrice) {

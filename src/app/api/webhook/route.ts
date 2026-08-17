@@ -37,12 +37,6 @@ export async function POST(req: NextRequest) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
     const userId = session.metadata?.userId
-
-    if (!userId) {
-      console.warn('[webhook] checkout.session.completed missing userId, session:', session.id)
-      return NextResponse.json({ received: true })
-    }
-
     const supabase = createServiceClient()
     const isReport = session.mode === 'payment'
     let plan: string
@@ -54,13 +48,17 @@ export async function POST(req: NextRequest) {
       plan = 'pro'
     }
     const customerId = typeof session.customer === 'string' ? session.customer : session.customer?.id
-    const { error } = await supabase
-      .from('profiles')
-      .update({ plan, ...(customerId ? { stripe_customer_id: customerId } : {}) })
-      .eq('id', userId)
 
-    if (error) {
-      console.error('[webhook] Failed to update profile plan for user', userId, error)
+    if (userId) {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ plan, ...(customerId ? { stripe_customer_id: customerId } : {}) })
+        .eq('id', userId)
+      if (error) console.error('[webhook] Failed to update profile for user', userId, error)
+    } else if (customerId) {
+      // Guest checkout — account will be created on /upgrade/success.
+      // Store stripe_customer_id now so the profile update on account creation can match it.
+      console.log('[webhook] Guest checkout completed, customer:', customerId)
     }
   }
 
