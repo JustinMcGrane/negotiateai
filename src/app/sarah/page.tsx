@@ -215,7 +215,7 @@ function SarahChat() {
             borderRadius: 16, padding: '24px 20px', marginTop: 8,
           }}>
             <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginBottom: 6 }}>
-              Sarah can keep helping you — create a free account to continue.
+              Sarah can keep helping you — start your 7-day trial to continue.
             </div>
             <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', marginBottom: 20, lineHeight: 1.6 }}>
               She&apos;ll remember everything from this conversation and coach you all the way to your next offer.

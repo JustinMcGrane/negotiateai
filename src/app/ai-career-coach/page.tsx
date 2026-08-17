@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'AI Career Coach — Free Salary & Career Coaching | Hayven',
-  description: 'Meet Sarah, your free AI career coach. Get your market salary, negotiation strategy, and career plan — personalized to your role. Start free.',
+  title: 'AI Career Coach — Salary & Career Coaching | Hayven',
+  description: 'Meet Sarah, your AI career coach. Get your market salary, negotiation strategy, and career plan — personalized to your role.',
   alternates: { canonical: 'https://gethayven.com/ai-career-coach' },
   openGraph: {
-    title: 'AI Career Coach — Free Salary & Career Coaching | Hayven',
-    description: 'Meet Sarah, your free AI career coach. Get your market salary, negotiation strategy, and career plan — personalized to your role. Start free.',
+    title: 'AI Career Coach — Salary & Career Coaching | Hayven',
+    description: 'Meet Sarah, your AI career coach. Get your market salary, negotiation strategy, and career plan — personalized to your role.',
     url: 'https://gethayven.com/ai-career-coach',
     type: 'website',
   },
@@ -21,7 +21,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How much does a career coach cost?',
-    a: 'A traditional human career coach typically costs $150–$500 per hour, or $1,000–$5,000 for a structured coaching package. Hayven\'s AI career coach is free to start — you get a full salary assessment, your market rate, and a personalized career plan at no cost. The Pro plan ($49/month) unlocks unlimited coaching sessions and all 10 negotiation tools.',
+    a: 'A traditional human career coach typically costs $150–$500 per hour, or $1,000–$5,000 for a structured coaching package. Hayven\'s AI career coach starts at $4.99 for a 7-day trial — you get unlimited coaching sessions, your market rate, a personalized career plan, and all 10 negotiation tools. Then $19.99/month after the trial.',
   },
   {
     q: 'Is an AI career coach as good as a human career coach?',
@@ -96,12 +96,15 @@ export default function AICareerCoachPage() {
             Meet Sarah — Hayven&apos;s AI career coach. She benchmarks your salary against the market, builds your negotiation strategy, and coaches you through every step of landing the offer you deserve.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/sarah" style={{
+            <Link href="/upgrade" style={{
               height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 28px', background: '#141414', color: '#fff',
+              padding: '0 28px',
+              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+              color: '#fff',
               borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
+              boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              Talk to Sarah free <ArrowRight size={15} />
+              ✦ Try 7 days for $4.99 <ArrowRight size={15} />
             </Link>
             <Link href="/worth" style={{
               height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
@@ -111,7 +114,7 @@ export default function AICareerCoachPage() {
               Check my market value
             </Link>
           </div>
-          <p style={{ marginTop: 16, fontSize: 13, color: '#94a3b8' }}>Free to start. No credit card required.</p>
+          <p style={{ marginTop: 16, fontSize: 13, color: '#94a3b8' }}>Then $19.99/month. Cancel anytime.</p>
         </section>
 
         {/* What does an AI career coach do */}
@@ -259,20 +262,22 @@ export default function AICareerCoachPage() {
         <section style={{ padding: '80px 32px', textAlign: 'center' }}>
           <div style={{ maxWidth: 520, margin: '0 auto' }}>
             <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', marginBottom: 16 }}>
-              Start with a free career coaching session
+              Find out what you&apos;re really worth
             </h2>
             <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.7, marginBottom: 36 }}>
-              Talk to Sarah now — no account required to start. She&apos;ll tell you your market rate, where you stand, and exactly what to do next.
+              Sarah will tell you your market rate, where you stand, and exactly what to do next — personalized to your role and situation.
             </p>
-            <Link href="/sarah" style={{
+            <Link href="/upgrade" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: '#141414', color: '#fff',
+              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+              color: '#fff',
               padding: '15px 36px', borderRadius: 10,
               fontSize: 16, fontWeight: 700, textDecoration: 'none',
+              boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
             }}>
-              Talk to Sarah free <ArrowRight size={16} />
+              ✦ Try 7 days for $4.99 <ArrowRight size={16} />
             </Link>
-            <p style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>No credit card required. Free forever plan available.</p>
+            <p style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>Then $19.99/month. Cancel anytime.</p>
           </div>
         </section>
 

@@ -44,7 +44,7 @@ export default function InterviewSalaryCoachPage() {
           <Link href="/upgrade" style={{ height: 48, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '0 28px', background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none', boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>✦ Try 7 days for $4.99 <ArrowRight size={15} /></Link>
         </div>
         <div style={{ display: 'flex', gap: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
-          {['Deflection scripts', 'Anchor strategies', 'Free to use'].map(t => (
+          {['Deflection scripts', 'Anchor strategies', '7-day trial for $4.99'].map(t => (
             <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#64748b' }}><CheckCircle size={14} color="#16a34a" />{t}</div>
           ))}
         </div>
