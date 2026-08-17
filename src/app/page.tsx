@@ -317,13 +317,15 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-            <Link href="/sarah" style={{
+            <Link href="/upgrade" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: '#4A90D9', color: '#fff',
+              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+              color: '#fff',
               padding: '12px 24px', borderRadius: 9,
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
+              boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              Talk to Sarah <ArrowRight size={14} />
+              ✦ Try 7 days for $4.99 <ArrowRight size={14} />
             </Link>
           </div>
           {/* Stat cards */}
@@ -588,7 +590,7 @@ export default function LandingPage() {
               <div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>PRODUCT</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {[{ href: '/worth', label: 'Get started' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/ai-career-coach', label: 'Career Coach' }].map(({ href, label }) => (
+                  {[{ href: '/upgrade', label: 'Get started' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/ai-career-coach', label: 'Career Coach' }].map(({ href, label }) => (
                     <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
                   ))}
                 </div>
