@@ -8,10 +8,6 @@ const FAQS = [
     a: 'Hayven is an AI-powered career and salary negotiation platform. You get a personalized career coach (Sarah), 10 negotiation tools, a resume analyzer, job search, and cover letter generator — all in one place. Start a conversation with Sarah, tell her where you are in your job search, and she\'ll guide you from there.',
   },
   {
-    q: 'Is Hayven really free to start?',
-    a: 'Yes. The free plan gives you a salary assessment, your current market value, your target role and salary, and a realistic timeline to get there — no credit card required. Upgrading to Pro unlocks unlimited coaching and all 10 negotiation tools.',
-  },
-  {
     q: 'How much more money can I negotiate?',
     a: 'It depends on your role and situation, but the average professional leaves $27,000 on the table by not negotiating their first offer. Most Hayven users who negotiate report getting between $5,000 and $25,000 more than the initial offer — often in a single conversation.',
   },
