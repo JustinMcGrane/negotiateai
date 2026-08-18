@@ -122,17 +122,17 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px 88px' }} className="landing-hero">
+        <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 32, color: '#0f172a', fontSize: 'clamp(56px, 9.5vw, 112px)', whiteSpace: 'nowrap' }}>
+          You&apos;re worth more.
+        </h1>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 420px', gap: 64, alignItems: 'center' }} className="landing-hero-grid">
 
           {/* Left — text */}
           <div>
-            <h1 style={{ fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 20, color: '#0f172a' }}>
-              <span style={{ display: 'block', fontSize: 'clamp(48px, 8vw, 96px)' }}>You&apos;re worth more.</span>
-              <span style={{ display: 'block', fontSize: 'clamp(22px, 3vw, 40px)', color: '#2952CC', fontWeight: 800, letterSpacing: '-0.03em', marginTop: 6 }}>Find out how much — and go get it.</span>
-            </h1>
+            <p style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#2952CC', letterSpacing: '-0.02em', marginBottom: 20 }}>Find out how much — and go get it.</p>
 
             <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 32, maxWidth: 460 }}>
-              Find out if you&apos;re being underpaid — and get a step-by-step plan to close the gap.
+              Find out if you&apos;re being underpaid — and get a personalized plan to close the gap.
             </p>
 
             <div style={{ marginBottom: 16 }}>
