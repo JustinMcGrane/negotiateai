@@ -121,117 +121,99 @@ export default function LandingPage() {
       </header>
 
       {/* Hero */}
-      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px 88px' }} className="landing-hero">
-        <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 32, color: '#0f172a', fontSize: 'clamp(56px, 9.5vw, 112px)', whiteSpace: 'nowrap' }}>
-          You&apos;re worth more.
+      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px 88px', textAlign: 'center' }} className="landing-hero">
+        <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(56px, 9.5vw, 112px)', whiteSpace: 'nowrap' }}>
+          You&apos;re Worth More.
         </h1>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 420px', gap: 64, alignItems: 'center' }} className="landing-hero-grid">
+        <p style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#2952CC', letterSpacing: '-0.02em', marginBottom: 40 }}>Find out how much — and go get it.</p>
 
-          {/* Left — text */}
-          <div>
-            <p style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#2952CC', letterSpacing: '-0.02em', marginBottom: 20 }}>Find out how much — and go get it.</p>
-
-            <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.75, marginBottom: 32, maxWidth: 460 }}>
-              Find out if you&apos;re being underpaid — and get a personalized plan to close the gap.
-            </p>
-
-            <div style={{ marginBottom: 16 }}>
-              <span style={{
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-                fontSize: 11, fontWeight: 700, letterSpacing: '0.1em',
-                color: '#f59e0b', textTransform: 'uppercase',
-                border: '1px solid rgba(245,158,11,0.3)',
-                background: 'rgba(245,158,11,0.07)',
-                padding: '5px 12px', borderRadius: 20,
-              }}>
-                ★ LIMITED INTRO OFFER — 7 DAYS FULL ACCESS
-              </span>
+        {/* Salary card */}
+        <div style={{
+          background: '#fff',
+          border: '1px solid #e8edf3',
+          borderRadius: 20,
+          padding: '28px 24px 24px',
+          boxShadow: '0 8px 40px rgba(0,0,0,0.09)',
+          maxWidth: 420,
+          margin: '0 auto 32px',
+          textAlign: 'left',
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
+            <div>
+              <div style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.1em', marginBottom: 5 }}>SALARY ANALYSIS</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 2 }}>Software Engineer</div>
+              <div style={{ fontSize: 12, color: '#94a3b8' }}>San Francisco, CA · 4 yrs exp.</div>
             </div>
-
-            <Link href="/upgrade" style={{
-              height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 32px',
-              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-              color: '#fff',
-              borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: 'none',
-              boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
-            }}>
-              ✦ FIND OUT YOUR WORTH HERE
-            </Link>
-            <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
-              Then $19.99/month. Cancel anytime.
-            </div>
-
-            <div style={{ display: 'flex', gap: 36, flexWrap: 'wrap', marginTop: 48 }}>
-              {[
-                { stat: '$27K', label: 'avg left on table' },
-                { stat: '85%', label: 'negotiate & get more' },
-                { stat: '24/7', label: 'always available' },
-              ].map(s => (
-                <div key={s.stat}>
-                  <div style={{ fontSize: 24, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
-                  <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
-                </div>
-              ))}
+            <div style={{ background: '#fef2f2', borderRadius: 8, padding: '4px 10px', fontSize: 11, fontWeight: 700, color: '#dc2626' }}>
+              Underpaid
             </div>
           </div>
 
-          {/* Right — salary card */}
-          <div style={{
-            background: '#fff',
-            border: '1px solid #e8edf3',
-            borderRadius: 20,
-            padding: '28px 24px 24px',
-            boxShadow: '0 8px 40px rgba(0,0,0,0.09)',
+          <div style={{ marginBottom: 18 }}>
+            <div style={{ position: 'relative', height: 7, borderRadius: 99, overflow: 'visible', marginBottom: 8, background: '#f1f5f9' }}>
+              <div style={{ position: 'absolute', inset: 0, borderRadius: 99, background: 'linear-gradient(to right, #fca5a5 0%, #fde68a 45%, #6ee7b7 100%)' }} />
+              <div style={{ position: 'absolute', top: '50%', left: '22%', transform: 'translate(-50%, -50%)', width: 16, height: 16, background: '#fff', border: '3px solid #0f172a', borderRadius: '50%', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', zIndex: 1 }} />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 9, fontWeight: 600, color: '#cbd5e1', letterSpacing: '0.06em' }}>
+              <span>BELOW MARKET</span><span>MARKET RATE</span><span>ABOVE MARKET</span>
+            </div>
+          </div>
+
+          {[
+            { label: 'Your current salary', value: '$112,000', color: '#ef4444' },
+            { label: 'Market median', value: '$148,000', color: '#0f172a' },
+            { label: 'Top 25%', value: '$171,000', color: '#10b981' },
+          ].map((row, i, arr) => (
+            <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: i < arr.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
+              <span style={{ fontSize: 13, color: '#64748b' }}>{row.label}</span>
+              <span style={{ fontSize: 13, fontWeight: 700, color: row.color }}>{row.value}</span>
+            </div>
+          ))}
+
+          <div style={{ marginTop: 16, background: '#fef2f2', borderRadius: 10, padding: '12px 14px' }}>
+            <div style={{ fontSize: 10, fontWeight: 600, color: '#b91c1c', letterSpacing: '0.06em', marginBottom: 3 }}>MONEY LEFT ON THE TABLE</div>
+            <div style={{ fontSize: 20, fontWeight: 800, color: '#dc2626', letterSpacing: '-0.02em' }}>$36,000 / year</div>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div style={{ marginBottom: 16 }}>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            fontSize: 11, fontWeight: 700, letterSpacing: '0.1em',
+            color: '#f59e0b', textTransform: 'uppercase',
+            border: '1px solid rgba(245,158,11,0.3)',
+            background: 'rgba(245,158,11,0.07)',
+            padding: '5px 12px', borderRadius: 20,
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
-              <div>
-                <div style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.1em', marginBottom: 5 }}>SALARY ANALYSIS</div>
-                <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 2 }}>Software Engineer</div>
-                <div style={{ fontSize: 12, color: '#94a3b8' }}>San Francisco, CA · 4 yrs exp.</div>
-              </div>
-              <div style={{ background: '#fef2f2', borderRadius: 8, padding: '4px 10px', fontSize: 11, fontWeight: 700, color: '#dc2626' }}>
-                Underpaid
-              </div>
+            ★ LIMITED INTRO OFFER — 7 DAYS FULL ACCESS
+          </span>
+        </div>
+        <Link href="/upgrade" style={{
+          height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
+          padding: '0 32px',
+          background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+          color: '#fff',
+          borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: 'none',
+          boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
+        }}>
+          ✦ FIND OUT YOUR WORTH HERE
+        </Link>
+        <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
+          Then $19.99/month. Cancel anytime.
+        </div>
+
+        <div style={{ display: 'flex', gap: 36, flexWrap: 'wrap', marginTop: 48, justifyContent: 'center' }}>
+          {[
+            { stat: '$27K', label: 'avg left on table' },
+            { stat: '85%', label: 'negotiate & get more' },
+            { stat: '24/7', label: 'always available' },
+          ].map(s => (
+            <div key={s.stat}>
+              <div style={{ fontSize: 24, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
+              <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
             </div>
-
-            <div style={{ marginBottom: 18 }}>
-              <div style={{ position: 'relative', height: 7, borderRadius: 99, overflow: 'visible', marginBottom: 8, background: '#f1f5f9' }}>
-                <div style={{ position: 'absolute', inset: 0, borderRadius: 99, background: 'linear-gradient(to right, #fca5a5 0%, #fde68a 45%, #6ee7b7 100%)' }} />
-                <div style={{ position: 'absolute', top: '50%', left: '22%', transform: 'translate(-50%, -50%)', width: 16, height: 16, background: '#fff', border: '3px solid #0f172a', borderRadius: '50%', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', zIndex: 1 }} />
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 9, fontWeight: 600, color: '#cbd5e1', letterSpacing: '0.06em' }}>
-                <span>BELOW MARKET</span><span>MARKET RATE</span><span>ABOVE MARKET</span>
-              </div>
-            </div>
-
-            {[
-              { label: 'Your current salary', value: '$112,000', color: '#ef4444' },
-              { label: 'Market median', value: '$148,000', color: '#0f172a' },
-              { label: 'Top 25%', value: '$171,000', color: '#10b981' },
-            ].map((row, i, arr) => (
-              <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: i < arr.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
-                <span style={{ fontSize: 13, color: '#64748b' }}>{row.label}</span>
-                <span style={{ fontSize: 13, fontWeight: 700, color: row.color }}>{row.value}</span>
-              </div>
-            ))}
-
-            <div style={{ marginTop: 16, background: '#fef2f2', borderRadius: 10, padding: '12px 14px' }}>
-              <div style={{ fontSize: 10, fontWeight: 600, color: '#b91c1c', letterSpacing: '0.06em', marginBottom: 3 }}>MONEY LEFT ON THE TABLE</div>
-              <div style={{ fontSize: 20, fontWeight: 800, color: '#dc2626', letterSpacing: '-0.02em' }}>$36,000 / year</div>
-            </div>
-
-            <Link href="/upgrade" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-              marginTop: 12, background: '#4169E1', color: '#fff',
-              borderRadius: 10, padding: '12px 20px',
-              fontSize: 13, fontWeight: 700, textDecoration: 'none',
-              width: '100%', boxSizing: 'border-box' as const,
-            }}>
-              See my real market value <ArrowRight size={13} />
-            </Link>
-          </div>
-
+          ))}
         </div>
       </section>
       <style>{`
