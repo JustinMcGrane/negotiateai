@@ -227,6 +227,39 @@ export default function AICareerCoachPage() {
           </div>
         </section>
 
+        {/* Job search coaching */}
+        <section style={{ padding: '80px 32px' }}>
+          <div style={{ maxWidth: 760, margin: '0 auto' }}>
+            <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', marginBottom: 20 }}>
+              Career coaching for your job search
+            </h2>
+            <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, marginBottom: 20 }}>
+              A career coach for job search does more than help you write a resume. The real value is strategy — knowing which roles to target, how to position your background, what to say in interviews, and how to evaluate and negotiate the offer when it comes.
+            </p>
+            <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, marginBottom: 20 }}>
+              Sarah acts as your career coach throughout the entire job search process. She helps you identify the right roles for your background, gives you recruiter-grade resume feedback, preps you for interviews with role-specific questions, and coaches you through the offer stage so you don&apos;t leave money on the table at the finish line.
+            </p>
+            <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, marginBottom: 32 }}>
+              Traditional career coaching services charge $1,000–$5,000 for a job search package. Hayven&apos;s AI career coaching services give you the same support — market data, resume feedback, interview prep, offer negotiation — for a fraction of the cost, available the moment you need it.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
+              {[
+                'Resume feedback and ATS scoring',
+                'Role and company targeting strategy',
+                'Interview preparation and mock questions',
+                'Offer evaluation and comparison',
+                'Salary negotiation coaching',
+                'Counter-offer scripts and email templates',
+              ].map(item => (
+                <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#475569' }}>
+                  <CheckCircle size={15} color="#16a34a" style={{ flexShrink: 0, marginTop: 2 }} />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* AI vs human */}
         <section style={{ padding: '80px 32px' }}>
           <div style={{ maxWidth: 760, margin: '0 auto' }}>
