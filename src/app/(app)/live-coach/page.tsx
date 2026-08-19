@@ -35,7 +35,7 @@ export default function LiveCoachPage() {
     createClient().auth.getUser().then(async ({ data }) => {
       if (!data.user) return
       const { data: profile } = await createClient().from('profiles').select('plan').eq('id', data.user.id).single()
-      if (profile?.plan === 'elite') {
+      if (profile?.plan === 'elite' || profile?.plan === 'pro') {
         setIsElite(true)
         setStage('setup')
       }

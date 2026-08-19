@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       .eq('id', user.id)
       .single()
 
-    const isElite = profile?.plan === 'elite'
+    const isElite = profile?.plan === 'elite' || profile?.plan === 'pro'
     if (!isElite) {
       return NextResponse.json({ error: 'elite_required', message: 'Live coaching is an Elite feature.' }, { status: 403 })
     }

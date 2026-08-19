@@ -327,7 +327,7 @@ export default async function DashboardPage() {
 
       {/* Elite feature cards */}
       {(() => {
-        const isElite = plan === 'elite'
+        const isElite = plan === 'elite' || plan === 'pro'
         const cardLinks: Record<string, string> = {
           'Annual Review Coach': '/tools/annual-review',
           'Promotion Planner': '/tools/promotion-planner',

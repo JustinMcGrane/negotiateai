@@ -12,7 +12,7 @@ export function EliteGate({ children }: { children: React.ReactNode }) {
       if (!data.user) { setStatus('blocked'); return }
       const { data: profile } = await createClient()
         .from('profiles').select('plan').eq('id', data.user.id).single()
-      setStatus(profile?.plan === 'elite' ? 'allowed' : 'blocked')
+      setStatus(profile?.plan === 'elite' || profile?.plan === 'pro' ? 'allowed' : 'blocked')
     })
   }, [])
 
