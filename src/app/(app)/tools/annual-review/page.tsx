@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
-import { EliteGate } from '@/components/negotiate/EliteGate'
 
 type Result = { summary: string; accomplishments: string[]; gaps: string[]; askAmount: string; script: string; emailDraft: string }
 
@@ -44,7 +43,6 @@ export default function AnnualReviewPage() {
   }
 
   return (
-    <EliteGate>
     <ToolPage title="Annual Review Coach" desc="Build a compelling case for your raise. Get a tailored script, talking points, and a ready-to-send follow-up email.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
@@ -136,6 +134,5 @@ export default function AnnualReviewPage() {
         </div>
       )}
     </ToolPage>
-    </EliteGate>
   )
 }
