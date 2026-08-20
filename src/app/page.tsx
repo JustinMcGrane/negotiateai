@@ -93,7 +93,7 @@ export default function LandingPage() {
       </div>
 
       {/* Header */}
-      <header style={{
+      <header className="landing-header" style={{
         borderBottom: '0.5px solid #e5e7eb',
         padding: '0 32px', height: 60,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -121,8 +121,8 @@ export default function LandingPage() {
       </header>
 
       {/* Hero */}
-      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px 88px', textAlign: 'center' }} className="landing-hero">
-        <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(56px, 9.5vw, 112px)', whiteSpace: 'nowrap' }}>
+      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px 88px', textAlign: 'center' }} className="landing-hero landing-section-pad">
+        <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(40px, 9.5vw, 112px)' }}>
           You Are Worth More.
         </h1>
         <p style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#2952CC', letterSpacing: '-0.02em', marginBottom: 40 }}>Find out how much — and go get it.</p>
@@ -219,6 +219,16 @@ export default function LandingPage() {
       <style>{`
         @media (max-width: 768px) {
           .landing-hero-grid { grid-template-columns: 1fr !important; }
+          .landing-sarah { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .landing-tools-grid { grid-template-columns: 1fr !important; }
+          .landing-sarah-chat { grid-template-columns: 1fr !important; }
+          .landing-section-pad { padding: 64px 20px !important; }
+          .landing-hero { padding: 48px 20px 64px !important; }
+          .landing-logo-strip { padding: 20px 20px !important; }
+          .landing-nav { display: none !important; }
+          .landing-header { padding: 0 16px !important; }
+          .landing-footer { padding: 40px 20px !important; }
+          .landing-footer-links { gap: 32px !important; flex-direction: column !important; }
         }
       `}</style>
 
@@ -250,7 +260,7 @@ export default function LandingPage() {
               From finding the right roles to submitting a polished application — all in one place.
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(420px, 1fr))', gap: '4px 40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(420px, 100%), 1fr))', gap: '4px 40px' }}>
             {careerFeatures.map(({ icon: Icon, color, name, desc }) => (
               <div key={name} style={{
                 display: 'flex', gap: 24, alignItems: 'flex-start',
@@ -277,7 +287,7 @@ export default function LandingPage() {
 
       {/* Sarah section */}
       <section style={{ background: '#0f172a', padding: '96px 40px' }}>
-        <div className="landing-sarah" style={{ maxWidth: 1000, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
+        <div className="landing-sarah" style={{ maxWidth: 1000, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }} >
           <div>
             <div style={{ fontSize: 12, fontWeight: 700, color: '#7AB8E8', letterSpacing: '0.1em', marginBottom: 16 }}>CAREER COACH</div>
             <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, marginBottom: 20, letterSpacing: '-0.025em' }}>
@@ -311,7 +321,7 @@ export default function LandingPage() {
             </Link>
           </div>
           {/* Stat cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div className="landing-sarah-chat" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {[
               { value: '24/7', label: 'Always available', sub: 'No scheduling. No waiting.' },
               { value: '$27K', label: 'Avg money left behind', sub: 'Without negotiating.' },
@@ -340,7 +350,7 @@ export default function LandingPage() {
               10 tools to know your market rate, build your strategy, and practice until you&apos;re ready.
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(420px, 1fr))', gap: '4px 40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(420px, 100%), 1fr))', gap: '4px 40px' }}>
             {negotiationTools.map(({ icon: Icon, name, desc }) => (
               <div key={name} style={{
                 display: 'flex', gap: 24, alignItems: 'flex-start',
