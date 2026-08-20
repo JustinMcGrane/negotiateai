@@ -123,7 +123,7 @@ export default function LandingPage() {
       {/* Hero */}
       <section style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px 88px', textAlign: 'center' }} className="landing-hero">
         <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(56px, 9.5vw, 112px)', whiteSpace: 'nowrap' }}>
-          You&apos;re Worth More.
+          You Are Worth More.
         </h1>
         <p style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#2952CC', letterSpacing: '-0.02em', marginBottom: 40 }}>Find out how much — and go get it.</p>
 
