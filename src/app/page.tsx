@@ -376,41 +376,58 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      <section style={{ padding: '96px 40px' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#4A90D9', letterSpacing: '0.1em', marginBottom: 12 }}>PRICING</div>
-            <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', margin: '0 0 12px' }}>Simple, transparent pricing</h2>
-            <p style={{ fontSize: 16, color: '#64748b' }}>Try for 7 days. Cancel anytime.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20, maxWidth: 640, margin: '0 auto' }}>
+      <section style={{ padding: '96px 40px', background: '#0b1120' }}>
+        <div style={{ maxWidth: 480, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: '#f59e0b', letterSpacing: '0.12em', marginBottom: 16 }}>PRICING</div>
+          <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.025em', margin: '0 0 48px' }}>Simple, transparent pricing</h2>
 
-            {/* Pro */}
-            <div style={{ background: '#2D6EA8', border: '2px solid #2D6EA8', borderRadius: 16, padding: 32, position: 'relative', overflow: 'hidden' }}>
-              <div style={{ position: 'absolute', top: 20, right: 20, background: '#4A90D9', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 20, letterSpacing: '0.05em' }}>MOST POPULAR</div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.6)', marginBottom: 20 }}>Professional</div>
-              <div style={{ fontSize: 40, fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', marginBottom: 4 }}>$19.99<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', marginBottom: 4 }}>First 7 days for $4.99</div>
-              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', marginBottom: 28 }}>Then $19.99/month. Cancel anytime.</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
+          {/* Pricing card */}
+          <div style={{
+            background: 'linear-gradient(160deg, #131f35 0%, #0f172a 100%)',
+            border: '1px solid rgba(245,158,11,0.25)',
+            borderRadius: 20,
+            padding: '40px 36px',
+            position: 'relative',
+            boxShadow: '0 0 60px rgba(245,158,11,0.08)',
+          }}>
+            {/* Grid pattern overlay */}
+            <div style={{
+              position: 'absolute', inset: 0, borderRadius: 20, overflow: 'hidden', pointerEvents: 'none',
+              backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)',
+              backgroundSize: '28px 28px',
+            }} />
+
+            <div style={{ position: 'relative' }}>
+              <div style={{ fontSize: 11, fontWeight: 800, color: '#f59e0b', letterSpacing: '0.12em', marginBottom: 20 }}>
+                CLAIM YOUR INTRO OFFER →
+              </div>
+              <div style={{ fontSize: 52, fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 8 }}>
+                $4.99 <span style={{ fontSize: 18, fontWeight: 400, color: 'rgba(255,255,255,0.5)' }}>today</span>
+              </div>
+              <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', marginBottom: 6 }}>7 days of full access.</div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', marginBottom: 32 }}>Then $19.99/month unless canceled before renewal.</div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 32, textAlign: 'left' }}>
                 {proFeatures.map(f => (
-                  <div key={f} style={{ fontSize: 13, color: '#C9E2F5', display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <CheckCircle size={14} color="#7AB8E8" />
+                  <div key={f} style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <CheckCircle size={14} color="#f59e0b" style={{ flexShrink: 0 }} />
                     {f}
                   </div>
                 ))}
               </div>
+
               <Link href="/upgrade" style={{
-                display: 'flex', justifyContent: 'center',
-                height: 44, lineHeight: '44px',
-                background: '#fff', borderRadius: 9,
-                fontSize: 14, textDecoration: 'none', color: '#2D6EA8', fontWeight: 700,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                height: 50,
+                background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+                borderRadius: 12,
+                fontSize: 15, textDecoration: 'none', color: '#fff', fontWeight: 700,
+                boxShadow: '0 4px 20px rgba(245,158,11,0.35)',
               }}>
-                Try 7 days for $4.99
+                ✦ Start for $4.99
               </Link>
+              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', marginTop: 12 }}>Cancel anytime. No commitment.</div>
             </div>
-
-
           </div>
         </div>
       </section>
