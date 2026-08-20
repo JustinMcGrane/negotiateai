@@ -317,20 +317,42 @@ export default function LandingPage() {
               ✦ Try 7 days for $4.99 <ArrowRight size={14} />
             </Link>
           </div>
-          {/* Stat cards */}
-          <div className="landing-sarah-chat" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-            {[
-              { value: '24/7', label: 'Always available', sub: 'No scheduling. No waiting.' },
-              { value: '$27K', label: 'Avg money left behind', sub: 'Without negotiating.' },
-              { value: '10x', label: 'More offer data', sub: 'Than a typical career coach.' },
-              { value: '100%', label: 'Personalized', sub: 'To your role and market.' },
-            ].map(({ value, label, sub }) => (
-              <div key={label} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: '24px 20px' }}>
-                <div style={{ fontSize: 30, fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', marginBottom: 6 }}>{value}</div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: '#e2e8f0', marginBottom: 4 }}>{label}</div>
-                <div style={{ fontSize: 12, color: '#64748b' }}>{sub}</div>
+          {/* Chat preview */}
+          <div style={{ background: '#1e293b', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 24px 60px rgba(0,0,0,0.4)' }}>
+            {/* Header */}
+            <div style={{ background: '#0f172a', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+              <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg, #6366f1, #4A90D9)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>💼</div>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontSize: 14, fontWeight: 700, color: '#fff' }}>Sarah</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, background: '#6366f1', color: '#fff', padding: '2px 7px', borderRadius: 4, letterSpacing: '0.05em' }}>PRO COACH</span>
+                </div>
+                <div style={{ fontSize: 11, color: '#64748b' }}>Your personalized career coach</div>
               </div>
-            ))}
+            </div>
+            {/* User message */}
+            <div style={{ padding: '20px 20px 0' }}>
+              <div style={{ background: '#334155', borderRadius: '12px 12px 4px 12px', padding: '12px 16px', fontSize: 13, color: '#e2e8f0', lineHeight: 1.6, marginBottom: 16, maxWidth: '85%', marginLeft: 'auto' }}>
+                Am I underpaid as an account executive in San Francisco at a $60k base with $100k OTE and 4 years of experience?
+              </div>
+            </div>
+            {/* Sarah response */}
+            <div style={{ padding: '0 20px 20px', display: 'flex', gap: 10 }}>
+              <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, #6366f1, #4A90D9)', flexShrink: 0, marginTop: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13 }}>💼</div>
+              <div style={{ fontSize: 13, color: '#94a3b8', lineHeight: 1.75 }}>
+                <p style={{ margin: '0 0 10px', color: '#e2e8f0' }}>Short answer: yes, that base is low for SF. But OTE is what matters for AEs — let me break it down.</p>
+                <p style={{ margin: '0 0 10px' }}>A $60k base with $100k OTE means your commission is $40k at 100% attainment. That&apos;s a 60/40 split — aggressive but not unusual. The problem is the total. <span style={{ background: 'rgba(239,68,68,0.15)', color: '#fca5a5', padding: '1px 5px', borderRadius: 4, fontWeight: 600 }}>$100k OTE in SF with 4 years is below market.</span></p>
+                <p style={{ margin: '0 0 10px' }}>A mid-level AE in SF should be landing <span style={{ background: 'rgba(74,144,217,0.15)', color: '#7AB8E8', padding: '1px 5px', borderRadius: 4, fontWeight: 600 }}>$130k–$180k OTE</span>, often on a 50/50 split. Enterprise AEs at strong SaaS companies clear <span style={{ background: 'rgba(99,102,241,0.15)', color: '#a5b4fc', padding: '1px 5px', borderRadius: 4, fontWeight: 600 }}>$200k+ OTE</span>.</p>
+                <p style={{ margin: 0, color: '#64748b', fontSize: 12 }}>What are you selling and to whom?</p>
+              </div>
+            </div>
+            {/* Input */}
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{ flex: 1, fontSize: 13, color: '#475569' }}>Ask Sarah anything — she remembers your context...</div>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: '#6366f1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <ArrowRight size={14} color="#fff" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
