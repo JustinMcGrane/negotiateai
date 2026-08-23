@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/equity-calculator`, lastModified: now, priority: 0.7 },
     { url: `${base}/negotiation-simulator`, lastModified: now, priority: 0.7 },
     { url: `${base}/interview-salary-coach`, lastModified: now, priority: 0.7 },
+    { url: `${base}/raise-calculator`, lastModified: now, priority: 0.9 },
     { url: `${base}/raise-request-builder`, lastModified: now, priority: 0.7 },
     { url: `${base}/objection-handler`, lastModified: now, priority: 0.7 },
     { url: `${base}/negotiation-playbook`, lastModified: now, priority: 0.7 },
