@@ -82,10 +82,10 @@ export default function RaiseCalculator() {
         <div style={{ maxWidth: 680, margin: '0 auto' }}>
           <div style={{ fontSize: 12, fontWeight: 700, color: '#7AB8E8', letterSpacing: '0.12em', marginBottom: 16 }}>FREE TOOL</div>
           <h1 style={{ fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 20 }}>
-            Raise Calculator
+            Pay Raise Calculator
           </h1>
           <p style={{ fontSize: 18, color: '#94a3b8', lineHeight: 1.7, margin: 0 }}>
-            Calculate your new salary after a raise, see your monthly and weekly increase, and find out if your raise is fair for your market.
+            Free pay raise calculator. Enter your salary and raise percentage or dollar amount to instantly see your new salary, monthly increase, and weekly increase. Works for annual salary and hourly wage.
           </p>
         </div>
       </section>
