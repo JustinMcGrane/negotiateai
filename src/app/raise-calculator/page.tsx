@@ -85,7 +85,7 @@ export default function RaiseCalculator() {
             Pay Raise Calculator
           </h1>
           <p style={{ fontSize: 18, color: '#94a3b8', lineHeight: 1.7, margin: 0 }}>
-            Free pay raise calculator. Enter your salary and raise percentage or dollar amount to instantly see your new salary, monthly increase, and weekly increase. Works for annual salary and hourly wage.
+            Free salary increase calculator. Enter your current salary and raise percentage or dollar amount to instantly see your new salary, monthly increase, and weekly increase. Works as a pay increase calculator for both annual salary and hourly wage.
           </p>
         </div>
       </section>
@@ -306,6 +306,13 @@ export default function RaiseCalculator() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* SEO text */}
+      <section className="rc-section" style={{ padding: '40px 40px 0', background: '#fff' }}>
+        <div style={{ maxWidth: 760, margin: '0 auto', fontSize: 13, color: '#94a3b8', lineHeight: 1.8 }}>
+          <p>This free salary raise calculator — also called a pay raise calculator, salary increase calculator, or pay increase calculator — helps you quickly calculate your new annual salary after any raise. Whether you received a percentage raise or a flat dollar amount, enter your current salary and raise details above to see your updated pay, monthly increase, and weekly difference. Our annual raise calculator works for both salaried employees and hourly workers.</p>
         </div>
       </section>
 
