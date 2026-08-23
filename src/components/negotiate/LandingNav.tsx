@@ -11,6 +11,7 @@ const TOOLS = [
   { label: 'Equity Calculator', href: '/equity-calculator' },
   { label: 'Negotiation Simulator', href: '/negotiation-simulator' },
   { label: 'Interview Salary Coach', href: '/interview-salary-coach' },
+  { label: 'Raise Calculator', href: '/raise-calculator' },
   { label: 'Raise Request Builder', href: '/raise-request-builder' },
   { label: 'Objection Handler', href: '/objection-handler' },
   { label: 'Negotiation Playbook', href: '/negotiation-playbook' },
