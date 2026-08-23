@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 
 const COMMON_SALARIES = [50000, 60000, 70000, 75000, 80000, 90000, 100000, 110000, 120000, 130000, 150000, 175000, 200000]
+const COMMON_HOURLY = [15, 16, 17, 18, 20, 22, 25, 30, 35, 40, 45, 50, 60, 75, 100]
 
 export default function SalaryToHourlyCalculator() {
   const [salary, setSalary] = useState('')
@@ -223,6 +224,44 @@ export default function SalaryToHourlyCalculator() {
         </div>
       </section>
 
+      {/* Hourly to annual table */}
+      <section className="sh-section" style={{ padding: '80px 40px', background: '#f8fafc' }}>
+        <div style={{ maxWidth: 760, margin: '0 auto' }}>
+          <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', marginBottom: 8 }}>
+            Hourly to annual salary chart
+          </h2>
+          <p style={{ fontSize: 15, color: '#64748b', marginBottom: 32 }}>Based on 40 hours per week, 52 weeks per year.</p>
+          <div style={{ overflowX: 'auto' }}>
+            <table className="sh-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+              <thead>
+                <tr style={{ background: '#fff', borderBottom: '2px solid #e2e8f0' }}>
+                  {['Hourly Rate', 'Annual Salary', 'Monthly', 'Weekly', 'Daily'].map(h => (
+                    <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontWeight: 700, color: '#374151', fontSize: 13 }}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {COMMON_HOURLY.map((h, i) => {
+                  const annual = h * 40 * 52
+                  const monthly = annual / 12
+                  const weekly = annual / 52
+                  const daily = h * 8
+                  return (
+                    <tr key={h} style={{ borderBottom: '1px solid #f1f5f9', background: i % 2 === 0 ? '#fff' : '#fafafa' }}>
+                      <td style={{ padding: '12px 16px', fontWeight: 700, color: '#0f172a' }}>${h}/hr</td>
+                      <td style={{ padding: '12px 16px', fontWeight: 700, color: '#16a34a' }}>{(annual).toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}</td>
+                      <td style={{ padding: '12px 16px', color: '#374151' }}>{monthly.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}</td>
+                      <td style={{ padding: '12px 16px', color: '#374151' }}>{weekly.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}</td>
+                      <td style={{ padding: '12px 16px', color: '#374151' }}>{daily.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="sh-section" style={{ padding: '80px 40px', background: '#f8fafc' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
@@ -236,6 +275,8 @@ export default function SalaryToHourlyCalculator() {
               { q: 'How do I convert annual salary to hourly?', a: 'Divide your annual salary by the number of hours you work per year. For a standard 40-hour week: Annual salary ÷ 2,080 = hourly rate. For example, $75,000 ÷ 2,080 = $36.06/hour.' },
               { q: 'What is a good hourly rate?', a: 'The median hourly wage in the US is around $22–$24/hour ($45,000–$50,000 annually). A "good" hourly rate depends heavily on your role, experience, and location. In tech and finance, $50–$100+/hour is common for mid-to-senior roles.' },
               { q: 'How many hours a year is a full-time job?', a: 'A standard full-time job is 2,080 hours per year (40 hours/week × 52 weeks). If you take 2 weeks of vacation, that\'s 2,000 hours. Use 2,080 for the standard calculation.' },
+              { q: '45 an hour is how much a year?', a: '$45 an hour is $93,600 per year based on a 40-hour work week and 52 weeks per year. That works out to $7,800 per month, $1,800 per week, and $360 per day.' },
+              { q: '45000 a year is how much an hour?', a: '$45,000 a year is $21.63 per hour based on a standard 40-hour work week. Monthly that\'s $3,750, weekly $865, and daily $173.' },
             ].map(({ q, a }) => (
               <div key={q} style={{ borderBottom: '1px solid #e2e8f0', paddingBottom: 28 }}>
                 <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 10 }}>{q}</div>
