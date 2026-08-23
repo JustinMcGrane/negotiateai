@@ -13,6 +13,7 @@ const TOOLS = [
   { label: 'Interview Salary Coach', href: '/interview-salary-coach' },
   { label: 'Raise Calculator', href: '/raise-calculator' },
   { label: 'Salary to Hourly Calculator', href: '/salary-to-hourly-calculator' },
+  { label: 'Paycheck Calculator', href: '/paycheck-calculator' },
   { label: 'Raise Request Builder', href: '/raise-request-builder' },
   { label: 'Objection Handler', href: '/objection-handler' },
   { label: 'Negotiation Playbook', href: '/negotiation-playbook' },
