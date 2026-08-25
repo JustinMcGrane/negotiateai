@@ -72,9 +72,15 @@ function SignupForm() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex' }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .signup-form-panel { flex: 1 !important; padding: 40px 24px !important; }
+          .signup-right-panel { display: none !important; }
+        }
+      `}</style>
 
       {/* Left — Form */}
-      <div style={{ flex: '0 0 480px', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '48px 56px', background: '#fff' }}>
+      <div className="signup-form-panel" style={{ flex: '0 0 480px', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '48px 56px', background: '#fff' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 44 }}>
           <Link href="/">
             <Image src="/logo.svg" alt="Hayven" width={200} height={56} style={{ objectFit: 'contain' }} priority />
@@ -156,7 +162,7 @@ function SignupForm() {
       </div>
 
       {/* Right — Social proof panel */}
-      <div style={{
+      <div className="signup-right-panel" style={{
         flex: 1, background: '#0f172a', display: 'flex', flexDirection: 'column',
         justifyContent: 'center', padding: '48px 56px', position: 'relative', overflow: 'hidden',
       }}>
