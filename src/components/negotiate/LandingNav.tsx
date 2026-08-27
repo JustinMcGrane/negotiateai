@@ -11,6 +11,7 @@ const TOOLS = [
   { label: 'Equity Calculator', href: '/equity-calculator' },
   { label: 'Negotiation Simulator', href: '/negotiation-simulator' },
   { label: 'Interview Salary Coach', href: '/interview-salary-coach' },
+  { label: 'Resume Skills Guide', href: '/resume-skills' },
   { label: 'Raise Calculator', href: '/raise-calculator' },
   { label: 'Salary to Hourly Calculator', href: '/salary-to-hourly-calculator' },
   { label: 'Paycheck Calculator', href: '/paycheck-calculator' },
