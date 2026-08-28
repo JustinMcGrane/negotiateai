@@ -2,6 +2,22 @@ export function GET() {
   const body = `User-agent: *
 Allow: /
 Allow: /blog/
+Allow: /resume-builder
+Allow: /resume-skills
+Allow: /raise-calculator
+Allow: /salary-to-hourly-calculator
+Allow: /paycheck-calculator
+Allow: /equity-calculator
+Allow: /compensation-analyzer
+Allow: /counter-offer-builder
+Allow: /offer-evaluator
+Allow: /objection-handler
+Allow: /raise-request-builder
+Allow: /negotiation-playbook
+Allow: /negotiation-simulator
+Allow: /interview-salary-coach
+Allow: /job-tracker
+Allow: /ai-career-coach
 Disallow: /dashboard
 Disallow: /tools/
 Disallow: /account
