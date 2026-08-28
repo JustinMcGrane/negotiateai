@@ -19,13 +19,11 @@ export const metadata: Metadata = {
     description: 'Personalized career coach, resume analyzer, job search, and salary negotiation. Land the job and the offer you deserve.',
     url: 'https://gethayven.com',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Hayven — Get paid what you\'re worth' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Hayven — Get paid what you\'re worth',
     description: 'Personalized career coach and salary negotiation tools. Free to start.',
-    images: ['/og-image.png'],
   },
 }
 
