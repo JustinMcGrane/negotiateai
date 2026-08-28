@@ -186,7 +186,7 @@ export default function LandingPage() {
             background: 'rgba(245,158,11,0.07)',
             padding: '5px 12px', borderRadius: 20,
           }}>
-            ★ LIMITED INTRO OFFER — 7 DAYS FULL ACCESS
+            ★ FREE TO START — NO CREDIT CARD REQUIRED
           </span>
         </div>
         <Link href="/signup" style={{
@@ -200,7 +200,7 @@ export default function LandingPage() {
           Try Free Today - No Credit Card Required
         </Link>
         <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
-          Then $19.99/month. Cancel anytime.
+          Upgrade to Pro for $20/month. Cancel anytime.
         </div>
 
         <div style={{ display: 'flex', gap: 36, flexWrap: 'wrap', marginTop: 48, justifyContent: 'center' }}>
