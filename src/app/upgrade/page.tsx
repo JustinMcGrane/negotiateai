@@ -82,7 +82,7 @@ export default function UpgradePage() {
               opacity: loading ? 0.6 : 1,
             }}
           >
-            {loading ? 'Loading…' : 'Try it free today — no credit card required'}
+            {loading ? 'Loading…' : 'Try Free Today - No Credit Card Required'}
           </button>
         </div>
 

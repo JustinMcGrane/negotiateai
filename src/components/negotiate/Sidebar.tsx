@@ -194,7 +194,7 @@ export function Sidebar() {
             textDecoration: 'none',
             boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
           }}>
-            ✦ Try it free today
+            ✦ Try Free Today
             <ChevronRight size={14} />
           </Link>
         )}

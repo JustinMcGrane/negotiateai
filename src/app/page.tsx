@@ -87,7 +87,7 @@ export default function LandingPage() {
           <span style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>85% of people who negotiate their salary get more money</span>
           <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}> — are you leaving money on the table?</span>
         </div>
-        <Link href="/upgrade" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
+        <Link href="/signup" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
           Find out →
         </Link>
       </div>
@@ -107,7 +107,7 @@ export default function LandingPage() {
           <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
             Sign in
           </Link>
-          <Link href="/upgrade" style={{
+          <Link href="/signup" style={{
             fontSize: 14, fontWeight: 700,
             background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
             color: '#fff',
@@ -115,7 +115,7 @@ export default function LandingPage() {
             display: 'flex', alignItems: 'center', gap: 6,
             boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
           }}>
-            Try it free today — no credit card required <ArrowRight size={14} />
+            Try Free Today - No Credit Card Required <ArrowRight size={14} />
           </Link>
         </div>
       </header>
@@ -189,7 +189,7 @@ export default function LandingPage() {
             ★ LIMITED INTRO OFFER — 7 DAYS FULL ACCESS
           </span>
         </div>
-        <Link href="/upgrade" style={{
+        <Link href="/signup" style={{
           height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
           padding: '0 32px',
           background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
@@ -197,7 +197,7 @@ export default function LandingPage() {
           borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: 'none',
           boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
         }}>
-          Try it free today — no credit card required
+          Try Free Today - No Credit Card Required
         </Link>
         <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
           Then $19.99/month. Cancel anytime.
@@ -306,7 +306,7 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-            <Link href="/upgrade" style={{
+            <Link href="/signup" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
               color: '#fff',
@@ -314,7 +314,7 @@ export default function LandingPage() {
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              Try it free today — no credit card required <ArrowRight size={14} />
+              Try Free Today - No Credit Card Required <ArrowRight size={14} />
             </Link>
           </div>
           {/* Chat preview */}
@@ -427,7 +427,7 @@ export default function LandingPage() {
               ))}
             </div>
 
-            <Link href="/upgrade" style={{
+            <Link href="/signup" style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
               height: 52,
               background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
@@ -435,7 +435,7 @@ export default function LandingPage() {
               fontSize: 15, textDecoration: 'none', color: '#fff', fontWeight: 700,
               boxShadow: '0 4px 20px rgba(239,68,68,0.25)',
             }}>
-              Try it free today — no credit card required
+              Try Free Today - No Credit Card Required
             </Link>
             <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 12, textAlign: 'center' }}>Cancel anytime. No commitment.</div>
           </div>
@@ -583,7 +583,7 @@ export default function LandingPage() {
           <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.7, marginBottom: 36 }}>
             Sarah will tell you your market rate, what&apos;s holding you back, and exactly what to do next.
           </p>
-          <Link href="/upgrade" style={{
+          <Link href="/signup" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             background: '#2D6EA8', color: '#fff',
             padding: '15px 36px', borderRadius: 10,
@@ -609,7 +609,7 @@ export default function LandingPage() {
               <div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>PRODUCT</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {[{ href: '/upgrade', label: 'Get started' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/ai-career-coach', label: 'Career Coach' }].map(({ href, label }) => (
+                  {[{ href: '/signup', label: 'Get started' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/ai-career-coach', label: 'Career Coach' }].map(({ href, label }) => (
                     <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
                   ))}
                 </div>

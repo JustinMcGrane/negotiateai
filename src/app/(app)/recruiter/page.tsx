@@ -358,7 +358,7 @@ function RecruiterPageInner() {
               cursor: 'pointer', textAlign: 'center',
             }}
           >
-            Try it free today — no credit card required
+            Try Free Today - No Credit Card Required
           </button>
           <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', textAlign: 'center', marginTop: 8 }}>
             You&apos;ve used your 10 free messages · Upgrade for unlimited access
