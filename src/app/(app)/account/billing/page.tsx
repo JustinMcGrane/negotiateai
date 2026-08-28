@@ -51,11 +51,11 @@ export default function BillingPage() {
     },
     {
       key: 'elite',
-      name: 'Elite',
+      name: 'Pro',
       price: '$79',
       sub: '/month',
       features: ['Everything in Professional', 'Sarah remembers you across sessions', 'Mock interview coaching with feedback', 'Live negotiation roleplay with Sarah', 'Annual Review Coach + Promotion Planner', 'PDF compensation report', 'Priority support'],
-      cta: 'Get Elite',
+      cta: 'Get Pro',
       disabled: false,
       priceId: process.env.NEXT_PUBLIC_STRIPE_ELITE_PRICE_ID || '',
     },

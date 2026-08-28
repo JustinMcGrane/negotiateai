@@ -9,7 +9,7 @@ interface Props {
 }
 
 const planConfig: Record<string, { label: string; bg: string; color: string }> = {
-  elite:  { label: 'Elite',  bg: '#ede9fe', color: '#6d28d9' },
+  elite:  { label: 'Pro',  bg: '#ede9fe', color: '#6d28d9' },
   pro:    { label: 'Pro',    bg: '#EBF5FB', color: '#2D6EA8' },
   free:   { label: 'Free',   bg: '#f1f5f9', color: '#64748b' },
   report: { label: 'Report', bg: '#EBF5FB', color: '#2D6EA8' },

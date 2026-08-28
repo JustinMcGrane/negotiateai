@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: 'Does Sarah actually remember me?',
-    a: 'On the Elite plan, yes — Sarah remembers your goals, your situation, and everything you\'ve discussed across every session. On the free and Pro plans, each conversation starts fresh, but you can catch Sarah up quickly.',
+    a: 'On the Pro plan, yes — Sarah remembers your goals, your situation, and everything you\'ve discussed across every session. On the free and Pro plans, each conversation starts fresh, but you can catch Sarah up quickly.',
   },
   {
     q: 'How is Hayven different from just Googling salary data?',

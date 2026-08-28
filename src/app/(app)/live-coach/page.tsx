@@ -120,9 +120,9 @@ export default function LiveCoachPage() {
             <Lock size={16} color="#667eea" />
           </div>
           <div>
-            <p style={{ margin: 0, fontWeight: 600, fontSize: 14, color: '#fff' }}>Elite feature</p>
+            <p style={{ margin: 0, fontWeight: 600, fontSize: 14, color: '#fff' }}>Pro feature</p>
             <p style={{ margin: '4px 0 0', fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>
-              Live coaching is available on the Elite plan. Upgrade to unlock real-time guidance during your calls.
+              Live coaching is available on the Pro plan. Upgrade to unlock real-time guidance during your calls.
             </p>
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function LiveCoachPage() {
           borderRadius: 8, padding: '12px 28px',
           fontSize: 14, fontWeight: 600,
         }}>
-          Upgrade to Elite
+          Upgrade to Pro
         </Link>
       </div>
     )

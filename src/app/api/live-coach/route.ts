@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
 
     const isElite = profile?.plan === 'elite' || profile?.plan === 'pro'
     if (!isElite) {
-      return NextResponse.json({ error: 'elite_required', message: 'Live coaching is an Elite feature.' }, { status: 403 })
+      return NextResponse.json({ error: 'elite_required', message: 'Live coaching is a Pro feature.' }, { status: 403 })
     }
 
     const { messages, context } = await req.json()

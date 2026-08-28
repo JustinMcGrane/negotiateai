@@ -37,9 +37,9 @@ export function EliteGate({ children }: { children: React.ReactNode }) {
         }}>
           <Lock size={22} color="#667eea" />
         </div>
-        <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 10px' }}>Elite feature</h2>
+        <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 10px' }}>Pro feature</h2>
         <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.6, margin: '0 0 28px' }}>
-          This tool is available on the Elite plan. Upgrade to unlock it along with live call coaching and voice roleplay.
+          This tool is available on the Pro plan. Upgrade to unlock it along with live call coaching and voice roleplay.
         </p>
         <Link href="/account/billing" style={{
           display: 'inline-block',
@@ -48,7 +48,7 @@ export function EliteGate({ children }: { children: React.ReactNode }) {
           borderRadius: 8, padding: '11px 28px',
           fontSize: 14, fontWeight: 600,
         }}>
-          Upgrade to Elite
+          Upgrade to Pro
         </Link>
       </div>
     )

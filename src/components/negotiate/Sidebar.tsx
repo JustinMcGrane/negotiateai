@@ -57,7 +57,7 @@ const nav: NavEntry[] = [
     ],
   },
   {
-    label: 'Elite',
+    label: 'Pro',
     items: [
       { label: 'Annual Review Coach', href: '/tools/annual-review', icon: Star },
       { label: 'Promotion Planner', href: '/tools/promotion-planner', icon: Award },

@@ -132,7 +132,7 @@ export default function RoleplayPage() {
           <div>
             <p style={{ margin: 0, fontWeight: 600, fontSize: 14, color: '#fff' }}>Pro feature</p>
             <p style={{ margin: '4px 0 0', fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>
-              Roleplay practice is available on Pro and Elite plans.
+              Roleplay practice is available on the Pro plan.
             </p>
           </div>
         </div>

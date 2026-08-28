@@ -325,7 +325,7 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Elite feature cards */}
+      {/* Pro feature cards */}
       {(() => {
         const isElite = plan === 'elite' || plan === 'pro'
         const cardLinks: Record<string, string> = {
@@ -338,9 +338,9 @@ export default async function DashboardPage() {
           <div style={{ marginBottom: 28 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>
-                {isElite ? 'ELITE TOOLS' : 'ELITE FEATURES'}
+                {isElite ? 'PRO TOOLS' : 'PRO FEATURES'}
               </div>
-              {!isElite && <Link href="/upgrade" style={{ fontSize: 12, color: 'var(--color-text-tertiary)', textDecoration: 'underline' }}>Upgrade to Elite</Link>}
+              {!isElite && <Link href="/upgrade" style={{ fontSize: 12, color: 'var(--color-text-tertiary)', textDecoration: 'underline' }}>Upgrade to Pro</Link>}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
               {FEATURE_CARDS.map((card) => (
@@ -364,7 +364,7 @@ export default async function DashboardPage() {
                           fontSize: 10, fontWeight: 700, color: '#92400e',
                           background: '#fef3c7', borderRadius: 20, padding: '2px 8px',
                         }}>
-                          <Lock size={9} /> ELITE
+                          <Lock size={9} /> PRO
                         </span>
                       )}
                     </div>
