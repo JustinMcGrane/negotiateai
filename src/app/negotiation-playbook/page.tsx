@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'Negotiation Playbook — Hayven',
   description: 'A step-by-step negotiation strategy for your exact situation. Know what to do at every stage of the offer process.',
+
+  alternates: { canonical: 'https://gethayven.com/negotiation-playbook' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Salary Negotiation Playbook — Your Step-by-Step Strategy',
+    `description: '|Get a personalized salary negotiation playbook. Know your number, your timing, and your exact strategy before you start.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [

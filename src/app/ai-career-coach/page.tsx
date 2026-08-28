@@ -12,7 +12,8 @@ export const metadata: Metadata = {
     url: 'https://gethayven.com/ai-career-coach',
     type: 'website',
   },
-}
+
+
 
 const FAQ_ITEMS = [
   {
@@ -114,7 +115,7 @@ export default function AICareerCoachPage() {
               Check my market value
             </Link>
           </div>
-          <p style={{ marginTop: 16, fontSize: 13, color: '#94a3b8' }}>Then $19.99/month. Cancel anytime.</p>
+          <p style={{ marginTop: 16, fontSize: 13, color: '#94a3b8' }}>Upgrade to Pro for $20/month. Cancel anytime.</p>
         </section>
 
         {/* What does an AI career coach do */}
@@ -314,7 +315,7 @@ export default function AICareerCoachPage() {
             }}>
               Try Free Today - No Credit Card Required <ArrowRight size={16} />
             </Link>
-            <p style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>Then $19.99/month. Cancel anytime.</p>
+            <p style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>Upgrade to Pro for $20/month. Cancel anytime.</p>
           </div>
         </section>
 

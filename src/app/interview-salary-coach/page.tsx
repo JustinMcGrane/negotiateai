@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'Interview Salary Coach — Hayven',
   description: 'Handle salary questions in interviews without leaving money on the table. Get coached on what to say, when to say it, and how to deflect.',
+
+  alternates: { canonical: 'https://gethayven.com/interview-salary-coach' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Interview Salary Coach — Handle the Money Question',
+    `description: '|Know exactly what to say when they ask about salary in an interview. Deflect, anchor, and negotiate from a position of strength.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [

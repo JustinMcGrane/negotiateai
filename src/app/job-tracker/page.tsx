@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'Job Tracker — Hayven',
   description: 'Track every application in one place. Never lose track of where you stand, what comes next, or which opportunities to prioritize.',
+
+  alternates: { canonical: 'https://gethayven.com/job-tracker' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Job Application Tracker — Never Lose Track of Your Search',
+    `description: '|Track every job application in one place. Stay organized, follow up at the right time, and manage your entire job search.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [

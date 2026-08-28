@@ -9,6 +9,18 @@ export const metadata: Metadata = {
   title: 'Hayven — The compensation platform that pays for itself',
   description: "Know your market rate. Build your strategy. Practice until you're ready.",
   icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
+  metadataBase: new URL('https://gethayven.com'),
+  alternates: { canonical: '/' },
+  openGraph: {
+    siteName: 'Hayven',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Hayven — Get paid what you\'re worth' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+
+    images: ['/og-image.png'],
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

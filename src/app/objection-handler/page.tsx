@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'Objection Handler — Hayven',
   description: 'Know exactly what to say when a recruiter pushes back. Get scripted responses to the most common salary negotiation objections.',
+
+  alternates: { canonical: 'https://gethayven.com/objection-handler' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Salary Negotiation Objection Handler',
+    `description: '|Know exactly what to say when they push back. Handle every salary negotiation objection with confidence.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [

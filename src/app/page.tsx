@@ -13,11 +13,19 @@ import { FAQ } from '@/components/negotiate/FAQ'
 export const metadata: Metadata = {
   title: 'Hayven — Get paid what you\'re worth',
   description: 'Personalized career coach, resume analyzer, job search, cover letter generator, and salary negotiation tools. Everything you need to land the job and the offer you deserve.',
+  alternates: { canonical: 'https://gethayven.com' },
   openGraph: {
     title: 'Hayven — Get paid what you\'re worth',
     description: 'Personalized career coach, resume analyzer, job search, and salary negotiation. Land the job and the offer you deserve.',
-    url: process.env.NEXT_PUBLIC_APP_URL ?? 'https://gethayven.com',
+    url: 'https://gethayven.com',
     type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Hayven — Get paid what you\'re worth' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hayven — Get paid what you\'re worth',
+    description: 'Personalized career coach and salary negotiation tools. Free to start.',
+    images: ['/og-image.png'],
   },
 }
 

@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'Raise Request Builder — Hayven',
   description: 'Build a compelling case for your raise with data, talking points, and a script that makes it easy for your manager to say yes.',
+
+  alternates: { canonical: 'https://gethayven.com/raise-request-builder' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Raise Request Builder — Make the Case for More Money',
+    `description: '|Build a compelling raise request with data, talking points, and the exact script to ask your manager for more money.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [

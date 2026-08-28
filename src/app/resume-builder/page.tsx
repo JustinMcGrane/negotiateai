@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'AI Resume Builder — Hayven',
   description: 'Get recruiter-grade resume feedback with ATS scoring, section-by-section breakdown, rewritten bullets, and a prioritized action plan.',
+
+  alternates: { canonical: 'https://gethayven.com/resume-builder' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Resume Builder — ATS-Optimized Resumes with AI Feedback',
+    `description: '|Build a resume that passes ATS filters and impresses recruiters. Get AI feedback, ATS scoring, and rewritten bullets.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [

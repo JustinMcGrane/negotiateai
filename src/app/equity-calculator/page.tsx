@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'Equity Calculator — Hayven',
   description: 'Find out what your stock options and RSUs are actually worth — today and at exit — so you can negotiate equity like you know what you\'re doing.',
+
+  alternates: { canonical: 'https://gethayven.com/equity-calculator' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Equity Calculator — See What Your Stock Options Are Worth',
+    `description: '|Calculate what your stock options and RSUs are actually worth today and at exit. Free equity calculator for employees negotiating job offers.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [

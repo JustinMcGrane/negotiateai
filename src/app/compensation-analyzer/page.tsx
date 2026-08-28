@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'Compensation Analyzer — Hayven',
   description: 'See your market rate at the 25th through 90th percentile for your exact role, level, and location.',
+
+  alternates: { canonical: 'https://gethayven.com/compensation-analyzer' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Compensation Analyzer — Know Your Market Rate',
+    `description: '|Find out exactly what you should be earning. See your market rate at every percentile by role, location, and experience.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [

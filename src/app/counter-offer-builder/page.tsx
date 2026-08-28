@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'Counter-Offer Builder — Hayven',
   description: 'Build a compelling counter-offer in minutes. Get the exact words to say, the number to ask for, and the reasoning to back it up.',
+
+  alternates: { canonical: 'https://gethayven.com/counter-offer-builder' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Counter-Offer Builder — Get the Exact Words to Negotiate',
+    `description: '|Build a compelling counter-offer in minutes. Get the exact script, the right number, and the reasoning to back it up.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [

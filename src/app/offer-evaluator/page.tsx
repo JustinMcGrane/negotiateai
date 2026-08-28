@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'Offer Evaluator — Hayven',
   description: 'Evaluate any job offer across salary, equity, benefits, and total comp — so you know exactly what to accept, counter, or walk away from.',
+
+  alternates: { canonical: 'https://gethayven.com/offer-evaluator' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Job Offer Evaluator — Score Any Offer 0–100',
+    `description: '|Evaluate any job offer instantly. Get a 0–100 score, red flags, missing terms, and a clear picture of total compensation.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [

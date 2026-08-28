@@ -7,6 +7,14 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 export const metadata: Metadata = {
   title: 'Negotiation Simulator — Hayven',
   description: 'Practice salary negotiation with a realistic AI career coach. Get scored feedback so you walk into the real conversation prepared.',
+
+  alternates: { canonical: 'https://gethayven.com/negotiation-simulator' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Salary Negotiation Simulator — Practice Until You're Ready ',
+    `description: '|Practice salary negotiation with an AI coach. Run real scenarios, get feedback, and build confidence before the real thing.',
+    images: ['/og-image.png'],
+  },
 }
 
 const benefits = [
