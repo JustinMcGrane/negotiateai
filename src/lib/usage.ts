@@ -1,7 +1,7 @@
 import { createServiceClient } from '@/lib/supabase/server'
 
 const FREE_LIMITS: Record<string, number> = {
-  recruiter: 0,
+  recruiter: 10,
   resume: 0,
   'cover-letter': 0,
 }
@@ -20,7 +20,10 @@ export async function checkAndIncrementUsage(
   if (isPro) return { allowed: true, used: 0, limit: 999 }
 
   const supabase = createServiceClient()
-  const period = getPeriod()
+
+  // recruiter uses lifetime count, others use monthly
+  const isLifetime = feature === 'recruiter'
+  const period = isLifetime ? 'lifetime' : getPeriod()
 
   const { data } = await supabase
     .from('usage_tracking')

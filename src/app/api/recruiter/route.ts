@@ -227,9 +227,24 @@ export async function POST(req: NextRequest) {
     const usage = await checkAndIncrementUsage(user.id, 'recruiter', isPro)
 
     if (!usage.allowed) {
+      // Generate personalized upgrade hook from conversation
+      let upgradeHook = "You're close to a breakthrough."
+      try {
+        const recentMessages = messages.slice(-6)
+        const hookRes = await client.messages.create({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 80,
+          messages: [{
+            role: 'user',
+            content: `Based on this conversation, write ONE punchy sentence (max 15 words) that highlights what the user stands to gain by continuing with a career coach. Reference their specific situation if possible. No quotes, no intro, just the sentence.\n\nConversation:\n${recentMessages.map((m: {role: string; content: string}) => `${m.role}: ${m.content}`).join('\n')}`,
+          }],
+        })
+        if (hookRes.content[0].type === 'text') upgradeHook = hookRes.content[0].text.trim()
+      } catch { /* best effort */ }
+
       return NextResponse.json({
         error: 'limit_reached',
-        message: `Pro subscription required. Try 7 days for $4.99 at gethayven.com/upgrade`,
+        upgradeHook,
         used: usage.used,
         limit: usage.limit,
       }, { status: 429 })

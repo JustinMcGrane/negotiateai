@@ -115,7 +115,7 @@ export default function LandingPage() {
             display: 'flex', alignItems: 'center', gap: 6,
             boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
           }}>
-            ✦ Try 7 days for $4.99 <ArrowRight size={14} />
+            Try it free today — no credit card required <ArrowRight size={14} />
           </Link>
         </div>
       </header>
@@ -197,7 +197,7 @@ export default function LandingPage() {
           borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: 'none',
           boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
         }}>
-          ✦ FIND OUT YOUR WORTH HERE
+          Try it free today — no credit card required
         </Link>
         <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
           Then $19.99/month. Cancel anytime.
@@ -314,7 +314,7 @@ export default function LandingPage() {
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              ✦ Try 7 days for $4.99 <ArrowRight size={14} />
+              Try it free today — no credit card required <ArrowRight size={14} />
             </Link>
           </div>
           {/* Chat preview */}
@@ -409,14 +409,14 @@ export default function LandingPage() {
             boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
             textAlign: 'left',
           }}>
-            <div style={{ fontSize: 11, fontWeight: 800, color: '#f59e0b', letterSpacing: '0.12em', marginBottom: 20 }}>
-              INTRO OFFER
+            <div style={{ fontSize: 11, fontWeight: 800, color: '#10b981', letterSpacing: '0.12em', marginBottom: 20 }}>
+              PRO PLAN
             </div>
             <div style={{ fontSize: 52, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 8 }}>
-              $4.99 <span style={{ fontSize: 18, fontWeight: 400, color: '#94a3b8' }}>today</span>
+              $20 <span style={{ fontSize: 18, fontWeight: 400, color: '#94a3b8' }}>/month</span>
             </div>
-            <div style={{ fontSize: 15, color: '#475569', marginBottom: 6 }}>7 days of full access.</div>
-            <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 32 }}>Then $19.99/month unless canceled before renewal.</div>
+            <div style={{ fontSize: 15, color: '#475569', marginBottom: 6 }}>Full unlimited access to everything.</div>
+            <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 32 }}>Free to start · Cancel anytime.</div>
 
             <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: 24, display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 32 }}>
               {proFeatures.map(f => (
@@ -435,7 +435,7 @@ export default function LandingPage() {
               fontSize: 15, textDecoration: 'none', color: '#fff', fontWeight: 700,
               boxShadow: '0 4px 20px rgba(239,68,68,0.25)',
             }}>
-              ✦ Start for $4.99
+              Try it free today — no credit card required
             </Link>
             <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 12, textAlign: 'center' }}>Cancel anytime. No commitment.</div>
           </div>
@@ -591,7 +591,7 @@ export default function LandingPage() {
           }}>
             See my market value <ArrowRight size={16} />
           </Link>
-          <div style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>7 days for $4.99 — then $19.99/month. Cancel anytime.</div>
+          <div style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>Free to start · $20/month after · Cancel anytime.</div>
         </div>
       </section>
 

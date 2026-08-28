@@ -2,13 +2,12 @@
 import { useState } from 'react'
 import { Check, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/client'
 
 export default function UpgradePage() {
   const [loading, setLoading] = useState(false)
 
   async function checkout() {
-    const priceId = process.env.NEXT_PUBLIC_STRIPE_PRO_TRIAL_PRICE_ID || process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || ''
+    const priceId = process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || ''
     if (!priceId) return
     setLoading(true)
     const res = await fetch('/api/checkout', {
@@ -22,13 +21,13 @@ export default function UpgradePage() {
   }
 
   const features = [
-    'Sarah career coach — unlimited coaching',
-    'All 10 negotiation tools — unlimited',
-    'Resume analyzer',
+    'Unlimited conversations with Sarah',
+    'Resume builder with AI feedback & ATS scoring',
+    'Job tracker to manage your entire search',
+    'Offer evaluator & counter-offer builder',
+    'Equity calculator & total comp breakdown',
+    'Negotiation playbook & raise builder',
     'Cover letter generator',
-    'Offer evaluator + counter-offer builder',
-    'Raise builder + negotiation playbook',
-    'Session history',
   ]
 
   return (
@@ -43,7 +42,7 @@ export default function UpgradePage() {
             Upgrade to Pro
           </h1>
           <p style={{ fontSize: 16, color: 'var(--color-text-secondary)', maxWidth: 400, margin: '0 auto' }}>
-            Try 7 days for $4.99 — then $19.99/month. Cancel anytime.
+            Unlimited access to Sarah and every tool — $20/month. Cancel anytime.
           </p>
         </div>
 
@@ -54,12 +53,12 @@ export default function UpgradePage() {
           position: 'relative',
         }}>
           <div style={{ position: 'absolute', top: -11, left: 24, background: '#141414', color: '#fff', fontSize: 11, padding: '2px 10px', borderRadius: 4, fontWeight: 600 }}>
-            Professional
+            Pro
           </div>
 
           <div style={{ marginBottom: 24 }}>
-            <div style={{ fontSize: 40, fontWeight: 700, letterSpacing: '-0.02em' }}>$4.99</div>
-            <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 2 }}>for 7 days — then $19.99/month</div>
+            <div style={{ fontSize: 40, fontWeight: 700, letterSpacing: '-0.02em' }}>$20</div>
+            <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 2 }}>/month · Cancel anytime</div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
@@ -76,13 +75,14 @@ export default function UpgradePage() {
             onClick={checkout}
             style={{
               width: '100%', height: 48,
-              background: '#141414', color: '#fff',
+              background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
+              color: '#fff',
               border: 'none', borderRadius: 10,
-              fontSize: 15, fontWeight: 600, cursor: loading ? 'default' : 'pointer',
+              fontSize: 15, fontWeight: 700, cursor: loading ? 'default' : 'pointer',
               opacity: loading ? 0.6 : 1,
             }}
           >
-            {loading ? 'Loading…' : 'Try 7 days for $4.99'}
+            {loading ? 'Loading…' : 'Try it free today — no credit card required'}
           </button>
         </div>
 

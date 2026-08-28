@@ -1,12 +1,12 @@
 'use client'
 import { useState, useRef, useEffect, Suspense } from 'react'
-import { Send, Briefcase, Sparkles, Lock, ChevronDown, ChevronUp, Brain } from 'lucide-react'
-import Link from 'next/link'
+import { Send, Briefcase, Sparkles, ChevronDown, ChevronUp, Brain } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
+import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
-const FREE_LIMIT = 0
+const FREE_LIMIT = 10
 
 const FREE_INTRO = `Hey! I'm Sarah, your personalized career coach, here to help you accomplish your goals and get the most out of the platform!
 
@@ -40,6 +40,8 @@ function RecruiterPageInner() {
   const [loading, setLoading] = useState(false)
   const [used, setUsed] = useState(0)
   const [limitReached, setLimitReached] = useState(false)
+  const [upgradeHook, setUpgradeHook] = useState<string | undefined>()
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
   const [isPro, setIsPro] = useState(false)
   const [memory, setMemory] = useState<Record<string, string>>({})
   const [showMemory, setShowMemory] = useState(false)
@@ -100,6 +102,8 @@ function RecruiterPageInner() {
       if (res.status === 429) {
         setLimitReached(true)
         setUsed(FREE_LIMIT)
+        if (data.upgradeHook) setUpgradeHook(data.upgradeHook)
+        setShowUpgradeModal(true)
         return
       }
 
@@ -158,6 +162,7 @@ function RecruiterPageInner() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', maxWidth: 800, margin: '0 auto', padding: '0 24px', overflow: 'hidden' }} data-component="recruiter-page">
+      {showUpgradeModal && <UpgradeModal upgradeHook={upgradeHook} onClose={() => setShowUpgradeModal(false)} />}
       {/* Header */}
       <div style={{ padding: '24px 0 16px', borderBottom: '0.5px solid var(--color-border-tertiary)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -201,7 +206,7 @@ function RecruiterPageInner() {
             )}
             {used > 0 && !limitReached && !isPro && (
               <span style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>
-                {remaining} left this month
+                {remaining} free messages left
               </span>
             )}
             <Sparkles size={16} color="#f59e0b" />
@@ -343,38 +348,21 @@ function RecruiterPageInner() {
       {/* Input / Limit */}
       {limitReached ? (
         <div style={{ padding: '20px 0 24px', borderTop: '0.5px solid var(--color-border-tertiary)' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
-            border: '1px solid rgba(102,126,234,0.3)',
-            borderRadius: 12, padding: '20px 24px',
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{
-                width: 36, height: 36, borderRadius: '50%',
-                background: 'rgba(102,126,234,0.2)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-              }}>
-                <Lock size={16} color="#667eea" />
-              </div>
-              <div>
-                <p style={{ margin: 0, fontWeight: 600, fontSize: 14, color: '#fff' }}>
-                  You've used all {FREE_LIMIT} free messages this month
-                </p>
-                <p style={{ margin: '2px 0 0', fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>
-                  Start your 7-day trial for $4.99 — unlimited coaching with Sarah
-                </p>
-              </div>
-            </div>
-            <Link href="/account/billing" style={{
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              color: '#fff', textDecoration: 'none',
-              borderRadius: 8, padding: '10px 20px',
-              fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0,
-            }}>
-              ✦ FIND OUT YOUR WORTH FOR $4.99
-            </Link>
-          </div>
+          <button
+            onClick={() => setShowUpgradeModal(true)}
+            style={{
+              width: '100%',
+              background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
+              color: '#fff', border: 'none', borderRadius: 10,
+              padding: '14px 20px', fontSize: 14, fontWeight: 700,
+              cursor: 'pointer', textAlign: 'center',
+            }}
+          >
+            Try it free today — no credit card required
+          </button>
+          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', textAlign: 'center', marginTop: 8 }}>
+            You&apos;ve used your 10 free messages · Upgrade for unlimited access
+          </p>
         </div>
       ) : (
         <div style={{ padding: '12px 0 24px' }}>
