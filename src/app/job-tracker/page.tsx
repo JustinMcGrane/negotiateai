@@ -52,14 +52,14 @@ export default function JobTrackerPage() {
           <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
             Sign in
           </Link>
-          <Link href="/upgrade" style={{
+          <Link href="/signup" style={{
             fontSize: 14, fontWeight: 700,
             background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
             color: '#fff',
             textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
             display: 'flex', alignItems: 'center', gap: 6,
             boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
-          }}>✦ Try 7 days for $4.99 <ArrowRight size={14} /></Link>
+          }}>Try Free Today - No Credit Card Required <ArrowRight size={14} /></Link>
         </div>
       </header>
 
@@ -83,7 +83,7 @@ export default function JobTrackerPage() {
         </p>
 
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}>
-          <Link href="/upgrade" style={{
+          <Link href="/signup" style={{
             height: 48, display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '0 28px',
             background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
@@ -91,7 +91,7 @@ export default function JobTrackerPage() {
             borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
             boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
           }}>
-            ✦ Try 7 days for $4.99 <ArrowRight size={15} />
+            Try Free Today - No Credit Card Required <ArrowRight size={15} />
           </Link>
         </div>
 
@@ -152,7 +152,7 @@ export default function JobTrackerPage() {
         <p style={{ fontSize: 16, color: '#94a3b8', maxWidth: 480, margin: '0 auto 36px' }}>
           Start tracking today and stop letting opportunities fall through the cracks.
         </p>
-        <Link href="/upgrade" style={{
+        <Link href="/signup" style={{
           height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
           padding: '0 32px',
           background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
@@ -160,7 +160,7 @@ export default function JobTrackerPage() {
           borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
           boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
         }}>
-          ✦ Try 7 days for $4.99 <ArrowRight size={15} />
+          Try Free Today - No Credit Card Required <ArrowRight size={15} />
         </Link>
       </section>
 

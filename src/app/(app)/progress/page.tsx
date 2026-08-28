@@ -157,7 +157,7 @@ export default async function ProgressPage() {
             padding: '9px 18px', borderRadius: 8,
             fontSize: 13, fontWeight: 700, textDecoration: 'none',
             whiteSpace: 'nowrap',
-          }}>✦ FIND OUT YOUR WORTH FOR $4.99</Link>
+          }}>Try Free Today - No Credit Card Required</Link>
         </div>
       )}
 

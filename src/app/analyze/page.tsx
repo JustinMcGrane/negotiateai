@@ -164,7 +164,7 @@ function WhatIsIncludedModal({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
       <div ref={ref} className="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-base font-bold text-gray-900">What&apos;s included — $49/month</h3>
+          <h3 className="text-base font-bold text-gray-900">What&apos;s included — $20/month</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-700 text-lg leading-none">&times;</button>
         </div>
         <ul className="space-y-4 mb-8">
@@ -224,7 +224,7 @@ function AnalysisResults({ result, isUnlocked, onUnlock }: {
                   <div className="text-3xl mb-3">🔒</div>
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Estimated money left on table</p>
                   <p className="text-4xl font-black text-gray-900 mb-1">{fmt(result.moneyLeftOnTable ?? result.gap ?? 0)}</p>
-                  <p className="text-xs text-gray-400 mb-5">$49/month · cancel anytime</p>
+                  <p className="text-xs text-gray-400 mb-5">$20/month · cancel anytime</p>
                   <p className="text-sm text-gray-600 mb-6 leading-relaxed">
                     Unlock your full negotiation playbook, scripts, red flags, and offer strengths.
                   </p>

@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     if (!usage.allowed) {
       return NextResponse.json({
         error: 'limit_reached',
-        message: `Pro subscription required. Try 7 days for $4.99 at gethayven.com/upgrade`,
+        message: `Pro subscription required. Sign up free at gethayven.com/signup`,
         used: usage.used,
         limit: usage.limit,
       }, { status: 429 })

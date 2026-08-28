@@ -44,7 +44,7 @@ export default function BillingPage() {
       price: '$49',
       sub: '/month',
       features: ['Sarah career coach — unlimited coaching', 'All 10 negotiation tools — unlimited', 'Resume analyzer + cover letter generator', 'Offer evaluator + counter-offer builder', 'Raise builder + negotiation playbook', 'Session history'],
-      cta: 'Get Professional',
+      cta: 'Try Free Today',
       disabled: false,
       priceId: process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || '',
       highlight: true,
@@ -64,7 +64,7 @@ export default function BillingPage() {
   return (
     <div style={{ padding: '32px 32px 80px', maxWidth: 860 }}>
       <h1 style={{ fontSize: 18, fontWeight: 500, marginBottom: 8 }}>Billing &amp; plans</h1>
-      <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 32 }}>Upgrade to unlock unlimited access and advanced features.</p>
+      <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 32 }}>Start free — upgrade to Pro for unlimited access.</p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginBottom: 32 }}>
         {plans.map((plan) => (

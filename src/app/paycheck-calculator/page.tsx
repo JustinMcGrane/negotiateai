@@ -205,7 +205,7 @@ export default function PaycheckCalculator() {
         <Link href="/" style={{ fontWeight: 800, fontSize: 18, color: '#0f172a', textDecoration: 'none' }}>Hayven</Link>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <Link href="/login" style={{ fontSize: 14, color: '#64748b', textDecoration: 'none' }}>Sign in</Link>
-          <Link href="/upgrade" style={{ fontSize: 14, fontWeight: 700, background: '#0f172a', color: '#fff', padding: '8px 18px', borderRadius: 8, textDecoration: 'none' }}>Try for $4.99</Link>
+          <Link href="/signup" style={{ fontSize: 14, fontWeight: 700, background: '#0f172a', color: '#fff', padding: '8px 18px', borderRadius: 8, textDecoration: 'none' }}>Try Free Today - No Credit Card Required</Link>
         </div>
       </header>
 
@@ -325,13 +325,13 @@ export default function PaycheckCalculator() {
               <div style={{ fontSize: 15, fontWeight: 700, color: '#fff', marginBottom: 4 }}>Is your salary actually fair?</div>
               <div style={{ fontSize: 13, color: '#94a3b8' }}>Sarah benchmarks your pay against your market and builds your negotiation strategy.</div>
             </div>
-            <Link href="/upgrade" style={{
+            <Link href="/signup" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap',
               background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
               color: '#fff', padding: '12px 20px', borderRadius: 9,
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
             }}>
-              Try for $4.99 <ArrowRight size={14} />
+              Try Free Today - No Credit Card Required <ArrowRight size={14} />
             </Link>
           </div>
         </div>
@@ -402,16 +402,16 @@ export default function PaycheckCalculator() {
               </div>
             ))}
           </div>
-          <Link href="/upgrade" style={{
+          <Link href="/signup" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
             color: '#fff', padding: '14px 28px', borderRadius: 10,
             fontSize: 15, fontWeight: 700, textDecoration: 'none',
             boxShadow: '0 4px 20px rgba(239,68,68,0.3)',
           }}>
-            ✦ Try Hayven for $4.99 <ArrowRight size={14} />
+            Try Free Today - No Credit Card Required <ArrowRight size={14} />
           </Link>
-          <div style={{ fontSize: 12, color: '#475569', marginTop: 12 }}>7-day trial. Cancel anytime.</div>
+          <div style={{ fontSize: 12, color: '#475569', marginTop: 12 }}>Free to start · Cancel anytime.</div>
         </div>
       </section>
 

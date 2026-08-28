@@ -340,7 +340,7 @@ export default async function DashboardPage() {
               <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text-tertiary)', letterSpacing: '0.04em' }}>
                 {isElite ? 'PRO TOOLS' : 'PRO FEATURES'}
               </div>
-              {!isElite && <Link href="/upgrade" style={{ fontSize: 12, color: 'var(--color-text-tertiary)', textDecoration: 'underline' }}>Upgrade to Pro</Link>}
+              {!isElite && <Link href="/signup" style={{ fontSize: 12, color: 'var(--color-text-tertiary)', textDecoration: 'underline' }}>Upgrade to Pro</Link>}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
               {FEATURE_CARDS.map((card) => (
@@ -428,7 +428,7 @@ export default async function DashboardPage() {
           <div>
             <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>You are on the free plan</div>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>
-              Start your 7-day trial for $4.99 and get full access to Sarah + all tools.
+              Sign up free and get full access to Sarah + all tools.
             </div>
           </div>
           <Link href="/account/billing" style={{

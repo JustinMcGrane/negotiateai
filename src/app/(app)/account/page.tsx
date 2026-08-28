@@ -123,7 +123,7 @@ export default function AccountPage() {
             background: '#141414', color: '#fff',
             padding: '8px 16px', borderRadius: 8,
             fontSize: 13, fontWeight: 600, textDecoration: 'none',
-          }}>✦ FIND OUT YOUR WORTH FOR $4.99</a>
+          }}>Try Free Today - No Credit Card Required</a>
         )}
         {isPro && (
           <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }}>Active</div>

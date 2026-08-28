@@ -143,7 +143,7 @@ export default function RoleplayPage() {
           borderRadius: 8, padding: '12px 28px',
           fontSize: 14, fontWeight: 600,
         }}>
-          ✦ FIND OUT YOUR WORTH FOR $4.99
+          Try Free Today - No Credit Card Required
         </Link>
       </div>
     )

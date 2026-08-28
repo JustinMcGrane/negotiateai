@@ -21,7 +21,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How much does a career coach cost?',
-    a: 'A traditional human career coach typically costs $150–$500 per hour, or $1,000–$5,000 for a structured coaching package. Hayven\'s AI career coach starts at $4.99 for a 7-day trial — you get unlimited coaching sessions, your market rate, a personalized career plan, and all 10 negotiation tools. Then $19.99/month after the trial.',
+    a: 'A traditional human career coach typically costs $150–$500 per hour, or $1,000–$5,000 for a structured coaching package. Hayven\'s AI career coach is free to start — talk to Sarah, get your market rate, and try all 10 tools. Pro is $20/month for unlimited access.',
   },
   {
     q: 'Is an AI career coach as good as a human career coach?',
@@ -80,7 +80,7 @@ export default function AICareerCoachPage() {
           <Link href="/" style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', textDecoration: 'none', letterSpacing: '-0.02em' }}>Hayven</Link>
           <div style={{ display: 'flex', gap: 8 }}>
             <Link href="/login" style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>Sign in</Link>
-            <Link href="/upgrade" style={{ fontSize: 14, fontWeight: 700, background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', textDecoration: 'none', padding: '8px 18px', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 6, boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>✦ Try 7 days for $4.99 <ArrowRight size={14} /></Link>
+            <Link href="/signup" style={{ fontSize: 14, fontWeight: 700, background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', textDecoration: 'none', padding: '8px 18px', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 6, boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>Try Free Today - No Credit Card Required <ArrowRight size={14} /></Link>
           </div>
         </header>
 
@@ -96,7 +96,7 @@ export default function AICareerCoachPage() {
             Meet Sarah — Hayven&apos;s AI career coach. She benchmarks your salary against the market, builds your negotiation strategy, and coaches you through every step of landing the offer you deserve.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/upgrade" style={{
+            <Link href="/signup" style={{
               height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
               padding: '0 28px',
               background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
@@ -104,7 +104,7 @@ export default function AICareerCoachPage() {
               borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              ✦ Try 7 days for $4.99 <ArrowRight size={15} />
+              Try Free Today - No Credit Card Required <ArrowRight size={15} />
             </Link>
             <Link href="/worth" style={{
               height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
@@ -186,7 +186,7 @@ export default function AICareerCoachPage() {
                 </div>
               ))}
             </div>
-            <Link href="/upgrade" style={{
+            <Link href="/signup" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
               color: '#fff',
@@ -194,7 +194,7 @@ export default function AICareerCoachPage() {
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              ✦ Try 7 days for $4.99 <ArrowRight size={14} />
+              Try Free Today - No Credit Card Required <ArrowRight size={14} />
             </Link>
           </div>
         </section>
@@ -214,7 +214,7 @@ export default function AICareerCoachPage() {
             <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, marginBottom: 32 }}>
               The average professional leaves $27,000 on the table by not negotiating their first offer. That number compounds every year through raises, bonuses, and future job offers — all of which are anchored to what you&apos;re making now. The sooner you get your compensation right, the more it pays off.
             </p>
-            <Link href="/upgrade" style={{
+            <Link href="/signup" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
               color: '#fff',
@@ -222,7 +222,7 @@ export default function AICareerCoachPage() {
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              ✦ Try 7 days for $4.99 <ArrowRight size={14} />
+              Try Free Today - No Credit Card Required <ArrowRight size={14} />
             </Link>
           </div>
         </section>
@@ -304,7 +304,7 @@ export default function AICareerCoachPage() {
             <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.7, marginBottom: 36 }}>
               Sarah will tell you your market rate, where you stand, and exactly what to do next — personalized to your role and situation.
             </p>
-            <Link href="/upgrade" style={{
+            <Link href="/signup" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
               color: '#fff',
@@ -312,7 +312,7 @@ export default function AICareerCoachPage() {
               fontSize: 16, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
             }}>
-              ✦ Try 7 days for $4.99 <ArrowRight size={16} />
+              Try Free Today - No Credit Card Required <ArrowRight size={16} />
             </Link>
             <p style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>Then $19.99/month. Cancel anytime.</p>
           </div>
