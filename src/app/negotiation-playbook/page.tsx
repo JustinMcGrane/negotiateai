@@ -11,9 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gethayven.com/negotiation-playbook' },
   twitter: {
     card: 'summary_large_image',
-    title: 'Salary Negotiation Playbook — Your Step-by-Step Strategy',
-    `description: '|Get a personalized salary negotiation playbook. Know your number, your timing, and your exact strategy before you start.',
-    images: ['/og-image.png'],
+    description: 'Get a personalized salary negotiation playbook. Know your number, your timing, and your exact strategy before you start.',
   },
 }
 

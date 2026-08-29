@@ -11,9 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gethayven.com/compensation-analyzer' },
   twitter: {
     card: 'summary_large_image',
-    title: 'Compensation Analyzer — Know Your Market Rate',
-    `description: '|Find out exactly what you should be earning. See your market rate at every percentile by role, location, and experience.',
-    images: ['/og-image.png'],
+    description: 'Find out exactly what you should be earning. See your market rate at every percentile by role, location, and experience.',
   },
 }
 

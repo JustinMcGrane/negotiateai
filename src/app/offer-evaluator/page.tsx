@@ -11,9 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gethayven.com/offer-evaluator' },
   twitter: {
     card: 'summary_large_image',
-    title: 'Job Offer Evaluator — Score Any Offer 0–100',
-    `description: '|Evaluate any job offer instantly. Get a 0–100 score, red flags, missing terms, and a clear picture of total compensation.',
-    images: ['/og-image.png'],
+    description: 'Evaluate any job offer instantly. Get a 0-100 score, red flags, missing terms, and a clear picture of total compensation.',
   },
 }
 

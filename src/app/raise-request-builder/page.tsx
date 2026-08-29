@@ -11,9 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gethayven.com/raise-request-builder' },
   twitter: {
     card: 'summary_large_image',
-    title: 'Raise Request Builder — Make the Case for More Money',
-    `description: '|Build a compelling raise request with data, talking points, and the exact script to ask your manager for more money.',
-    images: ['/og-image.png'],
+    description: 'Build a compelling raise request with data, talking points, and the exact script to ask your manager for more money.',
   },
 }
 

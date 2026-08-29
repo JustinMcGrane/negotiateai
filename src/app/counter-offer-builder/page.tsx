@@ -11,9 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gethayven.com/counter-offer-builder' },
   twitter: {
     card: 'summary_large_image',
-    title: 'Counter-Offer Builder — Get the Exact Words to Negotiate',
-    `description: '|Build a compelling counter-offer in minutes. Get the exact script, the right number, and the reasoning to back it up.',
-    images: ['/og-image.png'],
+    description: 'Build a compelling counter-offer in minutes. Get the exact script, the right number, and the reasoning to back it up.',
   },
 }
 

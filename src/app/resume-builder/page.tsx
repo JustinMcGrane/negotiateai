@@ -11,9 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gethayven.com/resume-builder' },
   twitter: {
     card: 'summary_large_image',
-    title: 'Resume Builder — ATS-Optimized Resumes with AI Feedback',
-    `description: '|Build a resume that passes ATS filters and impresses recruiters. Get AI feedback, ATS scoring, and rewritten bullets.',
-    images: ['/og-image.png'],
+    description: 'Build a resume that passes ATS filters and impresses recruiters. Get AI feedback, ATS scoring, and rewritten bullets.',
   },
 }
 

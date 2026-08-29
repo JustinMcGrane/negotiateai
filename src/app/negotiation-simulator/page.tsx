@@ -11,9 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gethayven.com/negotiation-simulator' },
   twitter: {
     card: 'summary_large_image',
-    title: 'Salary Negotiation Simulator — Practice Until You're Ready ',
-    `description: '|Practice salary negotiation with an AI coach. Run real scenarios, get feedback, and build confidence before the real thing.',
-    images: ['/og-image.png'],
+    description: 'Practice salary negotiation with an AI coach. Run real scenarios, get feedback, and build confidence before the real thing.',
   },
 }
 

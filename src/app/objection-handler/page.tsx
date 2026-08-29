@@ -11,9 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gethayven.com/objection-handler' },
   twitter: {
     card: 'summary_large_image',
-    title: 'Salary Negotiation Objection Handler',
-    `description: '|Know exactly what to say when they push back. Handle every salary negotiation objection with confidence.',
-    images: ['/og-image.png'],
+    description: 'Know exactly what to say when they push back. Handle every salary negotiation objection with confidence.',
   },
 }
 

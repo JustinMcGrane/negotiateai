@@ -11,9 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gethayven.com/interview-salary-coach' },
   twitter: {
     card: 'summary_large_image',
-    title: 'Interview Salary Coach — Handle the Money Question',
-    `description: '|Know exactly what to say when they ask about salary in an interview. Deflect, anchor, and negotiate from a position of strength.',
-    images: ['/og-image.png'],
+    description: 'Know exactly what to say when they ask about salary in an interview. Deflect, anchor, and negotiate from a position of strength.',
   },
 }
 
