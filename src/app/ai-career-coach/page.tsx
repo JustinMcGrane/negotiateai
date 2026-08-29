@@ -12,8 +12,11 @@ export const metadata: Metadata = {
     url: 'https://gethayven.com/ai-career-coach',
     type: 'website',
   },
-
-
+  twitter: {
+    card: 'summary_large_image',
+    description: 'Get personalized career coaching from Sarah, your AI career coach. Market rates, negotiation strategy, resume feedback — free to start.',
+  },
+}
 
 const FAQ_ITEMS = [
   {
