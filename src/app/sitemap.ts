@@ -54,5 +54,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/blog/project-manager-resume`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/financial-analyst-resume`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/operations-manager-resume`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/data-scientist-resume`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/ux-designer-resume`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/product-manager-resume`, lastModified: now, priority: 0.8 },
   ]
 }

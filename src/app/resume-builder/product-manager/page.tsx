@@ -132,7 +132,7 @@ export default function ProductManagerResumePage() {
         <div style={{ borderTop: '0.5px solid #e5e7eb', paddingTop: 32 }}>
           <div style={{ fontSize: 13, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.06em', marginBottom: 16 }}>RELATED READING</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-            <Link href="/blog/how-to-negotiate-salary-after-job-offer" style={{ fontSize: 13, fontWeight: 600, color: '#4169E1', textDecoration: 'none', padding: '6px 14px', borderRadius: 20, background: '#eff6ff', border: '0.5px solid #bfdbfe' }}>How to Negotiate a Job Offer</Link>
+            <Link href="/blog/product-manager-resume" style={{ fontSize: 13, fontWeight: 600, color: '#4169E1', textDecoration: 'none', padding: '6px 14px', borderRadius: 20, background: '#eff6ff', border: '0.5px solid #bfdbfe' }}>Product Manager Resume Guide</Link>
             <Link href="/compensation-analyzer" style={{ fontSize: 13, fontWeight: 600, color: '#059669', textDecoration: 'none', padding: '6px 14px', borderRadius: 20, background: '#ecfdf5', border: '0.5px solid #a7f3d0' }}>Product Manager Market Rate</Link>
             <Link href="/resume-builder" style={{ fontSize: 13, fontWeight: 600, color: '#64748b', textDecoration: 'none', padding: '6px 14px', borderRadius: 20, background: '#f1f5f9', border: '0.5px solid #e2e8f0' }}>All Resume Templates</Link>
           </div>
