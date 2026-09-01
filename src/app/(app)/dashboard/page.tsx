@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { TrendingUp, FileSearch, Play, ArrowRight, UserCircle, FileText, Search, Dumbbell, LineChart, ClipboardList } from 'lucide-react'
 
-export const metadata: Metadata = { title: 'Dashboard — NegotiateAI' }
+export const metadata: Metadata = { title: 'Dashboard — Hayven' }
 
 export default async function DashboardPage() {
   const supabase = await createClient()

@@ -85,7 +85,7 @@ export function Sidebar() {
         <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Image
             src="/logo.png"
-            alt="NegotiateAI"
+            alt="Hayven"
             width={180}
             height={52}
             style={{ objectFit: 'contain' }}

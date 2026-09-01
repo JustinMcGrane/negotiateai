@@ -7,7 +7,7 @@ async function sendEmail(to: string, subject: string, html: string) {
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: 'Sarah at NegotiateAI <sarah@negotiateai.com>', to, subject, html }),
+    body: JSON.stringify({ from: 'Sarah at Hayven <sarah@gethayven.com>', to, subject, html }),
   })
 }
 
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   }
 
   const supabase = createServiceClient()
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://negotiateai.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://gethayven.com'
 
   // Get users who haven't had a check-in in 30+ days, and haven't opted out
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
         </p>
         <a href="${appUrl}/recruiter?checkin=true" style="display: inline-block; background: #141414; color: #fff; text-decoration: none; padding: 13px 24px; border-radius: 9px; font-weight: 600; font-size: 14px; margin-bottom: 28px;">Start my check-in with Sarah →</a>
         <p style="color: #999; font-size: 12px; line-height: 1.6; margin: 0;">
-          You're receiving this because you signed up for NegotiateAI check-in reminders.
+          You're receiving this because you signed up for Hayven check-in reminders.
           <a href="${appUrl}/account/notifications" style="color: #999;">Unsubscribe</a>
         </p>
       </div>

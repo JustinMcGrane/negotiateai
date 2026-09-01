@@ -7,7 +7,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
       <header style={{ borderBottom: '0.5px solid var(--color-border-tertiary)', padding: '0 24px', height: 52, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <BrandMark size={22} />
-          <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)' }}>NegotiateAI</span>
+          <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)' }}>Hayven</span>
         </Link>
         <Link href="/signup" style={{ fontSize: 13, background: '#141414', color: '#fff', textDecoration: 'none', padding: '6px 14px', borderRadius: 8 }}>Start free →</Link>
       </header>

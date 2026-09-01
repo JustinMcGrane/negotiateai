@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
-export const metadata: Metadata = { title: 'Compensation Report — NegotiateAI' }
+export const metadata: Metadata = { title: 'Compensation Report — Hayven' }
 
 export default async function ReportPage() {
   const supabase = await createClient()

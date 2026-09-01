@@ -7,7 +7,7 @@ async function sendEmail(to: string, subject: string, html: string) {
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: 'NegotiateAI <pulse@negotiateai.com>', to, subject, html }),
+    body: JSON.stringify({ from: 'Hayven <pulse@gethayven.com>', to, subject, html }),
   })
 }
 
@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
   }
 
   const supabase = createServiceClient()
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://negotiateai.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://gethayven.com'
 
   const { data: users } = await supabase
     .from('profiles')
@@ -103,7 +103,7 @@ export async function GET(req: NextRequest) {
         </p>
         <a href="${appUrl}/tools/comp-analyzer" style="display: inline-block; background: #141414; color: #fff; text-decoration: none; padding: 13px 24px; border-radius: 9px; font-weight: 600; font-size: 14px; margin-bottom: 28px;">Run a full comp analysis →</a>
         <p style="color: #999; font-size: 12px; line-height: 1.6; margin: 0;">
-          You're receiving this because you signed up for NegotiateAI market alerts.
+          You're receiving this because you signed up for Hayven market alerts.
           <a href="${appUrl}/account/notifications" style="color: #999;">Unsubscribe</a>
         </p>
       </div>
