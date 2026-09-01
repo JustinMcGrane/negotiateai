@@ -389,6 +389,80 @@ export default function ResumeBuilderPage() {
         </div>
       </section>
 
+      {/* Resume Templates */}
+      <section style={{ background: '#f0f4f8', borderTop: '0.5px solid #e2e8f0', padding: '72px 24px' }}>
+        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{ display: 'inline-block', background: '#0f2240', color: '#fff', fontSize: 16, fontWeight: 700, padding: '12px 32px', borderRadius: 40, marginBottom: 28 }}>
+              Free Resume Templates
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 32 }}>
+              <span style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', borderBottom: '2px solid #0f172a', paddingBottom: 4 }}>Resumes</span>
+              <span style={{ fontSize: 15, color: '#94a3b8', cursor: 'default' }}>Cover Letters</span>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+            {/* Template 1 — Classic */}
+            {[
+              { accent: '#0f2240', accentLabel: 'Classic Navy', lineStyle: 'none' },
+              { accent: '#e05c2a', accentLabel: 'Modern Coral', lineStyle: 'solid' },
+              { accent: '#1e3a5f', accentLabel: 'Clean Slate', lineStyle: 'double' },
+            ].map((t, i) => (
+              <div key={i} style={{ background: '#fff', borderRadius: 12, padding: '24px 20px', boxShadow: '0 2px 16px rgba(0,0,0,0.08)', fontSize: 8, lineHeight: 1.5, color: '#1e293b', position: 'relative', overflow: 'hidden' }}>
+                {/* Name */}
+                <div style={{ fontWeight: 800, fontSize: 16, color: t.accent, marginBottom: 2 }}>Alex Johnson</div>
+                {t.lineStyle === 'solid' && <div style={{ height: 2, background: t.accent, marginBottom: 6 }} />}
+                {t.lineStyle === 'double' && <div style={{ borderTop: `2px solid ${t.accent}`, borderBottom: `1px solid ${t.accent}`, height: 4, marginBottom: 6 }} />}
+                <div style={{ fontSize: 8, color: '#64748b', marginBottom: 10 }}>San Francisco, CA · alex@email.com · linkedin.com/in/alexjohnson</div>
+
+                <div style={{ fontSize: 8, color: '#475569', lineHeight: 1.6, marginBottom: 10 }}>
+                  7+ years of product management experience driving growth in B2B SaaS. Increased ARR by 40%, reduced churn by 22%, and led cross-functional teams of 12+ across 3 product lines.
+                </div>
+
+                <div style={{ fontWeight: 800, fontSize: 9, color: t.accent, borderBottom: `1px solid ${t.accent}`, paddingBottom: 3, marginBottom: 8, letterSpacing: '0.04em' }}>WORK EXPERIENCE</div>
+
+                <div style={{ fontWeight: 700, fontSize: 9, marginBottom: 1 }}>Senior Product Manager · Stripe</div>
+                <div style={{ fontSize: 8, color: '#64748b', marginBottom: 5 }}>New York, United States · 2021–Present</div>
+                {['Grew activation rate from 38% to 61% in 6 months by redesigning onboarding flow — reducing time-to-value from 9 days to 2.', 'Launched 3 pricing experiments that increased enterprise ACV by $18K and contributed to 28% ARR growth in FY23.', 'Led a 6-person squad to ship a self-serve analytics dashboard, cutting support tickets by 34%.'].map((b, j) => (
+                  <div key={j} style={{ display: 'flex', gap: 5, marginBottom: 4 }}>
+                    <span style={{ color: t.accent, flexShrink: 0 }}>•</span>
+                    <span style={{ fontSize: 8, color: '#334155', lineHeight: 1.5 }}>{b}</span>
+                  </div>
+                ))}
+
+                <div style={{ fontWeight: 700, fontSize: 9, marginBottom: 1, marginTop: 8 }}>Product Manager · Notion</div>
+                <div style={{ fontSize: 8, color: '#64748b', marginBottom: 5 }}>Remote · 2019–2021</div>
+                {['Owned the templates marketplace from 0→1, reaching 500K monthly active users in 14 months.', 'Drove a 19% increase in retention by launching a contextual onboarding system based on 80+ user interviews.'].map((b, j) => (
+                  <div key={j} style={{ display: 'flex', gap: 5, marginBottom: 4 }}>
+                    <span style={{ color: t.accent, flexShrink: 0 }}>•</span>
+                    <span style={{ fontSize: 8, color: '#334155', lineHeight: 1.5 }}>{b}</span>
+                  </div>
+                ))}
+
+                <div style={{ fontWeight: 800, fontSize: 9, color: t.accent, borderBottom: `1px solid ${t.accent}`, paddingBottom: 3, marginBottom: 8, marginTop: 10, letterSpacing: '0.04em' }}>EDUCATION</div>
+                <div style={{ fontWeight: 700, fontSize: 9 }}>B.S. Computer Science · Stanford University</div>
+                <div style={{ fontSize: 8, color: '#64748b' }}>2015–2019</div>
+
+                {/* Template label */}
+                <div style={{ position: 'absolute', bottom: 12, right: 12, fontSize: 9, fontWeight: 600, color: '#94a3b8' }}>{t.accentLabel}</div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: 36 }}>
+            <Link href="/signup" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              background: '#0f2240', color: '#fff',
+              padding: '13px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none',
+            }}>
+              Use a free template →
+            </Link>
+            <p style={{ fontSize: 12, color: '#94a3b8', marginTop: 10 }}>No credit card required</p>
+          </div>
+        </div>
+      </section>
+
       {/* Resume Guides by Role */}
       <section style={{ background: '#f8fafc', borderTop: '0.5px solid #e5e7eb', padding: '72px 24px' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
