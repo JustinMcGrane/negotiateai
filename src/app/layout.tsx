@@ -14,9 +14,11 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: 'Hayven',
     type: 'website',
+    images: [{ url: '/logo.png', width: 1200, height: 630, alt: 'Hayven' }],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['/logo.png'],
   },
 }
 

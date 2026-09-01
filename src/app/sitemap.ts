@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/objection-handler`, lastModified: now, priority: 0.7 },
     { url: `${base}/negotiation-playbook`, lastModified: now, priority: 0.7 },
     { url: `${base}/resume-builder`, lastModified: now, priority: 0.8 },
+    { url: `${base}/resume-templates`, lastModified: now, priority: 0.9 },
     { url: `${base}/resume-builder/software-engineer`, lastModified: now, priority: 0.9 },
     { url: `${base}/resume-builder/product-manager`, lastModified: now, priority: 0.9 },
     { url: `${base}/resume-builder/marketing-manager`, lastModified: now, priority: 0.9 },
@@ -50,5 +51,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/blog/how-to-negotiate-salary-in-an-interview`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/how-to-negotiate-salary-offer`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/what-does-a-career-coach-do`, lastModified: now, priority: 0.7 },
+    { url: `${base}/blog/project-manager-resume`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/financial-analyst-resume`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/operations-manager-resume`, lastModified: now, priority: 0.8 },
   ]
 }

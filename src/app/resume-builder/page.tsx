@@ -581,7 +581,7 @@ export default function ResumeBuilderPage() {
 
       {/* Footer */}
       <footer style={{ borderTop: '0.5px solid #e5e7eb', padding: '32px 24px', display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap' }}>
-        {[{ href: '/login', label: 'Sign in' }, { href: '/signup', label: 'Sign up' }].map(({ href, label }) => (
+        {[{ href: '/login', label: 'Sign in' }, { href: '/signup', label: 'Sign up' }, { href: '/resume-templates', label: 'Resume Templates' }, { href: '/resume-skills', label: 'Resume Skills' }].map(({ href, label }) => (
           <Link key={href} href={href} prefetch={true} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
         ))}
       </footer>
