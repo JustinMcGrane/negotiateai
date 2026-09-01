@@ -60,6 +60,15 @@ const features = [
   { icon: '💬', title: 'Interview Readiness', desc: 'A plain-language assessment of whether your resume will generate calls — and if not, what\'s specifically holding it back.' },
 ]
 
+const aiFeaturesList = [
+  { title: 'Custom resume audits', desc: 'Analyze your resume against specific job descriptions to get personalized optimization insights. Like having a custom checklist for every application.' },
+  { title: 'Job-specific rewrites', desc: 'Automatically rewrite your summary and bullets using the exact language from the job description, so your resume speaks directly to what they\'re hiring for.' },
+  { title: 'Emphasize achievements', desc: 'We identify where you can add metrics — dollars, percentages, headcount — to boost the impact of every bullet. No more vague or fluffy statements.' },
+  { title: 'Smart keyword matching', desc: 'Get suggestions for keywords you\'re missing and see where to add them naturally to improve ATS alignment without sounding robotic.' },
+  { title: 'Address skill gaps', desc: 'If the job description mentions skills you haven\'t highlighted, we flag the gap and generate content ideas to show your relevant experience.' },
+  { title: 'Track multiple versions', desc: 'Create and compare multiple resume versions for different roles. Keep your applications organized so you know which version is going where.' },
+]
+
 const faqs = [
   { q: 'Is Hayven\'s resume builder really free?', a: 'Yes — signing up is free and you can analyze your resume immediately. No credit card required to get started. Pro features like unlimited analyses are available on the paid plan.' },
   { q: 'What format should I paste my resume in?', a: 'Plain text works best. Copy from Word, Google Docs, or a PDF reader and paste it in. The AI reads the content, not the visual formatting.' },
@@ -251,6 +260,77 @@ export default function ResumeBuilderPage() {
                 <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{f.desc}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How to improve your resume with AI — checklist + mockup */}
+      <section style={{ background: '#f8fafc', borderTop: '0.5px solid #e5e7eb', borderBottom: '0.5px solid #e5e7eb', padding: '72px 24px' }}>
+        <div style={{ maxWidth: 1040, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 420px', gap: 64, alignItems: 'center' }}>
+          <div>
+            <p style={{ fontSize: 13, fontWeight: 700, color: '#64748b', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>Powered by AI</p>
+            <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', marginBottom: 12, lineHeight: 1.15 }}>
+              How to improve your resume with AI
+            </h2>
+            <p style={{ fontSize: 15, color: '#64748b', lineHeight: 1.7, marginBottom: 36, maxWidth: 480 }}>
+              Optimize your resume for each application. Whether it&apos;s a full rewrite or a targeted revision, Hayven helps you make improvements strategically — not randomly.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+              {aiFeaturesList.map(f => (
+                <div key={f.title} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                  <div style={{ width: 20, height: 20, borderRadius: '50%', background: '#ecfdf5', border: '1.5px solid #10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>
+                    <span style={{ fontSize: 11, color: '#10b981', fontWeight: 700 }}>✓</span>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: 15, fontWeight: 700, color: '#0f172a' }}>{f.title}:</span>{' '}
+                    <span style={{ fontSize: 15, color: '#475569', lineHeight: 1.65 }}>{f.desc}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Product mockup */}
+          <div style={{ background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 16, padding: 24, boxShadow: '0 4px 32px rgba(0,0,0,0.08)' }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.06em', marginBottom: 16 }}>BULLET REWRITER</div>
+
+            {/* Original bullet */}
+            <div style={{ background: '#fef2f2', border: '0.5px solid #fca5a5', borderRadius: 10, padding: '14px 16px', marginBottom: 8 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, color: '#ef4444', marginBottom: 6, letterSpacing: '0.05em' }}>ORIGINAL</div>
+              <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, margin: 0 }}>
+                Managed social media and helped increase website traffic through content marketing campaigns.
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, margin: '10px 0', paddingLeft: 4 }}>
+              <div style={{ width: 20, height: 1, background: '#e2e8f0' }} />
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#10b981' }}>✦ AI Rewrite</span>
+              <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
+            </div>
+
+            {/* Rewritten bullet */}
+            <div style={{ background: '#ecfdf5', border: '0.5px solid #6ee7b7', borderRadius: 10, padding: '14px 16px', marginBottom: 20 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, color: '#10b981', marginBottom: 6, letterSpacing: '0.05em' }}>REWRITTEN</div>
+              <p style={{ fontSize: 13, color: '#065f46', lineHeight: 1.6, margin: 0 }}>
+                Grew website traffic by <strong>30%</strong> in 6 months by launching a short-form content marketing campaign across 3 channels — driving <strong>12K new monthly visitors</strong> and a <strong>22% increase in sign-ups</strong>.
+              </p>
+            </div>
+
+            {/* Keyword tags */}
+            <div style={{ marginBottom: 16 }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: '#475569', marginBottom: 8 }}>Keywords matched to job description</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {['Content marketing', 'SEO', 'Paid marketing', 'Analytics', 'Growth'].map(k => (
+                  <span key={k} style={{ fontSize: 11, fontWeight: 600, padding: '4px 10px', borderRadius: 20, background: '#eff6ff', color: '#2563eb', border: '0.5px solid #bfdbfe' }}>{k}</span>
+                ))}
+              </div>
+            </div>
+
+            {/* Action buttons */}
+            <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+              <button style={{ fontSize: 13, fontWeight: 600, padding: '8px 16px', borderRadius: 8, background: '#f1f5f9', color: '#475569', border: '0.5px solid #e2e8f0', cursor: 'pointer' }}>Cancel</button>
+              <button style={{ fontSize: 13, fontWeight: 600, padding: '8px 16px', borderRadius: 8, background: '#0f172a', color: '#fff', border: 'none', cursor: 'pointer' }}>Save Bullet</button>
+            </div>
           </div>
         </div>
       </section>
