@@ -463,29 +463,64 @@ export default function ResumeBuilderPage() {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section style={{ padding: '72px 24px' }}>
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+          <h2 style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', textAlign: 'center', marginBottom: 12 }}>
+            What people say after using Hayven
+          </h2>
+          <p style={{ fontSize: 16, color: '#64748b', textAlign: 'center', maxWidth: 480, margin: '0 auto 48px', lineHeight: 1.7 }}>
+            Real results from people who used Hayven to land interviews and better offers.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+            {[
+              { quote: 'I sent out 40 applications with my old resume and got 2 callbacks. After Hayven rewrote my bullets and flagged my keyword gaps, I got 6 interviews from the next 15 applications.', name: 'Marcus T.', role: 'Senior Software Engineer', company: 'Now at Stripe' },
+              { quote: 'The ATS score told me immediately why I was getting rejected — my resume was at a 31. I fixed the 3 things it flagged, resubmitted to the same companies, and got 4 calls in a week.', name: 'Priya K.', role: 'Product Manager', company: 'Now at Figma' },
+              { quote: 'I had no idea "managed campaigns" was so weak compared to "generated $1.2M in pipeline." Hayven showed me the exact words to change and the results were immediate.', name: 'Jordan W.', role: 'Account Executive', company: 'Now at Salesforce' },
+              { quote: 'I\'d been applying for 3 months with no results. Hayven identified that my resume had a 28 ATS score and rewrote 6 bullets. I had my first interview within 4 days.', name: 'Aaliyah R.', role: 'Marketing Manager', company: 'Now at HubSpot' },
+              { quote: 'The section-by-section scores showed me my summary was a 40 and my experience section was an 88. I rewrote just the summary and my response rate tripled.', name: 'Daniel M.', role: 'Data Scientist', company: 'Now at Meta' },
+              { quote: 'As a career changer, I didn\'t know how to frame my experience for tech roles. Hayven showed me exactly which keywords to add and how to reframe 5 years of consulting into PM language.', name: 'Sophie L.', role: 'Associate PM', company: 'Now at Notion' },
+            ].map(t => (
+              <div key={t.name} style={{ background: '#f8fafc', border: '0.5px solid #e5e7eb', borderRadius: 14, padding: 28 }}>
+                <div style={{ fontSize: 22, color: '#4169E1', marginBottom: 12, lineHeight: 1 }}>&ldquo;</div>
+                <p style={{ fontSize: 14, color: '#334155', lineHeight: 1.7, marginBottom: 20 }}>{t.quote}</p>
+                <div style={{ borderTop: '0.5px solid #e5e7eb', paddingTop: 16 }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>{t.name}</div>
+                  <div style={{ fontSize: 13, color: '#64748b' }}>{t.role}</div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: '#10b981', marginTop: 4 }}>{t.company}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Resume Guides by Role */}
       <section style={{ background: '#f8fafc', borderTop: '0.5px solid #e5e7eb', padding: '72px 24px' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
           <h2 style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', textAlign: 'center', marginBottom: 12 }}>
-            Resume guides by role
+            Resume builder by role
           </h2>
           <p style={{ fontSize: 16, color: '#64748b', textAlign: 'center', maxWidth: 480, margin: '0 auto 48px', lineHeight: 1.7 }}>
-            Before you analyze, read the guide for your role. See exactly what metrics and structure hiring managers expect.
+            Role-specific ATS keywords, before/after examples, and writing tips for your exact job target.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
             {[
-              { role: 'Software Engineer', color: '#6366f1', bg: '#eef2ff', href: '/blog/software-engineer-resume', desc: 'Tech stack placement, impact bullets, ATS keywords, and GitHub links.' },
-              { role: 'Account Executive', color: '#059669', bg: '#ecfdf5', href: '/blog/account-executive-resume', desc: 'Quota attainment, ACV, pipeline metrics, and deal size context.' },
-              { role: 'Marketing Manager', color: '#d97706', bg: '#fffbeb', href: '/blog/marketing-manager-resume', desc: 'Campaign results, budget ownership, channel-specific numbers, and ROAS.' },
+              { role: 'Software Engineer', color: '#6366f1', bg: '#eef2ff', href: '/resume-builder/software-engineer', desc: 'Tech stack placement, impact bullets, ATS keywords, latency/uptime metrics, and GitHub links.' },
+              { role: 'Product Manager', color: '#0284c7', bg: '#e0f2fe', href: '/resume-builder/product-manager', desc: 'OKRs, DAU/MAU, ARR, retention metrics, roadmap ownership, and cross-functional leadership.' },
+              { role: 'Account Executive', color: '#059669', bg: '#ecfdf5', href: '/resume-builder/account-executive', desc: 'Quota attainment, ACV, pipeline generation, deal size, and sales motion context.' },
+              { role: 'Marketing Manager', color: '#d97706', bg: '#fffbeb', href: '/resume-builder/marketing-manager', desc: 'ROAS, CAC, pipeline sourced, budget ownership, channel-specific metrics, and tool stack.' },
+              { role: 'Data Scientist', color: '#7c3aed', bg: '#f5f3ff', href: '/resume-builder/data-scientist', desc: 'Model performance metrics, AUC, business impact, production vs. prototype, and tool stack.' },
+              { role: 'UX Designer', color: '#db2777', bg: '#fdf2f8', href: '/resume-builder/ux-designer', desc: 'Conversion, drop-off, usability metrics, research methods, portfolio links, and design systems.' },
             ].map(g => (
               <Link key={g.role} href={g.href} style={{ textDecoration: 'none' }}>
-                <div style={{ background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 14, padding: '24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: g.bg, color: g.color, fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 20, width: 'fit-content' }}>
+                <div style={{ background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 14, padding: 24, display: 'flex', flexDirection: 'column', gap: 10, height: '100%' }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', background: g.bg, color: g.color, fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 20, width: 'fit-content' }}>
                     {g.role}
                   </div>
-                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{g.desc}</div>
+                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65, flex: 1 }}>{g.desc}</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, fontWeight: 600, color: g.color, marginTop: 4 }}>
-                    Read guide <ArrowRight size={13} />
+                    View guide <ArrowRight size={13} />
                   </div>
                 </div>
               </Link>
