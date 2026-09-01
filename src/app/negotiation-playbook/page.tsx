@@ -5,13 +5,17 @@ import { ArrowRight, CheckCircle, BookOpen, Map, Layers } from 'lucide-react'
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Negotiation Playbook — Hayven',
-  description: 'A step-by-step negotiation strategy for your exact situation. Know what to do at every stage of the offer process.',
-
+  title: 'Salary Negotiation Playbook — Step-by-Step Strategy for Your Offer | Hayven',
+  description: 'Get a step-by-step salary negotiation strategy built for your exact situation. Know your number, your timing, and what to say at every stage of the offer process.',
   alternates: { canonical: 'https://gethayven.com/negotiation-playbook' },
+  openGraph: {
+    title: 'Salary Negotiation Playbook | Hayven',
+    description: 'A personalized negotiation strategy for your exact offer — know what to do at every stage.',
+  },
   twitter: {
     card: 'summary_large_image',
-    description: 'Get a personalized salary negotiation playbook. Know your number, your timing, and your exact strategy before you start.',
+    title: 'Salary Negotiation Playbook | Hayven',
+    description: 'Get a personalized salary negotiation playbook. Know your number, timing, and exact strategy.',
   },
 }
 

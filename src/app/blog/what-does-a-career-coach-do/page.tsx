@@ -79,7 +79,7 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>What Sarah can help you with right now</h2>
         <p style={{ marginBottom: 24 }}>If you have a job offer, Sarah can help you <Link href="/blog/how-to-negotiate-salary-after-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>negotiate it</Link> — what to counter, how much to ask for, and what to say when they push back.</p>
-        <p style={{ marginBottom: 24 }}>If you think you might be underpaid, she can help you figure out your <Link href="/tools/comp-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>actual market rate</Link> and build a case for a raise.</p>
+        <p style={{ marginBottom: 24 }}>If you think you might be underpaid, she can help you figure out your <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>actual market rate</Link> and build a case for a raise.</p>
         <p style={{ marginBottom: 24 }}>If you&apos;re job searching, she can review your resume, help you target the right roles, and prep you for interviews.</p>
         <p style={{ marginBottom: 24 }}>The best way to understand what a career coach does is to talk to one. <Link href="/signup" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Start a conversation with Sarah</Link> — sign up free and see exactly what you&apos;re leaving on the table.</p>
       </div>

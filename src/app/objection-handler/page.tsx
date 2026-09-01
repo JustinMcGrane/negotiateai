@@ -5,13 +5,17 @@ import { ArrowRight, CheckCircle, Zap, BookOpen, MessageSquare } from 'lucide-re
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Objection Handler — Hayven',
-  description: 'Know exactly what to say when a recruiter pushes back. Get scripted responses to the most common salary negotiation objections.',
-
+  title: 'Salary Negotiation Objection Handler — Scripts for Every Recruiter Pushback | Hayven',
+  description: 'Know exactly what to say when a recruiter pushes back. Get scripted responses to "we\'re at the top of band," "the offer is firm," and every other salary negotiation objection.',
   alternates: { canonical: 'https://gethayven.com/objection-handler' },
+  openGraph: {
+    title: 'Salary Negotiation Objection Handler | Hayven',
+    description: 'Scripts for every recruiter pushback. Handle "we don\'t negotiate" and every other objection with confidence.',
+  },
   twitter: {
     card: 'summary_large_image',
-    description: 'Know exactly what to say when they push back. Handle every salary negotiation objection with confidence.',
+    title: 'Salary Negotiation Objection Handler | Hayven',
+    description: 'Know exactly what to say when they push back. Handle every salary negotiation objection.',
   },
 }
 

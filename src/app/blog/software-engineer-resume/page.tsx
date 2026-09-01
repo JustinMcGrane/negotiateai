@@ -95,8 +95,8 @@ export default function Article() {
         </ul>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Get your resume scored</h2>
-        <p style={{ marginBottom: 24 }}>Once your resume is drafted, run it through Hayven&apos;s <Link href="/tools/resume-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Resume Analyzer</Link>. It scores your resume on ATS compatibility, impact language, keyword coverage, and structure — then gives you a prioritized list of fixes. Most users improve their score significantly in under 30 minutes.</p>
-        <p style={{ marginBottom: 24 }}>Once your resume is in good shape, the next step is making sure the offer reflects your market value. Hayven&apos;s <Link href="/tools/comp-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> shows you exactly what software engineers at your level and city are making right now.</p>
+        <p style={{ marginBottom: 24 }}>Once your resume is drafted, run it through Hayven&apos;s <Link href="/resume-builder/software-engineer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Software Engineer Resume Analyzer</Link>. It scores your resume on ATS compatibility, impact language, keyword coverage, and structure — then gives you a prioritized list of fixes. Most users improve their score significantly in under 30 minutes.</p>
+        <p style={{ marginBottom: 24 }}>Once your resume is in good shape, the next step is making sure the offer reflects your market value. Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> shows you exactly what software engineers at your level and city are making right now.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

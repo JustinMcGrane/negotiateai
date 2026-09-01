@@ -59,7 +59,7 @@ export default function Article() {
           <li style={{ marginBottom: 10 }}><strong>Glassdoor</strong> — good for sales and go-to-market roles</li>
           <li style={{ marginBottom: 10 }}><strong>LinkedIn Salary</strong> — useful for mid-market roles</li>
           <li style={{ marginBottom: 10 }}><strong>Blind</strong> — candid data from employees at specific companies</li>
-          <li style={{ marginBottom: 10 }}><strong>Hayven&apos;s <Link href="/tools/comp-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link></strong> — gives you a precise market rate for your role, level, and city</li>
+          <li style={{ marginBottom: 10 }}><strong>Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link></strong> — gives you a precise market rate for your role, level, and city</li>
         </ul>
         <p style={{ marginBottom: 24 }}>Target the <strong>75th percentile</strong> for your role and location. This is your anchor number — the figure you lead with in your counter. It should be higher than what you&apos;ll ultimately accept, because negotiation always involves movement toward the middle.</p>
 
@@ -115,11 +115,11 @@ export default function Article() {
           <li style={{ marginBottom: 10 }}><strong>Preferred vs. common stock</strong> — Most employee options are common stock, which gets paid out after preferred shareholders in a liquidation event</li>
           <li style={{ marginBottom: 10 }}><strong>Post-termination exercise window</strong> — Standard is 90 days after leaving. Some companies offer 2–10 years, which is far more employee-friendly</li>
         </ul>
-        <p style={{ marginBottom: 24 }}>Use Hayven&apos;s <Link href="/tools/equity-calc" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Equity Calculator</Link> to model what your equity could be worth across different exit scenarios before you accept.</p>
+        <p style={{ marginBottom: 24 }}>Use Hayven&apos;s <Link href="/equity-calculator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Equity Calculator</Link> to model what your equity could be worth across different exit scenarios before you accept.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Practice before the actual call</h2>
         <p style={{ marginBottom: 24 }}>The biggest obstacle to negotiating isn&apos;t knowledge — it&apos;s anxiety. The silence after you name a number feels unbearable. The recruiter&apos;s hesitation feels like rejection. These are the moments where most negotiations fall apart.</p>
-        <p style={{ marginBottom: 24 }}>The only way to get comfortable is to practice out loud until the words feel natural. Hayven&apos;s <Link href="/tools/simulator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Negotiation Simulator</Link> lets you run through a realistic back-and-forth with an AI coach and get scored feedback on your responses. Run it 3–4 times before your actual call.</p>
+        <p style={{ marginBottom: 24 }}>The only way to get comfortable is to practice out loud until the words feel natural. Hayven&apos;s <Link href="/negotiation-simulator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Negotiation Simulator</Link> lets you run through a realistic back-and-forth with an AI coach and get scored feedback on your responses. Run it 3–4 times before your actual call.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>After the negotiation: get everything in writing</h2>
         <p style={{ marginBottom: 24 }}>Once you reach a verbal agreement, send a follow-up email that same day confirming the terms. Include base salary, signing bonus amount and payment timing, equity grant details, start date, and any other terms you negotiated.</p>

@@ -3,18 +3,19 @@ import Link from 'next/link'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Career Coach — AI-Powered Career Coaching | Hayven',
-  description: 'Get personalized career coaching from Sarah, your AI career coach. Salary benchmarking, negotiation strategy, resume feedback, and career planning — available 24/7.',
+  title: 'AI Career Coach — Salary Negotiation, Resume & Career Advice | Hayven',
+  description: 'Get personalized AI career coaching 24/7. Salary benchmarking, negotiation strategy, resume feedback, and career planning — available whenever you need it. Free to start.',
   alternates: { canonical: 'https://gethayven.com/ai-career-coach' },
   openGraph: {
-    title: 'Career Coach — AI-Powered Career Coaching | Hayven',
-    description: 'Get personalized career coaching from Sarah, your AI career coach. Salary benchmarking, negotiation strategy, resume feedback, and career planning — available 24/7.',
+    title: 'AI Career Coach — Salary, Resume & Career Advice | Hayven',
+    description: 'Get personalized career coaching from an AI trained on thousands of real negotiations. Free to start.',
     url: 'https://gethayven.com/ai-career-coach',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    description: 'Get personalized career coaching from Sarah, your AI career coach. Market rates, negotiation strategy, resume feedback — free to start.',
+    title: 'AI Career Coach | Hayven',
+    description: 'Salary benchmarking, negotiation strategy, resume feedback — personalized AI career coaching, free to start.',
   },
 }
 

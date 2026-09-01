@@ -1,17 +1,20 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Pay Raise Calculator — Calculate Your New Salary After a Raise | Hayven',
-  description: 'Free pay raise calculator. Enter your current salary and raise percentage or dollar amount to instantly see your new salary, monthly increase, and weekly take-home pay.',
+  title: 'Raise Calculator — Calculate Your New Salary After a Raise | Hayven',
+  description: 'Free salary raise calculator. Enter your current salary and raise percentage or amount to see your new pay — annually, monthly, biweekly, and hourly.',
   alternates: { canonical: 'https://gethayven.com/raise-calculator' },
   openGraph: {
-    title: 'Pay Raise Calculator — Calculate Your New Salary After a Raise | Hayven',
-    description: 'Free pay raise calculator. Enter your current salary and raise percentage or dollar amount to instantly see your new salary, monthly increase, and weekly take-home pay.',
-    url: 'https://gethayven.com/raise-calculator',
-    type: 'website',
+    title: 'Raise Calculator — Free | Hayven',
+    description: 'Calculate your new salary after a raise. See annual, monthly, and hourly pay breakdown instantly.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Raise Calculator | Hayven',
+    description: 'Free salary raise calculator. Calculate your new pay after any raise percentage or dollar amount.',
   },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children
+  return <>{children}</>
 }

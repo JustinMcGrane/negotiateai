@@ -55,7 +55,7 @@ export default function Article() {
           <p style={{ margin: 0, fontStyle: 'italic', color: '#0f172a' }}>&ldquo;Based on my research and experience, I&apos;m targeting somewhere in the $90,000–$100,000 range. But I&apos;m flexible depending on the full package.&rdquo;</p>
         </div>
         <p style={{ marginBottom: 24 }}>By putting your target at the bottom, even if they come in at the low end of your range, you&apos;re still where you want to be. The &ldquo;flexible depending on the full package&rdquo; line signals you&apos;re open to negotiating other components too.</p>
-        <p style={{ marginBottom: 24 }}>Before you give any number, make sure you know your market rate. Hayven&apos;s <Link href="/tools/comp-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> gives you a precise number for your role, level, and city so you&apos;re never guessing.</p>
+        <p style={{ marginBottom: 24 }}>Before you give any number, make sure you know your market rate. Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> gives you a precise number for your role, level, and city so you&apos;re never guessing.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>During the interview itself</h2>
         <p style={{ marginBottom: 24 }}>Salary rarely comes up in the middle of a technical or behavioral interview — that&apos;s handled by recruiting. But if an interviewer brings it up, treat it the same way: deflect to the range question, or if pressed, give the same range you gave recruiting.</p>
@@ -75,7 +75,7 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Practice before your next interview</h2>
         <p style={{ marginBottom: 24 }}>The salary question catches most people off guard because they haven&apos;t practiced answering it. The first time you say &ldquo;I&apos;d prefer to understand the full scope of the role before discussing numbers&rdquo; out loud should not be in a real interview.</p>
-        <p style={{ marginBottom: 24 }}>Hayven&apos;s <Link href="/tools/simulator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Negotiation Simulator</Link> lets you practice salary conversations in a realistic setting and get scored feedback — so you walk into your next interview prepared for whatever they ask.</p>
+        <p style={{ marginBottom: 24 }}>Hayven&apos;s <Link href="/negotiation-simulator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Negotiation Simulator</Link> lets you practice salary conversations in a realistic setting and get scored feedback — so you walk into your next interview prepared for whatever they ask.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

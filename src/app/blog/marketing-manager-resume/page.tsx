@@ -275,7 +275,7 @@ export default function Article() {
         </div>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Get your resume scored and your salary benchmarked</h2>
-        <p style={{ marginBottom: 24 }}>Once you&apos;ve drafted your resume, run it through Hayven&apos;s <Link href="/tools/resume-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Resume Analyzer</Link>. It checks ATS compatibility, keyword coverage, impact language, and structure — and gives you a prioritized list of fixes. Most users improve their score significantly in under 30 minutes.</p>
+        <p style={{ marginBottom: 24 }}>Once you&apos;ve drafted your resume, run it through Hayven&apos;s <Link href="/resume-builder/marketing-manager" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Marketing Manager Resume Analyzer</Link>. It checks ATS compatibility, keyword coverage, impact language, and structure — and gives you a prioritized list of fixes. Most users improve their score significantly in under 30 minutes.</p>
         <p style={{ marginBottom: 24 }}>Once you land the offer, don&apos;t leave money on the table. Use Hayven&apos;s <Link href="/worth" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>free salary checker</Link> to see exactly what marketing managers at your level and city are making right now — so you know whether to negotiate and by how much.</p>
       </div>
 
