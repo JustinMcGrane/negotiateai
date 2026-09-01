@@ -6,9 +6,20 @@ export const metadata: Metadata = {
   description: 'Got a job offer? Here\'s exactly how to negotiate salary after receiving it — what to say, when to say it, how much to ask for, and how to handle every objection.',
 }
 
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How to Negotiate Salary After a Job Offer',
+  description: 'Exactly how to negotiate salary after receiving a job offer.',
+  url: 'https://gethayven.com/blog/how-to-negotiate-salary-after-job-offer',
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  author: { '@type': 'Organization', name: 'Hayven' },
+}
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>Salary negotiation</span>

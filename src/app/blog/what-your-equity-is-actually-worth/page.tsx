@@ -9,9 +9,20 @@ export const metadata: Metadata = {
 const tag = 'Equity & compensation'
 const readTime = '8 min read'
 
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What Your Equity Is Actually Worth',
+  description: 'How to assess your equity honestly and ask the right questions.',
+  url: 'https://gethayven.com/blog/what-your-equity-is-actually-worth',
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  author: { '@type': 'Organization', name: 'Hayven' },
+}
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>{tag}</span>

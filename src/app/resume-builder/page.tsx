@@ -5,13 +5,17 @@ import { ArrowRight, CheckCircle, FileText, Zap, Target } from 'lucide-react'
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'AI Resume Builder — Hayven',
-  description: 'Get recruiter-grade resume feedback with ATS scoring, section-by-section breakdown, rewritten bullets, and a prioritized action plan.',
-
+  title: 'Free AI Resume Builder — ATS Score, Bullet Rewrites & Feedback | Hayven',
+  description: 'Get recruiter-grade resume feedback with ATS scoring, section-by-section breakdown, rewritten bullets, and a prioritized action plan. Free to start.',
   alternates: { canonical: 'https://gethayven.com/resume-builder' },
+  openGraph: {
+    title: 'Free AI Resume Builder — ATS Score & Bullet Rewrites | Hayven',
+    description: 'Get ATS scoring, bullet rewrites, and a prioritized fix list for your resume — free. Results in 60 seconds.',
+  },
   twitter: {
     card: 'summary_large_image',
-    description: 'Build a resume that passes ATS filters and impresses recruiters. Get AI feedback, ATS scoring, and rewritten bullets.',
+    title: 'Free AI Resume Builder | Hayven',
+    description: 'ATS scoring, bullet rewrites, and recruiter-grade feedback — free. Results in 60 seconds.',
   },
 }
 
@@ -84,9 +88,32 @@ const steps = [
   { number: '03', title: 'Apply the fixes', desc: 'Work through a prioritized action plan with rewritten bullets and specific improvements you can apply immediately.' },
 ]
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+}
+
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Hayven AI Resume Builder',
+  url: 'https://gethayven.com/resume-builder',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'AI-powered resume builder with ATS scoring, bullet rewrites, and keyword gap analysis.',
+}
+
 export default function ResumeBuilderPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }} />
 
       {/* Header */}
       <header style={{
@@ -512,6 +539,9 @@ export default function ResumeBuilderPage() {
               { role: 'Marketing Manager', color: '#d97706', bg: '#fffbeb', href: '/resume-builder/marketing-manager', desc: 'ROAS, CAC, pipeline sourced, budget ownership, channel-specific metrics, and tool stack.' },
               { role: 'Data Scientist', color: '#7c3aed', bg: '#f5f3ff', href: '/resume-builder/data-scientist', desc: 'Model performance metrics, AUC, business impact, production vs. prototype, and tool stack.' },
               { role: 'UX Designer', color: '#db2777', bg: '#fdf2f8', href: '/resume-builder/ux-designer', desc: 'Conversion, drop-off, usability metrics, research methods, portfolio links, and design systems.' },
+              { role: 'Project Manager', color: '#0f766e', bg: '#f0fdfa', href: '/resume-builder/project-manager', desc: 'Budget scope, on-time delivery rates, team size, Agile/Scrum methodology, and stakeholder management.' },
+              { role: 'Financial Analyst', color: '#b45309', bg: '#fffbeb', href: '/resume-builder/financial-analyst', desc: 'DCF/LBO models, deal size, variance analysis, forecasting accuracy, and tool stack (Excel, Power BI, SQL).' },
+              { role: 'Operations Manager', color: '#1d4ed8', bg: '#eff6ff', href: '/resume-builder/operations-manager', desc: 'Cost savings, efficiency gains, team scale, process methodology (Lean, Six Sigma), and ERP systems.' },
             ].map(g => (
               <Link key={g.role} href={g.href} style={{ textDecoration: 'none' }}>
                 <div style={{ background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 14, padding: 24, display: 'flex', flexDirection: 'column', gap: 10, height: '100%' }}>

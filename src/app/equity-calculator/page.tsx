@@ -5,13 +5,17 @@ import { ArrowRight, CheckCircle, DollarSign, Percent, Clock } from 'lucide-reac
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Equity Calculator — Hayven',
-  description: 'Find out what your stock options and RSUs are actually worth — today and at exit — so you can negotiate equity like you know what you\'re doing.',
-
+  title: 'Stock Option & RSU Calculator — Free Equity Value Tool | Hayven',
+  description: 'Find out what your stock options and RSUs are actually worth — today and at exit. Free equity calculator for employees negotiating job offers.',
   alternates: { canonical: 'https://gethayven.com/equity-calculator' },
+  openGraph: {
+    title: 'Stock Option & RSU Calculator — Free | Hayven',
+    description: 'Calculate what your equity is worth at any exit valuation. Free tool for tech employees and job seekers.',
+  },
   twitter: {
     card: 'summary_large_image',
-    description: 'Calculate what your stock options and RSUs are actually worth today and at exit. Free equity calculator for employees negotiating job offers.',
+    title: 'Stock Option & RSU Calculator | Hayven',
+    description: 'Calculate what your stock options and RSUs are actually worth today and at exit. Free equity calculator.',
   },
 }
 

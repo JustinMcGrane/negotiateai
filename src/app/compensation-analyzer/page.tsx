@@ -5,12 +5,16 @@ import { ArrowRight, CheckCircle, BarChart2, MapPin, TrendingUp } from 'lucide-r
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Compensation Analyzer — Hayven',
-  description: 'See your market rate at the 25th through 90th percentile for your exact role, level, and location.',
-
+  title: 'Salary Market Rate Tool — Find What You Should Be Earning | Hayven',
+  description: 'See your market rate at the 25th through 90th percentile for your exact role, level, and location. Know your worth before your next negotiation.',
   alternates: { canonical: 'https://gethayven.com/compensation-analyzer' },
+  openGraph: {
+    title: 'Salary Market Rate Tool — Free | Hayven',
+    description: 'Find out exactly what you should be earning by role, city, and experience level.',
+  },
   twitter: {
     card: 'summary_large_image',
+    title: 'Salary Market Rate Tool | Hayven',
     description: 'Find out exactly what you should be earning. See your market rate at every percentile by role, location, and experience.',
   },
 }

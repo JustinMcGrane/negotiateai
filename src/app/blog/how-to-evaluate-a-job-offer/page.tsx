@@ -9,9 +9,20 @@ export const metadata: Metadata = {
 const tag = 'Salary negotiation'
 const readTime = '7 min read'
 
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How to Evaluate a Job Offer (Beyond the Base Salary)',
+  description: 'How to evaluate the full value of a job offer — and what to negotiate.',
+  url: 'https://gethayven.com/blog/how-to-evaluate-a-job-offer',
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  author: { '@type': 'Organization', name: 'Hayven' },
+}
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>{tag}</span>

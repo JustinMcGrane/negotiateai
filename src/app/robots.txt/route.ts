@@ -3,6 +3,15 @@ export function GET() {
 Allow: /
 Allow: /blog/
 Allow: /resume-builder
+Allow: /resume-builder/software-engineer
+Allow: /resume-builder/product-manager
+Allow: /resume-builder/marketing-manager
+Allow: /resume-builder/account-executive
+Allow: /resume-builder/data-scientist
+Allow: /resume-builder/ux-designer
+Allow: /resume-builder/project-manager
+Allow: /resume-builder/financial-analyst
+Allow: /resume-builder/operations-manager
 Allow: /resume-skills
 Allow: /raise-calculator
 Allow: /salary-to-hourly-calculator

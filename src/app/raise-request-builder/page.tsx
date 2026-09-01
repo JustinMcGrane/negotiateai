@@ -5,13 +5,17 @@ import { ArrowRight, CheckCircle, FileText, TrendingUp, Award } from 'lucide-rea
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Raise Request Builder — Hayven',
-  description: 'Build a compelling case for your raise with data, talking points, and a script that makes it easy for your manager to say yes.',
-
+  title: 'How to Ask for a Raise — Script, Talking Points & Email Template | Hayven',
+  description: 'Build a compelling raise request with market data, impact bullets, and the exact script to use with your manager. Free.',
   alternates: { canonical: 'https://gethayven.com/raise-request-builder' },
+  openGraph: {
+    title: 'How to Ask for a Raise — Free Script & Template | Hayven',
+    description: 'Get the exact words to ask your manager for a raise, backed by market data and your impact.',
+  },
   twitter: {
     card: 'summary_large_image',
-    description: 'Build a compelling raise request with data, talking points, and the exact script to ask your manager for more money.',
+    title: 'How to Ask for a Raise | Hayven',
+    description: 'Build a compelling raise request with data, talking points, and the exact script to ask for more.',
   },
 }
 

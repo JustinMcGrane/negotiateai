@@ -190,8 +190,11 @@ export default function PaycheckCalculator() {
 
   const periodLabel = PAY_PERIODS.find(p => p.value === payPeriod)?.label ?? ''
 
+  const schema = { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Paycheck Calculator', url: 'https://gethayven.com/paycheck-calculator', applicationCategory: 'FinanceApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, description: 'Free paycheck calculator. Calculate take-home pay after federal and state taxes for any pay period.' }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <style>{`
         @media (max-width: 768px) {
           .pc-hero { padding: 48px 20px 56px !important; }

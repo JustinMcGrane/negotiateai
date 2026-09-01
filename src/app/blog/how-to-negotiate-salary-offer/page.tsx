@@ -6,9 +6,20 @@ export const metadata: Metadata = {
   description: 'Got a salary offer? Here\'s exactly how to negotiate it — what to say, how much to counter, how to handle pushback, and what to do if they say no.',
 }
 
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How to Negotiate a Salary Offer',
+  description: 'How to negotiate a salary offer — scripts, strategy, and objection handling.',
+  url: 'https://gethayven.com/blog/how-to-negotiate-salary-offer',
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  author: { '@type': 'Organization', name: 'Hayven' },
+}
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>Salary negotiation</span>

@@ -21,9 +21,20 @@ const cities = [
   { city: 'Remote (US)', p25: '$120,000', median: '$155,000', p75: '$192,000', note: 'Wide range depending on company HQ. Top companies pay SF rates regardless of location.' },
 ]
 
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Average Software Engineer Salary by City (2026)',
+  description: 'Software engineer salaries by city — top US tech hubs for 2026.',
+  url: 'https://gethayven.com/blog/average-software-engineer-salary-by-city',
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  author: { '@type': 'Organization', name: 'Hayven' },
+}
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>{tag}</span>

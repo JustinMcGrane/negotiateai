@@ -44,8 +44,11 @@ export default function SalaryToHourlyCalculator() {
     return `$${n}`
   }
 
+  const schema = { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Salary to Hourly Calculator', url: 'https://gethayven.com/salary-to-hourly-calculator', applicationCategory: 'FinanceApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, description: 'Free salary to hourly rate calculator. Convert annual salary to hourly, daily, weekly, and monthly pay.' }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <style>{`
         @media (max-width: 768px) {
           .sh-hero { padding: 48px 20px 56px !important; }

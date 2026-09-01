@@ -6,9 +6,20 @@ export const metadata: Metadata = {
   description: 'A software engineer resume that gets interviews. See what to include, what to cut, and how to structure it — with examples for every level.',
 }
 
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Software Engineer Resume: Examples & Tips',
+  description: 'A software engineer resume that gets interviews.',
+  url: 'https://gethayven.com/blog/software-engineer-resume',
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  author: { '@type': 'Organization', name: 'Hayven' },
+}
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>Resume tips</span>

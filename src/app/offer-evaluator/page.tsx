@@ -5,13 +5,17 @@ import { ArrowRight, CheckCircle, Scale, AlertCircle, TrendingUp } from 'lucide-
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Offer Evaluator — Hayven',
-  description: 'Evaluate any job offer across salary, equity, benefits, and total comp — so you know exactly what to accept, counter, or walk away from.',
-
+  title: 'Job Offer Evaluator — Score Any Offer Instantly & Know What to Counter | Hayven',
+  description: 'Evaluate any job offer across salary, equity, benefits, and total comp. Get a score, red flags, and a clear counter-offer strategy. Free.',
   alternates: { canonical: 'https://gethayven.com/offer-evaluator' },
+  openGraph: {
+    title: 'Job Offer Evaluator — Free | Hayven',
+    description: 'Get a 0-100 score on any job offer, surface red flags, and know exactly what to counter.',
+  },
   twitter: {
     card: 'summary_large_image',
-    description: 'Evaluate any job offer instantly. Get a 0-100 score, red flags, missing terms, and a clear picture of total compensation.',
+    title: 'Job Offer Evaluator | Hayven',
+    description: 'Score any job offer instantly. Get red flags, total comp breakdown, and a clear counter strategy.',
   },
 }
 

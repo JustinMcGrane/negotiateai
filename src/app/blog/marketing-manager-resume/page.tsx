@@ -6,9 +6,20 @@ export const metadata: Metadata = {
   description: 'Marketing manager resume examples that get interviews. Learn what metrics to include, how to write bullets that prove ROI, and what hiring managers actually want to see.',
 }
 
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Marketing Manager Resume: Examples & Tips (2026)',
+  description: 'Marketing manager resume examples that get interviews.',
+  url: 'https://gethayven.com/blog/marketing-manager-resume',
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  author: { '@type': 'Organization', name: 'Hayven' },
+}
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>Resume tips</span>

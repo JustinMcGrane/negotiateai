@@ -27,6 +27,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/resume-builder/account-executive`, lastModified: now, priority: 0.9 },
     { url: `${base}/resume-builder/data-scientist`, lastModified: now, priority: 0.9 },
     { url: `${base}/resume-builder/ux-designer`, lastModified: now, priority: 0.9 },
+    { url: `${base}/resume-builder/project-manager`, lastModified: now, priority: 0.9 },
+    { url: `${base}/resume-builder/financial-analyst`, lastModified: now, priority: 0.9 },
+    { url: `${base}/resume-builder/operations-manager`, lastModified: now, priority: 0.9 },
     { url: `${base}/job-tracker`, lastModified: now, priority: 0.7 },
     { url: `${base}/blog/how-to-negotiate-saas-job-offer`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/recruiter-types-and-how-to-handle`, lastModified: now, priority: 0.8 },
@@ -40,5 +43,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/blog/how-to-negotiate-salary-after-job-offer`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/salary-negotiation-email-template`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/how-to-negotiate-signing-bonus`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/account-executive-resume`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/software-engineer-resume`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/marketing-manager-resume`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/how-to-negotiate-a-salary`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/how-to-negotiate-salary-in-an-interview`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/how-to-negotiate-salary-offer`, lastModified: now, priority: 0.8 },
+    { url: `${base}/blog/what-does-a-career-coach-do`, lastModified: now, priority: 0.7 },
   ]
 }

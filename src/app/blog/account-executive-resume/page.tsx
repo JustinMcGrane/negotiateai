@@ -6,9 +6,20 @@ export const metadata: Metadata = {
   description: 'Write an account executive resume that gets callbacks. Real examples, the right metrics to include, and how to structure your sales experience to stand out.',
 }
 
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Account Executive Resume: Examples & Tips',
+  description: 'Write an account executive resume that gets callbacks.',
+  url: 'https://gethayven.com/blog/account-executive-resume',
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  author: { '@type': 'Organization', name: 'Hayven' },
+}
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>Resume tips</span>
