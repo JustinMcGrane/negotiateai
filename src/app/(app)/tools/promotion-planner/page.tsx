@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
@@ -29,8 +30,13 @@ export default function PromotionPlannerPage() {
     setError('')
     try {
       const res = await fetch('/api/promotion-planner', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
-      if (!res.ok) throw new Error()
-      setResult(await res.json())
+      const data = await res.json()
+      if (!res.ok) {
+        if (data?.error === 'elite_required') setError('UPGRADE_REQUIRED')
+        else setError('Generation failed. Please try again.')
+        return
+      }
+      setResult(data)
     } catch { setError('Generation failed. Please try again.') }
     setLoading(false)
   }
@@ -84,7 +90,7 @@ export default function PromotionPlannerPage() {
         </button>
       </form>
 
-      {error && <div style={{ marginTop: 16, fontSize: 13, color: 'var(--color-danger)', background: '#FDF2F2', padding: '10px 14px', borderRadius: 8 }}>{error}</div>}
+      {error === 'UPGRADE_REQUIRED' && <div style={{ marginTop: 16, background: '#fffbeb', border: '1px solid #fcd34d', borderRadius: 10, padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}><div><div style={{ fontSize: 14, fontWeight: 700, color: '#92400e', marginBottom: 4 }}>Pro plan required</div><div style={{ fontSize: 13, color: '#78350f' }}>This tool is available on the Pro and Elite plans.</div></div><Link href="/upgrade" style={{ fontSize: 13, fontWeight: 700, background: '#f59e0b', color: '#fff', padding: '8px 18px', borderRadius: 8, textDecoration: 'none', flexShrink: 0 }}>Upgrade now →</Link></div>}{error && error !== 'UPGRADE_REQUIRED' && <div style={{ marginTop: 16, fontSize: 13, color: 'var(--color-danger)', background: '#FDF2F2', padding: '10px 14px', borderRadius: 8 }}>{error}</div>}
 
       {result && (
         <div style={{ marginTop: 32 }} className="animate-slide-up">
