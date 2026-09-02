@@ -198,6 +198,7 @@ export default function JobsPage() {
   const [jobs, setJobs] = useState<Job[]>([])
   const [searched, setSearched] = useState(false)
   const [saved, setSaved] = useState<Set<number>>(new Set())
+  const [debugError, setDebugError] = useState<string | null>(null)
 
   async function search() {
     if (!query.trim()) return
@@ -210,7 +211,12 @@ export default function JobsPage() {
         body: JSON.stringify({ query, location, jobType: jobType === 'Any' ? '' : jobType, datePosted: datePosted === 'Any' ? '' : datePosted }),
       })
       const data = await res.json()
-      if (data.debugError) console.error('[job-search debug]', data.debugError)
+      if (data.debugError) {
+        console.error('[job-search debug]', data.debugError)
+        setDebugError(data.debugError)
+      } else {
+        setDebugError(null)
+      }
       setJobs(data.jobs || [])
     } catch (e) {
       console.error('[job-search fetch error]', e)
@@ -308,6 +314,13 @@ export default function JobsPage() {
       {loading && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {[...Array(5)].map((_, i) => <JobCardSkeleton key={i} />)}
+        </div>
+      )}
+
+      {/* Debug error */}
+      {debugError && (
+        <div style={{ marginBottom: 16, padding: '10px 14px', background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: 8, fontSize: 12, color: '#991b1b', fontFamily: 'monospace' }}>
+          API Error: {debugError}
         </div>
       )}
 
