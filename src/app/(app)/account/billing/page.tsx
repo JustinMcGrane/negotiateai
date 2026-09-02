@@ -40,24 +40,14 @@ export default function BillingPage() {
     },
     {
       key: 'pro',
-      name: 'Professional',
-      price: '$49',
-      sub: '/month',
-      features: ['Sarah career coach — unlimited coaching', 'All 10 negotiation tools — unlimited', 'Resume analyzer + cover letter generator', 'Offer evaluator + counter-offer builder', 'Raise builder + negotiation playbook', 'Session history'],
-      cta: 'Try Free Today',
+      name: 'Pro',
+      price: '$20',
+      sub: '/month · Cancel anytime',
+      features: ['Unlimited conversations with Sarah', 'Resume builder with AI feedback & ATS scoring', 'Job tracker to manage your entire search', 'Offer evaluator & counter-offer builder', 'Equity calculator & total comp breakdown', 'Negotiation playbook & raise builder', 'Cover letter generator'],
+      cta: 'Upgrade to Pro Now',
       disabled: false,
       priceId: process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || '',
       highlight: true,
-    },
-    {
-      key: 'elite',
-      name: 'Pro',
-      price: '$79',
-      sub: '/month',
-      features: ['Everything in Professional', 'Sarah remembers you across sessions', 'Mock interview coaching with feedback', 'Live negotiation roleplay with Sarah', 'Annual Review Coach + Promotion Planner', 'PDF compensation report', 'Priority support'],
-      cta: 'Get Pro',
-      disabled: false,
-      priceId: process.env.NEXT_PUBLIC_STRIPE_ELITE_PRICE_ID || '',
     },
   ]
 
@@ -66,22 +56,21 @@ export default function BillingPage() {
       <h1 style={{ fontSize: 18, fontWeight: 500, marginBottom: 8 }}>Billing &amp; plans</h1>
       <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 32 }}>Start free — upgrade to Pro for unlimited access.</p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 360px))', gap: 16, marginBottom: 32 }}>
         {plans.map((plan) => (
           <div key={plan.key} style={{
-            background: plan.key === 'elite' ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : '#fff',
-            border: plan.highlight ? '2px solid #141414' : plan.key === 'elite' ? '1px solid rgba(102,126,234,0.4)' : '0.5px solid var(--color-border-tertiary)',
+            background: '#fff',
+            border: plan.highlight ? '2px solid #141414' : '0.5px solid var(--color-border-tertiary)',
             borderRadius: 12, padding: 24, position: 'relative',
           }}>
             {plan.highlight && <div style={{ position: 'absolute', top: -10, left: 20, background: '#141414', color: '#fff', fontSize: 11, padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>Most popular</div>}
-            {plan.key === 'elite' && <div style={{ position: 'absolute', top: -10, left: 20, background: 'linear-gradient(135deg, #667eea, #764ba2)', color: '#fff', fontSize: 11, padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>Best results</div>}
-            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4, color: plan.key === 'elite' ? '#fff' : 'var(--color-text-primary)' }}>{plan.name}</div>
-            <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 2, color: plan.key === 'elite' ? '#fff' : 'var(--color-text-primary)' }}>{plan.price}</div>
-            <div style={{ fontSize: 12, color: plan.key === 'elite' ? 'rgba(255,255,255,0.4)' : 'var(--color-text-tertiary)', marginBottom: 20 }}>{plan.sub}</div>
+            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4, color: 'var(--color-text-primary)' }}>{plan.name}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 2, color: 'var(--color-text-primary)' }}>{plan.price}</div>
+            <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginBottom: 20 }}>{plan.sub}</div>
             {plan.features.map((f) => (
               <div key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginBottom: 8 }}>
-                <Check size={12} color={plan.key === 'elite' ? '#667eea' : 'var(--color-success)'} style={{ flexShrink: 0, marginTop: 2 }} />
-                <span style={{ fontSize: 12, color: plan.key === 'elite' ? 'rgba(255,255,255,0.7)' : 'var(--color-text-secondary)' }}>{f}</span>
+                <Check size={12} color="var(--color-success)" style={{ flexShrink: 0, marginTop: 2 }} />
+                <span style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>{f}</span>
               </div>
             ))}
             {currentPlan === plan.key ? (
@@ -99,9 +88,7 @@ export default function BillingPage() {
                 onClick={() => checkout(plan.priceId, plan.key)}
                 style={{
                   marginTop: 20, width: '100%', height: 38,
-                  background: plan.key === 'elite'
-                    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                    : plan.highlight ? '#141414' : 'transparent',
+                  background: plan.highlight ? '#141414' : 'transparent',
                   color: plan.key === 'free' ? 'var(--color-text-primary)' : '#fff',
                   border: plan.key === 'free' ? '0.5px solid var(--color-border-primary)' : 'none',
                   borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: loading === plan.key ? 'default' : 'pointer',
