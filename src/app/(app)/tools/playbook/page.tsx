@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import { ProGate } from '@/components/negotiate/ProGate'
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
@@ -42,6 +43,7 @@ export default function Playbook() {
 
   return (
     <ToolPage title="Negotiation playbook" desc="Get a personalized 5-step negotiation plan with exact language to use.">
+      <ProGate>
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div>
@@ -89,6 +91,7 @@ export default function Playbook() {
           </div>
         </div>
       )}
+      </ProGate>
     </ToolPage>
   )
 }

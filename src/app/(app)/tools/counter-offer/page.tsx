@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import { ProGate } from '@/components/negotiate/ProGate'
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
@@ -47,6 +48,7 @@ export default function CounterOffer() {
 
   return (
     <ToolPage title="Counter-offer builder" desc="Generate a ready-to-send counter-offer email and phone script for your specific situation.">
+      <ProGate>
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div><div style={lbl}>ROLE</div><input style={inp} placeholder="Senior Engineer" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} required /></div>
@@ -99,6 +101,7 @@ export default function CounterOffer() {
           </div>
         </div>
       )}
+      </ProGate>
     </ToolPage>
   )
 }

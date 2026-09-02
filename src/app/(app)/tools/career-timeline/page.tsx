@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import { ProGate } from '@/components/negotiate/ProGate'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
 
@@ -34,6 +35,7 @@ export default function CareerTimelinePage() {
 
   return (
     <ToolPage title="Career Timeline" desc="See a realistic 3-year map of your career trajectory — roles, salaries, and the moves that will get you there.">
+      <ProGate>
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div>
@@ -138,6 +140,7 @@ export default function CareerTimelinePage() {
           </div>
         </div>
       )}
+      </ProGate>
     </ToolPage>
   )
 }

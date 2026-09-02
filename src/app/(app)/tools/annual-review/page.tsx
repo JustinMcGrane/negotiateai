@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import { ProGate } from '@/components/negotiate/ProGate'
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
@@ -50,6 +51,7 @@ export default function AnnualReviewPage() {
 
   return (
     <ToolPage title="Annual Review Coach" desc="Build a compelling case for your raise. Get a tailored script, talking points, and a ready-to-send follow-up email.">
+      <ProGate>
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div>
@@ -139,6 +141,7 @@ export default function AnnualReviewPage() {
           </div>
         </div>
       )}
+      </ProGate>
     </ToolPage>
   )
 }
