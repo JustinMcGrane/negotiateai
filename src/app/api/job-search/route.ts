@@ -83,8 +83,9 @@ export async function POST(req: NextRequest) {
     }
 
     const headers = { 'X-RapidAPI-Key': apiKey, 'X-RapidAPI-Host': 'jsearch.p.rapidapi.com' }
+    const BASE_URL = 'https://jsearch.p.rapidapi.com/search'
 
-    const url = `https://jsearch.p.rapidapi.com/jobs/search?${new URLSearchParams({ ...baseParams, page: '1' })}`
+    const url = `${BASE_URL}?${new URLSearchParams({ ...baseParams, page: '1' })}`
     console.log('[job-search] Fetching:', url)
 
     const firstRes = await fetch(url, { headers })
@@ -101,7 +102,7 @@ export async function POST(req: NextRequest) {
     const moreResults = await Promise.allSettled(
       [2, 3].map(page => {
         const params = new URLSearchParams({ ...baseParams, page: String(page) })
-        return fetch(`https://jsearch.p.rapidapi.com/jobs/search?${params}`, { headers }).then(r => r.json())
+        return fetch(`${BASE_URL}?${params}`, { headers }).then(r => r.json())
       })
     )
     for (const result of moreResults) {
