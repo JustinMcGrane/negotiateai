@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
 
     if (!apiKey) {
       console.log('[job-search] No RAPIDAPI_KEY configured')
-      return NextResponse.json({ jobs: [], noApiKey: true })
+      return NextResponse.json({ jobs: [], debugError: 'No RAPIDAPI_KEY env var set' })
     }
 
     console.log('[job-search] RAPIDAPI_KEY found, length:', apiKey.length)
@@ -84,15 +84,27 @@ export async function POST(req: NextRequest) {
 
     const headers = { 'X-RapidAPI-Key': apiKey, 'X-RapidAPI-Host': 'jsearch.p.rapidapi.com' }
 
-    const pageResults = await Promise.allSettled(
-      [1, 2, 3].map(page => {
+    const url = `https://jsearch.p.rapidapi.com/search?${new URLSearchParams({ ...baseParams, page: '1' })}`
+    console.log('[job-search] Fetching:', url)
+
+    const firstRes = await fetch(url, { headers })
+    const firstBody = await firstRes.json()
+    console.log('[job-search] First page status:', firstRes.status, 'message:', firstBody?.message, 'data count:', firstBody?.data?.length)
+
+    if (!firstRes.ok || firstBody?.message) {
+      return NextResponse.json({ jobs: [], debugError: `RapidAPI error ${firstRes.status}: ${firstBody?.message || JSON.stringify(firstBody)}` })
+    }
+
+    const allJobs: JSearchJob[] = [...(firstBody?.data || [])]
+
+    // Fetch pages 2 and 3 in parallel
+    const moreResults = await Promise.allSettled(
+      [2, 3].map(page => {
         const params = new URLSearchParams({ ...baseParams, page: String(page) })
         return fetch(`https://jsearch.p.rapidapi.com/search?${params}`, { headers }).then(r => r.json())
       })
     )
-
-    const allJobs: JSearchJob[] = []
-    for (const result of pageResults) {
+    for (const result of moreResults) {
       if (result.status === 'fulfilled' && result.value?.data) {
         allJobs.push(...result.value.data)
       }

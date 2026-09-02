@@ -210,8 +210,10 @@ export default function JobsPage() {
         body: JSON.stringify({ query, location, jobType: jobType === 'Any' ? '' : jobType, datePosted: datePosted === 'Any' ? '' : datePosted }),
       })
       const data = await res.json()
+      if (data.debugError) console.error('[job-search debug]', data.debugError)
       setJobs(data.jobs || [])
-    } catch {
+    } catch (e) {
+      console.error('[job-search fetch error]', e)
       setJobs([])
     } finally {
       setLoading(false)
