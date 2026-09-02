@@ -88,11 +88,22 @@ export async function POST(req: NextRequest) {
     const firstRes = await fetch(`${BASE_URL}?${new URLSearchParams({ ...baseParams, page: '1' })}`, { headers })
     const firstBody = await firstRes.json()
 
+    console.log('[job-search] status:', firstRes.status, 'body keys:', Object.keys(firstBody || {}), 'data type:', typeof firstBody?.data, 'data sample:', JSON.stringify(firstBody).slice(0, 300))
+
     if (!firstRes.ok || firstBody?.message) {
-      return NextResponse.json({ jobs: [], debugError: `JSearch error ${firstRes.status}: ${firstBody?.message || JSON.stringify(firstBody)}` })
+      return NextResponse.json({ jobs: [], debugError: `JSearch error ${firstRes.status}: ${firstBody?.message || JSON.stringify(firstBody).slice(0, 200)}` })
     }
 
-    const allJobs: JSearchJob[] = [...(firstBody?.data || [])]
+    // search-v2 may return data as array or wrap jobs differently
+    const extractJobs = (body: Record<string, unknown>): JSearchJob[] => {
+      if (Array.isArray(body?.data)) return body.data as JSearchJob[]
+      if (Array.isArray((body?.data as Record<string, unknown>)?.jobs)) return (body.data as Record<string, unknown>).jobs as JSearchJob[]
+      if (Array.isArray(body?.jobs)) return body.jobs as JSearchJob[]
+      if (Array.isArray(body?.results)) return body.results as JSearchJob[]
+      return []
+    }
+
+    const allJobs: JSearchJob[] = extractJobs(firstBody)
 
     const moreResults = await Promise.allSettled(
       [2, 3].map(page => {
@@ -101,8 +112,8 @@ export async function POST(req: NextRequest) {
       })
     )
     for (const result of moreResults) {
-      if (result.status === 'fulfilled' && result.value?.data) {
-        allJobs.push(...result.value.data)
+      if (result.status === 'fulfilled') {
+        allJobs.push(...extractJobs(result.value))
       }
     }
 
