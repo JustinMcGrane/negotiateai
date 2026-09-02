@@ -1,21 +1,48 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
-type ArbeitnowJob = {
-  title?: string
-  company_name?: string
-  location?: string
-  remote?: boolean
-  salary?: string
-  created_at?: number
-  description?: string
-  url?: string
-  tags?: string[]
+type JSearchJob = {
+  job_title?: string
+  employer_name?: string
+  job_city?: string
+  job_state?: string
+  job_country?: string
+  job_is_remote?: boolean
+  job_min_salary?: number
+  job_max_salary?: number
+  job_salary_currency?: string
+  job_salary_period?: string
+  job_posted_at_datetime_utc?: string
+  job_description?: string
+  job_apply_link?: string
+  job_publisher?: string
 }
 
-function formatPosted(timestamp?: number): string {
-  if (!timestamp) return ''
-  const posted = new Date(timestamp * 1000)
+const DATE_FILTER_MAP: Record<string, string> = {
+  'Past 24h': 'today',
+  'Past week': 'week',
+  'Past month': 'month',
+}
+
+function formatSalary(job: JSearchJob): string {
+  if (!job.job_min_salary && !job.job_max_salary) return ''
+  const currency = job.job_salary_currency === 'USD' ? '$' : (job.job_salary_currency ?? '$')
+  const period = job.job_salary_period === 'HOUR' ? ' / hr' : ''
+  const fmt = (n: number) => n >= 1000 ? `${currency}${Math.round(n / 1000)}k` : `${currency}${n}`
+  if (job.job_min_salary && job.job_max_salary) {
+    return `${fmt(job.job_min_salary)} – ${fmt(job.job_max_salary)}${period}`
+  }
+  return `${fmt(job.job_min_salary ?? job.job_max_salary ?? 0)}${period}`
+}
+
+function formatLocation(job: JSearchJob): string {
+  if (job.job_is_remote) return 'Remote'
+  return [job.job_city, job.job_state].filter(Boolean).join(', ') || job.job_country || ''
+}
+
+function formatPosted(dateStr?: string): string {
+  if (!dateStr) return ''
+  const posted = new Date(dateStr)
   const now = new Date()
   const diffDays = Math.floor((now.getTime() - posted.getTime()) / (1000 * 60 * 60 * 24))
   if (diffDays === 0) return 'Today'
@@ -26,10 +53,6 @@ function formatPosted(timestamp?: number): string {
   return `${Math.floor(diffDays / 30)} months ago`
 }
 
-function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
-}
-
 export async function POST(req: NextRequest) {
   try {
     const supabase = await createClient()
@@ -37,49 +60,61 @@ export async function POST(req: NextRequest) {
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     const { query, location, jobType, datePosted } = await req.json()
+    const apiKey = process.env.RAPIDAPI_KEY
 
-    const params = new URLSearchParams({ search: query || '' })
-    if (location) params.set('location', location)
-    if (jobType === 'Remote') params.set('remote', 'true')
+    if (!apiKey) {
+      return NextResponse.json({ jobs: [], debugError: 'No RAPIDAPI_KEY env var set' })
+    }
 
-    // Fetch multiple pages in parallel for more results
-    const pages = [1, 2, 3]
-    const results = await Promise.allSettled(
-      pages.map(page => {
-        const p = new URLSearchParams(params)
-        p.set('page', String(page))
-        return fetch(`https://www.arbeitnow.com/api/job-board-api?${p}`, {
-          headers: { 'Accept': 'application/json' },
-        }).then(r => r.json())
+    const baseParams: Record<string, string> = {
+      query: [query, location].filter(Boolean).join(' '),
+      num_pages: '1',
+      country: 'us',
+    }
+    if (DATE_FILTER_MAP[datePosted]) baseParams.date_posted = DATE_FILTER_MAP[datePosted]
+    if (jobType === 'Remote') baseParams.remote_jobs_only = 'true'
+    if (jobType && jobType !== 'Any' && jobType !== 'Remote') {
+      const typeMap: Record<string, string> = { 'Full-time': 'FULLTIME', 'Part-time': 'PARTTIME', 'Contract': 'CONTRACTOR' }
+      if (typeMap[jobType]) baseParams.employment_types = typeMap[jobType]
+    }
+
+    const headers = {
+      'x-rapidapi-key': apiKey,
+      'x-rapidapi-host': 'jsearch.p.rapidapi.com',
+      'Content-Type': 'application/json',
+    }
+    const BASE_URL = 'https://jsearch.p.rapidapi.com/search-v2'
+
+    const firstRes = await fetch(`${BASE_URL}?${new URLSearchParams({ ...baseParams, page: '1' })}`, { headers })
+    const firstBody = await firstRes.json()
+
+    if (!firstRes.ok || firstBody?.message) {
+      return NextResponse.json({ jobs: [], debugError: `JSearch error ${firstRes.status}: ${firstBody?.message || JSON.stringify(firstBody)}` })
+    }
+
+    const allJobs: JSearchJob[] = [...(firstBody?.data || [])]
+
+    const moreResults = await Promise.allSettled(
+      [2, 3].map(page => {
+        const params = new URLSearchParams({ ...baseParams, page: String(page) })
+        return fetch(`${BASE_URL}?${params}`, { headers }).then(r => r.json())
       })
     )
-
-    let allJobs: ArbeitnowJob[] = []
-    for (const result of results) {
-      if (result.status === 'fulfilled' && Array.isArray(result.value?.data)) {
+    for (const result of moreResults) {
+      if (result.status === 'fulfilled' && result.value?.data) {
         allJobs.push(...result.value.data)
       }
     }
 
-    // Filter by date if requested
-    if (datePosted) {
-      const cutoffDays: Record<string, number> = { 'Past 24h': 1, 'Past week': 7, 'Past month': 30 }
-      const days = cutoffDays[datePosted]
-      if (days) {
-        const cutoff = Date.now() - days * 24 * 60 * 60 * 1000
-        allJobs = allJobs.filter(j => j.created_at && j.created_at * 1000 >= cutoff)
-      }
-    }
-
-    const jobs = allJobs.map((j: ArbeitnowJob) => ({
-      title: j.title || '',
-      company: j.company_name || '',
-      location: j.remote ? 'Remote' : (j.location || ''),
-      salary: j.salary || '',
-      posted: formatPosted(j.created_at),
-      description: stripHtml(j.description || '').slice(0, 600),
-      url: j.url || '',
-      source: 'Arbeitnow',
+    const jobs = allJobs.map((j: JSearchJob) => ({
+      title: j.job_title || '',
+      company: j.employer_name || '',
+      location: formatLocation(j),
+      salary: formatSalary(j),
+      posted: formatPosted(j.job_posted_at_datetime_utc),
+      description: j.job_description || '',
+      url: j.job_apply_link || '',
+      source: j.job_publisher || 'JSearch',
     }))
 
     return NextResponse.json({ jobs })
