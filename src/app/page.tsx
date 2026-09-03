@@ -82,9 +82,37 @@ const LOGOS = [
   { name: 'Uber', color: '#000000' },
 ]
 
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Hayven',
+  url: 'https://gethayven.com',
+  logo: 'https://gethayven.com/logo.png',
+  description: 'AI-powered salary negotiation and career coaching platform.',
+  sameAs: [],
+}
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Hayven',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '20',
+    priceCurrency: 'USD',
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: '20', priceCurrency: 'USD', unitText: 'MONTH' },
+  },
+  description: 'Know your market rate, negotiate your salary, and build your career with AI coaching.',
+  url: 'https://gethayven.com',
+}
+
 export default function LandingPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
 
       {/* Top announcement bar */}
       <div style={{ background: '#0f172a', width: '100%', padding: '12px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

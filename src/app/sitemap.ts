@@ -32,6 +32,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/resume-builder/financial-analyst`, lastModified: now, priority: 0.9 },
     { url: `${base}/resume-builder/operations-manager`, lastModified: now, priority: 0.9 },
     { url: `${base}/job-tracker`, lastModified: now, priority: 0.7 },
+    { url: `${base}/worth`, lastModified: now, priority: 0.8 },
+    { url: `${base}/resume-skills`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/how-to-negotiate-saas-job-offer`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/recruiter-types-and-how-to-handle`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/why-professionals-leave-money-on-table`, lastModified: now, priority: 0.8 },

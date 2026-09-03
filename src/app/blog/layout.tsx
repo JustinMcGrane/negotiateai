@@ -1,6 +1,19 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
+
+export const metadata: Metadata = {
+  openGraph: {
+    siteName: 'Hayven',
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/logo.png', width: 1200, height: 630, alt: 'Hayven' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@gethayven',
+  },
+}
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,7 +36,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
             textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
             display: 'flex', alignItems: 'center', gap: 6,
             boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
-          }}>Try Free Today - No Credit Card Required <ArrowRight size={14} /></Link>
+          }}>Upgrade to Pro Now <ArrowRight size={14} /></Link>
         </div>
       </header>
       <main style={{ maxWidth: 720, margin: '0 auto', padding: '64px 24px 120px' }}>
