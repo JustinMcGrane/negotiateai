@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Average Software Engineer Salary by City (2026) | Hayven',
   description: 'Software engineer salaries vary dramatically by city. Here\'s a breakdown of average software engineer pay in the top US tech hubs for 2026.',
+  alternates: { canonical: 'https://gethayven.com/blog/average-software-engineer-salary-by-city' },
 }
 
 const tag = 'Compensation data'

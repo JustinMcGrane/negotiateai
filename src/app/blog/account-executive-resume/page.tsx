@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Account Executive Resume: Examples & Tips That Get Interviews | Hayven',
   description: 'Write an account executive resume that gets callbacks. Real examples, the right metrics to include, and how to structure your sales experience to stand out.',
+  alternates: { canonical: 'https://gethayven.com/blog/account-executive-resume' },
 }
 
 

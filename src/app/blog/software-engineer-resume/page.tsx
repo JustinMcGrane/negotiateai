@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Software Engineer Resume: Examples & Tips That Get Interviews | Hayven',
   description: 'A software engineer resume that gets interviews. See what to include, what to cut, and how to structure it — with examples for every level.',
+  alternates: { canonical: 'https://gethayven.com/blog/software-engineer-resume' },
 }
 
 

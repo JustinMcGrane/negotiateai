@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'How to Ask for a Raise: Scripts That Actually Work | Hayven',
   description: 'Asking for a raise is uncomfortable — but it doesn\'t have to be awkward. Here are the exact scripts and strategies that get results.',
+  alternates: { canonical: 'https://gethayven.com/blog/how-to-ask-for-a-raise-scripts-that-work' },
 }
 
 const tag = 'Salary negotiation'

@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'How to Negotiate a Salary: The Complete Guide | Hayven',
   description: 'Learn how to negotiate a salary the right way — from researching your market rate to making the ask and handling pushback. Step-by-step guide.',
+  alternates: { canonical: 'https://gethayven.com/blog/how-to-negotiate-a-salary' },
 }
 
 const tag = 'Salary negotiation'

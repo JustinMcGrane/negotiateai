@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'How to Negotiate Salary in an Interview | Hayven',
   description: 'Salary negotiation starts in the interview — not after the offer. Here\'s exactly what to say when salary comes up during the interview process.',
+  alternates: { canonical: 'https://gethayven.com/blog/how-to-negotiate-salary-in-an-interview' },
 }
 
 const tag = 'Salary negotiation'

@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Why most professionals never negotiate their salary | Hayven',
   description: 'Research shows most professionals never negotiate their salary. Here\'s the psychology behind it — and how to overcome it.',
+  alternates: { canonical: 'https://gethayven.com/blog/why-professionals-leave-money-on-table' },
 }
 
 const tag = 'Career intelligence'

@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'How to Negotiate a SaaS Job Offer: Scripts & Strategy | Hayven',
   description: 'A complete guide to negotiating a SaaS job offer. Scripts, objection handlers, what to ask for beyond base salary, and how to get the most out of your tech offer.',
+  alternates: { canonical: 'https://gethayven.com/blog/how-to-negotiate-saas-job-offer' },
 }
 
 

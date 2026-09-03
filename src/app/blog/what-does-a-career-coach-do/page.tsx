@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'What Does a Career Coach Do? | Hayven',
   description: 'A career coach helps you get paid more, land better jobs, and make smarter career moves. Here\'s what they actually do — and how AI is changing the cost.',
+  alternates: { canonical: 'https://gethayven.com/blog/what-does-a-career-coach-do' },
 }
 
 const tag = 'Career intelligence'
