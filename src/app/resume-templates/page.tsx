@@ -201,7 +201,7 @@ export default function ResumeTemplatesPage() {
           <div style={{ fontSize: 28, fontWeight: 800, color: '#fff', marginBottom: 12, letterSpacing: '-0.02em' }}>Ready to build your resume?</div>
           <p style={{ fontSize: 16, color: '#94a3b8', marginBottom: 32, lineHeight: 1.65 }}>Pick a template, upload your resume, and get an ATS score with section-by-section feedback in under 60 seconds.</p>
           <Link href="/signup" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', padding: '14px 32px', borderRadius: 10, fontSize: 16, fontWeight: 700, textDecoration: 'none', boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>
-            Start Free — No Credit Card Required <ArrowRight size={16} />
+            Get Started Free <ArrowRight size={16} />
           </Link>
         </div>
       </section>

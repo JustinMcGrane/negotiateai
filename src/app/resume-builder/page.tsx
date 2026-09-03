@@ -138,7 +138,7 @@ export default function ResumeBuilderPage() {
             textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
             display: 'flex', alignItems: 'center', gap: 6,
             boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
-          }}>Try Free Today - No Credit Card Required <ArrowRight size={14} /></Link>
+          }}>Get Started Free <ArrowRight size={14} /></Link>
         </div>
       </header>
 
@@ -170,7 +170,7 @@ export default function ResumeBuilderPage() {
             borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
             boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
           }}>
-            Try Free Today - No Credit Card Required <ArrowRight size={15} />
+            Get Started Free <ArrowRight size={15} />
           </Link>
         </div>
 
@@ -515,7 +515,7 @@ export default function ResumeBuilderPage() {
           borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
           boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
         }}>
-          Try Free Today - No Credit Card Required <ArrowRight size={15} />
+          Get Started Free <ArrowRight size={15} />
         </Link>
       </section>
 

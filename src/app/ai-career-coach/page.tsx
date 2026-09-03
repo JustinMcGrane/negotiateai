@@ -85,7 +85,7 @@ export default function AICareerCoachPage() {
           <Link href="/" style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', textDecoration: 'none', letterSpacing: '-0.02em' }}>Hayven</Link>
           <div style={{ display: 'flex', gap: 8 }}>
             <Link href="/login" style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>Sign in</Link>
-            <Link href="/signup" style={{ fontSize: 14, fontWeight: 700, background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', textDecoration: 'none', padding: '8px 18px', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 6, boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>Try Free Today - No Credit Card Required <ArrowRight size={14} /></Link>
+            <Link href="/signup" style={{ fontSize: 14, fontWeight: 700, background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', textDecoration: 'none', padding: '8px 18px', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 6, boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>Get Started Free <ArrowRight size={14} /></Link>
           </div>
         </header>
 
@@ -109,7 +109,7 @@ export default function AICareerCoachPage() {
               borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              Try Free Today - No Credit Card Required <ArrowRight size={15} />
+              Get Started Free <ArrowRight size={15} />
             </Link>
             <Link href="/worth" style={{
               height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
@@ -199,7 +199,7 @@ export default function AICareerCoachPage() {
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              Try Free Today - No Credit Card Required <ArrowRight size={14} />
+              Get Started Free <ArrowRight size={14} />
             </Link>
           </div>
         </section>
@@ -227,7 +227,7 @@ export default function AICareerCoachPage() {
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              Try Free Today - No Credit Card Required <ArrowRight size={14} />
+              Get Started Free <ArrowRight size={14} />
             </Link>
           </div>
         </section>
@@ -317,7 +317,7 @@ export default function AICareerCoachPage() {
               fontSize: 16, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
             }}>
-              Try Free Today - No Credit Card Required <ArrowRight size={16} />
+              Get Started Free <ArrowRight size={16} />
             </Link>
             <p style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>Upgrade to Pro for $20/month. Cancel anytime.</p>
           </div>

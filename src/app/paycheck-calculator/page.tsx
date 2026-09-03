@@ -208,7 +208,7 @@ export default function PaycheckCalculator() {
         <Link href="/" style={{ fontWeight: 800, fontSize: 18, color: '#0f172a', textDecoration: 'none' }}>Hayven</Link>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <Link href="/login" style={{ fontSize: 14, color: '#64748b', textDecoration: 'none' }}>Sign in</Link>
-          <Link href="/signup" style={{ fontSize: 14, fontWeight: 700, background: '#0f172a', color: '#fff', padding: '8px 18px', borderRadius: 8, textDecoration: 'none' }}>Try Free Today - No Credit Card Required</Link>
+          <Link href="/signup" style={{ fontSize: 14, fontWeight: 700, background: '#0f172a', color: '#fff', padding: '8px 18px', borderRadius: 8, textDecoration: 'none' }}>Get Started Free</Link>
         </div>
       </header>
 
@@ -334,7 +334,7 @@ export default function PaycheckCalculator() {
               color: '#fff', padding: '12px 20px', borderRadius: 9,
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
             }}>
-              Try Free Today - No Credit Card Required <ArrowRight size={14} />
+              Get Started Free <ArrowRight size={14} />
             </Link>
           </div>
         </div>
@@ -412,7 +412,7 @@ export default function PaycheckCalculator() {
             fontSize: 15, fontWeight: 700, textDecoration: 'none',
             boxShadow: '0 4px 20px rgba(239,68,68,0.3)',
           }}>
-            Try Free Today - No Credit Card Required <ArrowRight size={14} />
+            Get Started Free <ArrowRight size={14} />
           </Link>
           <div style={{ fontSize: 12, color: '#475569', marginTop: 12 }}>Free to start · Cancel anytime.</div>
         </div>

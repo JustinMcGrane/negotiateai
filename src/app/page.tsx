@@ -149,7 +149,7 @@ export default function LandingPage() {
             display: 'flex', alignItems: 'center', gap: 6,
             boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
           }}>
-            Try Free Today - No Credit Card Required <ArrowRight size={14} />
+            Get Started Free <ArrowRight size={14} />
           </Link>
         </div>
       </header>
@@ -231,7 +231,7 @@ export default function LandingPage() {
           borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: 'none',
           boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
         }}>
-          Try Free Today - No Credit Card Required
+          Get Started Free
         </Link>
         <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
           Upgrade to Pro for $20/month. Cancel anytime.
@@ -348,7 +348,7 @@ export default function LandingPage() {
               fontSize: 14, fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
             }}>
-              Try Free Today - No Credit Card Required <ArrowRight size={14} />
+              Get Started Free <ArrowRight size={14} />
             </Link>
           </div>
           {/* Chat preview */}
@@ -469,7 +469,7 @@ export default function LandingPage() {
               fontSize: 15, textDecoration: 'none', color: '#fff', fontWeight: 700,
               boxShadow: '0 4px 20px rgba(239,68,68,0.25)',
             }}>
-              Try Free Today - No Credit Card Required
+              Get Started Free
             </Link>
             <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 12, textAlign: 'center' }}>Cancel anytime. No commitment.</div>
           </div>

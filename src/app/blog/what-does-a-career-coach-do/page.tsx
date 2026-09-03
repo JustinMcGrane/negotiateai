@@ -76,7 +76,7 @@ export default function Article() {
         <p style={{ marginBottom: 24 }}>Hayven built Sarah to solve this problem. Sarah is a personalized AI career coach that does everything a human career coach does — salary research, resume feedback, negotiation coaching, interview prep, job search strategy — available 24/7 at a fraction of the cost.</p>
         <p style={{ marginBottom: 24 }}>Unlike generic AI tools, Sarah is specifically built for career and compensation coaching. She knows what hiring managers actually think, what kills resumes before a human reads them, what&apos;s actually negotiable in an offer, and how to position you to win.</p>
         <p style={{ marginBottom: 24 }}>And because she&apos;s available anytime, you can get coaching the night before an interview, the morning of a negotiation call, or any other moment when you need it most — not just when you can schedule a session.</p>
-        <Link href="/signup" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', padding: '12px 24px', borderRadius: 9, fontSize: 14, fontWeight: 700, textDecoration: 'none', marginBottom: 24, boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>Try Free Today - No Credit Card Required</Link>
+        <Link href="/signup" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', padding: '12px 24px', borderRadius: 9, fontSize: 14, fontWeight: 700, textDecoration: 'none', marginBottom: 24, boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>Get Started Free</Link>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>What Sarah can help you with right now</h2>
         <p style={{ marginBottom: 24 }}>If you have a job offer, Sarah can help you <Link href="/blog/how-to-negotiate-salary-after-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>negotiate it</Link> — what to counter, how much to ask for, and what to say when they push back.</p>
@@ -88,7 +88,7 @@ export default function Article() {
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>
         <div style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>Meet Sarah — your AI career coach</div>
         <div style={{ fontSize: 15, color: '#64748b', marginBottom: 24, lineHeight: 1.65 }}>Sarah is a personalized AI career coach available 24/7. Resume feedback, salary research, negotiation coaching, interview prep — all in one conversation. Try Hayven free.</div>
-        <Link href="/signup" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', padding: '10px 22px', borderRadius: 9, fontSize: 14, fontWeight: 700, textDecoration: 'none', boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>Try Free Today - No Credit Card Required</Link>
+        <Link href="/signup" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', padding: '10px 22px', borderRadius: 9, fontSize: 14, fontWeight: 700, textDecoration: 'none', boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>Get Started Free</Link>
       </div>
     </article>
   )

@@ -408,7 +408,7 @@ export default function ResumePage() {
                 borderRadius: 10, padding: '12px 24px',
                 fontSize: 14, fontWeight: 600,
               }}>
-                Try Free Today - No Credit Card Required
+                Get Started Free
               </a>
             </div>
           )}

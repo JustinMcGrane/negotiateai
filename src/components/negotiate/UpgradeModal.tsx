@@ -92,7 +92,7 @@ export function UpgradeModal({ onClose, upgradeHook }: Props) {
           boxShadow: '0 4px 20px rgba(59,130,246,0.3)',
           marginBottom: 10,
         }}>
-          Try Free Today - No Credit Card Required
+          Get Started Free
         </a>
 
         <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textAlign: 'center', margin: 0 }}>
