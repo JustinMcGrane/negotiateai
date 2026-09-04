@@ -73,7 +73,7 @@ export function LandingSarahWidget() {
   }
 
   return (
-    <section style={{ background: '#0f172a', padding: '96px 40px' }} className="landing-section-pad">
+    <section id="check-market-value" style={{ background: '#0f172a', padding: '96px 40px', scrollMarginTop: 80 }} className="landing-section-pad">
       <div className="landing-sarah" style={{ maxWidth: 1000, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
 
         {/* Left: copy */}

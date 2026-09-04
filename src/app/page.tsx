@@ -268,7 +268,7 @@ export default function LandingPage() {
       `}</style>
 
       {/* Logo strip */}
-      <div id="check-market-value" style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '24px 40px', background: '#fafbfc' }}>
+      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '24px 40px', background: '#fafbfc' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.08em', textAlign: 'center', marginBottom: 16 }}>USED BY PROFESSIONALS AT</div>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
