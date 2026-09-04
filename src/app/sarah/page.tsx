@@ -74,10 +74,18 @@ function SarahChat() {
   const [userMessageCount, setUserMessageCount] = useState(0)
   const [showSignup, setShowSignup] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
+
+  function autoResize() {
+    const el = textareaRef.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = Math.min(el.scrollHeight, 120) + 'px'
+  }
 
   async function send(text?: string) {
     const content = (text ?? input).trim()
@@ -88,6 +96,7 @@ function SarahChat() {
     setMessages(newMessages)
     setInput('')
     setLoading(true)
+    if (textareaRef.current) { textareaRef.current.style.height = 'auto' }
 
     const newCount = userMessageCount + 1
     setUserMessageCount(newCount)
@@ -243,22 +252,24 @@ function SarahChat() {
       </div>
 
       {/* Input */}
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '16px', maxWidth: 720, width: '100%', margin: '0 auto' }}>
+      <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px 16px', paddingBottom: 'max(12px, env(safe-area-inset-bottom))', maxWidth: 720, width: '100%', margin: '0 auto' }}>
         <div style={{
-          display: 'flex', gap: 8,
+          display: 'flex', gap: 8, alignItems: 'flex-end',
           background: 'rgba(255,255,255,0.06)',
           border: '1px solid rgba(255,255,255,0.12)',
           borderRadius: 12, padding: '8px 12px',
         }}>
           <textarea
+            ref={textareaRef}
             value={input}
-            onChange={e => setInput(e.target.value)}
+            onChange={e => { setInput(e.target.value); autoResize() }}
             onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send() } }}
             placeholder="Ask Sarah anything…"
             rows={1}
             style={{
               flex: 1, background: 'transparent', border: 'none', outline: 'none',
-              fontSize: 14, color: '#fff', resize: 'none', lineHeight: 1.5, paddingTop: 4,
+              fontSize: 16, color: '#fff', resize: 'none', lineHeight: 1.5, paddingTop: 4,
+              overflowY: 'hidden', maxHeight: 120,
             }}
           />
           <button
