@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import { LandingNav } from '@/components/negotiate/LandingNav'
 import { FAQ } from '@/components/negotiate/FAQ'
+import { LandingSarahWidget } from '@/components/negotiate/LandingSarahWidget'
 
 export const metadata: Metadata = {
   title: 'Hayven — Get paid what you\'re worth',
@@ -223,7 +224,7 @@ export default function LandingPage() {
             ★ FREE TO START — NO CREDIT CARD REQUIRED
           </span>
         </div>
-        <Link href="/signup" style={{
+        <Link href="#check-market-value" style={{
           height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
           padding: '0 32px',
           background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
@@ -231,7 +232,7 @@ export default function LandingPage() {
           borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: 'none',
           boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
         }}>
-          Get Started Free
+          Find Out Your Market Value Free <ArrowRight size={16} />
         </Link>
         <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
           Upgrade to Pro for $20/month. Cancel anytime.
@@ -267,7 +268,7 @@ export default function LandingPage() {
       `}</style>
 
       {/* Logo strip */}
-      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '24px 40px', background: '#fafbfc' }}>
+      <div id="check-market-value" style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '24px 40px', background: '#fafbfc' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.08em', textAlign: 'center', marginBottom: 16 }}>USED BY PROFESSIONALS AT</div>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -281,6 +282,8 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+
+      <LandingSarahWidget />
 
       {/* Career Hub */}
       <section id="features" style={{ padding: '96px 40px' }}>
@@ -315,78 +318,6 @@ export default function LandingPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Sarah section */}
-      <section style={{ background: '#0f172a', padding: '96px 40px' }}>
-        <div className="landing-sarah" style={{ maxWidth: 1000, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }} >
-          <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#7AB8E8', letterSpacing: '0.1em', marginBottom: 16 }}>CAREER COACH</div>
-            <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, marginBottom: 20, letterSpacing: '-0.025em' }}>
-              Meet Sarah.<br />Your personal career coach.
-            </h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 36 }}>
-              {[
-                'Resume review and optimization',
-                'Job targeting and company strategy',
-                'Interview preparation and coaching',
-                'Offer negotiation and counter strategy',
-              ].map(item => (
-                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#cbd5e1' }}>
-                  <CheckCircle size={15} color="#7AB8E8" />
-                  {item}
-                </div>
-              ))}
-            </div>
-            <Link href="/signup" style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-              color: '#fff',
-              padding: '12px 24px', borderRadius: 9,
-              fontSize: 14, fontWeight: 700, textDecoration: 'none',
-              boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
-            }}>
-              Get Started Free <ArrowRight size={14} />
-            </Link>
-          </div>
-          {/* Chat preview */}
-          <div style={{ background: '#1e293b', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 24px 60px rgba(0,0,0,0.4)' }}>
-            {/* Header */}
-            <div style={{ background: '#0f172a', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-              <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg, #6366f1, #4A90D9)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>💼</div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ fontSize: 14, fontWeight: 700, color: '#fff' }}>Sarah</span>
-                  <span style={{ fontSize: 10, fontWeight: 700, background: '#6366f1', color: '#fff', padding: '2px 7px', borderRadius: 4, letterSpacing: '0.05em' }}>PRO COACH</span>
-                </div>
-                <div style={{ fontSize: 11, color: '#64748b' }}>Your personalized career coach</div>
-              </div>
-            </div>
-            {/* User message */}
-            <div style={{ padding: '20px 20px 0' }}>
-              <div style={{ background: '#334155', borderRadius: '12px 12px 4px 12px', padding: '12px 16px', fontSize: 13, color: '#e2e8f0', lineHeight: 1.6, marginBottom: 16, maxWidth: '85%', marginLeft: 'auto' }}>
-                Am I underpaid as an account executive in San Francisco at a $60k base with $100k OTE and 4 years of experience?
-              </div>
-            </div>
-            {/* Sarah response */}
-            <div style={{ padding: '0 20px 20px', display: 'flex', gap: 10 }}>
-              <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, #6366f1, #4A90D9)', flexShrink: 0, marginTop: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13 }}>💼</div>
-              <div style={{ fontSize: 13, color: '#94a3b8', lineHeight: 1.75 }}>
-                <p style={{ margin: '0 0 10px', color: '#e2e8f0' }}>Short answer: yes, that base is low for SF. But OTE is what matters for AEs — let me break it down.</p>
-                <p style={{ margin: '0 0 10px' }}>A $60k base with $100k OTE means your commission is $40k at 100% attainment. That&apos;s a 60/40 split — aggressive but not unusual. The problem is the total. <span style={{ background: 'rgba(239,68,68,0.15)', color: '#fca5a5', padding: '1px 5px', borderRadius: 4, fontWeight: 600 }}>$100k OTE in SF with 4 years is below market.</span></p>
-                <p style={{ margin: '0 0 10px' }}>A mid-level AE in SF should be landing <span style={{ background: 'rgba(74,144,217,0.15)', color: '#7AB8E8', padding: '1px 5px', borderRadius: 4, fontWeight: 600 }}>$130k–$180k OTE</span>, often on a 50/50 split. Enterprise AEs at strong SaaS companies clear <span style={{ background: 'rgba(99,102,241,0.15)', color: '#a5b4fc', padding: '1px 5px', borderRadius: 4, fontWeight: 600 }}>$200k+ OTE</span>.</p>
-                <p style={{ margin: 0, color: '#64748b', fontSize: 12 }}>What are you selling and to whom?</p>
-              </div>
-            </div>
-            {/* Input */}
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ flex: 1, fontSize: 13, color: '#475569' }}>Ask Sarah anything — she remembers your context...</div>
-              <div style={{ width: 32, height: 32, borderRadius: 8, background: '#6366f1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <ArrowRight size={14} color="#fff" />
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -617,7 +548,7 @@ export default function LandingPage() {
           <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.7, marginBottom: 36 }}>
             Sarah will tell you your market rate, what&apos;s holding you back, and exactly what to do next.
           </p>
-          <Link href="/signup" style={{
+          <Link href="#check-market-value" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             background: '#2D6EA8', color: '#fff',
             padding: '15px 36px', borderRadius: 10,
