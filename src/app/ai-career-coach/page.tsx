@@ -113,7 +113,7 @@ export default function AICareerCoachPage() {
             </Link>
             <Link href="/worth" style={{
               height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '0 28px', background: '#EBF5FB', color: '#2D6EA8',
+              padding: '0 28px', background: '#1a4fa0', color: '#fff',
               borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
             }}>
               Check my market value
