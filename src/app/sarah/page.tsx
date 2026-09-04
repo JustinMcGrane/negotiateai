@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
-const SIGNUP_AFTER = 8 // show signup prompt after this many user messages
+const SIGNUP_AFTER = 14 // hard fallback — Sarah should mention signup naturally before this
 
 const DEFAULT_INTRO = `Hey! I'm Sarah, your personalized career coach.
 
