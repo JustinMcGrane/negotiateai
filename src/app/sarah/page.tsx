@@ -9,11 +9,7 @@ type Message = { role: 'user' | 'assistant'; content: string }
 
 const SIGNUP_AFTER = 14 // hard fallback — Sarah should mention signup naturally before this
 
-const DEFAULT_INTRO = `Hey! I'm Sarah, your personalized career coach.
-
-I help people figure out what they're worth, how to negotiate their salary, and how to land their next role.
-
-What are you working on right now?`
+const DEFAULT_INTRO = `Hi! I'm Sarah, your career coach. Quick question — do you know if you're being paid what you're worth? Tell me your role and what you're making and I'll tell you right now.`
 
 const STARTERS = [
   'How do I negotiate my salary?',
