@@ -1,5 +1,12 @@
 {
   "framework": "nextjs",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "permanent": true
+    }
+  ],
   "functions": {
     "src/app/api/webhook/route.ts": {
       "maxDuration": 10
