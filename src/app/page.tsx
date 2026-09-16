@@ -596,6 +596,10 @@ export default function LandingPage() {
           <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
             <div style={{ fontSize: 12, color: '#94a3b8' }}>© {new Date().getFullYear()} Hayven. All rights reserved.</div>
             <div style={{ fontSize: 12, color: '#94a3b8' }}>AI-generated guidance for informational purposes only. Results may vary.</div>
+            <a href="https://launchaf.com/" target="_blank" rel="noopener" data-launchaf-badge="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://launchaf.com/api/badge/light?v=launchaf-blue-2026-2" alt="Featured on LaunchAF" width={200} height={56} />
+            </a>
           </div>
         </div>
       </footer>
