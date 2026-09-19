@@ -68,7 +68,7 @@ export default function Article() {
           <li style={{ marginBottom: 10 }}><strong>Glassdoor</strong> — good for sales, marketing, and operations roles</li>
           <li style={{ marginBottom: 10 }}><strong>LinkedIn Salary</strong> — useful for mid-market and non-tech roles</li>
           <li style={{ marginBottom: 10 }}><strong>Blind</strong> — candid, employee-submitted data by company</li>
-          <li style={{ marginBottom: 10 }}><strong>Hayven&apos;s <Link href="/worth" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link></strong> — gives you a precise market rate for your exact role, level, and city</li>
+          <li style={{ marginBottom: 10 }}><strong>Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link></strong> — gives you a precise market rate for your exact role, level, and city</li>
         </ul>
         <p style={{ marginBottom: 24 }}>Target the <strong>75th percentile</strong> as your anchor. This is what strong performers at your level make, and it&apos;s a defensible ask. You&apos;ll also counter higher than this number to leave room to meet in the middle — more on that below.</p>
 
@@ -143,7 +143,7 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Practice before the real conversation</h2>
         <p style={{ marginBottom: 24 }}>The biggest obstacle to negotiating a salary offer isn&apos;t knowledge — it&apos;s the anxiety of the live moment. The silence after you name your number. The recruiter&apos;s hesitation. The fear that you&apos;ve asked for too much. These are the moments where most people cave, even when they know better.</p>
-        <p style={{ marginBottom: 24 }}>The only fix is repetition. The more you&apos;ve said the words out loud, the more natural they feel when it counts. Hayven&apos;s <Link href="/signup" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Negotiation Simulator</Link> lets you run the entire conversation against a realistic AI recruiter and get scored feedback on your responses. Run it 3–4 times before your actual call and the real thing will feel familiar.</p>
+        <p style={{ marginBottom: 24 }}>The only fix is repetition. The more you&apos;ve said the words out loud, the more natural they feel when it counts. Hayven&apos;s <Link href="/negotiation-simulator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Negotiation Simulator</Link> lets you run the entire conversation against a realistic AI recruiter and get scored feedback on your responses. Run it 3–4 times before your actual call and the real thing will feel familiar.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

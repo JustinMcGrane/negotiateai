@@ -91,6 +91,20 @@ export default function OfferEvaluatorPage() {
         </div>
       </section>
 
+      <section style={{ maxWidth: 800, margin: '0 auto', padding: '48px 24px' }}>
+        <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>Related tools</h2>
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          {[
+            { href: '/compensation-analyzer', label: 'Compensation Analyzer' },
+            { href: '/counter-offer-builder', label: 'Counter-Offer Builder' },
+            { href: '/equity-calculator', label: 'Equity Calculator' },
+            { href: '/negotiation-playbook', label: 'Negotiation Playbook' },
+          ].map(({ href, label }) => (
+            <Link key={href} href={href} style={{ fontSize: 13, color: '#4169E1', textDecoration: 'none', border: '1px solid #dbeafe', borderRadius: 8, padding: '6px 14px', background: '#eff6ff' }}>{label}</Link>
+          ))}
+        </div>
+      </section>
+
       <section style={{ background: '#0f172a', padding: '72px 24px', textAlign: 'center' }}>
         <h2 style={{ fontSize: 'clamp(24px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 16 }}>Know what your offer is really worth.</h2>
         <p style={{ fontSize: 16, color: '#94a3b8', maxWidth: 480, margin: '0 auto 36px' }}>Get a full evaluation in seconds — free, no credit card required.</p>

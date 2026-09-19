@@ -91,6 +91,20 @@ export default function ObjectionHandlerPage() {
         </div>
       </section>
 
+      <section style={{ maxWidth: 800, margin: '0 auto', padding: '48px 24px' }}>
+        <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>Related tools</h2>
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          {[
+            { href: '/counter-offer-builder', label: 'Counter-Offer Builder' },
+            { href: '/negotiation-simulator', label: 'Negotiation Simulator' },
+            { href: '/negotiation-playbook', label: 'Negotiation Playbook' },
+            { href: '/interview-salary-coach', label: 'Interview Salary Coach' },
+          ].map(({ href, label }) => (
+            <Link key={href} href={href} style={{ fontSize: 13, color: '#4169E1', textDecoration: 'none', border: '1px solid #dbeafe', borderRadius: 8, padding: '6px 14px', background: '#eff6ff' }}>{label}</Link>
+          ))}
+        </div>
+      </section>
+
       <section style={{ background: '#0f172a', padding: '72px 24px', textAlign: 'center' }}>
         <h2 style={{ fontSize: 'clamp(24px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 16 }}>Stop letting pushback end your negotiation.</h2>
         <p style={{ fontSize: 16, color: '#94a3b8', maxWidth: 480, margin: '0 auto 36px' }}>Get your response scripts in seconds — free, no credit card required.</p>
