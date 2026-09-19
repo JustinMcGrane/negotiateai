@@ -580,6 +580,31 @@ export default function LandingPage() {
                 </div>
               </div>
               <div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>TOOLS</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {[
+                    { href: '/compensation-analyzer', label: 'Compensation Analyzer' },
+                    { href: '/offer-evaluator', label: 'Offer Evaluator' },
+                    { href: '/equity-calculator', label: 'Equity Calculator' },
+                    { href: '/counter-offer-builder', label: 'Counter-Offer Builder' },
+                    { href: '/raise-calculator', label: 'Raise Calculator' },
+                    { href: '/raise-request-builder', label: 'Raise Request Builder' },
+                    { href: '/negotiation-playbook', label: 'Negotiation Playbook' },
+                    { href: '/objection-handler', label: 'Objection Handler' },
+                    { href: '/negotiation-simulator', label: 'Negotiation Simulator' },
+                    { href: '/interview-salary-coach', label: 'Interview Salary Coach' },
+                    { href: '/job-tracker', label: 'Job Tracker' },
+                    { href: '/resume-builder', label: 'Resume Builder' },
+                    { href: '/resume-templates', label: 'Resume Templates' },
+                    { href: '/resume-skills', label: 'Resume Skills' },
+                    { href: '/paycheck-calculator', label: 'Paycheck Calculator' },
+                    { href: '/salary-to-hourly-calculator', label: 'Salary to Hourly' },
+                  ].map(({ href, label }) => (
+                    <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+                  ))}
+                </div>
+              </div>
+              <div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>LEGAL</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {[{ href: '/privacy', label: 'Privacy Policy' }, { href: '/terms', label: 'Terms of Service' }].map(({ href, label }) => (
