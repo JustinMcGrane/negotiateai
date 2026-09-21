@@ -1,8 +1,14 @@
 import { MetadataRoute } from 'next'
+import { SALARY_ROLES } from '@/lib/salaries/roles'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://gethayven.com'
   const now = new Date()
+
+  const salaryPages: MetadataRoute.Sitemap = [
+    { url: `${base}/tools/salaries`, lastModified: now, priority: 0.8 },
+    ...SALARY_ROLES.map(r => ({ url: `${base}/tools/salaries/${r.slug}`, lastModified: now, priority: 0.8 })),
+  ]
 
   return [
     { url: base, lastModified: now, priority: 1.0 },
@@ -58,5 +64,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/blog/data-scientist-resume`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/ux-designer-resume`, lastModified: now, priority: 0.8 },
     { url: `${base}/blog/product-manager-resume`, lastModified: now, priority: 0.8 },
+    ...salaryPages,
   ]
 }

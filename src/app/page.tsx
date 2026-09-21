@@ -599,6 +599,7 @@ export default function LandingPage() {
                     { href: '/resume-skills', label: 'Resume Skills' },
                     { href: '/paycheck-calculator', label: 'Paycheck Calculator' },
                     { href: '/salary-to-hourly-calculator', label: 'Salary to Hourly' },
+                    { href: '/tools/salaries', label: 'Salary Guides' },
                   ].map(({ href, label }) => (
                     <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
                   ))}
