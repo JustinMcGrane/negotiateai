@@ -7,11 +7,11 @@ import { TemplatesTabs } from '@/components/resume-builder/TemplatesTabs'
 
 export const metadata: Metadata = {
   title: 'Free AI Resume Builder — ATS Score, Bullet Rewrites & Feedback | Hayven',
-  description: 'Get recruiter-grade resume feedback with ATS scoring, section-by-section breakdown, rewritten bullets, and a prioritized action plan. Free to start.',
+  description: 'Upload your resume and get a real ATS score, rewritten bullets, and a prioritized fix list in 60 seconds. Used by job seekers who got callbacks at Google, Stripe, and Meta. Free.',
   alternates: { canonical: 'https://gethayven.com/resume-builder' },
   openGraph: {
-    title: 'Free AI Resume Builder — ATS Score & Bullet Rewrites | Hayven',
-    description: 'Get ATS scoring, bullet rewrites, and a prioritized fix list for your resume — free. Results in 60 seconds.',
+    title: 'Free AI Resume Builder — ATS Score, Bullet Rewrites & Feedback | Hayven',
+    description: 'ATS score, rewritten bullets, and a prioritized fix list — free. Results in 60 seconds.',
   },
   twitter: {
     card: 'summary_large_image',

@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'The 5 recruiter types and how to handle each | Hayven',
-  description: 'Not all recruiters negotiate the same way. Learn the 5 recruiter archetypes and the exact strategy for each.',
+  title: 'The 5 Recruiter Types (And How to Negotiate With Each) | Hayven',
+  description: 'The Hard Closer, The Friendly Deflector, The Process Robot — each recruiter plays a different game. Here\'s how to read them and negotiate accordingly.',
   alternates: { canonical: 'https://gethayven.com/blog/recruiter-types-and-how-to-handle' },
 }
 

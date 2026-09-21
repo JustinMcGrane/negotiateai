@@ -5,12 +5,12 @@ import { ArrowRight, CheckCircle, Mic, BarChart2, RefreshCw } from 'lucide-react
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Salary Negotiation Practice Tool — AI Roleplay & Scored Feedback | Hayven',
-  description: 'Practice salary negotiation with a realistic AI coach. Run real scenarios, get scored feedback, and build the confidence to ask for more.',
+  title: 'Salary Negotiation Practice — AI Roleplay & Scored Feedback | Hayven',
+  description: 'Practice negotiating before the real call. Run realistic scenarios against an AI recruiter, get scored feedback on every response, and walk in knowing exactly what to say.',
   alternates: { canonical: 'https://gethayven.com/negotiation-simulator' },
   openGraph: {
-    title: 'Salary Negotiation Practice Tool | Hayven',
-    description: 'Practice against an AI that pushes back like a real recruiter. Get scored feedback after every session.',
+    title: 'Salary Negotiation Practice — AI Roleplay & Scored Feedback | Hayven',
+    description: 'Practice against an AI recruiter before the real call. Scored feedback on every response. Free.',
   },
   twitter: {
     card: 'summary_large_image',

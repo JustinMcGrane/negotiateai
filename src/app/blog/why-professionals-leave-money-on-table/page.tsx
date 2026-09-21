@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Why most professionals never negotiate their salary | Hayven',
-  description: 'Research shows most professionals never negotiate their salary. Here\'s the psychology behind it — and how to overcome it.',
+  title: 'Why Most People Never Negotiate Their Salary (And How to Fix It) | Hayven',
+  description: '73% of employers expect a counter-offer. Most candidates never make one. Here\'s the psychology behind why — and the mindset shift that changes everything.',
   alternates: { canonical: 'https://gethayven.com/blog/why-professionals-leave-money-on-table' },
 }
 

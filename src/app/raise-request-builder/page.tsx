@@ -6,11 +6,11 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
   title: 'How to Ask for a Raise — Script, Talking Points & Email Template | Hayven',
-  description: 'Build a compelling raise request with market data, impact bullets, and the exact script to use with your manager. Free.',
+  description: 'Build a raise request your manager can\'t ignore. Get market data for your role, your accomplishments framed as business value, and the exact script for the conversation. Free.',
   alternates: { canonical: 'https://gethayven.com/raise-request-builder' },
   openGraph: {
-    title: 'How to Ask for a Raise — Free Script & Template | Hayven',
-    description: 'Get the exact words to ask your manager for a raise, backed by market data and your impact.',
+    title: 'How to Ask for a Raise — Script, Talking Points & Template | Hayven',
+    description: 'Build a raise request your manager can\'t ignore — market data, impact framing, and the exact script.',
   },
   twitter: {
     card: 'summary_large_image',

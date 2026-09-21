@@ -5,12 +5,12 @@ import { ArrowRight, CheckCircle, LayoutDashboard, Bell, TrendingUp } from 'luci
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Job Application Tracker — Organize Your Job Search | Hayven',
-  description: 'Track every job application in one place. Know where you stand, when to follow up, and which opportunities to prioritize. Free.',
+  title: 'Free Job Application Tracker — Never Lose Track of an Opportunity | Hayven',
+  description: 'Stop losing offers in your inbox. Track every application, follow-up, and interview in one place — see exactly where you stand with each role. Free.',
   alternates: { canonical: 'https://gethayven.com/job-tracker' },
   openGraph: {
-    title: 'Job Application Tracker — Free | Hayven',
-    description: 'Never lose track of where you stand. Manage your entire job search from one organized view.',
+    title: 'Free Job Application Tracker — Never Lose Track of an Opportunity | Hayven',
+    description: 'Track every application and follow-up in one view. Know exactly where each opportunity stands.',
   },
   twitter: {
     card: 'summary_large_image',

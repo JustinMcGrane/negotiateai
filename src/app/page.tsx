@@ -12,19 +12,19 @@ import { FAQ } from '@/components/negotiate/FAQ'
 import { LandingSarahWidget } from '@/components/negotiate/LandingSarahWidget'
 
 export const metadata: Metadata = {
-  title: 'Hayven — Get paid what you\'re worth',
-  description: 'Personalized career coach, resume analyzer, job search, cover letter generator, and salary negotiation tools. Everything you need to land the job and the offer you deserve.',
+  title: 'Hayven — Salary Negotiation Coach & Career Tools',
+  description: 'Know your market rate, build your counter-offer, and negotiate with confidence. Free salary negotiation tools, AI career coaching, and resume feedback — start in 60 seconds.',
   alternates: { canonical: 'https://gethayven.com' },
   openGraph: {
-    title: 'Hayven — Get paid what you\'re worth',
-    description: 'Personalized career coach, resume analyzer, job search, and salary negotiation. Land the job and the offer you deserve.',
+    title: 'Hayven — Salary Negotiation Coach & Career Tools',
+    description: 'Know your market rate, build your counter-offer, and negotiate with confidence. Free salary negotiation tools and AI career coaching.',
     url: 'https://gethayven.com',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hayven — Get paid what you\'re worth',
-    description: 'Personalized career coach and salary negotiation tools. Free to start.',
+    title: 'Hayven — Salary Negotiation Coach & Career Tools',
+    description: 'Know your market rate, counter any offer, and negotiate your next raise. Free to start.',
   },
 }
 

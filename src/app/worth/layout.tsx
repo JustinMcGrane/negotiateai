@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Find Out What You\'re Worth — Hayven',
-  description: 'Get your personalized market rate. See what professionals in your role, level, and city are actually earning.',
+  title: 'Am I Underpaid? Find Out Your Market Rate — Hayven',
+  description: 'Enter your role, level, and city — find out in 30 seconds if you\'re underpaid and by how much. See what professionals like you are actually earning.',
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

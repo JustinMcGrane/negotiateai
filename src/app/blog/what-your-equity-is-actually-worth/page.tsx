@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'What your equity is actually worth: a realistic guide | Hayven',
-  description: 'Most startup equity is worth less than the paper it\'s written on. Here\'s how to assess your equity honestly and ask the right questions.',
+  title: 'What Your Startup Equity Is Actually Worth (Honestly) | Hayven',
+  description: 'Most startup equity is worth far less than the offer letter implies. Here\'s how to calculate the real value of your options — and what to ask before you accept.',
   alternates: { canonical: 'https://gethayven.com/blog/what-your-equity-is-actually-worth' },
 }
 

@@ -5,12 +5,12 @@ import { ArrowRight, CheckCircle, MessageSquare, Target, Shield } from 'lucide-r
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Counter Offer Letter Generator — Free Script & Email Template | Hayven',
-  description: 'Build a compelling counter-offer in minutes. Get the exact words to say, the right number to ask for, and the reasoning to back it up. Free.',
+  title: 'Counter Offer Letter Generator — Script & Email Template | Hayven',
+  description: 'Don\'t accept the first offer. Build a data-backed counter-offer in minutes — get the exact number to ask for, the email to send, and the words to say on the call. Free.',
   alternates: { canonical: 'https://gethayven.com/counter-offer-builder' },
   openGraph: {
-    title: 'Counter Offer Letter Generator — Free | Hayven',
-    description: 'Get the exact script and email template to counter any job offer. Anchored to your market rate.',
+    title: 'Counter Offer Letter Generator — Script & Email Template | Hayven',
+    description: 'Get the exact words to counter any job offer — email template, call script, and the right number to ask for.',
   },
   twitter: {
     card: 'summary_large_image',

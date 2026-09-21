@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'What Does a Career Coach Do? | Hayven',
-  description: 'A career coach helps you get paid more, land better jobs, and make smarter career moves. Here\'s what they actually do — and how AI is changing the cost.',
+  title: 'What Does a Career Coach Do? (And Do You Actually Need One?) | Hayven',
+  description: 'Career coaches cost $200–$500/hr. Here\'s what they actually do, when it\'s worth it, and how AI tools give you the same help for free.',
   alternates: { canonical: 'https://gethayven.com/blog/what-does-a-career-coach-do' },
 }
 
