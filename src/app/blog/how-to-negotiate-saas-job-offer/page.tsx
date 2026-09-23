@@ -13,6 +13,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'How to Negotiate a SaaS Job Offer',
   description: 'A complete guide to negotiating a SaaS job offer.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/how-to-negotiate-saas-job-offer',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

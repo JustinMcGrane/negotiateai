@@ -13,6 +13,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Software Engineer Resume: Examples & Tips',
   description: 'A software engineer resume that gets interviews.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/software-engineer-resume',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

@@ -16,6 +16,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'How to Negotiate Salary in an Interview',
   description: 'Exactly what to say when salary comes up during the interview process.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/how-to-negotiate-salary-in-an-interview',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

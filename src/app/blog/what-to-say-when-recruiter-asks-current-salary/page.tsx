@@ -16,6 +16,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'What to Say When a Recruiter Asks Your Current Salary',
   description: 'Exactly what to say to protect your leverage and get a better offer.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/what-to-say-when-recruiter-asks-current-salary',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

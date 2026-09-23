@@ -1,0 +1,34 @@
+# Hayven
+
+> Hayven is a B2C AI career coaching and salary negotiation platform. It helps professionals understand their market value, negotiate job offers and raises, build stronger resumes, and make better career decisions.
+
+Hayven offers free and paid tools for salary benchmarking, offer evaluation, counter-offer scripting, negotiation practice, resume analysis, and career coaching via an AI assistant named Sarah.
+
+## Key pages
+
+- [Homepage](https://gethayven.com): Overview of all tools and features
+- [AI Career Coach](https://gethayven.com/ai-career-coach): Personalized career coaching powered by AI
+- [Compensation Analyzer](https://gethayven.com/compensation-analyzer): See your p25–p90 salary range by role, level, and city
+- [Offer Evaluator](https://gethayven.com/offer-evaluator): Score any job offer 0–100 across salary, equity, and benefits
+- [Counter-Offer Builder](https://gethayven.com/counter-offer-builder): Build a data-backed counter-offer with email and call scripts
+- [Negotiation Simulator](https://gethayven.com/negotiation-simulator): Practice salary negotiation against an AI recruiter
+- [Objection Handler](https://gethayven.com/objection-handler): Scripts for every recruiter pushback
+- [Negotiation Playbook](https://gethayven.com/negotiation-playbook): Step-by-step negotiation strategy for your exact offer
+- [Interview Salary Coach](https://gethayven.com/interview-salary-coach): What to say when asked salary expectations in an interview
+- [Raise Request Builder](https://gethayven.com/raise-request-builder): Build a raise request with market data and talking points
+- [Equity Calculator](https://gethayven.com/equity-calculator): Calculate what your stock options and RSUs are actually worth
+- [Raise Calculator](https://gethayven.com/raise-calculator): Calculate your new salary after a raise
+- [Salary to Hourly Calculator](https://gethayven.com/salary-to-hourly-calculator): Convert annual salary to hourly rate
+- [Paycheck Calculator](https://gethayven.com/paycheck-calculator): Calculate take-home pay after taxes
+- [Resume Builder](https://gethayven.com/resume-builder): AI resume scoring, ATS analysis, and bullet rewrites
+- [Resume Templates](https://gethayven.com/resume-templates): ATS-friendly resume templates with AI feedback
+- [Job Tracker](https://gethayven.com/job-tracker): Track job applications and follow-ups
+- [Salary Guides](https://gethayven.com/tools/salaries): Role-specific salary ranges, top-paying cities, and negotiation tips
+
+## Blog
+
+Hayven publishes practical salary negotiation and career guides at https://gethayven.com/blog.
+
+## About
+
+Hayven is free to start. Pro plans are available at $20/month. The platform does not provide legal or financial advice.

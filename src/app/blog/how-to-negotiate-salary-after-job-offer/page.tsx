@@ -13,6 +13,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'How to Negotiate Salary After a Job Offer',
   description: 'Exactly how to negotiate salary after receiving a job offer.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/how-to-negotiate-salary-after-job-offer',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

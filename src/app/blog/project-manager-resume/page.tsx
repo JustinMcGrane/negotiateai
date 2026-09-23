@@ -12,6 +12,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Project Manager Resume: Examples & Tips That Get Interviews',
   description: 'Write a project manager resume that gets callbacks.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/project-manager-resume',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

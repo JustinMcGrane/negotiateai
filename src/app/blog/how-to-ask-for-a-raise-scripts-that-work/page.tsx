@@ -16,6 +16,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'How to Ask for a Raise: Scripts That Actually Work',
   description: 'Asking for a raise scripts and strategies that get results.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/how-to-ask-for-a-raise-scripts-that-work',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

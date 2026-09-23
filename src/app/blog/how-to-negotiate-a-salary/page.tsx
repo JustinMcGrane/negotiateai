@@ -16,6 +16,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'How to Negotiate a Salary: The Complete Guide',
   description: 'Learn how to negotiate a salary the right way — step-by-step guide.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/how-to-negotiate-a-salary',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

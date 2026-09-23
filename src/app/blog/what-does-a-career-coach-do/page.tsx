@@ -16,6 +16,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'What Does a Career Coach Do?',
   description: 'A career coach helps you get paid more, land better jobs, and make smarter career moves.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/what-does-a-career-coach-do',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

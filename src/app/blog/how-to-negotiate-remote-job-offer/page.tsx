@@ -16,6 +16,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'How to Negotiate a Remote Job Offer',
   description: 'How to negotiate salary, equipment, and flexibility for remote jobs.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/how-to-negotiate-remote-job-offer',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

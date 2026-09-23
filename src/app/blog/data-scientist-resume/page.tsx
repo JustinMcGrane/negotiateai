@@ -12,6 +12,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Data Scientist Resume: Examples & Tips That Get Interviews',
   description: 'Write a data scientist resume that passes ATS and impresses hiring managers.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/data-scientist-resume',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

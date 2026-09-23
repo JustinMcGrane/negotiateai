@@ -16,6 +16,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'How to Negotiate a Signing Bonus',
   description: 'Signing bonuses are easier to negotiate than base salary.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/how-to-negotiate-signing-bonus',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

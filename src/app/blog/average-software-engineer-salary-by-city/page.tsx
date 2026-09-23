@@ -28,6 +28,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Average Software Engineer Salary by City (2026)',
   description: 'Software engineer salaries by city — top US tech hubs for 2026.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/average-software-engineer-salary-by-city',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

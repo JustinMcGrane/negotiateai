@@ -88,9 +88,8 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'Hayven',
   url: 'https://gethayven.com',
-  logo: 'https://gethayven.com/logo.png',
+  logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.svg', contentUrl: 'https://gethayven.com/logo.svg' },
   description: 'AI-powered salary negotiation and career coaching platform.',
-  sameAs: [],
 }
 
 const softwareSchema = {
@@ -99,12 +98,10 @@ const softwareSchema = {
   name: 'Hayven',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
-  offers: {
-    '@type': 'Offer',
-    price: '20',
-    priceCurrency: 'USD',
-    priceSpecification: { '@type': 'UnitPriceSpecification', price: '20', priceCurrency: 'USD', unitText: 'MONTH' },
-  },
+  offers: [
+    { '@type': 'Offer', price: '0', priceCurrency: 'USD', name: 'Free' },
+    { '@type': 'Offer', price: '20', priceCurrency: 'USD', name: 'Pro', priceSpecification: { '@type': 'UnitPriceSpecification', price: '20', priceCurrency: 'USD', unitText: 'MONTH' } },
+  ],
   description: 'Know your market rate, negotiate your salary, and build your career with AI coaching.',
   url: 'https://gethayven.com',
 }
@@ -155,6 +152,7 @@ export default function LandingPage() {
         </div>
       </header>
 
+      <main>
       {/* Hero */}
       <section style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px 88px', textAlign: 'center' }} className="landing-hero landing-section-pad">
         <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(40px, 9.5vw, 112px)' }}>
@@ -560,6 +558,7 @@ export default function LandingPage() {
         </div>
       </section>
 
+      </main>
       {/* Footer */}
       <footer style={{ borderTop: '1px solid #e2e8f0', padding: '48px 40px 36px' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>

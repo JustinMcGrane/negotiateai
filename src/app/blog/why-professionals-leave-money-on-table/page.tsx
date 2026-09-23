@@ -16,6 +16,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Why Most Professionals Never Negotiate Their Salary',
   description: 'The psychology behind not negotiating — and how to overcome it.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/why-professionals-leave-money-on-table',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

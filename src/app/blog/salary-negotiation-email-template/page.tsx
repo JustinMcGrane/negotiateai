@@ -16,6 +16,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Salary Negotiation Email Template (Copy & Paste)',
   description: 'Copy-paste salary negotiation email templates that actually work.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/salary-negotiation-email-template',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

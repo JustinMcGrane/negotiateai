@@ -16,6 +16,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'What Your Equity Is Actually Worth',
   description: 'How to assess your equity honestly and ask the right questions.',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   url: 'https://gethayven.com/blog/what-your-equity-is-actually-worth',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },

@@ -14,6 +14,8 @@ const articleSchema = {
   headline: 'How to Negotiate a Salary Offer',
   description: 'How to negotiate a salary offer — scripts, strategy, and objection handling.',
   url: 'https://gethayven.com/blog/how-to-negotiate-salary-offer',
+  datePublished: '2026-08-01',
+  dateModified: '2026-09-23',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },
 }
