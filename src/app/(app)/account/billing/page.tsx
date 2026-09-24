@@ -33,7 +33,7 @@ export default function BillingPage() {
       name: 'Free',
       price: '$0',
       sub: 'Forever free',
-      features: ['Sarah salary assessment (one session)', 'See your current market value', 'Get your target role + salary', 'Realistic timeline to get there'],
+      features: ['10 messages with Sarah (lifetime)', '1 resume analysis', '1 cover letter', 'All calculators (salary, equity, raise, paycheck)'],
       cta: 'Current plan',
       disabled: true,
       priceId: '',

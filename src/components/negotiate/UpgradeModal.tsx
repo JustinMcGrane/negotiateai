@@ -4,9 +4,30 @@ import { X } from 'lucide-react'
 interface Props {
   onClose: () => void
   upgradeHook?: string
+  feature?: 'recruiter' | 'resume' | 'cover-letter' | 'roleplay' | string
 }
 
-export function UpgradeModal({ onClose, upgradeHook }: Props) {
+const FEATURE_COPY: Record<string, { eyebrow: string; headline: string }> = {
+  recruiter: {
+    eyebrow: "You've used your free messages",
+    headline: "You could be leaving $20,000+ on the table.",
+  },
+  resume: {
+    eyebrow: "Free resume analysis used",
+    headline: "Your resume may be losing you interviews before anyone reads it.",
+  },
+  'cover-letter': {
+    eyebrow: "Free cover letter used",
+    headline: "A generic cover letter kills your chances. Pro unlocks unlimited tailored ones.",
+  },
+  roleplay: {
+    eyebrow: "Pro feature",
+    headline: "Practice is how you stop freezing when the recruiter pushes back.",
+  },
+}
+
+export function UpgradeModal({ onClose, upgradeHook, feature = 'recruiter' }: Props) {
+  const copy = FEATURE_COPY[feature] ?? FEATURE_COPY.recruiter
   return (
     <div style={{
       position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)',
@@ -17,27 +38,25 @@ export function UpgradeModal({ onClose, upgradeHook }: Props) {
         background: '#0f172a', borderRadius: 16, padding: '32px 28px', maxWidth: 460, width: '100%',
         border: '1px solid rgba(255,255,255,0.1)',
         boxShadow: '0 24px 60px rgba(0,0,0,0.5)',
+        position: 'relative',
       }} onClick={(e) => e.stopPropagation()}>
 
-        {/* Close */}
         <button onClick={onClose} style={{
-          position: 'absolute' as const, top: 16, right: 16,
+          position: 'absolute', top: 16, right: 16,
           background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', padding: 4,
         }}>
           <X size={18} />
         </button>
 
-        {/* Hook */}
         <div style={{ marginBottom: 20 }}>
           <p style={{ fontSize: 13, fontWeight: 600, color: '#60a5fa', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 10 }}>
-            You&apos;ve used your free messages
+            {copy.eyebrow}
           </p>
           <h2 style={{ fontSize: 22, fontWeight: 800, color: '#fff', lineHeight: 1.3, letterSpacing: '-0.02em', margin: 0 }}>
-            {upgradeHook || 'You could be leaving $20,000+ on the table.'}
+            {upgradeHook || copy.headline}
           </h2>
         </div>
 
-        {/* Stats */}
         <div style={{ display: 'flex', gap: 16, marginBottom: 24 }}>
           {[
             { value: '$27K', label: 'avg left on table' },
@@ -53,7 +72,6 @@ export function UpgradeModal({ onClose, upgradeHook }: Props) {
           ))}
         </div>
 
-        {/* Features */}
         <div style={{ marginBottom: 24 }}>
           {[
             'Unlimited conversations with Sarah',
@@ -71,7 +89,6 @@ export function UpgradeModal({ onClose, upgradeHook }: Props) {
           ))}
         </div>
 
-        {/* Testimonial */}
         <div style={{
           background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: 10, padding: '14px 16px', marginBottom: 24,
@@ -82,8 +99,7 @@ export function UpgradeModal({ onClose, upgradeHook }: Props) {
           <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0 }}>Early access user · Software Engineer, San Francisco</p>
         </div>
 
-        {/* CTA */}
-        <a href="/upgrade" style={{
+        <a href="/account/billing" style={{
           display: 'block', textAlign: 'center',
           background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
           color: '#fff', textDecoration: 'none',
@@ -92,11 +108,11 @@ export function UpgradeModal({ onClose, upgradeHook }: Props) {
           boxShadow: '0 4px 20px rgba(59,130,246,0.3)',
           marginBottom: 10,
         }}>
-          Get Started Free
+          Upgrade to Pro — $20/month
         </a>
 
         <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textAlign: 'center', margin: 0 }}>
-          $20/month after free period · Cancel anytime
+          Cancel anytime
         </p>
       </div>
     </div>

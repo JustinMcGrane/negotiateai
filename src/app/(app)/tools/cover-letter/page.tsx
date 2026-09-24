@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Sparkles, Copy, Check } from 'lucide-react'
+import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
 
 export default function CoverLetterPage() {
   const [jobTitle, setJobTitle] = useState('')
@@ -12,6 +13,7 @@ export default function CoverLetterPage() {
   const [letter, setLetter] = useState('')
   const [copied, setCopied] = useState(false)
   const [error, setError] = useState('')
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
   async function generate() {
     if (!jobTitle || !company) return
@@ -24,6 +26,10 @@ export default function CoverLetterPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ jobTitle, company, jobDesc, resume, tone }),
       })
+      if (res.status === 429 || res.status === 403) {
+        setShowUpgradeModal(true)
+        return
+      }
       const data = await res.json()
       setLetter(data.letter || '')
     } catch {
@@ -49,6 +55,7 @@ export default function CoverLetterPage() {
 
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: '32px 24px' }}>
+      {showUpgradeModal && <UpgradeModal feature="cover-letter" onClose={() => setShowUpgradeModal(false)} />}
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Cover Letter Generator</h1>
         <p style={{ color: 'var(--color-text-secondary)', marginTop: 8, fontSize: 14 }}>

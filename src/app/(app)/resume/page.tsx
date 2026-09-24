@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Sparkles, CheckCircle, AlertCircle, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react'
 import { ClientPageHeader } from '@/components/negotiate/ClientPageHeader'
+import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
 
 type SectionScore = { name: string; score: number; feedback: string }
 type BulletRewrite = { original: string; rewritten: string; reason: string }
@@ -121,6 +122,7 @@ export default function ResumePage() {
   const [loading, setLoading] = useState(false)
   const [analysis, setAnalysis] = useState<Analysis | null>(null)
   const [error, setError] = useState('')
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
 
   async function analyze() {
     if (!text.trim()) return
@@ -133,6 +135,10 @@ export default function ResumePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ resumeText: text, targetRole: jobTitle, jobDescription: jobDesc }),
       })
+      if (res.status === 429 || res.status === 403) {
+        setShowUpgradeModal(true)
+        return
+      }
       if (!res.ok) throw new Error()
       const data = await res.json()
       setAnalysis(data)
@@ -153,6 +159,7 @@ export default function ResumePage() {
 
   return (
     <div>
+      {showUpgradeModal && <UpgradeModal feature="resume" onClose={() => setShowUpgradeModal(false)} />}
       <ClientPageHeader title="Resume Analyzer" description="Recruiter-grade feedback and ATS scoring" />
     <div style={{ maxWidth: 820, margin: '0 auto', padding: '32px 24px 80px' }}>
       <div style={{ marginBottom: 28 }}>
