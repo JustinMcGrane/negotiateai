@@ -106,11 +106,44 @@ const softwareSchema = {
   url: 'https://gethayven.com',
 }
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I know if my job offer is competitive?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Enter your offer details into Hayven\'s Offer Evaluator to get a 0–100 score comparing your offer against market benchmarks for your role, level, and city. It breaks down salary, equity, bonus, and benefits so you know exactly what\'s below market and what to push on before you sign.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much should I negotiate my salary by?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Most candidates should counter at the 75th percentile for their role and market, which typically means asking for 10–20% more than the initial offer. Use Hayven\'s Compensation Analyzer to get the exact market rate for your role and city, then anchor your counter to that number.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Will negotiating my salary hurt my chances of getting the offer?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Almost never. Studies show that 85% of people who negotiate their salary get more money, and employers rarely rescind offers because a candidate negotiated professionally. Companies build negotiation room into their initial offers — accepting without countering means leaving money the company already budgeted for you on the table.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What do I say when a recruiter asks my current salary?',
+      acceptedAnswer: { '@type': 'Answer', text: 'You are not required to share your current salary in most US states. A safe response: "I\'d prefer to focus on what the role is worth and what I can bring to it — what\'s the budgeted range for this position?" Sharing your current salary anchors the negotiation to your past pay rather than your market value.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I ask my manager for a raise?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Come prepared with three things: your market rate compared to your current salary, a list of concrete contributions since your last review, and a specific dollar ask. Hayven\'s Raise Request Builder generates a ready-to-present document covering all three, including talking points for common manager objections.' },
+    },
+  ],
+}
+
 export default function LandingPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Top announcement bar */}
       <div style={{ background: '#0f172a', width: '100%', padding: '12px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -158,6 +191,9 @@ export default function LandingPage() {
         <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(40px, 9.5vw, 112px)' }}>
           You Are Worth More.
         </h1>
+        <p style={{ fontSize: 'clamp(16px, 1.8vw, 20px)', color: '#475569', lineHeight: 1.7, maxWidth: 620, margin: '0 auto 12px' }}>
+          Hayven tells you exactly what your role pays at the 25th through 90th percentile for your city and experience level — so you can walk into any salary conversation with data, not guesswork.
+        </p>
         <p style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#2952CC', letterSpacing: '-0.02em', marginBottom: 40 }}>Find out how much — and go get it.</p>
 
         {/* Salary card */}

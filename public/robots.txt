@@ -7,4 +7,17 @@ Disallow: /upgrade
 Disallow: /upgrade/success
 Disallow: /api/
 
+# Explicitly allow AI search crawlers
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: https://gethayven.com/sitemap.xml

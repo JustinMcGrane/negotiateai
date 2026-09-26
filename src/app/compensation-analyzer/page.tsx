@@ -19,6 +19,33 @@ export const metadata: Metadata = {
   },
 }
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I know what salary to ask for?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Look up the 75th percentile for your role, level, and city — that\'s the number to anchor your ask to. Hayven\'s Compensation Analyzer gives you the full p25–p90 range so you know exactly where you stand and what to target in a negotiation.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are national salary averages accurate?',
+      acceptedAnswer: { '@type': 'Answer', text: 'National averages are often misleading because compensation varies dramatically by city. A software engineer in San Francisco earns significantly more than the same role in Austin or Chicago. Always use location-adjusted salary data when preparing for a negotiation.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is a good salary for my role?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A competitive salary is one at or above the 50th percentile (median) for your role, experience level, and city. The 75th percentile is a strong target for negotiation. Hayven\'s Compensation Analyzer shows you all four percentiles — p25, p50, p75, and p90 — so you can see the full market range.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much can I negotiate above the initial offer?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Most initial offers come in at or below the 50th percentile. Candidates who counter at the 75th percentile typically receive 5–20% more than the original offer. The exact amount depends on the role, company size, and how far below market the initial offer is.' },
+    },
+  ],
+}
+
 const benefits = [
   { icon: BarChart2, title: 'Percentile breakdown', desc: 'See what the 25th, 50th, 75th, and 90th percentile looks like for your role — so you know exactly where you stand.' },
   { icon: MapPin, title: 'Location-adjusted', desc: 'Market rates vary dramatically by city. Get numbers specific to your market, not national averages that mislead.' },
@@ -34,6 +61,7 @@ const steps = [
 export default function CompensationAnalyzerPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <header style={{ borderBottom: '0.5px solid #e5e7eb', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: '#fff', zIndex: 50 }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}><Image src="/logo.svg" alt="Hayven" width={190} height={52} style={{ objectFit: 'contain' }} priority /></Link>
         <LandingNav />
@@ -47,8 +75,8 @@ export default function CompensationAnalyzerPage() {
         <h1 style={{ fontSize: 'clamp(36px, 6.5vw, 76px)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: 24, color: '#0f172a', whiteSpace: 'nowrap' }}>
           Find out what you<br /><span style={{ color: '#4169E1' }}>should actually be earning.</span>
         </h1>
-        <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.7, maxWidth: 560, margin: '0 auto 40px' }}>
-          See your market rate at the 25th through 90th percentile for your exact role, level, and location — so you can negotiate from data, not instinct.
+        <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.7, maxWidth: 600, margin: '0 auto 40px' }}>
+          To know what salary to ask for, you need your market rate — the 25th through 90th percentile for your exact role, level, and city. Hayven calculates that number in seconds so you can anchor your counter-offer to data, not instinct. Most candidates who negotiate at the 75th percentile receive 10–20% more than their initial offer.
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}>
           <Link href="/signup" style={{ height: 48, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '0 28px', background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none', boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>Get Started Free <ArrowRight size={15} /></Link>

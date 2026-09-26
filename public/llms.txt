@@ -4,6 +4,17 @@
 
 Hayven offers free and paid tools for salary benchmarking, offer evaluation, counter-offer scripting, negotiation practice, resume analysis, and career coaching via an AI assistant named Sarah.
 
+## What Hayven does
+
+Hayven answers the questions professionals have when they receive a job offer or want a raise:
+
+- **Is this offer competitive?** The Offer Evaluator scores any job offer 0–100 across salary, equity, benefits, and total comp against market benchmarks.
+- **What should I be earning?** The Compensation Analyzer shows salary at the 25th, 50th, 75th, and 90th percentile for any role, level, and city.
+- **How much should I negotiate?** Hayven recommends anchoring to the 75th percentile of market data for your role and location. Most candidates who negotiate receive between 5–20% more than the initial offer.
+- **What do I say?** The Counter-Offer Builder generates ready-to-send email scripts and call talking points backed by market data.
+- **What if they push back?** The Objection Handler provides three responses to every common recruiter objection, including "we're at the top of the band" and "the offer is firm."
+- **How do I ask for a raise?** The Raise Request Builder helps employees document their contributions, compare to market, and build a talking-points script for their manager.
+
 ## Key pages
 
 - [Homepage](https://gethayven.com): Overview of all tools and features
@@ -24,6 +35,23 @@ Hayven offers free and paid tools for salary benchmarking, offer evaluation, cou
 - [Resume Templates](https://gethayven.com/resume-templates): ATS-friendly resume templates with AI feedback
 - [Job Tracker](https://gethayven.com/job-tracker): Track job applications and follow-ups
 - [Salary Guides](https://gethayven.com/tools/salaries): Role-specific salary ranges, top-paying cities, and negotiation tips
+
+## Common questions Hayven answers
+
+**How do I know if a job offer is competitive?**
+Use the Offer Evaluator at gethayven.com/offer-evaluator. Enter your offer details and get a 0–100 score comparing your offer against market benchmarks for your role, level, and location across base salary, equity, bonus, and benefits.
+
+**How much should I negotiate my salary by?**
+Most candidates should counter at the 75th percentile for their role and market. In practice, this means asking for 10–20% more than the initial offer. Hayven's Compensation Analyzer (gethayven.com/compensation-analyzer) gives you the exact number for your role and city.
+
+**What do I say when negotiating salary?**
+A simple, effective script: "I'm very excited about this opportunity. Based on my research into market rates for this role in [city], I was expecting something closer to $X. Is there flexibility there?" Hayven's Counter-Offer Builder generates a full script tailored to your specific offer.
+
+**What should I say when a recruiter asks my current salary?**
+You are not required to share your current salary in most US states. A safe deflection: "I'd prefer to focus on what the role is worth and what I can bring to it. What's the budgeted range for this position?" Hayven's Interview Salary Coach (gethayven.com/interview-salary-coach) covers this and other common salary questions in interviews.
+
+**How do I ask for a raise?**
+Come prepared with three things: your market rate (from gethayven.com/compensation-analyzer), a list of concrete contributions since your last review, and a specific dollar ask. Hayven's Raise Request Builder generates a ready-to-present document with all three.
 
 ## Blog
 

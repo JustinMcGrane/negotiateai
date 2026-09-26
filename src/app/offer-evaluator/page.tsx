@@ -19,6 +19,33 @@ export const metadata: Metadata = {
   },
 }
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I know if a job offer is competitive?',
+      acceptedAnswer: { '@type': 'Answer', text: 'A competitive offer pays at or above the 50th percentile for your role, level, and city — and includes equity and benefits that add up to a strong total compensation package. Hayven\'s Offer Evaluator scores any offer 0–100 across all components so you know exactly where it stands before you respond.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should I negotiate every job offer?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. Employers expect candidates to negotiate and build room into initial offers. Studies show 85% of people who negotiate get more money, and offers are almost never rescinded because a candidate countered professionally. Not negotiating means accepting less than the company already planned to pay you.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What components of a job offer are negotiable?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Base salary, signing bonus, equity (stock options or RSUs), remote work flexibility, start date, PTO, and professional development budget are all commonly negotiable. When base salary is fixed by a salary band, signing bonuses and equity are often the easiest levers to move.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long do I have to respond to a job offer?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Most offers give you 3–7 days to respond. If you need more time, ask for it — a simple "I\'m very excited and want to make sure I review the details carefully; can I have until [date]?" is almost always granted. Never accept or decline under artificial urgency.' },
+    },
+  ],
+}
+
 const benefits = [
   { icon: Scale, title: 'Total comp breakdown', desc: 'Go beyond base salary. See the full picture — equity, bonus, benefits, and perks — in one clear view.' },
   { icon: AlertCircle, title: 'Red flags surfaced', desc: 'Spot the warning signs most candidates miss: vague equity terms, below-market ranges, missing benefits.' },
@@ -34,6 +61,7 @@ const steps = [
 export default function OfferEvaluatorPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <header style={{ borderBottom: '0.5px solid #e5e7eb', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: '#fff', zIndex: 50 }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}><Image src="/logo.svg" alt="Hayven" width={190} height={52} style={{ objectFit: 'contain' }} priority /></Link>
         <LandingNav />
@@ -47,8 +75,8 @@ export default function OfferEvaluatorPage() {
         <h1 style={{ fontSize: 'clamp(36px, 6.5vw, 76px)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', marginBottom: 24, color: '#0f172a', whiteSpace: 'nowrap' }}>
           Is this offer actually<br /><span style={{ color: '#4169E1' }}>worth taking?</span>
         </h1>
-        <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.7, maxWidth: 560, margin: '0 auto 40px' }}>
-          Evaluate any job offer across salary, equity, benefits, and total comp — so you know what to accept, counter, or walk away from.
+        <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.7, maxWidth: 600, margin: '0 auto 40px' }}>
+          A competitive job offer pays at or above the 50th percentile for your role and city — and the base salary is only part of it. Hayven scores your entire offer across salary, equity, bonus, and benefits on a 0–100 scale so you know exactly what&apos;s below market, what to push on, and what to say before you sign.
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}>
           <Link href="/signup" style={{ height: 48, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '0 28px', background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none', boxShadow: '0 3px 10px rgba(239,68,68,0.3)' }}>Get Started Free <ArrowRight size={15} /></Link>
