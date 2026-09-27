@@ -6,7 +6,7 @@ import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
   title: 'Marketing Manager Resume — AI Builder & Templates | Hayven',
-  description: 'Build a marketing manager resume that gets interviews. AI-powered ATS scoring, bullet rewrites, and marketing-specific keyword analysis. Free to start.',
+  description: 'Build a marketing manager resume that gets interviews — then find out what you should be paid. AI-powered ATS scoring, bullet rewrites, and marketing salary benchmarks by city. Free.',
   alternates: { canonical: 'https://gethayven.com/resume-builder/marketing-manager' },
   openGraph: { title: 'Marketing Manager Resume Builder | Hayven', description: 'AI resume builder for marketing managers. ATS scoring, bullet rewrites, and templates.' },
 }
@@ -100,6 +100,38 @@ export default function MarketingManagerResumePage() {
                 <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{t.desc}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Salary bridge section */}
+      <section style={{ padding: '72px 24px' }}>
+        <div style={{ maxWidth: 860, margin: '0 auto' }}>
+          <div style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%)', border: '0.5px solid #bfdbfe', borderRadius: 20, padding: '48px 40px' }}>
+            <div style={{ display: 'inline-block', fontSize: 12, fontWeight: 700, color: '#4169E1', background: '#dbeafe', padding: '4px 12px', borderRadius: 20, marginBottom: 20, letterSpacing: '0.06em' }}>ONCE YOUR RESUME GETS YOU THE INTERVIEW</div>
+            <h2 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', marginBottom: 16 }}>
+              What are marketing managers actually paid?
+            </h2>
+            <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.75, maxWidth: 580, marginBottom: 32 }}>
+              A strong resume gets you to the offer. Knowing your market rate is what gets you paid what you&apos;re worth. Marketing managers in the US earn between $85K–$155K depending on city, level, and company size — but the 75th percentile for your specific market is the number to anchor your negotiation to.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 16, marginBottom: 36 }}>
+              {[
+                { city: 'San Francisco', range: '$115K–$155K' },
+                { city: 'New York', range: '$105K–$145K' },
+                { city: 'Austin', range: '$88K–$120K' },
+                { city: 'Chicago', range: '$90K–$125K' },
+              ].map(({ city, range }) => (
+                <div key={city} style={{ background: '#fff', border: '0.5px solid #e2e8f0', borderRadius: 12, padding: '16px 20px' }}>
+                  <div style={{ fontSize: 13, color: '#64748b', marginBottom: 4 }}>{city}</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a' }}>{range}</div>
+                </div>
+              ))}
+            </div>
+            <Link href="/compensation-analyzer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#4169E1', color: '#fff', padding: '12px 28px', borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}>
+              See Your Exact Market Rate <ArrowRight size={14} />
+            </Link>
+            <p style={{ fontSize: 13, color: '#94a3b8', marginTop: 12 }}>Free · Based on your role, level, and city</p>
           </div>
         </div>
       </section>
