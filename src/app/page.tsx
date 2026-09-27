@@ -191,9 +191,6 @@ export default function LandingPage() {
         <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(40px, 9.5vw, 112px)' }}>
           You Are Worth More.
         </h1>
-        <p style={{ fontSize: 'clamp(16px, 1.8vw, 20px)', color: '#475569', lineHeight: 1.7, maxWidth: 620, margin: '0 auto 12px' }}>
-          Hayven tells you exactly what your role pays at the 25th through 90th percentile for your city and experience level — so you can walk into any salary conversation with data, not guesswork.
-        </p>
         <p style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#2952CC', letterSpacing: '-0.02em', marginBottom: 40 }}>Find out how much — and go get it.</p>
 
         {/* Salary card */}
