@@ -24,6 +24,24 @@ export const SALARY_ROLES: SalaryRole[] = [
     category: 'Aviation',
     context: 'Focus on airline seniority systems, per-diem pay, union contracts, and domestic vs international routes.',
   },
+  {
+    slug: 'dental-hygienist',
+    title: 'Dental Hygienist',
+    category: 'Healthcare',
+    context: 'Focus on full-time vs part-time practice, private vs DSO pay differences, geographic variation, and commission-based bonus structures at some practices.',
+  },
+  {
+    slug: 'actuary',
+    title: 'Actuary',
+    category: 'Finance',
+    context: 'Focus on exam progression (ASA vs FSA/ACAS/FCAS), how each passed exam raises salary, and differences between P&C, life, health, and pension actuaries.',
+  },
+  {
+    slug: 'pharmacist',
+    title: 'Pharmacist',
+    category: 'Healthcare',
+    context: 'Focus on retail vs hospital vs clinical pharmacy pay gaps, PharmD sign-on bonuses, and how board certifications (BCPS, BCACP) increase earnings.',
+  },
 ]
 
 export function getRoleBySlug(slug: string): SalaryRole | undefined {
