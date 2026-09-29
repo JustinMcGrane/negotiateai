@@ -150,6 +150,30 @@ export const SALARY_ROLES: SalaryRole[] = [
     category: 'Healthcare',
     context: 'Focus on PhD/PsyD licensure differences, private practice vs community mental health vs university counseling center pay, insurance panel reimbursement rates, and telehealth impact on caseload capacity.',
   },
+  {
+    slug: 'compensation-analyst',
+    title: 'Compensation Analyst',
+    category: 'Human Resources',
+    context: 'Focus on HR/total rewards career progression, CCP certification premium, tech vs traditional industry pay differences, and how compensation analytics skills (SQL, Radford, Mercer) command higher salaries.',
+  },
+  {
+    slug: 'underwater-welder',
+    title: 'Underwater Welder',
+    category: 'Trades',
+    context: 'Focus on offshore vs inland diving distinction, saturation diving premium, hazard pay and depth pay structures, AWS and ADCI certification requirements, and how short career windows affect lifetime earnings calculations.',
+  },
+  {
+    slug: 'anesthesiologist',
+    title: 'Anesthesiologist',
+    category: 'Healthcare',
+    context: 'Focus on employed vs private practice vs locum tenens pay structures, CRNA supervision ratio impact on workload, subspecialty premiums (cardiac, pediatric, pain management), and geographic market variation.',
+  },
+  {
+    slug: 'nurse-practitioner',
+    title: 'Nurse Practitioner',
+    category: 'Healthcare',
+    context: 'Focus on full-practice-authority states vs restricted states salary differences, primary care vs specialty NP pay gaps, collaborating physician fee impact, and how DNP vs MSN affects compensation.',
+  },
 ]
 
 export function getRoleBySlug(slug: string): SalaryRole | undefined {
