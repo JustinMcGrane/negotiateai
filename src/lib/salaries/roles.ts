@@ -42,6 +42,30 @@ export const SALARY_ROLES: SalaryRole[] = [
     category: 'Healthcare',
     context: 'Focus on retail vs hospital vs clinical pharmacy pay gaps, PharmD sign-on bonuses, and how board certifications (BCPS, BCACP) increase earnings.',
   },
+  {
+    slug: 'air-traffic-controller',
+    title: 'Air Traffic Controller',
+    category: 'Government',
+    context: 'Focus on FAA pay bands (D through CPC), facility level (TRACON vs ARTCC vs tower), federal benefits package, and mandatory retirement at 56.',
+  },
+  {
+    slug: 'iron-worker',
+    title: 'Iron Worker',
+    category: 'Trades',
+    context: 'Focus on union vs non-union pay (IABSW locals), prevailing wage on public projects, structural vs reinforcing vs ornamental specializations, and overtime-heavy compensation.',
+  },
+  {
+    slug: 'neurosurgeon',
+    title: 'Neurosurgeon',
+    category: 'Healthcare',
+    context: 'Focus on the exceptionally long training path (14+ years), academic vs private practice pay, RVU-based compensation models, and subspecialty premiums (spine, pediatric, skull base).',
+  },
+  {
+    slug: 'mental-health-counselor',
+    title: 'Mental Health Counselor',
+    category: 'Healthcare',
+    context: 'Focus on LPC/LMHC licensure requirements, private practice vs agency pay gaps, telehealth rate expansion, and how supervision hours affect early-career earnings.',
+  },
 ]
 
 export function getRoleBySlug(slug: string): SalaryRole | undefined {
