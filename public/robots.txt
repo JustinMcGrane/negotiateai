@@ -3,7 +3,6 @@ Allow: /
 
 # Block auth and transactional pages
 Disallow: /onboarding
-Disallow: /upgrade
 Disallow: /upgrade/success
 Disallow: /api/
 
