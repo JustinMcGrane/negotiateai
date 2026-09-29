@@ -56,5 +56,15 @@ Return this exact JSON structure with realistic US compensation data (salaries i
   const text = msg.content[0].type === 'text' ? msg.content[0].text : ''
   const match = text.match(/\{[\s\S]*\}/)
   if (!match) throw new Error('No JSON in response')
-  return JSON.parse(match[0]) as SalaryData
+  const parsed = JSON.parse(match[0]) as Partial<SalaryData>
+  return {
+    p25: parsed.p25 ?? 0,
+    p50: parsed.p50 ?? 0,
+    p75: parsed.p75 ?? 0,
+    p90: parsed.p90 ?? 0,
+    insight: parsed.insight ?? '',
+    negotiationTip: parsed.negotiationTip ?? '',
+    topPayingCities: Array.isArray(parsed.topPayingCities) ? parsed.topPayingCities : [],
+    topPayingIndustries: Array.isArray(parsed.topPayingIndustries) ? parsed.topPayingIndustries : [],
+  }
 }
