@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Sparkles, CheckCircle, AlertCircle, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react'
 import { ClientPageHeader } from '@/components/negotiate/ClientPageHeader'
 import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
+import posthog from 'posthog-js'
 
 type SectionScore = { name: string; score: number; feedback: string }
 type BulletRewrite = { original: string; rewritten: string; reason: string }
@@ -136,11 +137,13 @@ export default function ResumePage() {
         body: JSON.stringify({ resumeText: text, targetRole: jobTitle, jobDescription: jobDesc }),
       })
       if (res.status === 429 || res.status === 403) {
+        posthog.capture('upgrade_modal_shown', { feature: 'resume' })
         setShowUpgradeModal(true)
         return
       }
       if (!res.ok) throw new Error()
       const data = await res.json()
+      posthog.capture('resume_analyzed', { score: data.overallScore })
       setAnalysis(data)
     } catch {
       setError('Analysis failed. Please try again.')

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Sparkles, Copy, Check } from 'lucide-react'
 import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
+import posthog from 'posthog-js'
 
 export default function CoverLetterPage() {
   const [jobTitle, setJobTitle] = useState('')
@@ -27,10 +28,12 @@ export default function CoverLetterPage() {
         body: JSON.stringify({ jobTitle, company, jobDesc, resume, tone }),
       })
       if (res.status === 429 || res.status === 403) {
+        posthog.capture('upgrade_modal_shown', { feature: 'cover-letter' })
         setShowUpgradeModal(true)
         return
       }
       const data = await res.json()
+      posthog.capture('cover_letter_generated', { company, tone })
       setLetter(data.letter || '')
     } catch {
       setError('Generation failed. Please try again.')

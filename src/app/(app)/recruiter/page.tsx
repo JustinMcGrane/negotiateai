@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, Suspense } from 'react'
 import { Send, Briefcase, Sparkles, ChevronDown, ChevronUp, Brain } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
+import posthog from 'posthog-js'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
@@ -103,6 +104,7 @@ function RecruiterPageInner() {
         setLimitReached(true)
         setUsed(FREE_LIMIT)
         if (data.upgradeHook) setUpgradeHook(data.upgradeHook)
+        posthog.capture('upgrade_modal_shown', { feature: 'recruiter' })
         setShowUpgradeModal(true)
         return
       }
@@ -113,6 +115,7 @@ function RecruiterPageInner() {
       }
 
       if (data.used !== undefined) setUsed(data.used)
+      posthog.capture('sarah_message_sent', { message_count: data.used ?? 0 })
 
       if (data.isPro && !isPro) {
         setIsPro(true)
