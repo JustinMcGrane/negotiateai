@@ -5,6 +5,7 @@ import {
   TrendingUp, BookOpen, Play, FileSearch,
   Calculator, DollarSign, Mail, Shield, PenLine, MessageSquare,
   UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowRight,
+  CheckCircle,
 } from 'lucide-react'
 import { LandingNav } from '@/components/negotiate/LandingNav'
 import { FAQ } from '@/components/negotiate/FAQ'
