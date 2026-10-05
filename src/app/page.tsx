@@ -2,10 +2,11 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { NewsletterForm } from '@/components/negotiate/NewsletterForm'
+import HeroCheckWidget from './HeroCheckWidget'
 import {
   TrendingUp, BookOpen, Play, FileSearch,
   Calculator, DollarSign, Mail, Shield, PenLine, MessageSquare,
-  UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowRight, Star,
+  UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowRight, CheckCircle,
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -40,12 +41,6 @@ const negotiationTools = [
   { icon: MessageSquare, color: '#141414', bg: '#f0f0f0', name: 'Interview Salary Coach', desc: 'Real-time coaching on how to answer salary questions at every stage of the interview process.' },
 ]
 
-const testimonials = [
-  { name: 'Priya S.', role: 'Senior Software Engineer', result: '+$18K base salary', quote: 'Sarah spotted three things wrong with my resume in two minutes that I had never noticed. Fixed them, applied to 8 roles, got 5 callbacks.' },
-  { name: 'Marcus J.', role: 'Product Manager', result: '+$12K + signing bonus', quote: 'The negotiation simulator felt eerily real. I practiced against the tough recruiter persona three times before my actual call. It worked.' },
-  { name: 'Elena V.', role: 'Data Scientist', result: '31st → 74th percentile', quote: 'The comp analyzer showed me exactly how underpaid I was. Six months later I negotiated a 28% raise at the same company.' },
-  { name: 'James T.', role: 'Sales Director', result: '+$25K total comp', quote: 'I uploaded my resume, got the score (54 — ouch), followed every suggestion, and landed three final-round interviews the next week.' },
-]
 
 export default function LandingPage() {
   return (
@@ -78,65 +73,44 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section style={{
-        maxWidth: 760, margin: '0 auto',
-        padding: '96px 24px 80px',
-        textAlign: 'center',
+        background: ‘linear-gradient(160deg, #0f172a 0%, #1e293b 100%)’,
+        padding: ‘64px 24px 72px’,
       }}>
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 6,
-          background: '#f0fdf4', border: '1px solid #bbf7d0',
-          borderRadius: 20, padding: '5px 14px', marginBottom: 28,
-        }}>
-          <Star size={12} color="#16a34a" fill="#16a34a" />
-          <span style={{ fontSize: 12, color: '#15803d', fontWeight: 600 }}>Your personal AI career platform</span>
-        </div>
-
-        <h1 style={{
-          fontSize: 'clamp(32px, 5.5vw, 52px)',
-          fontWeight: 800, lineHeight: 1.15,
-          letterSpacing: '-0.03em', marginBottom: 24,
-          color: '#0f172a',
-        }}>
-          Land the job.<br />
-          Negotiate the offer.<br />
-          <span style={{ whiteSpace: 'nowrap' }}>Get paid what you&apos;re <span style={{ display: 'inline-block', background: '#1D6FD1', color: '#fff', borderRadius: 10, padding: '2px 18px 8px' }}>worth.</span></span>
-        </h1>
-
-        <p style={{
-          fontSize: 18, color: '#475569', lineHeight: 1.7,
-          marginBottom: 40, maxWidth: 580, margin: '0 auto 40px',
-        }}>
-          Hayven gives you an AI recruiter, resume analyzer, job search, cover letter generator, and 10 negotiation tools — everything you need to take control of your career.
-        </p>
-
-        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 56 }}>
-          <Link href="/signup" style={{
-            height: 48, display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '0 28px', background: '#141414', color: '#fff',
-            borderRadius: 10, fontSize: 15, fontWeight: 600, textDecoration: 'none',
-          }}>
-            Start for free <ArrowRight size={15} />
-          </Link>
-          <Link href="#features" style={{
-            height: 48, display: 'inline-flex', alignItems: 'center',
-            padding: '0 24px', background: 'transparent', color: '#374151',
-            border: '1px solid #d1d5db', borderRadius: 10, fontSize: 15, textDecoration: 'none',
-          }}>
-            See what’s inside
-          </Link>
-        </div>
-
-        <div style={{ display: 'flex', gap: 40, justifyContent: 'center', flexWrap: 'wrap' }}>
-          {[
-            { stat: '$18K+', label: 'average negotiation gain' },
-            { stat: '15+', label: 'AI-powered career tools' },
-            { stat: '100%', label: 'free to start' },
-          ].map(s => (
-            <div key={s.stat} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
-              <div style={{ fontSize: 13, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
+        <div style={{ maxWidth: 920, margin: ‘0 auto’, display: ‘grid’, gridTemplateColumns: ‘repeat(auto-fit, minmax(300px, 1fr))’, gap: 48, alignItems: ‘center’ }}>
+          <div>
+            <div style={{
+              display: ‘inline-flex’, alignItems: ‘center’, gap: 6,
+              background: ‘rgba(37,99,235,0.2)’, border: ‘1px solid rgba(37,99,235,0.35)’,
+              borderRadius: 20, padding: ‘5px 14px’, marginBottom: 24,
+            }}>
+              <span style={{ fontSize: 12, color: ‘#93c5fd’, fontWeight: 600 }}>Free salary check</span>
             </div>
-          ))}
+            <h1 style={{
+              fontSize: ‘clamp(30px, 5vw, 48px)’,
+              fontWeight: 900, lineHeight: 1.15,
+              letterSpacing: ‘-0.03em’, marginBottom: 18,
+              color: ‘#fff’,
+            }}>
+              Are you underpaid?<br />
+              <span style={{ color: ‘#93c5fd’ }}>Find out in 30 seconds.</span>
+            </h1>
+            <p style={{ fontSize: 16, color: ‘#94a3b8’, lineHeight: 1.75, marginBottom: 28 }}>
+              Enter your job title and see what the market pays. Free, no signup needed.
+            </p>
+            <div style={{ display: ‘flex’, flexDirection: ‘column’, gap: 11 }}>
+              {[
+                ‘See if you\’re paid below market’,
+                ‘See how much more you could ask for’,
+                ‘Get a script for the conversation’,
+              ].map(item => (
+                <div key={item} style={{ display: ‘flex’, alignItems: ‘center’, gap: 10, fontSize: 14, color: ‘#cbd5e1’ }}>
+                  <CheckCircle size={15} color="#34d399" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+          <HeroCheckWidget />
         </div>
       </section>
 
@@ -280,35 +254,6 @@ export default function LandingPage() {
                   <div style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', marginBottom: 3 }}>{name}</div>
                   <div style={{ fontSize: 12, color: '#64748b', lineHeight: 1.5 }}>{desc}</div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section style={{ background: '#f8fafc', padding: '80px 24px' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(22px, 4vw, 34px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', margin: '0 0 10px' }}>
-              Real results from real people
-            </h2>
-            <p style={{ fontSize: 15, color: '#64748b' }}>Not motivational quotes. Actual outcomes.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
-            {testimonials.map(t => (
-              <div key={t.name} style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 14, padding: 24 }}>
-                <div style={{
-                  display: 'inline-block',
-                  background: '#ecfdf5', color: '#059669',
-                  fontSize: 13, fontWeight: 700,
-                  borderRadius: 6, padding: '4px 10px', marginBottom: 14,
-                }}>
-                  {t.result}
-                </div>
-                <p style={{ fontSize: 13, color: '#475569', lineHeight: 1.7, marginBottom: 16 }}>&ldquo;{t.quote}&rdquo;</p>
-                <div style={{ fontSize: 13, fontWeight: 600, color: '#0f172a' }}>{t.name}</div>
-                <div style={{ fontSize: 12, color: '#94a3b8' }}>{t.role}</div>
               </div>
             ))}
           </div>
