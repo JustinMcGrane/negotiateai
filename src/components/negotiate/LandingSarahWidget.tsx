@@ -1,7 +1,15 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle } from 'lucide-react'
+
+const SAMPLE_RESULTS = [
+  { title: 'Senior Product Manager', location: 'San Francisco, CA', gap: 24000, color: '#ef4444' },
+  { title: 'Software Engineer', location: 'Austin, TX', gap: 18000, color: '#ef4444' },
+  { title: 'Marketing Manager', location: 'New York, NY', gap: 31000, color: '#ef4444' },
+]
+
+const GAP_AMOUNTS = ['$12K gap', '$31K gap', '$8K gap', '$22K gap', '$19K gap']
 
 type Step = 'form' | 'loading' | 'result'
 
@@ -24,6 +32,12 @@ export function LandingSarahWidget() {
   const [salary, setSalary] = useState('')
   const [result, setResult] = useState<WorthResult | null>(null)
   const [error, setError] = useState('')
+  const [gapIdx, setGapIdx] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => setGapIdx(i => (i + 1) % GAP_AMOUNTS.length), 1800)
+    return () => clearInterval(t)
+  }, [])
 
   async function analyze() {
     const salaryNum = Number(salary.replace(/[^0-9]/g, ''))
@@ -113,9 +127,12 @@ export function LandingSarahWidget() {
         {/* Right: interactive widget */}
         <div style={{ background: '#1e293b', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 24px 60px rgba(0,0,0,0.4)' }}>
           {/* Widget header */}
-          <div style={{ background: '#0f172a', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981' }} />
-            <span style={{ fontSize: 13, fontWeight: 600, color: '#e2e8f0' }}>Check My Market Value</span>
+          <div style={{ background: '#0f172a', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981', animation: 'pulse 1.8s infinite' }} />
+              <span style={{ fontSize: 13, fontWeight: 600, color: '#e2e8f0' }}>Check My Market Value</span>
+            </div>
+            <span style={{ fontSize: 11, color: '#475569', fontWeight: 500 }}>↑ 3,241 checks this week</span>
           </div>
 
           <div style={{ padding: '24px 20px' }}>
@@ -167,10 +184,33 @@ export function LandingSarahWidget() {
                     color: !title.trim() || !salary.trim() ? '#475569' : '#fff',
                     fontSize: 14, fontWeight: 700, cursor: !title.trim() || !salary.trim() ? 'default' : 'pointer',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                    transition: 'background 0.2s',
                   }}
                 >
-                  See if I&apos;m underpaid <ArrowRight size={14} />
+                  {!title.trim() || !salary.trim()
+                    ? <><span style={{ transition: 'opacity 0.4s' }}>Find your {GAP_AMOUNTS[gapIdx]}</span> <ArrowRight size={14} /></>
+                    : <>See if I&apos;m underpaid <ArrowRight size={14} /></>
+                  }
                 </button>
+
+                {/* Blurred sample results teaser */}
+                <div style={{ marginTop: 16, borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 14 }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: '#334155', letterSpacing: '0.08em', marginBottom: 10, textTransform: 'uppercase' }}>Recent results</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+                    {SAMPLE_RESULTS.map((r, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', filter: 'blur(3.5px)', userSelect: 'none', pointerEvents: 'none' }}>
+                        <div>
+                          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0' }}>{r.title}</div>
+                          <div style={{ fontSize: 11, color: '#64748b' }}>{r.location}</div>
+                        </div>
+                        <div style={{ fontSize: 13, fontWeight: 800, color: r.color }}>${Math.round(r.gap / 1000)}K gap</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ textAlign: 'center', marginTop: 10, fontSize: 11, color: '#475569' }}>
+                    Submit your info to see your result
+                  </div>
+                </div>
               </>
             )}
 
