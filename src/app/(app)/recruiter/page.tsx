@@ -1,19 +1,17 @@
 'use client'
-import { useState, useRef, useEffect, Suspense } from 'react'
-import { Send, Briefcase, Sparkles, ChevronDown, ChevronUp, Brain } from 'lucide-react'
-import { useSearchParams } from 'next/navigation'
-import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
-import posthog from 'posthog-js'
+import { useState, useRef, useEffect } from 'react'
+import { Send, Briefcase, Sparkles, Lock, ChevronDown, ChevronUp, Brain } from 'lucide-react'
+import Link from 'next/link'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
-const FREE_LIMIT = 10
+const FREE_LIMIT = 20
 
-const FREE_INTRO = `Hey! I'm Sarah, your personalized career coach, here to help you accomplish your goals and get the most out of the platform!
+const FREE_INTRO = `Hey! I'm Sarah, your personal recruiting assistant, here to help you accomplish your goals and help you navigate the platform to get as much out of it as possible!
 
 What are you working on right now?`
 
-const PRO_INTRO = `Hey! I'm Sarah, your personalized career coach, here to help you accomplish your goals and get the most out of the platform!
+const PRO_INTRO = `Hey! I'm Sarah, your personal recruiting assistant, here to help you accomplish your goals and help you navigate the platform to get as much out of it as possible!
 
 I've got your profile pulled up and I'm ready to dig in. I can run mock interviews, coach you through a negotiation, review your resume, or help you figure out your next move. I'll remember everything we talk about so you never have to repeat yourself.
 
@@ -35,23 +33,17 @@ const PRO_STARTERS = [
   { label: 'Career pivot', prompt: 'I\'m thinking about pivoting careers. Help me figure out if it makes sense and how to position myself.' },
 ]
 
-function RecruiterPageInner() {
+export default function RecruiterPage() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [used, setUsed] = useState(0)
   const [limitReached, setLimitReached] = useState(false)
-  const [upgradeHook, setUpgradeHook] = useState<string | undefined>()
-  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
   const [isPro, setIsPro] = useState(false)
   const [memory, setMemory] = useState<Record<string, string>>({})
   const [showMemory, setShowMemory] = useState(false)
   const [initialized, setInitialized] = useState(false)
-  const [userHasSent, setUserHasSent] = useState(false)
-  const [checkinTriggered, setCheckinTriggered] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
-  const searchParams = useSearchParams()
-  const isCheckin = searchParams.get('checkin') === 'true'
 
   useEffect(() => {
     async function init() {
@@ -71,23 +63,14 @@ function RecruiterPageInner() {
   }, [])
 
   useEffect(() => {
-    if (!initialized || !isCheckin || checkinTriggered) return
-    setCheckinTriggered(true)
-    const checkinMsg = "I'd like to do my quarterly check-in. Can you help me review my progress and update my career strategy?"
-    setTimeout(() => send(checkinMsg), 500)
-  }, [initialized, isCheckin, checkinTriggered]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (!userHasSent) return
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages, userHasSent])
+  }, [messages])
 
   async function send(text?: string) {
     const content = (text ?? input).trim()
     if (!content || loading || limitReached) return
     const userMsg: Message = { role: 'user', content }
     setMessages(prev => [...prev, userMsg])
-    setUserHasSent(true)
     setInput('')
     setLoading(true)
 
@@ -98,41 +81,69 @@ function RecruiterPageInner() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: allMessages }),
       })
-      const data = await res.json()
 
       if (res.status === 429) {
         setLimitReached(true)
         setUsed(FREE_LIMIT)
-        if (data.upgradeHook) setUpgradeHook(data.upgradeHook)
-        posthog.capture('upgrade_modal_shown', { feature: 'recruiter' })
-        setShowUpgradeModal(true)
         return
       }
 
-      if (!res.ok) {
-        setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, I ran into an issue. Please try again in a moment." }])
-        return
-      }
+      // Add empty assistant message to stream into
+      setMessages(prev => [...prev, { role: 'assistant', content: '' }])
+      setLoading(false)
 
-      if (data.used !== undefined) setUsed(data.used)
-      posthog.capture('sarah_message_sent', { message_count: data.used ?? 0 })
+      const reader = res.body!.getReader()
+      const decoder = new TextDecoder()
+      let buffer = ''
 
-      if (data.isPro && !isPro) {
-        setIsPro(true)
-        // Refresh memory
-        fetch('/api/sarah-memory').then(r => r.json()).then(d => setMemory(d.memory ?? {}))
-        // Replace intro with Pro intro if first exchange
-        if (messages.length === 1) {
-          setMessages([
-            { role: 'assistant', content: PRO_INTRO },
-            userMsg,
-            { role: 'assistant', content: data.content },
-          ])
-          return
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        buffer += decoder.decode(value, { stream: true })
+        const lines = buffer.split('\n')
+        buffer = lines.pop() ?? ''
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue
+          try {
+            const parsed = JSON.parse(line.slice(6))
+
+            if (parsed.text) {
+              setMessages(prev => {
+                const updated = [...prev]
+                updated[updated.length - 1] = {
+                  role: 'assistant',
+                  content: updated[updated.length - 1].content + parsed.text,
+                }
+                return updated
+              })
+            }
+
+            if (parsed.done) {
+              if (parsed.used !== undefined) setUsed(parsed.used)
+              // Use the clean content (strips assessment signal etc)
+              setMessages(prev => {
+                const updated = [...prev]
+                updated[updated.length - 1] = { role: 'assistant', content: parsed.content }
+                return updated
+              })
+              if (parsed.isPro && !isPro) {
+                setIsPro(true)
+                fetch('/api/sarah-memory').then(r => r.json()).then(d => setMemory(d.memory ?? {}))
+              }
+            }
+
+            if (parsed.error) {
+              setMessages(prev => {
+                const updated = [...prev]
+                updated[updated.length - 1] = { role: 'assistant', content: 'Something went wrong. Please try again.' }
+                return updated
+              })
+            }
+          } catch {}
         }
       }
-
-      setMessages(prev => [...prev, { role: 'assistant', content: data.content }])
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
       setMessages(prev => [...prev, { role: 'assistant', content: `Error: ${msg}` }])
@@ -143,9 +154,6 @@ function RecruiterPageInner() {
 
   function renderContent(text: string) {
     return text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\n/g, '<br />')
   }
@@ -163,9 +171,10 @@ function RecruiterPageInner() {
     challenges: 'Challenges',
   }
 
+  if (!initialized) return null
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', maxWidth: 800, margin: '0 auto', padding: '0 24px', overflow: 'hidden' }} data-component="recruiter-page">
-      {showUpgradeModal && <UpgradeModal upgradeHook={upgradeHook} onClose={() => setShowUpgradeModal(false)} />}
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', maxWidth: 800, margin: '0 auto', padding: '0 24px' }}>
       {/* Header */}
       <div style={{ padding: '24px 0 16px', borderBottom: '0.5px solid var(--color-border-tertiary)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -184,11 +193,11 @@ function RecruiterPageInner() {
                 background: isPro ? 'linear-gradient(135deg, #667eea, #764ba2)' : '#10b981',
                 color: '#fff', borderRadius: 4, padding: '2px 6px', fontWeight: 600,
               }}>
-                {isPro ? 'PRO COACH' : 'CAREER COACH'}
+                {isPro ? 'PRO COACH' : 'AI RECRUITER'}
               </span>
             </div>
             <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: 0 }}>
-              Your personalized career coach
+              Your personal recruiting assistant
             </p>
           </div>
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -209,7 +218,7 @@ function RecruiterPageInner() {
             )}
             {used > 0 && !limitReached && !isPro && (
               <span style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>
-                {remaining} free messages left
+                {remaining} left this month
               </span>
             )}
             <Sparkles size={16} color="#f59e0b" />
@@ -239,24 +248,6 @@ function RecruiterPageInner() {
 
       {/* Messages */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '20px 0', display: 'flex', flexDirection: 'column', gap: 16 }}>
-        {!initialized && (
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-            <div style={{
-              width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <Briefcase size={13} color="#fff" />
-            </div>
-            <div style={{
-              background: 'var(--color-background-secondary)',
-              border: '0.5px solid var(--color-border-tertiary)',
-              borderRadius: '18px 18px 18px 4px',
-              padding: '12px 16px', width: 220, height: 44,
-              opacity: 0.5,
-            }} />
-          </div>
-        )}
         {messages.map((msg, i) => (
           <div key={i} style={{ display: 'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
             {msg.role === 'assistant' && (
@@ -351,21 +342,38 @@ function RecruiterPageInner() {
       {/* Input / Limit */}
       {limitReached ? (
         <div style={{ padding: '20px 0 24px', borderTop: '0.5px solid var(--color-border-tertiary)' }}>
-          <button
-            onClick={() => setShowUpgradeModal(true)}
-            style={{
-              width: '100%',
-              background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
-              color: '#fff', border: 'none', borderRadius: 10,
-              padding: '14px 20px', fontSize: 14, fontWeight: 700,
-              cursor: 'pointer', textAlign: 'center',
-            }}
-          >
-            Get Started Free
-          </button>
-          <p style={{ fontSize: 11, color: 'var(--color-text-tertiary)', textAlign: 'center', marginTop: 8 }}>
-            You&apos;ve used your 10 free messages · Upgrade for unlimited access
-          </p>
+          <div style={{
+            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+            border: '1px solid rgba(102,126,234,0.3)',
+            borderRadius: 12, padding: '20px 24px',
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{
+                width: 36, height: 36, borderRadius: '50%',
+                background: 'rgba(102,126,234,0.2)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              }}>
+                <Lock size={16} color="#667eea" />
+              </div>
+              <div>
+                <p style={{ margin: 0, fontWeight: 600, fontSize: 14, color: '#fff' }}>
+                  You've used all {FREE_LIMIT} free messages this month
+                </p>
+                <p style={{ margin: '2px 0 0', fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>
+                  Upgrade to Pro for unlimited coaching with Sarah
+                </p>
+              </div>
+            </div>
+            <Link href="/account/billing" style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: '#fff', textDecoration: 'none',
+              borderRadius: 8, padding: '10px 20px',
+              fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0,
+            }}>
+              Upgrade to Pro
+            </Link>
+          </div>
         </div>
       ) : (
         <div style={{ padding: '12px 0 24px' }}>
@@ -410,13 +418,5 @@ function RecruiterPageInner() {
         </div>
       )}
     </div>
-  )
-}
-
-export default function RecruiterPage() {
-  return (
-    <Suspense fallback={<div style={{ padding: 40 }}>Loading…</div>}>
-      <RecruiterPageInner />
-    </Suspense>
   )
 }
