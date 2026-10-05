@@ -191,7 +191,14 @@ export default function LandingPage() {
         <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(40px, 9.5vw, 112px)' }}>
           Are You Underpaid?
         </h1>
-        <p style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 800, color: '#2952CC', letterSpacing: '-0.02em', marginBottom: 40 }}>Find out your market value — and go get it.</p>
+        <p style={{ fontSize: 'clamp(18px, 2.2vw, 24px)', fontWeight: 700, color: '#2952CC', letterSpacing: '-0.02em', marginBottom: 20 }}>Find out in 30 seconds — free.</p>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 50, padding: '10px 20px 10px 14px', marginBottom: 40 }}>
+          <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'linear-gradient(135deg, #667eea, #764ba2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, color: '#fff', flexShrink: 0 }}>M</div>
+          <div style={{ textAlign: 'left' }}>
+            <div style={{ fontSize: 13, color: '#374151', fontStyle: 'italic', lineHeight: 1.4 }}>&ldquo;Found out I was $42K below market. Got the raise in two weeks.&rdquo;</div>
+            <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2, fontWeight: 500 }}>— Michael T., Product Manager</div>
+          </div>
+        </div>
 
         {/* Salary card */}
         <div style={{
