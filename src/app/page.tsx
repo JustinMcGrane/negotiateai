@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { NewsletterForm } from '@/components/negotiate/NewsletterForm'
+import { FAQ } from '@/components/negotiate/FAQ'
 import HeroCheckWidget from './HeroCheckWidget'
 import {
   TrendingUp, BookOpen, Play, FileSearch,
@@ -340,36 +340,187 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Early Access */}
-      <section style={{ padding: '80px 24px', background: '#0f172a' }}>
-        <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ display: 'inline-block', fontSize: 12, fontWeight: 700, color: '#f59e0b', background: 'rgba(245,158,11,0.15)', padding: '4px 12px', borderRadius: 20, letterSpacing: '0.08em', marginBottom: 20 }}>
-            LIMITED — FIRST 1,000 MEMBERS ONLY
+      <FAQ />
+
+      {/* Resume guides by role */}
+      <section style={{ padding: '96px 24px', background: '#f8fafc' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 38px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', marginBottom: 14 }}>
+              Resume guides by role
+            </h2>
+            <p style={{ fontSize: 17, color: '#64748b', maxWidth: 520, margin: '0 auto', lineHeight: 1.7 }}>
+              Step-by-step resume breakdowns for the roles that matter most — with real examples and the exact metrics hiring managers want to see.
+            </p>
           </div>
-          <h2 style={{ fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 12px', lineHeight: 1.2 }}>
-            Lock in Pro at $15/month — forever.
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
+            <Link href="/blog/software-engineer-resume" style={{ textDecoration: 'none' }}>
+              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 16, overflow: 'hidden', cursor: 'pointer' }}>
+                <div style={{ background: '#1e293b', padding: '24px 20px', position: 'relative' }}>
+                  <div style={{ background: '#fff', borderRadius: 8, padding: '16px 14px', fontSize: 9, lineHeight: 1.6, color: '#334155', fontFamily: 'monospace' }}>
+                    <div style={{ fontWeight: 800, fontSize: 11, color: '#0f172a', marginBottom: 2 }}>Jordan Lee</div>
+                    <div style={{ color: '#64748b', marginBottom: 8, fontSize: 8 }}>jordan@email.com · github.com/jlee · linkedin.com/in/jlee</div>
+                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6, marginBottom: 6 }}>
+                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Skills</div>
+                      <div style={{ color: '#475569' }}>Python · TypeScript · React · Node.js · AWS · Docker · Postgres</div>
+                    </div>
+                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6 }}>
+                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Experience</div>
+                      <div style={{ fontWeight: 700, fontSize: 9, color: '#0f172a' }}>Senior Software Engineer · Stripe</div>
+                      <div style={{ color: '#64748b', marginBottom: 4, fontSize: 8 }}>2022 – Present</div>
+                      <div style={{ color: '#475569' }}>• Reduced API latency by 40%, cutting p99 from 800ms to 480ms</div>
+                      <div style={{ color: '#475569' }}>• Built real-time pipeline processing 2M events/day with Kafka</div>
+                    </div>
+                  </div>
+                  <div style={{ position: 'absolute', top: 12, right: 12, background: '#6366f1', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20 }}>ATS ✓</div>
+                </div>
+                <div style={{ padding: '20px 22px 24px' }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#6366f1', marginBottom: 6 }}>Software Engineer</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>Resume guide &amp; examples</div>
+                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6, marginBottom: 16 }}>How to structure your tech stack, write impact-driven bullets, and pass ATS screening.</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 600, color: '#6366f1' }}>Read guide <ArrowRight size={14} /></div>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/blog/account-executive-resume" style={{ textDecoration: 'none' }}>
+              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 16, overflow: 'hidden', cursor: 'pointer' }}>
+                <div style={{ background: '#1e293b', padding: '24px 20px', position: 'relative' }}>
+                  <div style={{ background: '#fff', borderRadius: 8, padding: '16px 14px', fontSize: 9, lineHeight: 1.6, color: '#334155', fontFamily: 'monospace' }}>
+                    <div style={{ fontWeight: 800, fontSize: 11, color: '#0f172a', marginBottom: 2 }}>Morgan Chen</div>
+                    <div style={{ color: '#64748b', marginBottom: 8, fontSize: 8 }}>morgan@email.com · linkedin.com/in/mchen</div>
+                    <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 4, padding: '4px 8px', marginBottom: 8, fontSize: 8, color: '#166534' }}>Mid-market SaaS AE · 5 yrs · Avg 118% quota · $30K–$150K ACV</div>
+                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6 }}>
+                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Experience</div>
+                      <div style={{ fontWeight: 700, fontSize: 9, color: '#0f172a' }}>Account Executive · Salesforce</div>
+                      <div style={{ color: '#64748b', marginBottom: 4, fontSize: 8 }}>2021 – Present</div>
+                      <div style={{ color: '#475569' }}>• Closed $2.4M ARR in FY2024 at 127% quota — #2 of 18 AEs</div>
+                      <div style={{ color: '#475569' }}>• Self-sourced 60% of pipeline, averaging 4 SQLs/week</div>
+                    </div>
+                  </div>
+                  <div style={{ position: 'absolute', top: 12, right: 12, background: '#059669', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20 }}>127% ✓</div>
+                </div>
+                <div style={{ padding: '20px 22px 24px' }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#059669', marginBottom: 6 }}>Account Executive</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>Resume guide &amp; examples</div>
+                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6, marginBottom: 16 }}>How to show quota attainment, deal size, and pipeline metrics in a way that lands interviews.</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 600, color: '#059669' }}>Read guide <ArrowRight size={14} /></div>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/blog/marketing-manager-resume" style={{ textDecoration: 'none' }}>
+              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 16, overflow: 'hidden', cursor: 'pointer' }}>
+                <div style={{ background: '#1e293b', padding: '24px 20px', position: 'relative' }}>
+                  <div style={{ background: '#fff', borderRadius: 8, padding: '16px 14px', fontSize: 9, lineHeight: 1.6, color: '#334155', fontFamily: 'monospace' }}>
+                    <div style={{ fontWeight: 800, fontSize: 11, color: '#0f172a', marginBottom: 2 }}>Alex Rivera</div>
+                    <div style={{ color: '#64748b', marginBottom: 8, fontSize: 8 }}>alex@email.com · linkedin.com/in/arivera</div>
+                    <div style={{ background: '#fef9c3', border: '1px solid #fef08a', borderRadius: 4, padding: '4px 8px', marginBottom: 8, fontSize: 8, color: '#713f12' }}>Demand gen · B2B SaaS · 6 yrs · $800K budget ownership</div>
+                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6 }}>
+                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Experience</div>
+                      <div style={{ fontWeight: 700, fontSize: 9, color: '#0f172a' }}>Marketing Manager · HubSpot</div>
+                      <div style={{ color: '#64748b', marginBottom: 4, fontSize: 8 }}>2020 – Present</div>
+                      <div style={{ color: '#475569' }}>• Drove $4.2M in pipeline via 6-channel demand gen program</div>
+                      <div style={{ color: '#475569' }}>• Grew organic traffic 8K → 47K/mo in 14 months via SEO</div>
+                    </div>
+                  </div>
+                  <div style={{ position: 'absolute', top: 12, right: 12, background: '#d97706', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20 }}>3.4x ROAS ✓</div>
+                </div>
+                <div style={{ padding: '20px 22px 24px' }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#d97706', marginBottom: 6 }}>Marketing Manager</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>Resume guide &amp; examples</div>
+                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6, marginBottom: 16 }}>How to show campaign results, budget ownership, and channel impact — not just buzzwords.</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 600, color: '#d97706' }}>Read guide <ArrowRight size={14} /></div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ background: '#EBF5FB', padding: '96px 24px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 540, margin: '0 auto' }}>
+          <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 42px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', marginBottom: 16 }}>
+            Find out what you&apos;re worth.
           </h2>
-          <p style={{ fontSize: 16, color: '#94a3b8', marginBottom: 8, lineHeight: 1.7 }}>
-            Pro is $20/month. The first 1,000 members get it at $15/month, locked in for life — even when the price goes up.
+          <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.7, marginBottom: 36 }}>
+            Sarah will tell you your market rate, what&apos;s holding you back, and exactly what to do next.
           </p>
-          <p style={{ fontSize: 14, color: '#64748b', marginBottom: 36 }}>
-            Enter your email to claim your spot. We&apos;ll send you the activation link.
-          </p>
-          <NewsletterForm />
+          <Link href="/signup" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            background: '#ea580c', color: '#fff',
+            padding: '15px 36px', borderRadius: 10,
+            fontSize: 16, fontWeight: 700, textDecoration: 'none',
+          }}>
+            Get started free <ArrowRight size={16} />
+          </Link>
+          <div style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>Free to start · $20/month after · Cancel anytime.</div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer style={{ borderTop: '1px solid #e2e8f0', padding: '36px 24px' }}>
-        <div style={{ maxWidth: 860, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-          <Image src="/logo.svg" alt="Hayven" width={140} height={40} style={{ objectFit: 'contain' }} />
-          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
-            {[{ href: '/login', label: 'Sign in' }, { href: '/signup', label: 'Sign up' }].map(({ href, label }) => (
-              <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
-            ))}
+      <footer style={{ borderTop: '1px solid #e2e8f0', padding: '48px 24px 36px' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 32, marginBottom: 40 }}>
+            <div>
+              <Image src="/logo.svg" alt="Hayven" width={130} height={36} style={{ objectFit: 'contain', marginBottom: 12 }} />
+              <div style={{ fontSize: 13, color: '#94a3b8', maxWidth: 260, lineHeight: 1.6 }}>
+                AI-powered career and salary negotiation tools for professionals who want to get paid what they&apos;re worth.
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: 56, flexWrap: 'wrap' }}>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>PRODUCT</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {[{ href: '/signup', label: 'Get started' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/ai-career-coach', label: 'Career Coach' }].map(({ href, label }) => (
+                    <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>TOOLS</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {[
+                    { href: '/compensation-analyzer', label: 'Compensation Analyzer' },
+                    { href: '/offer-evaluator', label: 'Offer Evaluator' },
+                    { href: '/equity-calculator', label: 'Equity Calculator' },
+                    { href: '/counter-offer-builder', label: 'Counter-Offer Builder' },
+                    { href: '/raise-calculator', label: 'Raise Calculator' },
+                    { href: '/raise-request-builder', label: 'Raise Request Builder' },
+                    { href: '/negotiation-playbook', label: 'Negotiation Playbook' },
+                    { href: '/objection-handler', label: 'Objection Handler' },
+                    { href: '/negotiation-simulator', label: 'Negotiation Simulator' },
+                    { href: '/interview-salary-coach', label: 'Interview Salary Coach' },
+                    { href: '/job-tracker', label: 'Job Tracker' },
+                    { href: '/resume-builder', label: 'AI Resume Builder' },
+                    { href: '/resume-templates', label: 'Resume Templates' },
+                    { href: '/resume-skills', label: 'Resume Skills' },
+                    { href: '/paycheck-calculator', label: 'Paycheck Calculator' },
+                    { href: '/salary-to-hourly-calculator', label: 'Salary to Hourly' },
+                    { href: '/tools/salaries', label: 'Salary Guides' },
+                  ].map(({ href, label }) => (
+                    <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>LEGAL</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {[{ href: '/privacy', label: 'Privacy Policy' }, { href: '/terms', label: 'Terms of Service' }].map(({ href, label }) => (
+                    <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>SUPPORT</div>
+                <a href="mailto:GetHayven@gmail.com" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>GetHayven@gmail.com</a>
+              </div>
+            </div>
           </div>
-          <div style={{ fontSize: 12, color: '#94a3b8', width: '100%', marginTop: 12 }}>
-            Hayven provides AI-generated guidance for informational purposes. Results may vary. © {new Date().getFullYear()} Hayven.
+          <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+            <div style={{ fontSize: 12, color: '#94a3b8' }}>© {new Date().getFullYear()} Hayven. All rights reserved.</div>
+            <div style={{ fontSize: 12, color: '#94a3b8' }}>AI-generated guidance for informational purposes only. Results may vary.</div>
           </div>
         </div>
       </footer>

@@ -151,6 +151,7 @@ export default function HeroCheckWidget() {
   const [roleError, setRoleError] = useState('')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<CompResult | null>(null)
+  const [apiError, setApiError] = useState(false)
   const [salary, setSalary] = useState('')
   const [comparison, setComparison] = useState<null | { diff: number; pct: number; userSalary: number }>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -179,6 +180,7 @@ export default function HeroCheckWidget() {
       return
     }
     setRoleError('')
+    setApiError(false)
     track('step1_submit')
     setLoading(true)
     try {
@@ -188,9 +190,13 @@ export default function HeroCheckWidget() {
         body: JSON.stringify({ role: role.trim(), location: location.trim() || 'United States', experience: '', companySize: '', industry: '' }),
       })
       const data = await res.json()
-      if (data.p50) setResult(data)
+      if (data.p50) {
+        setResult(data)
+      } else {
+        setApiError(true)
+      }
     } catch {
-      // silent fail — keep form
+      setApiError(true)
     } finally {
       setLoading(false)
     }
@@ -311,6 +317,12 @@ export default function HeroCheckWidget() {
               <>Check my market value <ArrowRight size={15} /></>
             )}
           </button>
+
+          {apiError && (
+            <p role="alert" style={{ margin: '10px 0 0', fontSize: 13, color: '#f87171', textAlign: 'center' }}>
+              Couldn&apos;t fetch market data — please try again.
+            </p>
+          )}
 
           <p style={{ margin: '12px 0 0', fontSize: 12, color: '#94a3b8', textAlign: 'center' }}>
             Free · No account required · We don&apos;t store your salary
