@@ -46,6 +46,18 @@ export default function LandingPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
 
+      {/* Top announcement bar */}
+      <div style={{ background: '#0f172a', width: '100%', padding: '12px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>🏆 </span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>85% of people who negotiate their salary get more money</span>
+          <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}> — are you leaving money on the table?</span>
+        </div>
+        <Link href="/signup" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
+          Find out →
+        </Link>
+      </div>
+
       {/* Header */}
       <header style={{
         borderBottom: '0.5px solid #e5e7eb',
@@ -54,7 +66,7 @@ export default function LandingPage() {
         position: 'sticky', top: 0, background: '#fff', zIndex: 50,
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image src="/logo.png" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
+          <Image src="/logo.svg" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Link href="/login" style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
@@ -74,43 +86,42 @@ export default function LandingPage() {
       {/* Hero */}
       <section style={{
         background: 'linear-gradient(160deg, #0f172a 0%, #1e293b 100%)',
-        padding: '64px 24px 72px',
+        padding: '72px 24px 80px',
       }}>
-        <div style={{ maxWidth: 920, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 48, alignItems: 'center' }}>
-          <div>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              background: 'rgba(37,99,235,0.2)', border: '1px solid rgba(37,99,235,0.35)',
-              borderRadius: 20, padding: '5px 14px', marginBottom: 24,
-            }}>
-              <span style={{ fontSize: 12, color: '#93c5fd', fontWeight: 600 }}>Free salary check</span>
-            </div>
+        <div style={{ maxWidth: 920, margin: '0 auto' }}>
+          {/* Big headline — centered, full width */}
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <h1 style={{
-              fontSize: 'clamp(30px, 5vw, 48px)',
-              fontWeight: 900, lineHeight: 1.15,
-              letterSpacing: '-0.03em', marginBottom: 18,
-              color: '#fff',
+              fontSize: 'clamp(48px, 9vw, 100px)',
+              fontWeight: 900, lineHeight: 1.0,
+              letterSpacing: '-0.04em',
+              color: '#fff', margin: '0 0 16px',
             }}>
-              Are you underpaid?<br />
-              <span style={{ color: '#93c5fd' }}>Find out in 30 seconds.</span>
+              Are you underpaid?
             </h1>
-            <p style={{ fontSize: 16, color: '#94a3b8', lineHeight: 1.75, marginBottom: 28 }}>
-              Enter your job title and see what the market pays. Free, no signup needed.
+            <p style={{ fontSize: 'clamp(18px, 2.5vw, 24px)', fontWeight: 700, color: '#93c5fd', letterSpacing: '-0.01em', margin: 0 }}>
+              Find out in 30 seconds — free, no signup needed.
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
-              {[
-                'See if you\'re paid below market',
-                'See how much more you could ask for',
-                'Get a script for the conversation',
-              ].map(item => (
-                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#cbd5e1' }}>
-                  <CheckCircle size={15} color="#34d399" />
-                  {item}
-                </div>
-              ))}
-            </div>
           </div>
-          <HeroCheckWidget />
+
+          {/* Two-column: checklist + widget */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 48, alignItems: 'center' }}>
+            <div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {[
+                  'See if you\'re paid below market',
+                  'See how much more you could ask for',
+                  'Get a script for the conversation',
+                ].map(item => (
+                  <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 16, color: '#cbd5e1' }}>
+                    <CheckCircle size={18} color="#34d399" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <HeroCheckWidget />
+          </div>
         </div>
       </section>
 
@@ -390,7 +401,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer style={{ borderTop: '1px solid #e2e8f0', padding: '36px 24px' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-          <Image src="/logo.png" alt="Hayven" width={140} height={40} style={{ objectFit: 'contain' }} />
+          <Image src="/logo.svg" alt="Hayven" width={140} height={40} style={{ objectFit: 'contain' }} />
           <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
             {[{ href: '/login', label: 'Sign in' }, { href: '/signup', label: 'Sign up' }].map(({ href, label }) => (
               <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
