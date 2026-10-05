@@ -195,9 +195,27 @@ export default function LandingPage() {
             <h1 style={{ fontWeight: 900, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 18, color: '#0f172a', fontSize: 'clamp(36px, 6vw, 76px)' }}>
               Are You<br />Underpaid?
             </h1>
-            <p style={{ fontSize: 'clamp(16px, 1.8vw, 20px)', fontWeight: 700, color: '#2952CC', letterSpacing: '-0.01em', marginBottom: 36 }}>Find out in 30 seconds — free.</p>
+            <p style={{ fontSize: 'clamp(16px, 1.8vw, 20px)', fontWeight: 700, color: '#2952CC', letterSpacing: '-0.01em', marginBottom: 32 }}>Find out in 30 seconds — free.</p>
 
-            <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
+            <p style={{ fontSize: 15, color: '#64748b', lineHeight: 1.7, marginBottom: 32, maxWidth: 400 }}>
+              Most people leave $15K–$40K on the table every year without knowing it. Tell Sarah your role and salary — she&apos;ll show you exactly where you stand.
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 40 }}>
+              {[
+                'Know exactly what the market pays for your role',
+                'Get a step-by-step negotiation plan',
+                'Interview prep and counter-offer strategy',
+                'Sarah remembers your whole journey',
+              ].map(item => (
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#374151' }}>
+                  <CheckCircle size={15} color="#2952CC" style={{ flexShrink: 0 }} />
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', paddingTop: 24, borderTop: '1px solid #f1f5f9' }}>
               {[
                 { stat: '$27K', label: 'avg left on table' },
                 { stat: '85%', label: 'negotiate & get more' },
