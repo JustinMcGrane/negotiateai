@@ -79,11 +79,15 @@ export function LandingSarahWidget() {
         {/* Left: copy */}
         <div>
           <div style={{ fontSize: 12, fontWeight: 700, color: '#7AB8E8', letterSpacing: '0.1em', marginBottom: 16 }}>SARAH · CAREER COACH</div>
-          <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#fff', lineHeight: 1.15, marginBottom: 20, letterSpacing: '-0.025em' }}>
-            Find out your<br />market value free.
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 8, padding: '6px 12px', marginBottom: 18 }}>
+            <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#ef4444', display: 'inline-block', flexShrink: 0, animation: 'pulse 1.8s infinite' }} />
+            <span style={{ fontSize: 12, fontWeight: 700, color: '#fca5a5', letterSpacing: '0.04em' }}>73% of professionals are underpaid</span>
+          </div>
+          <h2 style={{ fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 900, color: '#fff', lineHeight: 1.05, marginBottom: 16, letterSpacing: '-0.03em' }}>
+            Are you<br /><span style={{ color: '#ef4444' }}>underpaid?</span>
           </h2>
           <p style={{ fontSize: 15, color: '#94a3b8', lineHeight: 1.7, marginBottom: 28 }}>
-            Tell Sarah what you do and what you make. She&apos;ll tell you exactly where you stand — and what to do about it.
+            Most people leave $15K–$40K on the table every year. Tell Sarah your role and salary — she&apos;ll show you your exact gap in seconds.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 36 }}>
             {[
@@ -165,7 +169,7 @@ export function LandingSarahWidget() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                   }}
                 >
-                  Check my market value <ArrowRight size={14} />
+                  See if I&apos;m underpaid <ArrowRight size={14} />
                 </button>
               </>
             )}
