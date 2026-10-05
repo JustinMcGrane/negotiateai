@@ -197,16 +197,8 @@ export default function LandingPage() {
           <p style={{ fontSize: 'clamp(16px, 1.8vw, 20px)', fontWeight: 700, color: '#2952CC', letterSpacing: '-0.01em' }}>Find out in 30 seconds — free.</p>
         </div>
 
-        {/* Two-column: verbiage left, widget right */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }} className="landing-hero-grid">
-          {/* Left: copy */}
-          <div>
-            <p style={{ fontSize: 'clamp(18px, 2vw, 24px)', color: '#374151', lineHeight: 1.65, fontWeight: 400 }}>
-              Most people leave $15K–$40K on the table every year without knowing it. Tell Sarah your role and salary — she&apos;ll show you exactly where you stand and what to do about it.
-            </p>
-          </div>
-
-          {/* Right: live widget */}
+        {/* Widget centered */}
+        <div style={{ maxWidth: 480, margin: '0 auto' }}>
           <HeroWidget />
         </div>
       </section>
