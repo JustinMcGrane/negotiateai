@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+type CachedResult = { jobs: ReturnType<typeof getMockJobs>; ts: number }
+const cache = new Map<string, CachedResult>()
+const CACHE_TTL_MS = 60 * 60 * 1000 // 1 hour
+
 type JSearchJob = {
   job_title?: string
   employer_name?: string
@@ -60,6 +64,12 @@ export async function POST(req: NextRequest) {
 
     if (!apiKey) {
       return NextResponse.json({ jobs: getMockJobs(query, location) })
+    }
+
+    const cacheKey = `${query}|${location}|${jobType}|${datePosted}`
+    const cached = cache.get(cacheKey)
+    if (cached && Date.now() - cached.ts < CACHE_TTL_MS) {
+      return NextResponse.json({ jobs: cached.jobs })
     }
 
     const baseParams = new URLSearchParams({
@@ -126,6 +136,7 @@ export async function POST(req: NextRequest) {
       source: j.job_publisher || 'JSearch',
     }))
 
+    cache.set(cacheKey, { jobs, ts: Date.now() })
     return NextResponse.json({ jobs })
   } catch (err) {
     console.error(err)
