@@ -266,88 +266,55 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      <section style={{ padding: '80px 24px' }}>
-        <div style={{ maxWidth: 860, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(22px, 4vw, 34px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', margin: '0 0 10px' }}>Simple pricing</h2>
-            <p style={{ fontSize: 15, color: '#64748b' }}>Start free. Upgrade when it pays off.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
-            <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 14, padding: 28 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>Free</div>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 4 }}>$0</div>
-              <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>No credit card required</div>
-              {['Sarah salary assessment (one session)', 'See your current market value', 'Get your target role + salary', 'Realistic timeline to get there'].map(f => (
-                <div key={f} style={{ fontSize: 13, color: '#475569', padding: '6px 0', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ color: '#10b981', fontWeight: 700 }}>✓</span> {f}
-                </div>
-              ))}
-              <Link href="/signup" style={{
-                display: 'block', marginTop: 24, textAlign: 'center',
-                height: 42, lineHeight: '42px',
-                border: '1px solid #d1d5db', borderRadius: 9,
-                fontSize: 14, textDecoration: 'none', color: '#374151', fontWeight: 600,
-              }}>
-                Get started free
-              </Link>
-            </div>
+      <section style={{ padding: '96px 24px', background: '#f8fafc' }}>
+        <div style={{ maxWidth: 480, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: '#4A90D9', letterSpacing: '0.12em', marginBottom: 16 }}>PRICING</div>
+          <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', margin: '0 0 48px' }}>Simple, transparent pricing</h2>
 
-            <div style={{ background: '#0f172a', border: '2px solid #0f172a', borderRadius: 14, padding: 28, position: 'relative' }}>
-              <div style={{
-                position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                background: '#2563eb', color: '#fff',
-                fontSize: 11, fontWeight: 700, padding: '3px 12px', borderRadius: 20,
-                whiteSpace: 'nowrap',
-              }}>MOST POPULAR</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 6 }}>Professional</div>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>$49<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>Unlimited coaching &amp; tools</div>
+          <div style={{
+            background: '#fff',
+            border: '1px solid #e2e8f0',
+            borderRadius: 20,
+            padding: '40px 36px',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
+            textAlign: 'left',
+          }}>
+            <div style={{ fontSize: 11, fontWeight: 800, color: '#10b981', letterSpacing: '0.12em', marginBottom: 20 }}>
+              PRO PLAN
+            </div>
+            <div style={{ fontSize: 52, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 8 }}>
+              $20 <span style={{ fontSize: 18, fontWeight: 400, color: '#94a3b8' }}>/month</span>
+            </div>
+            <div style={{ fontSize: 15, color: '#475569', marginBottom: 6 }}>Full unlimited access to everything.</div>
+            <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 32 }}>Free to start · Cancel anytime.</div>
+
+            <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: 24, display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 32 }}>
               {[
-                'Sarah AI recruiter — unlimited coaching',
+                'Sarah career coach — unlimited',
                 'All 10 negotiation tools — unlimited',
                 'Resume analyzer + cover letter generator',
                 'Offer evaluator + counter-offer builder',
                 'Raise builder + negotiation playbook',
                 'Session history',
               ].map(f => (
-                <div key={f} style={{ fontSize: 13, color: '#cbd5e1', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ color: '#34d399', fontWeight: 700 }}>✓</span> {f}
+                <div key={f} style={{ fontSize: 14, color: '#334155', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <CheckCircle size={15} color="#16a34a" style={{ flexShrink: 0 }} />
+                  {f}
                 </div>
               ))}
-              <Link href="/signup" style={{
-                display: 'block', marginTop: 24, textAlign: 'center',
-                height: 42, lineHeight: '42px',
-                background: '#2563eb', borderRadius: 9,
-                fontSize: 14, textDecoration: 'none', color: '#fff', fontWeight: 700,
-              }}>
-                Get Professional →
-              </Link>
             </div>
 
-            <div style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', border: '1px solid rgba(102,126,234,0.4)', borderRadius: 14, padding: 28, position: 'relative' }}>
-              <div style={{
-                position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                background: 'linear-gradient(135deg, #667eea, #764ba2)', color: '#fff',
-                fontSize: 11, fontWeight: 700, padding: '3px 12px', borderRadius: 20,
-                whiteSpace: 'nowrap',
-              }}>BEST RESULTS</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 6 }}>Pro</div>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>$79<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 24 }}>Everything in Professional, plus:</div>
-              {['Sarah remembers you across sessions', 'Mock interview coaching with feedback', 'Live negotiation roleplay with Sarah', 'Annual Review Coach + Promotion Planner', 'PDF compensation report', 'Priority support'].map(f => (
-                <div key={f} style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ color: '#667eea', fontWeight: 700 }}>✓</span> {f}
-                </div>
-              ))}
-              <Link href="/signup" style={{
-                display: 'block', marginTop: 24, textAlign: 'center',
-                height: 42, lineHeight: '42px',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: 9,
-                fontSize: 14, textDecoration: 'none', color: '#fff', fontWeight: 700,
-              }}>
-                Get Pro →
-              </Link>
-            </div>
+            <Link href="/signup" style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+              height: 52,
+              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+              borderRadius: 12,
+              fontSize: 15, textDecoration: 'none', color: '#fff', fontWeight: 700,
+              boxShadow: '0 4px 20px rgba(239,68,68,0.25)',
+            }}>
+              Get Started Free
+            </Link>
+            <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 12, textAlign: 'center' }}>Cancel anytime. No commitment.</div>
           </div>
         </div>
       </section>
@@ -380,10 +347,10 @@ export default function LandingPage() {
             LIMITED — FIRST 1,000 MEMBERS ONLY
           </div>
           <h2 style={{ fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 12px', lineHeight: 1.2 }}>
-            Lock in Pro at $40/month — forever.
+            Lock in Pro at $15/month — forever.
           </h2>
           <p style={{ fontSize: 16, color: '#94a3b8', marginBottom: 8, lineHeight: 1.7 }}>
-            Pro is $49/month. The first 1,000 members get it at $40/month, locked in for life — even when the price goes up.
+            Pro is $20/month. The first 1,000 members get it at $15/month, locked in for life — even when the price goes up.
           </p>
           <p style={{ fontSize: 14, color: '#64748b', marginBottom: 36 }}>
             Enter your email to claim your spot. We&apos;ll send you the activation link.
