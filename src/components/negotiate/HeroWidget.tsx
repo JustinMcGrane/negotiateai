@@ -305,6 +305,12 @@ export function HeroWidget() {
 
           {step === 'result' && result && (
             <>
+              <button
+                onClick={() => { setStep('form'); setResult(null); setTitle(''); setLocation(''); setSalary(''); setError('') }}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 12, color: '#475569', marginBottom: 12, padding: 0, display: 'flex', alignItems: 'center', gap: 4 }}
+              >
+                ← Check another salary
+              </button>
               <div style={{ display: 'flex', gap: 10, marginBottom: 16, alignItems: 'flex-start' }}>
                 <div style={{ width: 32, height: 32, borderRadius: '50%', flexShrink: 0, background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 700, color: '#fff' }}>S</div>
                 <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '4px 14px 14px 14px', padding: '10px 14px', fontSize: 13, color: '#e2e8f0', lineHeight: 1.6 }}>
