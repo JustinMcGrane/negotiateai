@@ -46,35 +46,27 @@ export default function LandingPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
 
-      {/* Top announcement bar */}
-      <div style={{ background: '#0f172a', width: '100%', padding: '12px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ flex: 1, textAlign: 'center' }}>
-          <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>🏆 </span>
-          <span style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>85% of people who negotiate their salary get more money</span>
-          <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}> — are you leaving money on the table?</span>
-        </div>
-        <Link href="/signup" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
-          Find out →
-        </Link>
-      </div>
-
       {/* Header */}
       <header style={{
-        borderBottom: '0.5px solid #e5e7eb',
+        boxShadow: '0 1px 0 rgba(0,0,0,0.06)',
         padding: '0 32px', height: 60,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         position: 'sticky', top: 0, background: '#fff', zIndex: 50,
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image src="/logo.svg" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain' }} priority />
+          <Image src="/logo.svg" alt="Hayven" width={160} height={44} style={{ objectFit: 'contain', display: 'block' }} priority />
         </Link>
+        <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+          <Link href="/#features" style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 12px' }}>Tools</Link>
+          <Link href="/blog" style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 12px' }}>Resources</Link>
+        </nav>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Link href="/login" style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
             Sign in
           </Link>
           <Link href="/signup" style={{
             fontSize: 14, fontWeight: 600,
-            background: '#141414', color: '#fff',
+            background: '#ea580c', color: '#fff',
             textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
             display: 'flex', alignItems: 'center', gap: 6,
           }}>
@@ -92,26 +84,28 @@ export default function LandingPage() {
           {/* Big headline — centered, full width */}
           <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <h1 style={{
-              fontSize: 'clamp(48px, 9vw, 100px)',
+              fontSize: 'clamp(48px, 7vw, 80px)',
               fontWeight: 900, lineHeight: 1.0,
               letterSpacing: '-0.04em',
               color: '#fff', margin: '0 0 16px',
             }}>
-              Are you underpaid?
+              You Are Worth More.<br /><span style={{ color: '#93c5fd' }}>Find out how much in 30 seconds.</span>
             </h1>
             <p style={{ fontSize: 'clamp(18px, 2.5vw, 24px)', fontWeight: 700, color: '#93c5fd', letterSpacing: '-0.01em', margin: 0 }}>
-              Find out in 30 seconds — free, no signup needed.
+              Find out how much in 30 seconds — free, no signup needed.
             </p>
           </div>
 
           {/* Two-column: checklist + widget */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 48, alignItems: 'center' }}>
             <div>
+              <p style={{ fontSize: 16, color: '#94a3b8', marginBottom: 20, lineHeight: 1.6 }}>
+                Enter your job title and see what the market pays for it.
+              </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {[
                   'See if you\'re paid below market',
                   'See how much more you could ask for',
-                  'Get a script for the conversation',
                 ].map(item => (
                   <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 16, color: '#cbd5e1' }}>
                     <CheckCircle size={18} color="#34d399" />

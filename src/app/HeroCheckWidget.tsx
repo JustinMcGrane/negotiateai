@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowRight, MapPin } from 'lucide-react'
 
@@ -23,6 +23,128 @@ function track(event: string) {
   }
 }
 
+const CHIPS = ['Software Engineer', 'Registered Nurse', 'Marketing Manager', 'Teacher', 'Sales Rep', 'Accountant']
+
+function StatusBadge({ status }: { status: 'underpaid' | 'at_market' | 'above_market' }) {
+  const config = {
+    underpaid: { label: 'Underpaid', bg: 'rgba(239,68,68,0.15)', color: '#f87171', border: 'rgba(239,68,68,0.3)' },
+    at_market: { label: 'At market', bg: 'rgba(234,179,8,0.15)', color: '#fbbf24', border: 'rgba(234,179,8,0.3)' },
+    above_market: { label: 'Above market', bg: 'rgba(52,211,153,0.15)', color: '#34d399', border: 'rgba(52,211,153,0.3)' },
+  }[status]
+  return (
+    <span style={{
+      display: 'inline-block', fontSize: 12, fontWeight: 700,
+      background: config.bg, color: config.color,
+      border: `1px solid ${config.border}`,
+      borderRadius: 20, padding: '3px 12px', letterSpacing: '0.04em',
+    }}>
+      {config.label}
+    </span>
+  )
+}
+
+function SpectrumBar({ pct, p25, p90, userSalary }: { pct: number; p25: number; p90: number; userSalary: number }) {
+  const range = p90 - p25
+  const raw = range > 0 ? (userSalary - p25) / range : 0.5
+  const pos = Math.min(98, Math.max(2, raw * 100))
+  return (
+    <div style={{ marginBottom: 16 }}>
+      <div style={{ position: 'relative', height: 10, borderRadius: 5, background: 'linear-gradient(90deg, #ef4444 0%, #eab308 50%, #22c55e 100%)', marginBottom: 6 }}>
+        <div style={{
+          position: 'absolute', top: '50%', left: `${pos}%`,
+          transform: 'translate(-50%, -50%)',
+          width: 16, height: 16, borderRadius: '50%',
+          background: '#fff', border: '2.5px solid #0f172a',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.4)',
+        }} />
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: '#64748b' }}>
+        <span>Below market</span>
+        <span>Market rate</span>
+        <span>Above market</span>
+      </div>
+    </div>
+  )
+}
+
+function ResultCard({
+  roleLabel, locationLabel, userSalary, result, diff, pct, isExample,
+}: {
+  roleLabel: string; locationLabel: string; userSalary: number
+  result: { p25: number; p50: number; p75: number; p90: number }
+  diff: number; pct: number; isExample?: boolean
+}) {
+  const status: 'underpaid' | 'at_market' | 'above_market' =
+    pct < -5 ? 'underpaid' : pct > 10 ? 'above_market' : 'at_market'
+
+  return (
+    <div style={{
+      background: 'rgba(255,255,255,0.06)',
+      border: `1px solid ${status === 'underpaid' ? 'rgba(239,68,68,0.3)' : status === 'above_market' ? 'rgba(52,211,153,0.3)' : 'rgba(234,179,8,0.3)'}`,
+      borderRadius: 16, padding: '24px 20px',
+    }}>
+      {isExample && (
+        <div style={{ fontSize: 10, fontWeight: 700, color: '#64748b', letterSpacing: '0.1em', marginBottom: 12 }}>EXAMPLE RESULT</div>
+      )}
+
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14, flexWrap: 'wrap', gap: 8 }}>
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: '#e2e8f0' }}>{roleLabel}</div>
+          <div style={{ fontSize: 11, color: '#94a3b8' }}>{locationLabel}</div>
+        </div>
+        <StatusBadge status={status} />
+      </div>
+
+      <SpectrumBar pct={pct} p25={result.p25} p90={result.p90} userSalary={userSalary} />
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
+        {[
+          { label: 'Your salary', val: fmt(userSalary), muted: false },
+          { label: 'Market median', val: fmt(result.p50), muted: true },
+          { label: 'Top 25%', val: fmt(result.p75), muted: true },
+        ].map(row => (
+          <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+            <span style={{ color: '#94a3b8' }}>{row.label}</span>
+            <span style={{ fontWeight: 700, color: row.muted ? '#cbd5e1' : '#fff' }}>{row.val}</span>
+          </div>
+        ))}
+      </div>
+
+      {status === 'underpaid' && (
+        <div style={{ padding: '10px 14px', background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: 10, marginBottom: 14 }}>
+          <span style={{ fontSize: 12, color: '#f87171', fontWeight: 600 }}>Money left on the table: </span>
+          <span style={{ fontSize: 12, color: '#fca5a5', fontWeight: 700 }}>{fmt(Math.abs(diff))}/year</span>
+        </div>
+      )}
+      {status === 'at_market' && (
+        <div style={{ padding: '10px 14px', background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.2)', borderRadius: 10, marginBottom: 14 }}>
+          <span style={{ fontSize: 12, color: '#34d399', fontWeight: 600 }}>You&apos;re at market rate. Negotiate for the top of range.</span>
+        </div>
+      )}
+      {status === 'above_market' && (
+        <div style={{ padding: '10px 14px', background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.2)', borderRadius: 10, marginBottom: 14 }}>
+          <span style={{ fontSize: 12, color: '#34d399', fontWeight: 600 }}>You&apos;re above market. Here&apos;s how to protect it.</span>
+        </div>
+      )}
+
+      {!isExample && (
+        <Link
+          href="/signup"
+          onClick={() => track('signup_click')}
+          style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+            width: '100%', height: 50, fontSize: 14, fontWeight: 700,
+            background: '#ea580c', color: '#fff',
+            borderRadius: 11, textDecoration: 'none',
+          }}
+        >
+          Save my results + get negotiation tips <ArrowRight size={14} />
+        </Link>
+      )}
+    </div>
+  )
+}
+
 export default function HeroCheckWidget() {
   const [role, setRole] = useState('')
   const [location, setLocation] = useState('')
@@ -30,8 +152,25 @@ export default function HeroCheckWidget() {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<CompResult | null>(null)
   const [salary, setSalary] = useState('')
-  const [comparison, setComparison] = useState<null | { diff: number; pct: number }>(null)
+  const [comparison, setComparison] = useState<null | { diff: number; pct: number; userSalary: number }>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      inputRef.current?.focus()
+    }
+    // Scroll observer to hide Crisp chat on hero
+    function onScroll() {
+      if (window.scrollY < 200) {
+        document.body.classList.add('hero-visible')
+      } else {
+        document.body.classList.remove('hero-visible')
+      }
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   async function handleStep1() {
     if (!role.trim()) {
@@ -64,10 +203,9 @@ export default function HeroCheckWidget() {
     track('step2_submit')
     const diff = userSalary - result.p50
     const pct = Math.round((diff / result.p50) * 100)
-    setComparison({ diff, pct })
+    track('result_state_' + (pct < -5 ? 'below' : pct > 10 ? 'above' : 'at'))
+    setComparison({ diff, pct, userSalary })
   }
-
-  const isAbove = comparison && comparison.pct >= 0
 
   return (
     <div style={{ maxWidth: 460, width: '100%', margin: '0 auto' }}>
@@ -79,7 +217,11 @@ export default function HeroCheckWidget() {
           border: '1px solid rgba(255,255,255,0.14)',
           borderRadius: 16, padding: '28px 24px',
         }}>
-          <div style={{ marginBottom: 18 }}>
+          <style>{`
+            @keyframes spin { to { transform: rotate(360deg) } }
+            #hero-role::placeholder, #hero-location::placeholder, #hero-salary::placeholder { color: #94a3b8 !important; }
+          `}</style>
+          <div style={{ marginBottom: 14 }}>
             <label htmlFor="hero-role" style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 8, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
               Your job title
             </label>
@@ -105,6 +247,26 @@ export default function HeroCheckWidget() {
             {roleError && (
               <p id="role-error" role="alert" style={{ margin: '6px 0 0', fontSize: 12, color: '#f87171' }}>{roleError}</p>
             )}
+          </div>
+
+          {/* Job title chips */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 18 }}>
+            {CHIPS.map(chip => (
+              <button
+                key={chip}
+                onClick={() => { setRole(chip); track('chip_click'); setTimeout(handleStep1, 50) }}
+                style={{
+                  fontSize: 12, padding: '5px 10px', borderRadius: 20,
+                  background: 'rgba(255,255,255,0.08)', color: '#94a3b8',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  cursor: 'pointer', transition: 'all 0.15s',
+                }}
+                onMouseEnter={e => { (e.target as HTMLButtonElement).style.background = 'rgba(255,255,255,0.15)'; (e.target as HTMLButtonElement).style.color = '#e2e8f0' }}
+                onMouseLeave={e => { (e.target as HTMLButtonElement).style.background = 'rgba(255,255,255,0.08)'; (e.target as HTMLButtonElement).style.color = '#94a3b8' }}
+              >
+                {chip}
+              </button>
+            ))}
           </div>
 
           <div style={{ marginBottom: 20 }}>
@@ -143,35 +305,28 @@ export default function HeroCheckWidget() {
             {loading ? (
               <>
                 <span style={{ width: 16, height: 16, border: '2px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.7s linear infinite' }} />
-                Checking market data…
+                Checking market data for you…
               </>
             ) : (
               <>Check my market value <ArrowRight size={15} /></>
             )}
           </button>
 
-          <p style={{ margin: '12px 0 0', fontSize: 12, color: '#64748b', textAlign: 'center' }}>
+          <p style={{ margin: '12px 0 0', fontSize: 12, color: '#94a3b8', textAlign: 'center' }}>
             Free · No account required · We don&apos;t store your salary
           </p>
 
-          {/* Example preview */}
-          <div style={{ marginTop: 20, padding: '14px 16px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10 }}>
-            <div style={{ fontSize: 10, fontWeight: 700, color: '#64748b', letterSpacing: '0.1em', marginBottom: 10 }}>EXAMPLE RESULT</div>
-            <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 8 }}>Senior Product Manager · Austin, TX</div>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              {[{ label: 'Low', val: '$145K', muted: true }, { label: 'Median', val: '$178K', highlight: true }, { label: 'High', val: '$215K', muted: true }].map(b => (
-                <div key={b.label} style={{
-                  flex: 1, minWidth: 70, textAlign: 'center',
-                  padding: '8px 6px',
-                  background: b.highlight ? 'rgba(37,99,235,0.2)' : 'rgba(255,255,255,0.04)',
-                  borderRadius: 8,
-                  border: b.highlight ? '1px solid rgba(37,99,235,0.4)' : '1px solid rgba(255,255,255,0.06)',
-                }}>
-                  <div style={{ fontSize: 11, color: '#64748b', marginBottom: 3 }}>{b.label}</div>
-                  <div style={{ fontSize: 15, fontWeight: 800, color: b.highlight ? '#93c5fd' : '#94a3b8' }}>{b.val}</div>
-                </div>
-              ))}
-            </div>
+          {/* Example preview — rebuilt */}
+          <div style={{ marginTop: 20 }}>
+            <ResultCard
+              roleLabel="Senior Product Manager"
+              locationLabel="Austin, TX"
+              userSalary={148000}
+              result={{ p25: 145000, p50: 178000, p75: 210000, p90: 225000 }}
+              diff={-30000}
+              pct={-17}
+              isExample
+            />
           </div>
         </div>
       ) : !comparison ? (
@@ -240,51 +395,16 @@ export default function HeroCheckWidget() {
           </button>
         </div>
       ) : (
-        /* ── Result ── */
-        <div style={{
-          background: 'rgba(255,255,255,0.06)',
-          border: `1px solid ${isAbove ? 'rgba(52,211,153,0.3)' : 'rgba(251,146,60,0.3)'}`,
-          borderRadius: 16, padding: '28px 24px', textAlign: 'center',
-        }}>
-          <div style={{
-            fontSize: 48, fontWeight: 900, letterSpacing: '-0.03em',
-            color: isAbove ? '#34d399' : '#fb923c',
-            marginBottom: 8,
-          }}>
-            {Math.abs(comparison.pct)}%
-          </div>
-          <div style={{ fontSize: 16, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>
-            {isAbove ? 'above' : 'below'} market median
-          </div>
-          <div style={{ fontSize: 14, color: '#94a3b8', marginBottom: 24 }}>
-            {isAbove
-              ? `You're earning ${fmt(Math.abs(comparison.diff))} more than the median.`
-              : `The gap is ${fmt(Math.abs(comparison.diff))} — that's money left on the table.`}
-          </div>
-
-          {result.insight && (
-            <p style={{ fontSize: 13, color: '#94a3b8', lineHeight: 1.7, marginBottom: 24, textAlign: 'left', padding: '12px 14px', background: 'rgba(255,255,255,0.04)', borderRadius: 10 }}>
-              {result.insight}
-            </p>
-          )}
-
-          <Link
-            href="/signup"
-            onClick={() => track('signup_click')}
-            style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              width: '100%', height: 52, fontSize: 15, fontWeight: 700,
-              background: '#2563eb', color: '#fff',
-              borderRadius: 11, textDecoration: 'none',
-            }}
-          >
-            {isAbove ? 'Save my result + get negotiation tips' : 'Get my negotiation plan from Sarah'} <ArrowRight size={15} />
-          </Link>
-          <p style={{ margin: '10px 0 0', fontSize: 12, color: '#64748b' }}>Free to start · No credit card</p>
-        </div>
+        /* ── Step 3: Result ── */
+        <ResultCard
+          roleLabel={role}
+          locationLabel={location || 'United States'}
+          userSalary={comparison.userSalary}
+          result={result}
+          diff={comparison.diff}
+          pct={comparison.pct}
+        />
       )}
-
-      <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
     </div>
   )
 }
