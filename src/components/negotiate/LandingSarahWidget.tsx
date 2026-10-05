@@ -198,7 +198,7 @@ export function LandingSarahWidget() {
                   <div style={{ fontSize: 10, fontWeight: 700, color: '#334155', letterSpacing: '0.08em', marginBottom: 10, textTransform: 'uppercase' }}>Recent results</div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                     {SAMPLE_RESULTS.map((r, i) => (
-                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', filter: 'blur(3.5px)', userSelect: 'none', pointerEvents: 'none' }}>
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', filter: 'blur(1.5px)', userSelect: 'none', pointerEvents: 'none' }}>
                         <div>
                           <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0' }}>{r.title}</div>
                           <div style={{ fontSize: 11, color: '#64748b' }}>{r.location}</div>
