@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
     }
 
     const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 8000)
+    const timeout = setTimeout(() => controller.abort(), 5000)
 
     let allJobs: JSearchJob[] = []
     try {
