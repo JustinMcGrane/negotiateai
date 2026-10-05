@@ -191,10 +191,10 @@ export default function LandingPage() {
       <section style={{ maxWidth: 1140, margin: '0 auto', padding: '72px 40px 80px' }} className="landing-hero landing-section-pad">
         {/* Centered headline */}
         <div style={{ textAlign: 'center', marginBottom: 56 }}>
-          <h1 style={{ fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: 12, color: '#0f172a', fontSize: 'clamp(40px, 5vw, 64px)' }}>
+          <h1 style={{ fontWeight: 900, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(56px, 8vw, 96px)' }}>
             Are You Underpaid?
           </h1>
-          <p style={{ fontSize: 'clamp(16px, 1.6vw, 22px)', fontWeight: 600, color: '#2952CC', letterSpacing: '-0.01em' }}>Find out in 30 seconds — free.</p>
+          <p style={{ fontSize: 'clamp(20px, 2.5vw, 32px)', fontWeight: 700, color: '#2952CC', letterSpacing: '-0.02em' }}>Find out in 30 seconds — free.</p>
         </div>
 
         {/* Widget centered */}
