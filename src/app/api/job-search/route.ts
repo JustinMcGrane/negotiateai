@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-type CachedResult = { jobs: ReturnType<typeof getMockJobs>; ts: number }
-const cache = new Map<string, CachedResult>()
-const CACHE_TTL_MS = 60 * 60 * 1000 // 1 hour
+import { createClient } from '@/lib/supabase/server'
 
 type JSearchJob = {
   job_title?: string
@@ -47,8 +44,7 @@ function formatPosted(dateStr?: string): string {
   if (!dateStr) return ''
   const posted = new Date(dateStr)
   const now = new Date()
-  const diffMs = now.getTime() - posted.getTime()
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+  const diffDays = Math.floor((now.getTime() - posted.getTime()) / (1000 * 60 * 60 * 24))
   if (diffDays === 0) return 'Today'
   if (diffDays === 1) return '1 day ago'
   if (diffDays < 7) return `${diffDays} days ago`
@@ -59,73 +55,69 @@ function formatPosted(dateStr?: string): string {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
     const { query, location, jobType, datePosted } = await req.json()
     const apiKey = process.env.RAPIDAPI_KEY
 
     if (!apiKey) {
-      return NextResponse.json({ jobs: getMockJobs(query, location) })
+      return NextResponse.json({ jobs: [], debugError: 'No RAPIDAPI_KEY env var set' })
     }
 
-    const cacheKey = `${query}|${location}|${jobType}|${datePosted}`
-    const cached = cache.get(cacheKey)
-    if (cached && Date.now() - cached.ts < CACHE_TTL_MS) {
-      return NextResponse.json({ jobs: cached.jobs })
-    }
-
-    const baseParams = new URLSearchParams({
-      query: [query, jobType, location].filter(Boolean).join(' '),
+    const baseParams: Record<string, string> = {
+      query: [query, location].filter(Boolean).join(' '),
       num_pages: '1',
       country: 'us',
-    })
-    if (DATE_FILTER_MAP[datePosted]) {
-      baseParams.set('date_posted', DATE_FILTER_MAP[datePosted])
     }
-    if (jobType === 'Remote') {
-      baseParams.set('remote_jobs_only', 'true')
-    }
+    if (DATE_FILTER_MAP[datePosted]) baseParams.date_posted = DATE_FILTER_MAP[datePosted]
+    if (jobType === 'Remote') baseParams.remote_jobs_only = 'true'
     if (jobType && jobType !== 'Any' && jobType !== 'Remote') {
-      const typeMap: Record<string, string> = {
-        'Full-time': 'FULLTIME',
-        'Part-time': 'PARTTIME',
-        'Contract': 'CONTRACTOR',
-      }
-      if (typeMap[jobType]) baseParams.set('employment_types', typeMap[jobType])
+      const typeMap: Record<string, string> = { 'Full-time': 'FULLTIME', 'Part-time': 'PARTTIME', 'Contract': 'CONTRACTOR' }
+      if (typeMap[jobType]) baseParams.employment_types = typeMap[jobType]
     }
 
     const headers = {
-      'X-RapidAPI-Key': apiKey,
-      'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
+      'x-rapidapi-key': apiKey,
+      'x-rapidapi-host': 'jsearch.p.rapidapi.com',
+      'Content-Type': 'application/json',
+    }
+    const BASE_URL = 'https://jsearch.p.rapidapi.com/search-v2'
+
+    const firstRes = await fetch(`${BASE_URL}?${new URLSearchParams({ ...baseParams, page: '1' })}`, { headers })
+    const firstBody = await firstRes.json()
+
+    console.log('[job-search] status:', firstRes.status, 'body keys:', Object.keys(firstBody || {}), 'data type:', typeof firstBody?.data, 'data sample:', JSON.stringify(firstBody).slice(0, 300))
+
+    if (!firstRes.ok || firstBody?.message) {
+      return NextResponse.json({ jobs: [], debugError: `JSearch error ${firstRes.status}: ${firstBody?.message || JSON.stringify(firstBody).slice(0, 200)}` })
     }
 
-    const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 5000)
+    // search-v2 may return data as array or wrap jobs differently
+    const extractJobs = (body: Record<string, unknown>): JSearchJob[] => {
+      if (Array.isArray(body?.data)) return body.data as JSearchJob[]
+      if (Array.isArray((body?.data as Record<string, unknown>)?.jobs)) return (body.data as Record<string, unknown>).jobs as JSearchJob[]
+      if (Array.isArray(body?.jobs)) return body.jobs as JSearchJob[]
+      if (Array.isArray(body?.results)) return body.results as JSearchJob[]
+      return []
+    }
 
-    let allJobs: JSearchJob[] = []
-    try {
-      baseParams.set('page', '1')
-      const res = await fetch(`https://jsearch.p.rapidapi.com/search?${baseParams}`, {
-        headers,
-        signal: controller.signal,
+    const allJobs: JSearchJob[] = extractJobs(firstBody)
+
+    const moreResults = await Promise.allSettled(
+      [2, 3].map(page => {
+        const params = new URLSearchParams({ ...baseParams, page: String(page) })
+        return fetch(`${BASE_URL}?${params}`, { headers }).then(r => r.json())
       })
-      const json = await res.json()
-      allJobs = json.data || []
-    } catch {
-      // timeout or network error — fall through to mock
-    } finally {
-      clearTimeout(timeout)
+    )
+    for (const result of moreResults) {
+      if (result.status === 'fulfilled') {
+        allJobs.push(...extractJobs(result.value))
+      }
     }
 
-    if (allJobs.length === 0) {
-      return NextResponse.json({ jobs: getMockJobs(query, location) })
-    }
-
-    const seen = new Set<string>()
-    const jobs = allJobs.filter((j: JSearchJob) => {
-      const key = `${j.job_title}|${j.employer_name}|${j.job_apply_link}`
-      if (seen.has(key)) return false
-      seen.add(key)
-      return true
-    }).map((j: JSearchJob) => ({
+    const jobs = allJobs.map((j: JSearchJob) => ({
       title: j.job_title || '',
       company: j.employer_name || '',
       location: formatLocation(j),
@@ -136,65 +128,9 @@ export async function POST(req: NextRequest) {
       source: j.job_publisher || 'JSearch',
     }))
 
-    cache.set(cacheKey, { jobs, ts: Date.now() })
     return NextResponse.json({ jobs })
   } catch (err) {
-    console.error(err)
-    return NextResponse.json({ jobs: [] }, { status: 500 })
+    console.error('[job-search] Error:', err)
+    return NextResponse.json({ jobs: [], debugError: String(err) }, { status: 200 })
   }
-}
-
-function getMockJobs(query: string, location: string) {
-  return [
-    {
-      title: `Senior ${query}`,
-      company: 'Acme Corp',
-      location: location || 'San Francisco, CA',
-      salary: '$140k – $180k',
-      posted: '2 days ago',
-      description: 'We are looking for an experienced professional to join our growing team. You will work on challenging problems and collaborate with world-class engineers across a fast-paced, mission-driven environment.',
-      url: 'https://www.linkedin.com/jobs/',
-      source: 'LinkedIn',
-    },
-    {
-      title: query,
-      company: 'TechStartup Inc',
-      location: location || 'Remote',
-      salary: '$120k – $160k',
-      posted: '1 week ago',
-      description: 'Join our fast-growing startup and help shape the future of our product. Competitive salary, equity, and great benefits.',
-      url: 'https://www.indeed.com/jobs',
-      source: 'Indeed',
-    },
-    {
-      title: `${query} – Growth Track`,
-      company: 'Enterprise Solutions LLC',
-      location: location || 'New York, NY',
-      salary: '$130k – $170k',
-      posted: '3 days ago',
-      description: 'Exciting opportunity for a motivated professional ready to make an impact. Strong culture, mentorship program, and clear advancement path.',
-      url: 'https://www.glassdoor.com/Job/',
-      source: 'Glassdoor',
-    },
-    {
-      title: `${query} Contractor`,
-      company: 'Bright Consulting Group',
-      location: location || 'Austin, TX',
-      salary: '$75 – $95 / hr',
-      posted: '5 days ago',
-      description: 'Short-term contract role with potential to convert full-time. Ideal for someone available to start immediately.',
-      url: 'https://www.linkedin.com/jobs/',
-      source: 'LinkedIn',
-    },
-    {
-      title: `Associate ${query}`,
-      company: 'NextLevel Finance',
-      location: location || 'Chicago, IL',
-      salary: '$90k – $115k',
-      posted: '1 day ago',
-      description: 'Great entry point for someone looking to grow quickly. Structured mentorship and clear internal mobility.',
-      url: 'https://www.indeed.com/jobs',
-      source: 'Indeed',
-    },
-  ]
 }

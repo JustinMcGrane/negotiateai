@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
 import { createServiceClient } from '@/lib/supabase/server'
@@ -8,33 +8,41 @@ import { formatProfileContext } from '@/lib/profile-context'
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 function buildAssessmentSystemPrompt(profileContext: string) {
+  const hasWorthData = profileContext.includes('Current salary:')
   const profileSection = profileContext ? `\n\nWhat you already know about them:\n${profileContext}\n` : ''
-  return `You are Sarah, a personal recruiting assistant on the Hayven platform. You are running a free salary assessment for a new user.${profileSection}
+  const step1 = hasWorthData
+    ? `STEP 1 — YOU ALREADY HAVE THEIR DATA:
+You know their role, location, current salary, and market gap from the salary checker. Do NOT ask for information you already have. Jump straight into helping them close the gap. Ask only what you genuinely don't know yet — like years of experience or whether they want to negotiate their current role or find a new one.`
+    : `STEP 1 — COLLECT INFORMATION (naturally, conversationally):
+Learn their current role and title, years of experience, location, and current salary (ask gently). Ask one or two things at a time. Never interrogate.`
 
-YOUR GOAL: Collect enough information to give them a personalized salary assessment, then deliver it honestly and motivatingly.
+  return `You are Sarah, a personal career coach on the Hayven platform. You help people understand their market value and take action to get paid what they're worth.${profileSection}
 
-STEP 1 — COLLECT INFORMATION (naturally, conversationally):
-Learn their current role and title, years of experience, location, highest education level, and current salary (ask gently). Encourage them to paste their resume for more accurate recommendations. Ask one or two things at a time. Never interrogate.
+YOUR GOAL: Give them specific, honest, actionable advice about their career and compensation situation.
 
-STEP 2 — DELIVER THE ASSESSMENT (only when you have enough info):
-Once you have their role, experience, and location, deliver the assessment. Include:
-1. Their current market salary range — what they should be earning right now
-2. A specific target role one level up with a realistic salary range for that title in their market
-3. An honest encouraging timeline — how long it typically takes to reach that role (be specific: "most people I work with in your position land this in 4 to 6 months")
-4. One or two specific things standing between them and that role — honest but not crushing
-5. A warm close acknowledging this is achievable and that the platform exists to help them get there faster
+${step1}
 
-Be genuinely encouraging. Give real hope based on real numbers. Do not be vague.
+STEP 2 — DELIVER REAL ADVICE:
+Give them a concrete next step based on their situation. Include:
+1. Whether they should negotiate their current salary or find a new role (or both)
+2. A realistic target salary and timeline based on their role and market
+3. The one or two things most likely standing between them and that number
+4. What to actually do first
 
-When you have delivered the full assessment, end your message with this exact line on its own:
+Be direct. Give real numbers. Do not be vague or hedge everything.
+
+When you have delivered a full picture of their situation and next steps, end your message with:
 [ASSESSMENT_COMPLETE]{"currentSalary":CURRENT_ESTIMATE,"currentTitle":"THEIR_CURRENT_TITLE","targetTitle":"TARGET_TITLE","targetSalary":TARGET_SALARY_MIDPOINT,"timeline":"X to Y months"}[/ASSESSMENT_COMPLETE]
-
-Replace values with real numbers and strings. currentSalary and targetSalary are integers (no $ sign). timeline is a short string like "4 to 6 months".
 
 HOW YOU COMMUNICATE:
 - Write like a human. Short paragraphs. Plain sentences.
 - Never use bullet points or headers.
-- No filler phrases. One question at a time.`
+- No filler phrases like "Great question" or "Absolutely".
+- One question at a time. Never end with a list of questions.
+- If their approach is wrong, say so directly but kindly.
+
+MENTIONING SIGN-UP:
+You can mention signing up at most once, and only when the moment genuinely calls for it. Good moments: after you've delivered a real insight or concrete number, or when they ask for something that requires continuity — like tracking progress, preparing for an interview next week, or following up on an offer. Bad moments: mid-conversation, before you've given them real value, or when they're in the middle of a problem. When you do mention it, make it one natural sentence at the end of a response — frame it as a capability ("if you sign up I'll remember all of this for next time") not a pitch. Never use words like "unlock" or "upgrade". Never make it sound like a wall. If you've already mentioned it once, never bring it up again.`
 }
 
 function buildFreeSystemPrompt(profileContext: string) {
@@ -131,7 +139,7 @@ async function extractAndSaveMemory(
       .join('\n')
 
     const extraction = await client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 256,
       messages: [{
         role: 'user',
@@ -157,34 +165,92 @@ async function extractAndSaveMemory(
   }
 }
 
+const GUEST_LIMIT = 10
+const guestUsage = new Map<string, { count: number; reset: number }>()
+
+function checkGuestLimit(ip: string): { allowed: boolean; used: number } {
+  const now = Date.now()
+  const window = 24 * 60 * 60 * 1000 // 24 hours
+  const entry = guestUsage.get(ip)
+  if (!entry || now > entry.reset) {
+    guestUsage.set(ip, { count: 1, reset: now + window })
+    return { allowed: true, used: 1 }
+  }
+  if (entry.count >= GUEST_LIMIT) return { allowed: false, used: entry.count }
+  entry.count++
+  return { allowed: true, used: entry.count }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
+    const body = await req.json()
+    const { messages, contextNote } = body
 
+    // Guest (unauthenticated) path
     if (!user) {
-      return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+      const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+      const guest = checkGuestLimit(ip)
+      if (!guest.allowed) {
+        return NextResponse.json({ error: 'limit_reached', used: guest.used, limit: GUEST_LIMIT }, { status: 429 })
+      }
+      const systemPrompt = buildAssessmentSystemPrompt(contextNote ?? '')
+      const anthropicMessages = messages
+        .filter((m: { role: string }) => m.role !== 'system')
+        .map((m: { role: string; content: string }) => ({ role: m.role as 'user' | 'assistant', content: m.content }))
+      while (anthropicMessages.length > 0 && anthropicMessages[0].role === 'assistant') anthropicMessages.shift()
+      if (anthropicMessages.length === 0) return NextResponse.json({ error: 'No messages' }, { status: 400 })
+      const response = await client.messages.create({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1024,
+        system: systemPrompt,
+        messages: anthropicMessages,
+      })
+      const rawContent = response.content[0].type === 'text' ? response.content[0].text : ''
+      let assessment = null
+      let content = rawContent
+      const assessmentMatch = rawContent.match(/\[ASSESSMENT_COMPLETE\]([\s\S]*?)\[\/ASSESSMENT_COMPLETE\]/)
+      if (assessmentMatch) {
+        try { assessment = JSON.parse(assessmentMatch[1]) } catch {}
+        content = rawContent.replace(/\[ASSESSMENT_COMPLETE\][\s\S]*?\[\/ASSESSMENT_COMPLETE\]/, '').trim()
+      }
+      return NextResponse.json({ content, used: guest.used, limit: GUEST_LIMIT, isPro: false, assessment })
     }
 
-    const [{ data: profile }, { messages }] = await Promise.all([
-      supabase
-        .from('profiles')
-        .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role')
-        .eq('id', user.id)
-        .single(),
-      req.json(),
-    ])
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role')
+      .eq('id', user.id)
+      .single()
 
-    const isPro = profile?.plan === 'pro' || profile?.plan === 'elite'
+    const isPro = ['pro', 'elite'].includes((profile?.plan ?? '').toLowerCase())
+    console.log('[recruiter] plan:', profile?.plan, 'isPro:', isPro)
+
     const usage = await checkAndIncrementUsage(user.id, 'recruiter', isPro)
 
     if (!usage.allowed) {
-      return new Response(JSON.stringify({
+      // Generate personalized upgrade hook from conversation
+      let upgradeHook = "You're close to a breakthrough."
+      try {
+        const recentMessages = messages.slice(-6)
+        const hookRes = await client.messages.create({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 80,
+          messages: [{
+            role: 'user',
+            content: `Based on this conversation, write ONE punchy sentence (max 15 words) that highlights what the user stands to gain by continuing with a career coach. Reference their specific situation if possible. No quotes, no intro, just the sentence.\n\nConversation:\n${recentMessages.map((m: {role: string; content: string}) => `${m.role}: ${m.content}`).join('\n')}`,
+          }],
+        })
+        if (hookRes.content[0].type === 'text') upgradeHook = hookRes.content[0].text.trim()
+      } catch { /* best effort */ }
+
+      return NextResponse.json({
         error: 'limit_reached',
-        message: `You've used all ${FREE_LIMITS.recruiter} free messages this month. Upgrade to Pro for unlimited access to Sarah.`,
+        upgradeHook,
         used: usage.used,
         limit: usage.limit,
-      }), { status: 429 })
+      }, { status: 429 })
     }
 
     const onboardingProfile = {
@@ -197,19 +263,25 @@ export async function POST(req: NextRequest) {
     const profileContext = formatProfileContext(onboardingProfile)
     const isAssessmentMode = !isPro
 
-    let systemPrompt = isAssessmentMode ? buildAssessmentSystemPrompt(profileContext) : buildFreeSystemPrompt(profileContext)
+    const combinedContext = [profileContext, contextNote].filter(Boolean).join('\n\n')
+    let systemPrompt = isAssessmentMode ? buildAssessmentSystemPrompt(combinedContext) : buildFreeSystemPrompt(combinedContext)
     let memory: Record<string, string> = {}
 
     if (isPro) {
+      console.log('[recruiter] fetching pro memory...')
       const serviceClient = createServiceClient()
-      const { data: memoryData } = await serviceClient
+      const { data: memoryData, error: memoryError } = await serviceClient
         .from('sarah_memory')
         .select('context')
         .eq('user_id', user.id)
         .single()
 
+      if (memoryError && memoryError.code !== 'PGRST116') {
+        console.log('[recruiter] memory error:', memoryError)
+      }
       memory = (memoryData?.context as Record<string, string>) ?? {}
       systemPrompt = buildProSystemPrompt(memory, profileContext)
+      console.log('[recruiter] pro system prompt built, calling claude...')
     }
 
     const anthropicMessages = messages
@@ -219,70 +291,44 @@ export async function POST(req: NextRequest) {
         content: m.content,
       }))
 
+    // Anthropic requires messages to start with 'user' role
     while (anthropicMessages.length > 0 && anthropicMessages[0].role === 'assistant') {
       anthropicMessages.shift()
     }
 
     if (anthropicMessages.length === 0) {
-      return new Response(JSON.stringify({ error: 'No messages to process' }), { status: 400 })
+      return NextResponse.json({ error: 'No messages to process' }, { status: 400 })
     }
 
-    const encoder = new TextEncoder()
-    const stream = new ReadableStream({
-      async start(controller) {
-        let fullContent = ''
+    const response = await client.messages.create({
+      model: isPro ? 'claude-opus-4-8' : 'claude-sonnet-4-6',
+      max_tokens: isPro ? 2048 : 1024,
+      system: systemPrompt,
+      messages: anthropicMessages,
+    })
 
+    const rawContent = response.content[0].type === 'text' ? response.content[0].text : ''
+
+    // Parse assessment completion signal for free users
+    let assessment = null
+    let content = rawContent
+    if (!isPro) {
+      const assessmentMatch = rawContent.match(/\[ASSESSMENT_COMPLETE\]([\s\S]*?)\[\/ASSESSMENT_COMPLETE\]/)
+      if (assessmentMatch) {
         try {
-          const anthropicStream = client.messages.stream({
-            model: isPro ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001',
-            max_tokens: isPro ? 2048 : 1024,
-            system: systemPrompt,
-            messages: anthropicMessages,
-          })
-
-          for await (const chunk of anthropicStream) {
-            if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
-              const text = chunk.delta.text
-              fullContent += text
-              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`))
-            }
-          }
-
-          // Parse assessment signal for free users
-          let assessment = null
-          let content = fullContent
-          if (!isPro) {
-            const assessmentMatch = fullContent.match(/\[ASSESSMENT_COMPLETE\]([\s\S]*?)\[\/ASSESSMENT_COMPLETE\]/)
-            if (assessmentMatch) {
-              try { assessment = JSON.parse(assessmentMatch[1]) } catch {}
-              content = fullContent.replace(/\[ASSESSMENT_COMPLETE\][\s\S]*?\[\/ASSESSMENT_COMPLETE\]/, '').trim()
-            }
-          }
-
-          // Send final metadata
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ done: true, content, used: usage.used, limit: usage.limit, isPro, assessment })}\n\n`))
-        } catch (err) {
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: 'Stream failed' })}\n\n`))
-        } finally {
-          controller.close()
-        }
-
-        // Kick off memory extraction async after stream closes
-        if (isPro && messages.length % 4 === 0) {
-          extractAndSaveMemory(user.id, messages, memory)
-        }
+          assessment = JSON.parse(assessmentMatch[1])
+        } catch {}
+        content = rawContent.replace(/\[ASSESSMENT_COMPLETE\][\s\S]*?\[\/ASSESSMENT_COMPLETE\]/, '').trim()
       }
-    })
+    }
 
-    return new Response(stream, {
-      headers: {
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
-      },
-    })
+    if (isPro && messages.length % 4 === 0) {
+      extractAndSaveMemory(user.id, messages, memory)
+    }
+
+    return NextResponse.json({ content, used: usage.used, limit: usage.limit, isPro, assessment })
   } catch (err) {
     console.error('[recruiter] error:', err)
-    return new Response(JSON.stringify({ error: 'Failed to get response' }), { status: 500 })
+    return NextResponse.json({ error: 'Failed to get response' }, { status: 500 })
   }
 }
