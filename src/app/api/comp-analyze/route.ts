@@ -20,13 +20,14 @@ async function trackUsage(feature: string) {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
     const body = await req.json()
     const { role, experience, location, companySize, industry } = body
 
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    // Don't gate on auth — this is a public landing page tool
-    const profile = user ? await getUserProfile().catch(() => null) : null
+    const profile = await getUserProfile().catch(() => null)
     const profileContext = formatProfileContext(profile)
     const contextBlock = profileContext ? `\n\n${profileContext}\n` : ''
 
