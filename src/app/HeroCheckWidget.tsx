@@ -18,8 +18,8 @@ function fmt(n: number) {
 }
 
 function track(event: string) {
-  if (typeof window !== 'undefined' && (window as Record<string, unknown>).gtag) {
-    (window as Record<string, unknown> & { gtag: Function }).gtag('event', event)
+  if (typeof window !== 'undefined' && (window as unknown as Record<string, unknown>).gtag) {
+    ;(window as unknown as { gtag: (a: string, b: string) => void }).gtag('event', event)
   }
 }
 
