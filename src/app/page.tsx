@@ -5,7 +5,6 @@ import {
   TrendingUp, BookOpen, Play, FileSearch,
   Calculator, DollarSign, Mail, Shield, PenLine, MessageSquare,
   UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowRight,
-  CheckCircle,
 } from 'lucide-react'
 import { LandingNav } from '@/components/negotiate/LandingNav'
 import { FAQ } from '@/components/negotiate/FAQ'
@@ -201,36 +200,9 @@ export default function LandingPage() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }} className="landing-hero-grid">
           {/* Left: copy */}
           <div>
-            <p style={{ fontSize: 16, color: '#64748b', lineHeight: 1.75, marginBottom: 32 }}>
+            <p style={{ fontSize: 'clamp(18px, 2vw, 24px)', color: '#374151', lineHeight: 1.65, fontWeight: 400 }}>
               Most people leave $15K–$40K on the table every year without knowing it. Tell Sarah your role and salary — she&apos;ll show you exactly where you stand and what to do about it.
             </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 40 }}>
-              {[
-                'Know exactly what the market pays for your role',
-                'Get a step-by-step negotiation plan',
-                'Interview prep and counter-offer strategy',
-                'Sarah remembers your whole journey',
-              ].map(item => (
-                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#374151' }}>
-                  <CheckCircle size={15} color="#2952CC" style={{ flexShrink: 0 }} />
-                  {item}
-                </div>
-              ))}
-            </div>
-
-            <div style={{ display: 'flex', gap: 36, flexWrap: 'wrap', paddingTop: 28, borderTop: '1px solid #f1f5f9' }}>
-              {[
-                { stat: '$27K', label: 'avg left on table' },
-                { stat: '85%', label: 'negotiate & get more' },
-                { stat: '30s', label: 'to see your gap' },
-              ].map(s => (
-                <div key={s.stat}>
-                  <div style={{ fontSize: 28, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
-                  <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right: live widget */}
