@@ -81,7 +81,6 @@ export default function RecruiterPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: allMessages }),
       })
-      const data = await res.json()
 
       if (res.status === 429) {
         setLimitReached(true)
@@ -89,24 +88,62 @@ export default function RecruiterPage() {
         return
       }
 
-      if (data.used !== undefined) setUsed(data.used)
+      // Add empty assistant message to stream into
+      setMessages(prev => [...prev, { role: 'assistant', content: '' }])
+      setLoading(false)
 
-      if (data.isPro && !isPro) {
-        setIsPro(true)
-        // Refresh memory
-        fetch('/api/sarah-memory').then(r => r.json()).then(d => setMemory(d.memory ?? {}))
-        // Replace intro with Pro intro if first exchange
-        if (messages.length === 1) {
-          setMessages([
-            { role: 'assistant', content: PRO_INTRO },
-            userMsg,
-            { role: 'assistant', content: data.content },
-          ])
-          return
+      const reader = res.body!.getReader()
+      const decoder = new TextDecoder()
+      let buffer = ''
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        buffer += decoder.decode(value, { stream: true })
+        const lines = buffer.split('\n')
+        buffer = lines.pop() ?? ''
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue
+          try {
+            const parsed = JSON.parse(line.slice(6))
+
+            if (parsed.text) {
+              setMessages(prev => {
+                const updated = [...prev]
+                updated[updated.length - 1] = {
+                  role: 'assistant',
+                  content: updated[updated.length - 1].content + parsed.text,
+                }
+                return updated
+              })
+            }
+
+            if (parsed.done) {
+              if (parsed.used !== undefined) setUsed(parsed.used)
+              // Use the clean content (strips assessment signal etc)
+              setMessages(prev => {
+                const updated = [...prev]
+                updated[updated.length - 1] = { role: 'assistant', content: parsed.content }
+                return updated
+              })
+              if (parsed.isPro && !isPro) {
+                setIsPro(true)
+                fetch('/api/sarah-memory').then(r => r.json()).then(d => setMemory(d.memory ?? {}))
+              }
+            }
+
+            if (parsed.error) {
+              setMessages(prev => {
+                const updated = [...prev]
+                updated[updated.length - 1] = { role: 'assistant', content: 'Something went wrong. Please try again.' }
+                return updated
+              })
+            }
+          } catch {}
         }
       }
-
-      setMessages(prev => [...prev, { role: 'assistant', content: data.content }])
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
       setMessages(prev => [...prev, { role: 'assistant', content: `Error: ${msg}` }])

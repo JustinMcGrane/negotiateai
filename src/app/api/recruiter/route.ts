@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
 import { createServiceClient } from '@/lib/supabase/server'
@@ -163,7 +163,7 @@ export async function POST(req: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
 
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
     }
 
     const [{ data: profile }, { messages }] = await Promise.all([
@@ -179,12 +179,12 @@ export async function POST(req: NextRequest) {
     const usage = await checkAndIncrementUsage(user.id, 'recruiter', isPro)
 
     if (!usage.allowed) {
-      return NextResponse.json({
+      return new Response(JSON.stringify({
         error: 'limit_reached',
         message: `You've used all ${FREE_LIMITS.recruiter} free messages this month. Upgrade to Pro for unlimited access to Sarah.`,
         used: usage.used,
         limit: usage.limit,
-      }, { status: 429 })
+      }), { status: 429 })
     }
 
     const onboardingProfile = {
@@ -219,44 +219,70 @@ export async function POST(req: NextRequest) {
         content: m.content,
       }))
 
-    // Anthropic requires messages to start with 'user' role
     while (anthropicMessages.length > 0 && anthropicMessages[0].role === 'assistant') {
       anthropicMessages.shift()
     }
 
     if (anthropicMessages.length === 0) {
-      return NextResponse.json({ error: 'No messages to process' }, { status: 400 })
+      return new Response(JSON.stringify({ error: 'No messages to process' }), { status: 400 })
     }
 
-    const response = await client.messages.create({
-      model: isPro ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001',
-      max_tokens: isPro ? 2048 : 1024,
-      system: systemPrompt,
-      messages: anthropicMessages,
+    const encoder = new TextEncoder()
+    const stream = new ReadableStream({
+      async start(controller) {
+        let fullContent = ''
+
+        try {
+          const anthropicStream = client.messages.stream({
+            model: isPro ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001',
+            max_tokens: isPro ? 2048 : 1024,
+            system: systemPrompt,
+            messages: anthropicMessages,
+          })
+
+          for await (const chunk of anthropicStream) {
+            if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
+              const text = chunk.delta.text
+              fullContent += text
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`))
+            }
+          }
+
+          // Parse assessment signal for free users
+          let assessment = null
+          let content = fullContent
+          if (!isPro) {
+            const assessmentMatch = fullContent.match(/\[ASSESSMENT_COMPLETE\]([\s\S]*?)\[\/ASSESSMENT_COMPLETE\]/)
+            if (assessmentMatch) {
+              try { assessment = JSON.parse(assessmentMatch[1]) } catch {}
+              content = fullContent.replace(/\[ASSESSMENT_COMPLETE\][\s\S]*?\[\/ASSESSMENT_COMPLETE\]/, '').trim()
+            }
+          }
+
+          // Send final metadata
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ done: true, content, used: usage.used, limit: usage.limit, isPro, assessment })}\n\n`))
+        } catch (err) {
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: 'Stream failed' })}\n\n`))
+        } finally {
+          controller.close()
+        }
+
+        // Kick off memory extraction async after stream closes
+        if (isPro && messages.length % 4 === 0) {
+          extractAndSaveMemory(user.id, messages, memory)
+        }
+      }
     })
 
-    const rawContent = response.content[0].type === 'text' ? response.content[0].text : ''
-
-    // Parse assessment completion signal for free users
-    let assessment = null
-    let content = rawContent
-    if (!isPro) {
-      const assessmentMatch = rawContent.match(/\[ASSESSMENT_COMPLETE\]([\s\S]*?)\[\/ASSESSMENT_COMPLETE\]/)
-      if (assessmentMatch) {
-        try {
-          assessment = JSON.parse(assessmentMatch[1])
-        } catch {}
-        content = rawContent.replace(/\[ASSESSMENT_COMPLETE\][\s\S]*?\[\/ASSESSMENT_COMPLETE\]/, '').trim()
-      }
-    }
-
-    if (isPro && messages.length % 4 === 0) {
-      extractAndSaveMemory(user.id, messages, memory)
-    }
-
-    return NextResponse.json({ content, used: usage.used, limit: usage.limit, isPro, assessment })
+    return new Response(stream, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      },
+    })
   } catch (err) {
     console.error('[recruiter] error:', err)
-    return NextResponse.json({ error: 'Failed to get response' }, { status: 500 })
+    return new Response(JSON.stringify({ error: 'Failed to get response' }), { status: 500 })
   }
 }
