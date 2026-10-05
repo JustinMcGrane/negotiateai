@@ -9,10 +9,9 @@ import {
   BookOpen, Mail, Shield, PenLine, Play, MessageSquare,
   BarChart2, Settings, CreditCard, ChevronRight,
   UserCircle, FileText, Search, ClipboardList, PenSquare, ArrowUpLeft,
-  Zap, Users, Star, Award, GitCompare, Map, LogOut,
+  Zap, Users, Star, Award, GitCompare, Map,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
 
 type NavItem = { label: string; href: string; icon: LucideIcon }
 type NavGroup = { label: string; items: NavItem[] }
@@ -73,7 +72,6 @@ const nav: NavEntry[] = [
 
 export function Sidebar() {
   const path = usePathname()
-  const router = useRouter()
   const [plan, setPlan] = useState<string | null>(null)
 
   useEffect(() => {
@@ -83,11 +81,6 @@ export function Sidebar() {
       setPlan(profile?.plan ?? 'free')
     })
   }, [])
-
-  async function handleLogout() {
-    await createClient().auth.signOut()
-    router.push('/')
-  }
 
   return (
     <aside
@@ -214,19 +207,6 @@ export function Sidebar() {
           <ArrowUpLeft size={13} />
           Back to website
         </Link>
-        <button
-          onClick={handleLogout}
-          style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            padding: '6px 8px', fontSize: 12,
-            color: '#94a3b8',
-            background: 'none', border: 'none', cursor: 'pointer',
-            borderRadius: 6, width: '100%', textAlign: 'left',
-          }}
-        >
-          <LogOut size={13} />
-          Log out
-        </button>
       </div>
     </aside>
   )
