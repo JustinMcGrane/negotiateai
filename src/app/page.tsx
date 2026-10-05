@@ -10,6 +10,7 @@ import {
 import { LandingNav } from '@/components/negotiate/LandingNav'
 import { FAQ } from '@/components/negotiate/FAQ'
 import { LandingSarahWidget } from '@/components/negotiate/LandingSarahWidget'
+import { HeroWidget } from '@/components/negotiate/HeroWidget'
 
 export const metadata: Metadata = {
   title: 'Hayven — Salary Negotiation Coach & Career Tools',
@@ -187,106 +188,31 @@ export default function LandingPage() {
 
       <main>
       {/* Hero */}
-      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px 88px', textAlign: 'center' }} className="landing-hero landing-section-pad">
-        <h1 style={{ fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(40px, 9.5vw, 112px)' }}>
-          Are You Underpaid?
-        </h1>
-        <p style={{ fontSize: 'clamp(18px, 2.2vw, 24px)', fontWeight: 700, color: '#2952CC', letterSpacing: '-0.02em', marginBottom: 20 }}>Find out in 30 seconds — free.</p>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 50, padding: '10px 20px 10px 14px', marginBottom: 40 }}>
-          <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'linear-gradient(135deg, #667eea, #764ba2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, color: '#fff', flexShrink: 0 }}>M</div>
-          <div style={{ textAlign: 'left' }}>
-            <div style={{ fontSize: 13, color: '#374151', fontStyle: 'italic', lineHeight: 1.4 }}>&ldquo;Found out I was $42K below market. Got the raise in two weeks.&rdquo;</div>
-            <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2, fontWeight: 500 }}>— Michael T., Product Manager</div>
-          </div>
-        </div>
+      <section style={{ maxWidth: 1140, margin: '0 auto', padding: '72px 40px 80px' }} className="landing-hero landing-section-pad">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }} className="landing-hero-grid">
+          {/* Left: copy */}
+          <div>
+            <h1 style={{ fontWeight: 900, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 18, color: '#0f172a', fontSize: 'clamp(36px, 6vw, 76px)' }}>
+              Are You<br />Underpaid?
+            </h1>
+            <p style={{ fontSize: 'clamp(16px, 1.8vw, 20px)', fontWeight: 700, color: '#2952CC', letterSpacing: '-0.01em', marginBottom: 36 }}>Find out in 30 seconds — free.</p>
 
-        {/* Salary card */}
-        <div style={{
-          background: '#fff',
-          border: '1px solid #e8edf3',
-          borderRadius: 20,
-          padding: '28px 24px 24px',
-          boxShadow: '0 8px 40px rgba(0,0,0,0.09)',
-          maxWidth: 420,
-          margin: '0 auto 32px',
-          textAlign: 'left',
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
-            <div>
-              <div style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.1em', marginBottom: 5 }}>SALARY ANALYSIS</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 2 }}>Software Engineer</div>
-              <div style={{ fontSize: 12, color: '#94a3b8' }}>San Francisco, CA · 4 yrs exp.</div>
-            </div>
-            <div style={{ background: '#fef2f2', borderRadius: 8, padding: '4px 10px', fontSize: 11, fontWeight: 700, color: '#dc2626' }}>
-              Underpaid
+            <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
+              {[
+                { stat: '$27K', label: 'avg left on table' },
+                { stat: '85%', label: 'negotiate & get more' },
+                { stat: '30s', label: 'to see your gap' },
+              ].map(s => (
+                <div key={s.stat}>
+                  <div style={{ fontSize: 26, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
+                  <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div style={{ marginBottom: 18 }}>
-            <div style={{ position: 'relative', height: 7, borderRadius: 99, overflow: 'visible', marginBottom: 8, background: '#f1f5f9' }}>
-              <div style={{ position: 'absolute', inset: 0, borderRadius: 99, background: 'linear-gradient(to right, #fca5a5 0%, #fde68a 45%, #6ee7b7 100%)' }} />
-              <div style={{ position: 'absolute', top: '50%', left: '22%', transform: 'translate(-50%, -50%)', width: 16, height: 16, background: '#fff', border: '3px solid #0f172a', borderRadius: '50%', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', zIndex: 1 }} />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 9, fontWeight: 600, color: '#cbd5e1', letterSpacing: '0.06em' }}>
-              <span>BELOW MARKET</span><span>MARKET RATE</span><span>ABOVE MARKET</span>
-            </div>
-          </div>
-
-          {[
-            { label: 'Your current salary', value: '$112,000', color: '#ef4444' },
-            { label: 'Market median', value: '$148,000', color: '#0f172a' },
-            { label: 'Top 25%', value: '$171,000', color: '#10b981' },
-          ].map((row, i, arr) => (
-            <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: i < arr.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
-              <span style={{ fontSize: 13, color: '#64748b' }}>{row.label}</span>
-              <span style={{ fontSize: 13, fontWeight: 700, color: row.color }}>{row.value}</span>
-            </div>
-          ))}
-
-          <div style={{ marginTop: 16, background: '#fef2f2', borderRadius: 10, padding: '12px 14px' }}>
-            <div style={{ fontSize: 10, fontWeight: 600, color: '#b91c1c', letterSpacing: '0.06em', marginBottom: 3 }}>MONEY LEFT ON THE TABLE</div>
-            <div style={{ fontSize: 20, fontWeight: 800, color: '#dc2626', letterSpacing: '-0.02em' }}>$36,000 / year</div>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div style={{ marginBottom: 16 }}>
-          <span style={{
-            display: 'inline-flex', alignItems: 'center', gap: 6,
-            fontSize: 11, fontWeight: 700, letterSpacing: '0.1em',
-            color: '#f59e0b', textTransform: 'uppercase',
-            border: '1px solid rgba(245,158,11,0.3)',
-            background: 'rgba(245,158,11,0.07)',
-            padding: '5px 12px', borderRadius: 20,
-          }}>
-            ★ FREE TO START — NO CREDIT CARD REQUIRED
-          </span>
-        </div>
-        <Link href="#check-market-value" style={{
-          height: 52, display: 'inline-flex', alignItems: 'center', gap: 8,
-          padding: '0 32px',
-          background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-          color: '#fff',
-          borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: 'none',
-          boxShadow: '0 4px 20px rgba(239,68,68,0.35)',
-        }}>
-          Find Out Your Market Value Free <ArrowRight size={16} />
-        </Link>
-        <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 10 }}>
-          Upgrade to Pro for $20/month. Cancel anytime.
-        </div>
-
-        <div style={{ display: 'flex', gap: 36, flexWrap: 'wrap', marginTop: 48, justifyContent: 'center' }}>
-          {[
-            { stat: '$27K', label: 'avg left on table' },
-            { stat: '85%', label: 'negotiate & get more' },
-            { stat: '24/7', label: 'always available' },
-          ].map(s => (
-            <div key={s.stat}>
-              <div style={{ fontSize: 24, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em' }}>{s.stat}</div>
-              <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>{s.label}</div>
-            </div>
-          ))}
+          {/* Right: live widget */}
+          <HeroWidget />
         </div>
       </section>
       <style>{`
