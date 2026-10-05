@@ -84,7 +84,7 @@ export function LandingSarahWidget() {
             <span style={{ fontSize: 12, fontWeight: 700, color: '#fca5a5', letterSpacing: '0.04em' }}>73% of professionals are underpaid</span>
           </div>
           <h2 style={{ fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 900, color: '#fff', lineHeight: 1.05, marginBottom: 16, letterSpacing: '-0.03em' }}>
-            Are you<br /><span style={{ color: '#ef4444' }}>underpaid?</span>
+            Are you<br /><span style={{ color: '#7AB8E8' }}>underpaid?</span>
           </h2>
           <p style={{ fontSize: 15, color: '#94a3b8', lineHeight: 1.7, marginBottom: 28 }}>
             Most people leave $15K–$40K on the table every year. Tell Sarah your role and salary — she&apos;ll show you your exact gap in seconds.
