@@ -87,18 +87,27 @@ export async function POST(req: NextRequest) {
       'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
     }
 
-    const pages = [1, 2, 3]
-    const results = await Promise.allSettled(
-      pages.map((page) => {
-        const params = new URLSearchParams(baseParams)
-        params.set('page', String(page))
-        return fetch(`https://jsearch.p.rapidapi.com/search?${params}`, { headers }).then((r) => r.json())
-      })
-    )
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 8000)
 
-    const allJobs: JSearchJob[] = results.flatMap((r) =>
-      r.status === 'fulfilled' ? (r.value.data || []) : []
-    )
+    let allJobs: JSearchJob[] = []
+    try {
+      baseParams.set('page', '1')
+      const res = await fetch(`https://jsearch.p.rapidapi.com/search?${baseParams}`, {
+        headers,
+        signal: controller.signal,
+      })
+      const json = await res.json()
+      allJobs = json.data || []
+    } catch {
+      // timeout or network error — fall through to mock
+    } finally {
+      clearTimeout(timeout)
+    }
+
+    if (allJobs.length === 0) {
+      return NextResponse.json({ jobs: getMockJobs(query, location) })
+    }
 
     const seen = new Set<string>()
     const jobs = allJobs.filter((j: JSearchJob) => {
