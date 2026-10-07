@@ -2,6 +2,8 @@ export function GET() {
   const body = `User-agent: *
 Allow: /
 Allow: /blog/
+Allow: /tools/salaries
+Allow: /tools/salaries/
 Allow: /resume-builder
 Allow: /resume-builder/software-engineer
 Allow: /resume-builder/product-manager
@@ -13,6 +15,7 @@ Allow: /resume-builder/project-manager
 Allow: /resume-builder/financial-analyst
 Allow: /resume-builder/operations-manager
 Allow: /resume-skills
+Allow: /resume-templates
 Allow: /raise-calculator
 Allow: /salary-to-hourly-calculator
 Allow: /paycheck-calculator
@@ -28,7 +31,21 @@ Allow: /interview-salary-coach
 Allow: /job-tracker
 Allow: /ai-career-coach
 Disallow: /dashboard
-Disallow: /tools/
+Disallow: /tools/comp-analyzer
+Disallow: /tools/offer-evaluator
+Disallow: /tools/equity-calc
+Disallow: /tools/cost-calculator
+Disallow: /tools/playbook
+Disallow: /tools/counter-offer
+Disallow: /tools/objections
+Disallow: /tools/raise-builder
+Disallow: /tools/simulator
+Disallow: /tools/interview-coach
+Disallow: /tools/annual-review
+Disallow: /tools/promotion-planner
+Disallow: /tools/competing-offer
+Disallow: /tools/career-timeline
+Disallow: /tools/cover-letter
 Disallow: /account
 Disallow: /progress
 Disallow: /jobs
