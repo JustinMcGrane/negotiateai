@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
     const response = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 400,
+      temperature: 0,
       system: `You are Sarah, a sharp and direct AI career coach who specializes in salary negotiation. You have access to aggregated compensation data from LinkedIn, Glassdoor, Levels.fyi, and Payscale.
 
 When given a job title, location, and current salary, respond with a JSON object in this exact shape:
