@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Sparkles, Copy, Check } from 'lucide-react'
 import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
+import { ProGate } from '@/components/negotiate/ProGate'
 import posthog from 'posthog-js'
 
 export default function CoverLetterPage() {
@@ -57,7 +58,7 @@ export default function CoverLetterPage() {
   }
 
   return (
-    <div style={{ maxWidth: 800, margin: '0 auto', padding: '32px 24px' }}>
+    <ProGate><div style={{ maxWidth: 800, margin: '0 auto', padding: '32px 24px' }}>
       {showUpgradeModal && <UpgradeModal feature="cover-letter" onClose={() => setShowUpgradeModal(false)} />}
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Cover Letter Generator</h1>
@@ -170,6 +171,6 @@ export default function CoverLetterPage() {
           </div>
         </div>
       )}
-    </div>
+    </div></ProGate>
   )
 }

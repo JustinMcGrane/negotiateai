@@ -1,4 +1,5 @@
 'use client'
+import { ProGate } from '@/components/negotiate/ProGate'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
 
@@ -33,7 +34,7 @@ export default function CostCalculator() {
   const maxVal = result ? Math.max(...result.yearlyData.map((d) => d.market)) : 1
 
   return (
-    <ToolPage title="Cost of not negotiating" desc="See the compounding dollar gap over 5–20 years of accepting less than market rate.">
+    <ProGate><ToolPage title="Cost of not negotiating" desc="See the compounding dollar gap over 5–20 years of accepting less than market rate.">
       <form onSubmit={calculate}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div><div style={lbl}>CURRENT OFFER ($)</div><input type="number" style={inp} placeholder="120000" value={form.currentOffer} onChange={(e) => setForm({ ...form, currentOffer: e.target.value })} required /></div>
@@ -99,6 +100,6 @@ export default function CostCalculator() {
           </div>
         </div>
       )}
-    </ToolPage>
+    </ToolPage></ProGate>
   )
 }

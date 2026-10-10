@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
+import { ProGate } from '@/components/negotiate/ProGate'
 import { PERSONAS } from '@/lib/personas'
 import type { Persona } from '@/lib/personas'
 import { Send, RotateCcw, Copy, Check } from 'lucide-react'
@@ -149,7 +150,7 @@ This is turn ${newTurn} of ${MAX_TURNS}. ${newTurn === MAX_TURNS - 1 ? 'This is 
   const lbl: React.CSSProperties = { fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 4 }
 
   if (stage === 'setup') return (
-    <div style={{ padding: '32px 32px 80px', maxWidth: 780 }}>
+    <ProGate><div style={{ padding: '32px 32px 80px', maxWidth: 780 }}>
       <div style={{ marginBottom: 24 }}>
         <h1 style={{ fontSize: 18, fontWeight: 500 }}>Negotiation simulator</h1>
         <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>Practice a live negotiation with a realistic AI coach. Get a scored debrief after 6 turns.</p>
@@ -204,11 +205,11 @@ This is turn ${newTurn} of ${MAX_TURNS}. ${newTurn === MAX_TURNS - 1 ? 'This is 
           Start simulation →
         </button>
       </div>
-    </div>
+    </div></ProGate>
   )
 
   if (stage === 'chat') return (
-    <div style={{ padding: '24px 32px', maxWidth: 700, height: 'calc(100vh - 0px)', display: 'flex', flexDirection: 'column' }}>
+    <ProGate><div style={{ padding: '24px 32px', maxWidth: 700, height: 'calc(100vh - 0px)', display: 'flex', flexDirection: 'column' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{ width: 36, height: 36, background: persona!.bgColor, border: `1px solid ${persona!.fgColor}30`, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 500, color: persona!.fgColor }}>
@@ -265,11 +266,11 @@ This is turn ${newTurn} of ${MAX_TURNS}. ${newTurn === MAX_TURNS - 1 ? 'This is 
       </div>
 
       <style>{`@keyframes typing-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }`}</style>
-    </div>
+    </div></ProGate>
   )
 
   return (
-    <div style={{ padding: '32px 32px 80px', maxWidth: 780 }}>
+    <ProGate><div style={{ padding: '32px 32px 80px', maxWidth: 780 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <div>
           <h1 style={{ fontSize: 18, fontWeight: 500 }}>Negotiation debrief</h1>
@@ -334,6 +335,6 @@ This is turn ${newTurn} of ${MAX_TURNS}. ${newTurn === MAX_TURNS - 1 ? 'This is 
           </div>
         </div>
       ) : null}
-    </div>
+    </div></ProGate>
   )
 }

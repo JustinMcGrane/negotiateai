@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Sparkles, CheckCircle, AlertCircle, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react'
 import { ClientPageHeader } from '@/components/negotiate/ClientPageHeader'
 import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
+import { ProGate } from '@/components/negotiate/ProGate'
 import posthog from 'posthog-js'
 
 type SectionScore = { name: string; score: number; feedback: string }
@@ -161,7 +162,7 @@ export default function ResumePage() {
   }
 
   return (
-    <div>
+    <ProGate><div>
       {showUpgradeModal && <UpgradeModal feature="resume" onClose={() => setShowUpgradeModal(false)} />}
       <ClientPageHeader title="Resume Analyzer" description="Recruiter-grade feedback and ATS scoring" />
     <div style={{ maxWidth: 820, margin: '0 auto', padding: '32px 24px 80px' }}>
@@ -425,6 +426,6 @@ export default function ResumePage() {
         </div>
       )}
     </div>
-    </div>
+    </div></ProGate>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 interface Result {
   conservative: number; base: number; optimistic: number
@@ -29,7 +30,7 @@ export default function EquityCalc() {
   }
 
   return (
-    <ToolPage title="Equity calculator" desc="Model your equity value across conservative, base, and optimistic exit scenarios.">
+    <ProGate><ToolPage title="Equity calculator" desc="Model your equity value across conservative, base, and optimistic exit scenarios.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div>
@@ -88,6 +89,6 @@ export default function EquityCalc() {
           </div>
         </div>
       )}
-    </ToolPage>
+    </ToolPage></ProGate>
   )
 }

@@ -1,4 +1,5 @@
 'use client'
+import { ProGate } from '@/components/negotiate/ProGate'
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
@@ -39,7 +40,7 @@ export default function ObjectionHandler() {
   }
 
   return (
-    <ToolPage title="Objection handler" desc="Get three targeted responses to any recruiter pushback — assertive, collaborative, or reframe.">
+    <ProGate><ToolPage title="Objection handler" desc="Get three targeted responses to any recruiter pushback — assertive, collaborative, or reframe.">
       <form onSubmit={submit}>
         <div style={{ marginBottom: 14 }}>
           <div style={lbl}>WHAT DID THEY SAY?</div>
@@ -83,6 +84,6 @@ export default function ObjectionHandler() {
           </div>
         </div>
       )}
-    </ToolPage>
+    </ToolPage></ProGate>
   )
 }

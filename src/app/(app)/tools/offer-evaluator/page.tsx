@@ -1,4 +1,5 @@
 'use client'
+import { ProGate } from '@/components/negotiate/ProGate'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
 
@@ -37,7 +38,7 @@ export default function OfferEvaluator() {
   }
 
   return (
-    <ToolPage title="Offer evaluator" desc="Score any job offer 0–100 and get a breakdown of exactly what to negotiate.">
+    <ProGate><ToolPage title="Offer evaluator" desc="Score any job offer 0–100 and get a breakdown of exactly what to negotiate.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div><div style={lbl}>ROLE</div><input style={inp} placeholder="Senior Product Manager" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} required /></div>
@@ -103,6 +104,6 @@ export default function OfferEvaluator() {
           </div>
         </div>
       )}
-    </ToolPage>
+    </ToolPage></ProGate>
   )
 }
