@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     }
 
     const response = await client.messages.create({
-      model: 'claude-opus-4-8-20251101',
+      model: 'claude-opus-4-8',
       max_tokens: 300,
       system: systemPrompt,
       messages: anthropicMessages,
