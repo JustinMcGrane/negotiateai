@@ -99,7 +99,7 @@ Provide a JSON response with EXACTLY this structure. Be brutally honest and hype
 Return only valid JSON. No markdown code blocks. No commentary outside the JSON.`
 
     const response = await client.messages.create({
-      model: isPro ? 'claude-opus-4-8' : 'claude-sonnet-4-6',
+      model: 'claude-sonnet-4-6',
       max_tokens: 2048,
       messages: [{ role: 'user', content: prompt }],
     })
