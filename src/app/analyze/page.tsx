@@ -230,7 +230,7 @@ function AnalysisResults({ result, isUnlocked, onUnlock }: {
                   </p>
                   <button onClick={handleUnlock} disabled={checkoutLoading}
                     className="w-full py-3.5 bg-gray-900 text-white text-sm font-semibold rounded-xl hover:bg-gray-700 transition-colors mb-3 disabled:opacity-50">
-                    {checkoutLoading ? 'Redirecting...' : 'Unlock my analysis — $49/mo'}
+                    {checkoutLoading ? 'Redirecting...' : 'Unlock my analysis — $20/mo'}
                   </button>
                   <button onClick={() => setShowModal(true)}
                     className="w-full py-3 border border-gray-200 text-gray-600 text-sm font-medium rounded-xl hover:bg-gray-50 transition-colors">
