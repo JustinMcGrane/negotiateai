@@ -57,7 +57,7 @@ export function BlogEarlyAccessBanner() {
           ) : (
             <>
               <p style={{ margin: '0 0 2px', fontSize: 14, fontWeight: 700, color: '#fff' }}>
-                First 1,000 members get Pro at $40/month.
+                First 1,000 members get Pro at $20/month.
               </p>
               {spotsLeft !== null && (
                 <p style={{ margin: 0, fontSize: 12, color: '#94a3b8' }}>{spotsLeft} spots remaining</p>

@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 import { Send } from 'lucide-react'
 
 interface Message { role: 'user' | 'assistant'; content: string }
@@ -88,7 +89,7 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
   const lbl: React.CSSProperties = { fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 4 }
 
   if (!started) return (
-    <ToolPage title="Interview salary coach" desc="Practice answering salary questions with an AI interviewer, then get specific coaching feedback.">
+    <ProGate><ToolPage title="Interview salary coach" desc="Practice answering salary questions with an AI interviewer, then get specific coaching feedback.">
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 14, marginBottom: 20 }}>
         <div><div style={lbl}>ROLE</div><input style={inp} placeholder="Product Manager" value={setup.role} onChange={(e) => setSetup({ ...setup, role: e.target.value })} /></div>
         <div><div style={lbl}>TARGET RANGE</div><input style={inp} placeholder="$130K–$150K" value={setup.target} onChange={(e) => setSetup({ ...setup, target: e.target.value })} /></div>
@@ -103,11 +104,11 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
       <button onClick={start} disabled={!setup.role || !setup.target || !setup.stage} style={{ height: 38, padding: '0 20px', background: '#141414', color: '#fff', border: 'none', borderRadius: 8, fontSize: 13, opacity: (!setup.role || !setup.target || !setup.stage) ? 0.4 : 1 }}>
         Start coaching session →
       </button>
-    </ToolPage>
+    </ToolPage></ProGate>
   )
 
   return (
-    <div style={{ padding: '24px 32px 80px', maxWidth: 700 }}>
+    <ProGate><div style={{ padding: '24px 32px 80px', maxWidth: 700 }}>
       <div style={{ marginBottom: 16 }}>
         <h1 style={{ fontSize: 18, fontWeight: 500 }}>Interview salary coach</h1>
         <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>Question {Math.min(turn + 1, MAX_TURNS)} of {MAX_TURNS} · {setup.role} · {setup.stage}</p>
@@ -157,6 +158,6 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
           </button>
         </div>
       )}
-    </div>
+    </div></ProGate>
   )
 }

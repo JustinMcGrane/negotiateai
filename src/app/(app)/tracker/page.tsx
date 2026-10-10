@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { Plus, Trash2, ExternalLink } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { ClientPageHeader } from '@/components/negotiate/ClientPageHeader'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 type Status = 'saved' | 'applied' | 'interviewing' | 'offer' | 'rejected'
 type Application = {
@@ -118,7 +119,7 @@ export default function TrackerPage() {
   }, {} as Record<Status, number>)
 
   return (
-    <div>
+    <ProGate><div>
       <ClientPageHeader title="Application Tracker" description="Track every role from saved to offer" />
     <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 24px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28 }}>
@@ -233,6 +234,6 @@ export default function TrackerPage() {
         </div>
       )}
     </div>
-    </div>
+    </div></ProGate>
   )
 }
