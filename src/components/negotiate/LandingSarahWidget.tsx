@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 
 function SarahAvatar({ size = 36 }: { size?: number }) {
   return (
@@ -25,38 +26,83 @@ function UserAvatar({ size = 36 }: { size?: number }) {
 }
 
 const chat = [
-  {
-    from: 'user',
-    text: "I've been a Senior Engineer at this company for 2 years. Making $118K in Austin. Is that good?",
-  },
-  {
-    from: 'sarah',
-    text: "Not quite. The market median for Senior Engineers in Austin right now is $141K. You're sitting at the 28th percentile — that's a $23K gap.",
-    highlight: true,
-  },
-  {
-    from: 'user',
-    text: "Wow. I had no idea. What do I do?",
-  },
-  {
-    from: 'sarah',
-    text: "I've built your negotiation plan. Here's your 3-step script: anchor at $145K, justify with your on-call record, and counter any pushback with the Levels.fyi data I pulled for you.",
-    plan: true,
-  },
-  {
-    from: 'user',
-    text: "I sent it. They came back with $138K 🎉",
-  },
-  {
-    from: 'sarah',
-    text: "That's $20K more per year. Nice work. Let's set a reminder to revisit in 6 months. 🚀",
-    result: true,
-  },
+  { from: 'user', text: "I've been a Senior Engineer for 2 years. Making $118K in Austin. Is that good?" },
+  { from: 'sarah', text: "Not quite. The market median for Senior Engineers in Austin is $141K. You're at the 28th percentile — that's a $23K gap.", highlight: true },
+  { from: 'user', text: "Wow. I had no idea. What do I do?" },
+  { from: 'sarah', text: "Here's your 3-step plan: anchor at $145K, justify with your on-call record, and counter any pushback with the Levels.fyi data.", plan: true },
+  { from: 'user', text: "I sent it. They came back with $138K 🎉" },
+  { from: 'sarah', text: "That's $20K more per year. Nice work. Let's revisit in 6 months. 🚀", result: true },
 ]
 
-export function LandingSarahWidget() {
+// Delay before each message appears (ms)
+const DELAYS = [400, 1200, 2800, 3800, 5600, 6400]
+
+function TypingIndicator() {
   return (
-    <section id="meet-sarah" style={{ background: '#0f172a', padding: '96px 40px', scrollMarginTop: 80 }} className="landing-section-pad">
+    <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+      <SarahAvatar size={28} />
+      <div style={{
+        borderRadius: '4px 14px 14px 14px', padding: '12px 14px',
+        background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)',
+        display: 'flex', gap: 4, alignItems: 'center',
+      }}>
+        {[0, 1, 2].map(i => (
+          <div key={i} style={{
+            width: 6, height: 6, borderRadius: '50%', background: '#64748b',
+            animation: `typing-bounce 1.2s ease-in-out ${i * 0.2}s infinite`,
+          }} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export function LandingSarahWidget() {
+  const [visibleCount, setVisibleCount] = useState(0)
+  const [showTyping, setShowTyping] = useState(false)
+  const [started, setStarted] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const chatRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true) },
+      { threshold: 0.3 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [started])
+
+  useEffect(() => {
+    if (!started) return
+    const timers: ReturnType<typeof setTimeout>[] = []
+
+    chat.forEach((msg, i) => {
+      // Show typing indicator before Sarah messages
+      if (msg.from === 'sarah') {
+        timers.push(setTimeout(() => setShowTyping(true), DELAYS[i] - 900))
+      }
+      timers.push(setTimeout(() => {
+        setShowTyping(false)
+        setVisibleCount(i + 1)
+        // Scroll chat to bottom
+        requestAnimationFrame(() => {
+          if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight
+        })
+      }, DELAYS[i]))
+    })
+
+    return () => timers.forEach(clearTimeout)
+  }, [started])
+
+  return (
+    <section id="meet-sarah" ref={sectionRef} style={{ background: '#0f172a', padding: '96px 40px', scrollMarginTop: 80 }} className="landing-section-pad">
+      <style>{`
+        @keyframes typing-bounce { 0%,100%{transform:translateY(0);opacity:0.4} 50%{transform:translateY(-4px);opacity:1} }
+        @keyframes msg-in { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+      `}</style>
       <div className="landing-sarah" style={{ maxWidth: 1040, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
 
         {/* Left: Sarah pitch */}
@@ -93,7 +139,7 @@ export function LandingSarahWidget() {
           <div style={{ fontSize: 12, color: '#475569', marginTop: 10 }}>No credit card required</div>
         </div>
 
-        {/* Right: mock chat */}
+        {/* Right: animated chat */}
         <div style={{ background: '#1e293b', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 24px 60px rgba(0,0,0,0.5)' }}>
           {/* Chat header */}
           <div style={{ background: '#0f172a', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
@@ -108,18 +154,16 @@ export function LandingSarahWidget() {
           </div>
 
           {/* Messages */}
-          <div style={{ padding: '20px 16px', display: 'flex', flexDirection: 'column', gap: 14 }}>
-            {chat.map((msg, i) => {
+          <div ref={chatRef} style={{ padding: '20px 16px', display: 'flex', flexDirection: 'column', gap: 14, minHeight: 360, maxHeight: 420, overflowY: 'auto' }}>
+            {chat.slice(0, visibleCount).map((msg, i) => {
               const isSarah = msg.from === 'sarah'
               return (
-                <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', flexDirection: isSarah ? 'row' : 'row-reverse' }}>
+                <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', flexDirection: isSarah ? 'row' : 'row-reverse', animation: 'msg-in 0.35s ease both' }}>
                   {isSarah ? <SarahAvatar size={28} /> : <UserAvatar size={28} />}
                   <div style={{ maxWidth: '78%' }}>
                     <div style={{
                       borderRadius: isSarah ? '4px 14px 14px 14px' : '14px 4px 14px 14px',
-                      padding: '10px 13px',
-                      fontSize: 13,
-                      lineHeight: 1.6,
+                      padding: '10px 13px', fontSize: 13, lineHeight: 1.6,
                       color: isSarah ? '#e2e8f0' : '#fff',
                       background: msg.result
                         ? 'linear-gradient(135deg, rgba(16,185,129,0.2), rgba(16,185,129,0.08))'
@@ -158,7 +202,23 @@ export function LandingSarahWidget() {
                 </div>
               )
             })}
+            {showTyping && <TypingIndicator />}
           </div>
+
+          {/* CTA footer */}
+          {visibleCount === chat.length && (
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', padding: '14px 16px', background: '#0f172a', display: 'flex', alignItems: 'center', gap: 10, animation: 'msg-in 0.4s ease both' }}>
+              <div style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, padding: '9px 14px', fontSize: 13, color: '#475569' }}>
+                Ask Sarah about your salary…
+              </div>
+              <Link href="/signup" style={{
+                background: '#5865f2', color: '#fff', borderRadius: 8, padding: '9px 16px',
+                fontSize: 13, fontWeight: 700, textDecoration: 'none', whiteSpace: 'nowrap',
+              }}>
+                Try free →
+              </Link>
+            </div>
+          )}
         </div>
 
       </div>
