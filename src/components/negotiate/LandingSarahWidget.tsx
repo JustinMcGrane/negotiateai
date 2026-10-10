@@ -29,7 +29,7 @@ const chat = [
   { from: 'user', text: "I've been a Senior Engineer for 2 years. Making $118K in Austin. Is that good?" },
   { from: 'sarah', text: "Not quite. The market median for Senior Engineers in Austin is $141K. You're at the 28th percentile — that's a $23K gap.", highlight: true },
   { from: 'user', text: "Wow. I had no idea. What do I do?" },
-  { from: 'sarah', text: "Here's your 3-step plan: anchor at $145K, justify with your on-call record, and counter any pushback with the Levels.fyi data.", plan: true },
+  { from: 'sarah', text: "Here's your 3-step plan: anchor at $145K, justify with your on-call record, and counter any pushback with the market compensation data I pulled.", plan: true },
   { from: 'user', text: "I sent it. They came back with $138K 🎉" },
   { from: 'sarah', text: "That's $20K more per year. Nice work. Let's revisit in 6 months. 🚀", result: true },
 ]
@@ -185,7 +185,7 @@ export function LandingSarahWidget() {
                     {msg.plan && (
                       <div style={{ marginTop: 8, background: 'rgba(88,101,242,0.12)', border: '1px solid rgba(88,101,242,0.25)', borderRadius: 10, padding: '10px 12px' }}>
                         <div style={{ fontSize: 10, fontWeight: 700, color: '#818cf8', letterSpacing: '0.06em', marginBottom: 6 }}>YOUR NEGOTIATION PLAN</div>
-                        {['Anchor at $145K', 'Cite on-call contributions', 'Counter with Levels.fyi data'].map((step, si) => (
+                        {['Anchor at $145K', 'Cite on-call contributions', 'Counter with verified market data'].map((step, si) => (
                           <div key={si} style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 12, color: '#c7d2fe', marginBottom: si < 2 ? 4 : 0 }}>
                             <div style={{ width: 16, height: 16, borderRadius: '50%', background: 'rgba(88,101,242,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: '#818cf8', flexShrink: 0 }}>{si + 1}</div>
                             {step}

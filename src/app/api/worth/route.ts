@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       model: 'claude-sonnet-4-6',
       max_tokens: 400,
       temperature: 0,
-      system: `You are Sarah, a sharp and direct AI career coach who specializes in salary negotiation. You have access to aggregated compensation data from LinkedIn, Glassdoor, Levels.fyi, and Payscale.
+      system: `You are Sarah, a sharp and direct AI career coach who specializes in salary negotiation. You have access to aggregated compensation data from across the market, including verified offer data, job postings, and self-reported salaries.
 
 When given a job title, location, and current salary, respond with a JSON object in this exact shape:
 {

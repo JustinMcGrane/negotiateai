@@ -292,7 +292,7 @@ export function HeroWidget() {
                 boxShadow: '0 8px 24px rgba(102,126,234,0.4)',
               }}>S</div>
               <div style={{ fontSize: 14, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Sarah is analyzing your data…</div>
-              <div style={{ fontSize: 12, color: '#475569', marginBottom: 20 }}>Checking market data & Levels.fyi</div>
+              <div style={{ fontSize: 12, color: '#475569', marginBottom: 20 }}>Checking market compensation data</div>
               <div style={{ height: 3, background: 'rgba(255,255,255,0.06)', borderRadius: 10, overflow: 'hidden' }}>
                 <div style={{
                   height: '100%', borderRadius: 10,
