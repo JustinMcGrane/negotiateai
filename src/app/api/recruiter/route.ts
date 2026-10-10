@@ -139,7 +139,7 @@ async function extractAndSaveMemory(
       .join('\n')
 
     const extraction = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
+      model: 'claude-sonnet-4-6',
       max_tokens: 256,
       messages: [{
         role: 'user',
@@ -235,7 +235,7 @@ export async function POST(req: NextRequest) {
       try {
         const recentMessages = messages.slice(-6)
         const hookRes = await client.messages.create({
-          model: 'claude-haiku-4-5-20251001',
+          model: 'claude-sonnet-4-6',
           max_tokens: 80,
           messages: [{
             role: 'user',

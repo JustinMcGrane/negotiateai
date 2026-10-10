@@ -33,7 +33,7 @@ Return this JSON:
 }`
 
     const msg = await getClient().messages.create({
-      model: 'claude-haiku-4-5-20251001',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1200,
       messages: [{ role: 'user', content: prompt }],
     })
