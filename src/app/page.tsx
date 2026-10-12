@@ -73,37 +73,37 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section style={{
-        background: ‘linear-gradient(160deg, #0f172a 0%, #1e293b 100%)’,
-        padding: ‘64px 24px 72px’,
+        background: 'linear-gradient(160deg, #0f172a 0%, #1e293b 100%)',
+        padding: '64px 24px 72px',
       }}>
-        <div style={{ maxWidth: 920, margin: ‘0 auto’, display: ‘grid’, gridTemplateColumns: ‘repeat(auto-fit, minmax(300px, 1fr))’, gap: 48, alignItems: ‘center’ }}>
+        <div style={{ maxWidth: 920, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 48, alignItems: 'center' }}>
           <div>
             <div style={{
-              display: ‘inline-flex’, alignItems: ‘center’, gap: 6,
-              background: ‘rgba(37,99,235,0.2)’, border: ‘1px solid rgba(37,99,235,0.35)’,
-              borderRadius: 20, padding: ‘5px 14px’, marginBottom: 24,
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              background: 'rgba(37,99,235,0.2)', border: '1px solid rgba(37,99,235,0.35)',
+              borderRadius: 20, padding: '5px 14px', marginBottom: 24,
             }}>
-              <span style={{ fontSize: 12, color: ‘#93c5fd’, fontWeight: 600 }}>Free salary check</span>
+              <span style={{ fontSize: 12, color: '#93c5fd', fontWeight: 600 }}>Free salary check</span>
             </div>
             <h1 style={{
-              fontSize: ‘clamp(30px, 5vw, 48px)’,
+              fontSize: 'clamp(30px, 5vw, 48px)',
               fontWeight: 900, lineHeight: 1.15,
-              letterSpacing: ‘-0.03em’, marginBottom: 18,
-              color: ‘#fff’,
+              letterSpacing: '-0.03em', marginBottom: 18,
+              color: '#fff',
             }}>
               Are you underpaid?<br />
-              <span style={{ color: ‘#93c5fd’ }}>Find out in 30 seconds.</span>
+              <span style={{ color: '#93c5fd' }}>Find out in 30 seconds.</span>
             </h1>
-            <p style={{ fontSize: 16, color: ‘#94a3b8’, lineHeight: 1.75, marginBottom: 28 }}>
+            <p style={{ fontSize: 16, color: '#94a3b8', lineHeight: 1.75, marginBottom: 28 }}>
               Enter your job title and see what the market pays. Free, no signup needed.
             </p>
-            <div style={{ display: ‘flex’, flexDirection: ‘column’, gap: 11 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
               {[
-                ‘See if you\’re paid below market’,
-                ‘See how much more you could ask for’,
-                ‘Get a script for the conversation’,
+                'See if you\'re paid below market',
+                'See how much more you could ask for',
+                'Get a script for the conversation',
               ].map(item => (
-                <div key={item} style={{ display: ‘flex’, alignItems: ‘center’, gap: 10, fontSize: 14, color: ‘#cbd5e1’ }}>
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#cbd5e1' }}>
                   <CheckCircle size={15} color="#34d399" />
                   {item}
                 </div>
@@ -234,10 +234,10 @@ export default function LandingPage() {
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: '#0F6E56', letterSpacing: '0.08em', marginBottom: 10 }}>NEGOTIATION SUITE</div>
             <h2 style={{ fontSize: 'clamp(22px, 4vw, 34px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', margin: '0 0 14px' }}>
-              Get paid what you’re worth
+              Get paid what you're worth
             </h2>
             <p style={{ fontSize: 15, color: '#64748b', maxWidth: 500, margin: '0 auto' }}>
-              10 tools to help you know your market rate, build your strategy, and practice until you’re ready.
+              10 tools to help you know your market rate, build your strategy, and practice until you're ready.
             </p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
