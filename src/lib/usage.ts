@@ -65,3 +65,12 @@ export async function getUsage(userId: string): Promise<Record<string, number>> 
 }
 
 export { FREE_LIMITS }
+
+export async function logToolUse(userId: string, tool: string, plan: string = 'free') {
+  try {
+    const supabase = createServiceClient()
+    await supabase.from('tool_uses').insert({ user_id: userId, tool, plan })
+  } catch {
+    // non-blocking — never fail a request because of logging
+  }
+}

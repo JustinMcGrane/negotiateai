@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
-import { checkAndIncrementUsage, FREE_LIMITS } from '@/lib/usage'
+import { checkAndIncrementUsage, FREE_LIMITS, logToolUse } from '@/lib/usage'
 
 const client = new Anthropic()
 
@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
 
     const isPro = profile?.plan === 'pro'
     const usage = await checkAndIncrementUsage(user.id, 'resume', isPro)
+    logToolUse(user.id, 'resume', profile?.plan ?? 'free')
 
     if (!usage.allowed) {
       return NextResponse.json({

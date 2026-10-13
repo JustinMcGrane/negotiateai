@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { getUserProfile, formatProfileContext } from '@/lib/profile-context'
+import { logToolUse } from '@/lib/usage'
+import { createClient } from '@/lib/supabase/server'
 
 function getClient() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }) }
 
@@ -8,6 +10,13 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const { role, experience, location, companySize, industry } = body
+
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user) {
+      const { data: prof } = await supabase.from('profiles').select('plan').eq('id', user.id).single()
+      logToolUse(user.id, 'comp-analyze', prof?.plan ?? 'free')
+    }
 
     const profile = await getUserProfile()
     const profileContext = formatProfileContext(profile)

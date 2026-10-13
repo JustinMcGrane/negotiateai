@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { createClient } from '@/lib/supabase/server'
+import { logToolUse } from '@/lib/usage'
 
 function getClient() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }) }
 
@@ -7,6 +9,12 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const { role, baseSalary, bonus, equity, location, stage } = body
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user) {
+      const { data: prof } = await supabase.from('profiles').select('plan').eq('id', user.id).single()
+      logToolUse(user.id, 'offer-evaluate', prof?.plan ?? 'free')
+    }
 
     const prompt = `You are a compensation expert. Return ONLY valid JSON.
 
