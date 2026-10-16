@@ -28,8 +28,7 @@ const softwareSchema = {
   url: 'https://gethayven.com/ai-career-coach',
   offers: [
     { '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD' },
-    { '@type': 'Offer', name: 'Professional', price: '49', priceCurrency: 'USD', billingIncrement: 'P1M' },
-    { '@type': 'Offer', name: 'Pro', price: '79', priceCurrency: 'USD', billingIncrement: 'P1M' },
+    { '@type': 'Offer', name: 'Pro', price: '20', priceCurrency: 'USD', billingIncrement: 'P1M' },
   ],
   description: 'Sarah is Hayven\'s AI career coach. She provides personalized salary negotiation strategies, compensation analysis, resume feedback, and career guidance. Sarah is an AI assistant, not a human coach or licensed professional.',
   publisher: {
@@ -72,7 +71,7 @@ const faqSchema = {
       name: 'How much does Hayven cost?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Hayven has a free plan that includes a salary assessment and one coaching session with Sarah. Paid plans start at $49/month for unlimited coaching and all negotiation tools.',
+        text: 'Hayven has a free plan that includes a salary assessment and one coaching session with Sarah. Pro is $20/month for unlimited coaching and all negotiation tools.',
       },
     },
   ],
@@ -261,7 +260,7 @@ export default function AiCareerCoachPage() {
                 'Data-driven market salary analysis',
                 'Unlimited practice conversations',
                 'Writes emails and scripts for you',
-                'Free plan available; paid plans from $49/mo',
+                'Free plan available; Pro from $20/mo',
                 'No scheduling required',
               ].map((item) => (
                 <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginBottom: 10 }}>
@@ -311,12 +310,12 @@ export default function AiCareerCoachPage() {
                 dark: false,
               },
               {
-                name: 'Professional',
-                price: '$49',
+                name: 'Pro',
+                price: '$20',
                 period: '/mo',
                 desc: 'Unlimited coaching & tools',
                 features: ['Sarah — unlimited coaching', 'All 10 negotiation tools', 'Resume analyzer + cover letter', 'Counter-offer builder', 'Raise builder + playbook'],
-                cta: 'Get Professional',
+                cta: 'Get Pro',
                 ctaHref: '/signup',
                 dark: true,
               },
