@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Account Executive Resume: Examples & Tips That Get Interviews | Hayven',
   description: 'Write an account executive resume that gets callbacks. Real examples, the right metrics to include, and how to structure your sales experience to stand out.',
   alternates: { canonical: 'https://gethayven.com/blog/account-executive-resume' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/account-executive-resume/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/account-executive-resume/opengraph-image'] },
 }
 
 

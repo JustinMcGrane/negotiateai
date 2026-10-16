@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Software Engineer Resume: Examples & Tips That Get Interviews | Hayven',
   description: 'A software engineer resume that gets interviews. See what to include, what to cut, and how to structure it — with examples for every level.',
   alternates: { canonical: 'https://gethayven.com/blog/software-engineer-resume' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/software-engineer-resume/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/software-engineer-resume/opengraph-image'] },
 }
 
 

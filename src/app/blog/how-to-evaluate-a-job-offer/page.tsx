@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'How to Evaluate a Job Offer (Beyond the Base Salary) | Hayven',
   description: 'Base salary is just one number. Here\'s how to evaluate the full value of a job offer — and what to negotiate before you sign.',
   alternates: { canonical: 'https://gethayven.com/blog/how-to-evaluate-a-job-offer' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/how-to-evaluate-a-job-offer/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/how-to-evaluate-a-job-offer/opengraph-image'] },
 }
 
 const tag = 'Salary negotiation'

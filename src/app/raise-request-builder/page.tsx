@@ -31,6 +31,15 @@ const steps = [
   { number: '03', title: 'Have the conversation', desc: 'Use your script to open the conversation and guide it toward the outcome you want.' },
 ]
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+    { '@type': 'ListItem', position: 2, name: 'Raise Request Builder', item: 'https://gethayven.com/raise-request-builder' },
+  ],
+}
+
 export default function RaiseRequestBuilderPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>

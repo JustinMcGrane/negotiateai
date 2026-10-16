@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'How to Negotiate a Salary: The Complete Guide | Hayven',
   description: 'Learn how to negotiate a salary the right way — from researching your market rate to making the ask and handling pushback. Step-by-step guide.',
   alternates: { canonical: 'https://gethayven.com/blog/how-to-negotiate-a-salary' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/how-to-negotiate-a-salary/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/how-to-negotiate-a-salary/opengraph-image'] },
 }
 
 const tag = 'Salary negotiation'

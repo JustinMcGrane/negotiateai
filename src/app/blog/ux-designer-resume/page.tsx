@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'UX Designer Resume: Examples & Tips That Get Interviews | Hayven',
   description: 'Write a UX designer resume that gets callbacks. Real examples, how to frame your portfolio, the right metrics to include, and what separates strong UX resumes from weak ones.',
   alternates: { canonical: 'https://gethayven.com/blog/ux-designer-resume' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/ux-designer-resume/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/ux-designer-resume/opengraph-image'] },
 }
 
 const articleSchema = {

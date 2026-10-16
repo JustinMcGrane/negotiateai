@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'How to Negotiate a Salary Offer: Scripts & Strategy | Hayven',
   description: 'Got a salary offer? Here\'s exactly how to negotiate it — what to say, how much to counter, how to handle pushback, and what to do if they say no.',
   alternates: { canonical: 'https://gethayven.com/blog/how-to-negotiate-salary-offer' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/how-to-negotiate-salary-offer/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/how-to-negotiate-salary-offer/opengraph-image'] },
 }
 
 

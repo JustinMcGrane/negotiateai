@@ -3,6 +3,15 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+    { '@type': 'ListItem', position: 2, name: 'Raise Calculator', item: 'https://gethayven.com/raise-calculator' },
+  ],
+}
+
 export default function RaiseCalculator() {
   const [currentSalary, setCurrentSalary] = useState('')
   const [raiseType, setRaiseType] = useState<'percent' | 'amount'>('percent')

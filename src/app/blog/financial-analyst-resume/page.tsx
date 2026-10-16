@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Financial Analyst Resume: Examples & Tips That Get Interviews | Hayven',
   description: 'Write a financial analyst resume that gets callbacks. Real examples, the right metrics to include, and how to structure your finance experience to stand out.',
   alternates: { canonical: 'https://gethayven.com/blog/financial-analyst-resume' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/financial-analyst-resume/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/financial-analyst-resume/opengraph-image'] },
 }
 
 const articleSchema = {

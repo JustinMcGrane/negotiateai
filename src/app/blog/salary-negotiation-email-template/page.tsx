@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Salary Negotiation Email Template (Copy & Paste) | Hayven',
   description: 'Copy-paste salary negotiation email templates that actually work. Scripts for counter-offers, follow-ups, and closing the deal.',
   alternates: { canonical: 'https://gethayven.com/blog/salary-negotiation-email-template' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/salary-negotiation-email-template/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/salary-negotiation-email-template/opengraph-image'] },
 }
 
 const tag = 'Salary negotiation'

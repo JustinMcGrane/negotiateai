@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Data Scientist Resume: Examples & Tips That Get Interviews | Hayven',
   description: 'Write a data scientist resume that passes ATS and impresses hiring managers. Real examples, the right metrics to include, and how to show model impact — not just model names.',
   alternates: { canonical: 'https://gethayven.com/blog/data-scientist-resume' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/data-scientist-resume/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/data-scientist-resume/opengraph-image'] },
 }
 
 const articleSchema = {

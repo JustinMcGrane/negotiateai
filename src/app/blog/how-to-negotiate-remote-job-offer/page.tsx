@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'How to Negotiate a Remote Job Offer | Hayven',
   description: 'Remote job offers come with unique leverage points most candidates miss. Here\'s how to negotiate salary, equipment, and flexibility when the job is remote.',
   alternates: { canonical: 'https://gethayven.com/blog/how-to-negotiate-remote-job-offer' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/how-to-negotiate-remote-job-offer/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/how-to-negotiate-remote-job-offer/opengraph-image'] },
 }
 
 const tag = 'Salary negotiation'

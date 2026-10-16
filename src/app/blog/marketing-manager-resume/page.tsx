@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Marketing Manager Resume: Examples, Templates & Tips (2026) | Hayven',
   description: 'Marketing manager resume examples that get interviews. Learn what metrics to include, how to write bullets that prove ROI, and what hiring managers actually want to see.',
   alternates: { canonical: 'https://gethayven.com/blog/marketing-manager-resume' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/marketing-manager-resume/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/marketing-manager-resume/opengraph-image'] },
 }
 
 

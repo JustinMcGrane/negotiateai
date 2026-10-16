@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'How to Negotiate Salary in an Interview | Hayven',
   description: 'Salary negotiation starts in the interview — not after the offer. Here\'s exactly what to say when salary comes up during the interview process.',
   alternates: { canonical: 'https://gethayven.com/blog/how-to-negotiate-salary-in-an-interview' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/how-to-negotiate-salary-in-an-interview/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/how-to-negotiate-salary-in-an-interview/opengraph-image'] },
 }
 
 const tag = 'Salary negotiation'

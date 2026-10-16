@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Average Software Engineer Salary by City (2026) | Hayven',
   description: 'Software engineer salaries vary dramatically by city. Here\'s a breakdown of average software engineer pay in the top US tech hubs for 2026.',
   alternates: { canonical: 'https://gethayven.com/blog/average-software-engineer-salary-by-city' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/average-software-engineer-salary-by-city/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/average-software-engineer-salary-by-city/opengraph-image'] },
 }
 
 const tag = 'Compensation data'

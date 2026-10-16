@@ -138,6 +138,15 @@ function calcStateTax(income: number, state: string) {
   return tax
 }
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+    { '@type': 'ListItem', position: 2, name: 'Paycheck Calculator', item: 'https://gethayven.com/paycheck-calculator' },
+  ],
+}
+
 export default function PaycheckCalculator() {
   const [salary, setSalary] = useState('')
   const [state, setState] = useState('California')

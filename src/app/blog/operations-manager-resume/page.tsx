@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Operations Manager Resume: Examples & Tips That Get Interviews | Hayven',
   description: 'Write an operations manager resume that gets callbacks. Real examples, the right metrics to include, and how to structure your ops experience to stand out.',
   alternates: { canonical: 'https://gethayven.com/blog/operations-manager-resume' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/operations-manager-resume/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/operations-manager-resume/opengraph-image'] },
 }
 
 const articleSchema = {

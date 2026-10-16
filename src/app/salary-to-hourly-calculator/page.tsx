@@ -6,6 +6,15 @@ import { ArrowRight, CheckCircle } from 'lucide-react'
 const COMMON_SALARIES = [50000, 60000, 70000, 75000, 80000, 90000, 100000, 110000, 120000, 130000, 150000, 175000, 200000]
 const COMMON_HOURLY = [15, 16, 17, 18, 20, 22, 23, 25, 28, 30, 32, 35, 40, 45, 50, 60, 75, 100]
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+    { '@type': 'ListItem', position: 2, name: 'Salary to Hourly Calculator', item: 'https://gethayven.com/salary-to-hourly-calculator' },
+  ],
+}
+
 export default function SalaryToHourlyCalculator() {
   const [salary, setSalary] = useState('')
   const [hoursPerWeek, setHoursPerWeek] = useState('40')

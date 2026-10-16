@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Product Manager Resume: Examples & Tips That Get Interviews | Hayven',
   description: 'Write a product manager resume that gets callbacks. Real examples, the right metrics to include, and how to frame your PM experience so hiring managers immediately see your impact.',
   alternates: { canonical: 'https://gethayven.com/blog/product-manager-resume' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/product-manager-resume/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/product-manager-resume/opengraph-image'] },
 }
 
 const articleSchema = {

@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'What Your Startup Equity Is Actually Worth (Honestly) | Hayven',
   description: 'Most startup equity is worth far less than the offer letter implies. Here\'s how to calculate the real value of your options — and what to ask before you accept.',
   alternates: { canonical: 'https://gethayven.com/blog/what-your-equity-is-actually-worth' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/what-your-equity-is-actually-worth/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/what-your-equity-is-actually-worth/opengraph-image'] },
 }
 
 const tag = 'Equity & compensation'

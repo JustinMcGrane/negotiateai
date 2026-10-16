@@ -31,6 +31,15 @@ const steps = [
   { number: '03', title: 'Walk in with a script', desc: 'Come away with specific language for every salary moment in the interview process.' },
 ]
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+    { '@type': 'ListItem', position: 2, name: 'Interview Salary Coach', item: 'https://gethayven.com/interview-salary-coach' },
+  ],
+}
+
 export default function InterviewSalaryCoachPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>

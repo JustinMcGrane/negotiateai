@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'How to Negotiate a Signing Bonus | Hayven',
   description: 'Signing bonuses are easier to negotiate than base salary. Here\'s how to ask for one — and how much to ask for.',
   alternates: { canonical: 'https://gethayven.com/blog/how-to-negotiate-signing-bonus' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/how-to-negotiate-signing-bonus/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/how-to-negotiate-signing-bonus/opengraph-image'] },
 }
 
 const tag = 'Salary negotiation'

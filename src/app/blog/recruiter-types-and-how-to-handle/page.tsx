@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'The 5 Recruiter Types (And How to Negotiate With Each) | Hayven',
   description: 'The Hard Closer, The Friendly Deflector, The Process Robot — each recruiter plays a different game. Here\'s how to read them and negotiate accordingly.',
   alternates: { canonical: 'https://gethayven.com/blog/recruiter-types-and-how-to-handle' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/recruiter-types-and-how-to-handle/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/recruiter-types-and-how-to-handle/opengraph-image'] },
 }
 
 const tag = 'Negotiation strategy'

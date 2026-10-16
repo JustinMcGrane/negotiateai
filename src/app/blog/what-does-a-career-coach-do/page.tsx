@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'What Does a Career Coach Do? (And Do You Actually Need One?) | Hayven',
   description: 'Career coaches cost $200–$500/hr. Here\'s what they actually do, when it\'s worth it, and how AI tools give you the same help for free.',
   alternates: { canonical: 'https://gethayven.com/blog/what-does-a-career-coach-do' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/what-does-a-career-coach-do/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/what-does-a-career-coach-do/opengraph-image'] },
 }
 
 const tag = 'Career intelligence'

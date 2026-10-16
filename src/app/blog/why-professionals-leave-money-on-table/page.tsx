@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Why Most People Never Negotiate Their Salary (And How to Fix It) | Hayven',
   description: '73% of employers expect a counter-offer. Most candidates never make one. Here\'s the psychology behind why — and the mindset shift that changes everything.',
   alternates: { canonical: 'https://gethayven.com/blog/why-professionals-leave-money-on-table' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/why-professionals-leave-money-on-table/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/why-professionals-leave-money-on-table/opengraph-image'] },
 }
 
 const tag = 'Career intelligence'

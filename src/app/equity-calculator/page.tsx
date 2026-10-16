@@ -31,6 +31,15 @@ const steps = [
   { number: '03', title: 'Negotiate from data', desc: 'Walk into equity conversations knowing what you have, what it\'s worth, and what to ask for.' },
 ]
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+    { '@type': 'ListItem', position: 2, name: 'Equity Calculator', item: 'https://gethayven.com/equity-calculator' },
+  ],
+}
+
 export default function EquityCalculatorPage() {
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>

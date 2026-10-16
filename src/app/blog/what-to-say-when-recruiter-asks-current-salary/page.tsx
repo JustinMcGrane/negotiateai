@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'What to Say When a Recruiter Asks Your Current Salary | Hayven',
   description: 'Recruiters ask your current salary to anchor the offer low. Here\'s exactly what to say to protect your leverage and get a better offer.',
   alternates: { canonical: 'https://gethayven.com/blog/what-to-say-when-recruiter-asks-current-salary' },
+  openGraph: {
+    type: 'article',
+    images: [{ url: 'https://gethayven.com/blog/what-to-say-when-recruiter-asks-current-salary/opengraph-image' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['https://gethayven.com/blog/what-to-say-when-recruiter-asks-current-salary/opengraph-image'] },
 }
 
 const tag = 'Salary negotiation'
