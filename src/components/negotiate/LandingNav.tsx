@@ -5,6 +5,9 @@ import { ChevronDown } from 'lucide-react'
 
 const TOOLS = [
   { label: 'Career Coach', href: '/ai-career-coach' },
+  { label: 'Salary Negotiation Guide', href: '/salary-negotiation' },
+  { label: 'How to Ask for a Raise', href: '/how-to-ask-for-a-raise' },
+  { label: 'Salary Calculators', href: '/salary-calculator' },
   { label: 'Compensation Analyzer', href: '/compensation-analyzer' },
   { label: 'Offer Evaluator', href: '/offer-evaluator' },
   { label: 'Counter-Offer Builder', href: '/counter-offer-builder' },

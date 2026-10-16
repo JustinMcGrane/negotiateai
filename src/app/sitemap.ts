@@ -26,6 +26,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/objection-handler`, lastModified: D('2026-09-01'), priority: 0.7 },
     { url: `${base}/negotiation-playbook`, lastModified: D('2026-09-01'), priority: 0.7 },
 
+    // SEO landing pages
+    { url: `${base}/salary-negotiation`, lastModified: D('2026-10-16'), priority: 0.9 },
+    { url: `${base}/how-to-ask-for-a-raise`, lastModified: D('2026-10-16'), priority: 0.9 },
+    { url: `${base}/salary-calculator`, lastModified: D('2026-10-16'), priority: 0.8 },
+
     // Calculators
     { url: `${base}/raise-calculator`, lastModified: D('2026-09-01'), priority: 0.9 },
     { url: `${base}/salary-to-hourly-calculator`, lastModified: D('2026-09-01'), priority: 0.9 },

@@ -232,16 +232,27 @@ export default function AICareerCoachPage() {
             <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, marginBottom: 32 }}>
               The average professional leaves $27,000 on the table by not negotiating their first offer. That number compounds every year through raises, bonuses, and future job offers — all of which are anchored to what you&apos;re making now. The sooner you get your compensation right, the more it pays off.
             </p>
-            <Link href="/signup" style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-              color: '#fff',
-              padding: '12px 24px', borderRadius: 9,
-              fontSize: 14, fontWeight: 700, textDecoration: 'none',
-              boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
-            }}>
-              Get Started Free <ArrowRight size={14} />
-            </Link>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 0 }}>
+              <Link href="/signup" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+                color: '#fff',
+                padding: '12px 24px', borderRadius: 9,
+                fontSize: 14, fontWeight: 700, textDecoration: 'none',
+                boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
+              }}>
+                Get Started Free <ArrowRight size={14} />
+              </Link>
+              <Link href="/how-to-ask-for-a-raise" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                background: 'transparent', border: '1.5px solid #e2e8f0',
+                color: '#0f172a',
+                padding: '12px 20px', borderRadius: 9,
+                fontSize: 14, fontWeight: 600, textDecoration: 'none',
+              }}>
+                How to Ask for a Raise →
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -259,6 +270,9 @@ export default function AICareerCoachPage() {
             </p>
             <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, marginBottom: 32 }}>
               Traditional career coaching services charge $1,000–$5,000 for a job search package. Hayven&apos;s AI career coaching services give you the same support — market data, resume feedback, interview prep, offer negotiation — for a fraction of the cost, available the moment you need it.
+            </p>
+            <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.8, marginBottom: 24 }}>
+              For a deep dive on negotiating a new offer, see the <Link href="/salary-negotiation" style={{ color: '#4A90D9', textDecoration: 'none', fontWeight: 600 }}>complete salary negotiation guide</Link>.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
               {[
