@@ -1,20 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 type Result = { leverage: string; strategy: string; script: string; emailTemplate: string; risks: string[]; likelyOutcome: string }
 
 export default function CompetingOfferPage() {
-  const router = useRouter()
   const [form, setForm] = useState({ currentRole: '', currentSalary: '', competingOffer: '', competingCompany: '', preferCurrent: 'yes', currentManager: 'good', timeline: '' })
-
-  useEffect(() => {
-    createClient().from('profiles').select('plan').single().then(({ data }) => {
-      if (data?.plan !== 'elite') router.replace('/upgrade')
-    })
-  }, [])
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -35,7 +27,7 @@ export default function CompetingOfferPage() {
   }
 
   return (
-    <ToolPage title="Competing Offer Tool" desc="Have an outside offer? Use it strategically to get a raise or counteroffer without burning bridges.">
+    <ProGate toolName="Competing Offer Lever"><ToolPage title="Competing Offer Tool" desc="Have an outside offer? Use it strategically to get a raise or counteroffer without burning bridges.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div>
@@ -117,5 +109,6 @@ export default function CompetingOfferPage() {
         </div>
       )}
     </ToolPage>
+      </ProGate>
   )
 }

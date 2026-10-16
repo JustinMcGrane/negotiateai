@@ -1,20 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 type Result = { summary: string; accomplishments: string[]; gaps: string[]; askAmount: string; script: string; emailDraft: string }
 
 export default function AnnualReviewPage() {
-  const router = useRouter()
   const [form, setForm] = useState({ role: '', currentSalary: '', lastRaise: '', accomplishments: '', metrics: '', marketRate: '', managerRelationship: 'good' })
-
-  useEffect(() => {
-    createClient().from('profiles').select('plan').single().then(({ data }) => {
-      if (data?.plan !== 'elite') router.replace('/upgrade')
-    })
-  }, [])
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -36,7 +28,7 @@ export default function AnnualReviewPage() {
   }
 
   return (
-    <ToolPage title="Annual Review Coach" desc="Build a compelling case for your raise. Get a tailored script, talking points, and a ready-to-send follow-up email.">
+    <ProGate toolName="Annual Review Coach"><ToolPage title="Annual Review Coach" desc="Build a compelling case for your raise. Get a tailored script, talking points, and a ready-to-send follow-up email.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div>
@@ -115,5 +107,6 @@ export default function AnnualReviewPage() {
         </div>
       )}
     </ToolPage>
+      </ProGate>
   )
 }

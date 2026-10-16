@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 interface Result {
   p25: number; p50: number; p75: number; p90: number
@@ -33,7 +34,7 @@ export default function CompAnalyzer() {
   const max = result ? result.p90 : 1
 
   return (
-    <ToolPage title="Compensation analyzer" desc="See your market rate at the 25th through 90th percentile for your role, location, and experience level.">
+    <ProGate toolName="Compensation Analyzer"><ToolPage title="Compensation analyzer" desc="See your market rate at the 25th through 90th percentile for your role, location, and experience level.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div>
@@ -117,5 +118,6 @@ export default function CompAnalyzer() {
         </div>
       )}
     </ToolPage>
+      </ProGate>
   )
 }

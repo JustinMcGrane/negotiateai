@@ -1,20 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 type Result = { assessment: string; timeline: string; gaps: { area: string; action: string }[]; milestones: { month: string; goal: string }[]; script: string }
 
 export default function PromotionPlannerPage() {
-  const router = useRouter()
   const [form, setForm] = useState({ currentRole: '', targetRole: '', tenure: '', strengths: '', gaps: '', companySize: '', timeframe: '12' })
-
-  useEffect(() => {
-    createClient().from('profiles').select('plan').single().then(({ data }) => {
-      if (data?.plan !== 'elite') router.replace('/upgrade')
-    })
-  }, [])
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -36,7 +28,7 @@ export default function PromotionPlannerPage() {
   }
 
   return (
-    <ToolPage title="Promotion Planner" desc="Get a realistic, step-by-step plan to earn your next promotion with exact milestones and a timeline.">
+    <ProGate toolName="Promotion Planner"><ToolPage title="Promotion Planner" desc="Get a realistic, step-by-step plan to earn your next promotion with exact milestones and a timeline.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div>
@@ -127,5 +119,6 @@ export default function PromotionPlannerPage() {
         </div>
       )}
     </ToolPage>
+      </ProGate>
   )
 }

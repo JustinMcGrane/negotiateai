@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Sparkles, Copy, Check } from 'lucide-react'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 export default function CoverLetterPage() {
   const [jobTitle, setJobTitle] = useState('')
@@ -46,6 +47,7 @@ export default function CoverLetterPage() {
   }
 
   return (
+    <ProGate toolName="Cover Letter Generator">
     <div style={{ maxWidth: 800, margin: '0 auto', padding: '32px 24px' }}>
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Cover Letter Generator</h1>
@@ -153,5 +155,6 @@ export default function CoverLetterPage() {
         </div>
       )}
     </div>
+    </ProGate>
   )
 }

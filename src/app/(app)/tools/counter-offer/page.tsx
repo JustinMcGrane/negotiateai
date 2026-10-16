@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 interface Result { email: string; script: string; tip: string }
 
@@ -34,7 +35,7 @@ export default function CounterOffer() {
   }
 
   return (
-    <ToolPage title="Counter-offer builder" desc="Generate a ready-to-send counter-offer email and phone script for your specific situation.">
+    <ProGate toolName="Counter-Offer Builder"><ToolPage title="Counter-offer builder" desc="Generate a ready-to-send counter-offer email and phone script for your specific situation.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div><div style={lbl}>ROLE</div><input style={inp} placeholder="Senior Engineer" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} required /></div>
@@ -81,5 +82,6 @@ export default function CounterOffer() {
         </div>
       )}
     </ToolPage>
+      </ProGate>
   )
 }

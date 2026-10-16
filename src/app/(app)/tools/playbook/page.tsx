@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 interface Step { title: string; body: string }
 interface Result { steps: Step[] }
@@ -25,7 +26,7 @@ export default function Playbook() {
   }
 
   return (
-    <ToolPage title="Negotiation playbook" desc="Get a personalized 5-step negotiation plan with exact language to use.">
+    <ProGate toolName="Negotiation Playbook"><ToolPage title="Negotiation playbook" desc="Get a personalized 5-step negotiation plan with exact language to use.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div>
@@ -68,5 +69,6 @@ export default function Playbook() {
         </div>
       )}
     </ToolPage>
+      </ProGate>
   )
 }

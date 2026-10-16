@@ -1,21 +1,13 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 type Milestone = { year: string; role: string; salary: string; milestone: string }
 type Result = { summary: string; milestones: Milestone[]; salaryGrowth: string; keyMoves: string[]; risks: string[] }
 
 export default function CareerTimelinePage() {
-  const router = useRouter()
   const [form, setForm] = useState({ currentRole: '', currentSalary: '', experience: '', goal: '', location: '', companyType: '' })
-
-  useEffect(() => {
-    createClient().from('profiles').select('plan').single().then(({ data }) => {
-      if (data?.plan !== 'elite') router.replace('/upgrade')
-    })
-  }, [])
   const [result, setResult] = useState<Result | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -36,7 +28,7 @@ export default function CareerTimelinePage() {
   }
 
   return (
-    <ToolPage title="Career Timeline" desc="See a realistic 3-year map of your career trajectory — roles, salaries, and the moves that will get you there.">
+    <ProGate toolName="Career Timeline"><ToolPage title="Career Timeline" desc="See a realistic 3-year map of your career trajectory — roles, salaries, and the moves that will get you there.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div>
@@ -142,5 +134,6 @@ export default function CareerTimelinePage() {
         </div>
       )}
     </ToolPage>
+      </ProGate>
   )
 }

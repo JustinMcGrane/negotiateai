@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 interface Result { subject: string; email: string; talkingPoints: string[]; timing: string }
 
@@ -34,7 +35,7 @@ export default function RaiseBuilder() {
   }
 
   return (
-    <ToolPage title="Raise request builder" desc="Build a compelling raise request email and talking points from your accomplishments.">
+    <ProGate toolName="Raise Request Builder"><ToolPage title="Raise request builder" desc="Build a compelling raise request email and talking points from your accomplishments.">
       <form onSubmit={submit}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14, marginBottom: 20 }}>
           <div><div style={lbl}>CURRENT ROLE</div><input style={inp} placeholder="Senior Product Manager" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} required /></div>
@@ -89,5 +90,6 @@ export default function RaiseBuilder() {
         </div>
       )}
     </ToolPage>
+      </ProGate>
   )
 }

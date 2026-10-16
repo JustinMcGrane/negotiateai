@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 import { PERSONAS } from '@/lib/personas'
 import type { Persona } from '@/lib/personas'
 import { Send, RotateCcw } from 'lucide-react'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 interface Message { role: 'user' | 'assistant' | 'system'; content: string }
 interface Debrief {
@@ -16,7 +17,7 @@ function scoreColor(s: number) {
   return 'var(--color-danger)'
 }
 
-export default function Simulator() {
+function SimulatorInner() {
   const [stage, setStage] = useState<'setup' | 'chat' | 'debrief'>('setup')
   const [offerText, setOfferText] = useState('')
   const [parseLoading, setParseLoading] = useState(false)
@@ -322,5 +323,13 @@ This is turn ${newTurn} of ${MAX_TURNS}. ${newTurn === MAX_TURNS - 1 ? 'This is 
         </div>
       ) : null}
     </div>
+  )
+}
+
+export default function Simulator() {
+  return (
+    <ProGate toolName="Negotiation Simulator">
+      <SimulatorInner />
+    </ProGate>
   )
 }

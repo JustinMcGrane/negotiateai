@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 import { Send } from 'lucide-react'
 
 interface Message { role: 'user' | 'assistant'; content: string }
@@ -76,7 +77,7 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
   const lbl: React.CSSProperties = { fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 4 }
 
   if (!started) return (
-    <ToolPage title="Interview salary coach" desc="Practice answering salary questions with an AI interviewer, then get specific coaching feedback.">
+    <ProGate toolName="Interview Coach"><ToolPage title="Interview salary coach" desc="Practice answering salary questions with an AI interviewer, then get specific coaching feedback.">
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 14, marginBottom: 20 }}>
         <div><div style={lbl}>ROLE</div><input style={inp} placeholder="Product Manager" value={setup.role} onChange={(e) => setSetup({ ...setup, role: e.target.value })} /></div>
         <div><div style={lbl}>TARGET RANGE</div><input style={inp} placeholder="$130K–$150K" value={setup.target} onChange={(e) => setSetup({ ...setup, target: e.target.value })} /></div>
@@ -92,6 +93,7 @@ Keep responses to 2-3 sentences. No stage directions. No quotes around your spee
         Start coaching session →
       </button>
     </ToolPage>
+      </ProGate>
   )
 
   return (

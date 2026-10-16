@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 type Feedback = {
   score: number
@@ -64,7 +65,7 @@ export default function DailyPrepPage() {
   }
 
   return (
-    <ToolPage title="Daily negotiation prep" desc="One scenario a day. Get instant coaching feedback and track your streak.">
+    <ProGate toolName="Daily Negotiation Prep"><ToolPage title="Daily negotiation prep" desc="One scenario a day. Get instant coaching feedback and track your streak.">
 
       {streak > 0 && (
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#fff7ed', border: '0.5px solid #fed7aa', borderRadius: 20, padding: '4px 12px', marginBottom: 20, fontSize: 13, color: '#c2410c', fontWeight: 600 }}>
@@ -139,5 +140,6 @@ export default function DailyPrepPage() {
         </div>
       )}
     </ToolPage>
+      </ProGate>
   )
 }

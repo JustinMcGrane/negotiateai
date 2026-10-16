@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { ToolPage } from '@/components/negotiate/ToolPage'
+import { ProGate } from '@/components/negotiate/ProGate'
 
 interface Response { label: string; text: string }
 interface Result { objection: string; responses: Response[]; insight: string }
@@ -31,7 +32,7 @@ export default function ObjectionHandler() {
   }
 
   return (
-    <ToolPage title="Objection handler" desc="Get three targeted responses to any recruiter pushback — assertive, collaborative, or reframe.">
+    <ProGate toolName="Objection Handler"><ToolPage title="Objection handler" desc="Get three targeted responses to any recruiter pushback — assertive, collaborative, or reframe.">
       <form onSubmit={submit}>
         <div style={{ marginBottom: 14 }}>
           <div style={lbl}>WHAT DID THEY SAY?</div>
@@ -70,5 +71,6 @@ export default function ObjectionHandler() {
         </div>
       )}
     </ToolPage>
+      </ProGate>
   )
 }
