@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: 'When to ask, how to prepare, raise request scripts, and how to handle rejection.',
     url: 'https://gethayven.com/how-to-ask-for-a-raise',
     type: 'article',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'Hayven — How to Ask for a Raise' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -25,10 +26,15 @@ const articleSchema = {
   headline: 'How to Ask for a Raise: Step-by-Step Guide & Scripts',
   description: 'Learn exactly how to ask for a raise at work — when to ask, how to prepare, and scripts that work.',
   url: 'https://gethayven.com/how-to-ask-for-a-raise',
+  datePublished: '2024-10-01',
+  dateModified: '2025-10-16',
+  author: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  image: 'https://gethayven.com/opengraph-image',
   publisher: {
     '@type': 'Organization',
     name: 'Hayven',
     url: 'https://gethayven.com',
+    logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.png' },
   },
 }
 

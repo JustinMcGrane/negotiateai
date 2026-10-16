@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: 'Proven salary negotiation strategies, scripts, and tactics for job offers and raises.',
     url: 'https://gethayven.com/salary-negotiation',
     type: 'article',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'Hayven — Salary Negotiation Guide' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -25,10 +26,15 @@ const articleSchema = {
   headline: 'How to Negotiate Salary: Complete Guide & Scripts',
   description: 'Learn how to negotiate salary with proven strategies, step-by-step scripts, and expert tactics.',
   url: 'https://gethayven.com/salary-negotiation',
+  datePublished: '2024-10-01',
+  dateModified: '2025-10-16',
+  author: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  image: 'https://gethayven.com/opengraph-image',
   publisher: {
     '@type': 'Organization',
     name: 'Hayven',
     url: 'https://gethayven.com',
+    logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.png' },
   },
 }
 

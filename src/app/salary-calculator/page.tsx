@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: 'See what your role pays at the 25th through 90th percentile. Real market data, free.',
     url: 'https://gethayven.com/salary-calculator',
     type: 'website',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'Hayven — Salary Calculator' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -28,10 +29,13 @@ const webAppSchema = {
   operatingSystem: 'Web',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   description: 'Find out what your role pays. Get your 25th–90th percentile salary range for your job title and location.',
+  datePublished: '2024-10-01',
+  dateModified: '2025-10-16',
   publisher: {
     '@type': 'Organization',
     name: 'Hayven',
     url: 'https://gethayven.com',
+    logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.png' },
   },
 }
 

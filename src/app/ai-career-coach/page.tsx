@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: 'Personalized salary negotiation, compensation analysis, and career coaching from Sarah — Hayven\'s AI career coach. Start free.',
     url: 'https://gethayven.com/ai-career-coach',
     type: 'website',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'Hayven — AI Career Coach' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -31,6 +32,8 @@ const softwareSchema = {
     { '@type': 'Offer', name: 'Pro', price: '20', priceCurrency: 'USD', billingIncrement: 'P1M' },
   ],
   description: 'Sarah is Hayven\'s AI career coach. She provides personalized salary negotiation strategies, compensation analysis, resume feedback, and career guidance. Sarah is an AI assistant, not a human coach or licensed professional.',
+  datePublished: '2024-10-01',
+  dateModified: '2025-10-16',
   publisher: {
     '@type': 'Organization',
     name: 'Hayven',

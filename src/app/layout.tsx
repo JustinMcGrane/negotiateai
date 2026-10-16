@@ -10,6 +10,11 @@ export const metadata: Metadata = {
     siteName: 'Hayven',
     type: 'website',
     locale: 'en_US',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'Hayven — AI Career Coaching & Salary Negotiation' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['https://gethayven.com/opengraph-image'],
   },
 }
 
@@ -20,7 +25,10 @@ const organizationSchema = {
   url: 'https://gethayven.com',
   logo: 'https://gethayven.com/logo.png',
   description: 'AI-powered career coaching platform for salary negotiation, raise requests, and compensation guidance.',
-  sameAs: [],
+  sameAs: [
+    'https://www.linkedin.com/company/gethayven',
+    'https://twitter.com/gethayven',
+  ],
 }
 
 const websiteSchema = {

@@ -23,8 +23,7 @@ Sarah is Hayven's AI career coach. She provides personalized salary negotiation 
 ## Pricing
 
 - Free: salary assessment, one coaching session with Sarah
-- Professional: $49/month — unlimited coaching and all tools
-- Pro: $79/month — everything in Professional plus memory, mock interviews, and PDF reports
+- Pro: $20/month — unlimited coaching and all negotiation tools
 
 ## Links
 
