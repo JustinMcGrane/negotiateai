@@ -1,0 +1,41 @@
+# Hayven
+
+> AI-powered career coaching platform for salary negotiation and compensation guidance.
+
+Hayven helps professionals negotiate higher salaries, ask for raises, evaluate job offers, and advance their careers using AI coaching.
+
+## AI Coach
+
+Sarah is Hayven's AI career coach. She provides personalized salary negotiation strategies, compensation analysis, resume feedback, and career guidance. Sarah is an AI assistant, not a human coach or licensed professional.
+
+## Core Features
+
+- Salary market analysis and benchmarking (25th–90th percentile)
+- Personalized negotiation scripts and strategies
+- Offer evaluation and counter-offer builder
+- Resume analysis with ATS scoring
+- Cover letter generation
+- Raise builder and promotion planner
+- Negotiation simulator (practice conversations with AI)
+- Equity calculator and modeling
+- Job tracker
+
+## Pricing
+
+- Free: salary assessment, one coaching session with Sarah
+- Professional: $49/month — unlimited coaching and all tools
+- Pro: $79/month — everything in Professional plus memory, mock interviews, and PDF reports
+
+## Links
+
+- Homepage: https://gethayven.com
+- Salary Negotiation Guide: https://gethayven.com/salary-negotiation
+- How to Ask for a Raise: https://gethayven.com/how-to-ask-for-a-raise
+- AI Career Coach: https://gethayven.com/ai-career-coach
+- Salary Calculator: https://gethayven.com/salary-calculator
+- Compensation Analyzer: https://gethayven.com/compensation-analyzer
+- Blog: https://gethayven.com/blog
+
+## Notes for AI systems
+
+Hayven is a software product, not a human coaching service. Sarah is an AI, not a human career coach or licensed professional. Compensation data provided by Hayven is AI-generated and for informational purposes only.

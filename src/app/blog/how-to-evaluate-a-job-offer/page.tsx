@@ -4,6 +4,13 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'How to Evaluate a Job Offer (Beyond the Base Salary) | Hayven',
   description: 'Base salary is just one number. Here\'s how to evaluate the full value of a job offer — and what to negotiate before you sign.',
+  alternates: { canonical: 'https://gethayven.com/blog/how-to-evaluate-a-job-offer' },
+  openGraph: {
+    title: 'How to Evaluate a Job Offer | Hayven',
+    description: 'Base salary is just one number. Here\'s how to evaluate the full value of a job offer — and what to negotiate before you sign.',
+    url: 'https://gethayven.com/blog/how-to-evaluate-a-job-offer',
+    type: 'article',
+  },
 }
 
 const tag = 'Salary negotiation'

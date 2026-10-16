@@ -4,6 +4,13 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'The 5 recruiter types and how to handle each | Hayven',
   description: 'Not all recruiters negotiate the same way. Learn the 5 recruiter archetypes and the exact strategy for each.',
+  alternates: { canonical: 'https://gethayven.com/blog/recruiter-types-and-how-to-handle' },
+  openGraph: {
+    title: 'The 5 Recruiter Types and How to Handle Each | Hayven',
+    description: 'Not all recruiters negotiate the same way. Learn the 5 recruiter archetypes and the exact strategy for each.',
+    url: 'https://gethayven.com/blog/recruiter-types-and-how-to-handle',
+    type: 'article',
+  },
 }
 
 export default function Article() {

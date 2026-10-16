@@ -4,6 +4,13 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'How to negotiate your first SaaS job offer | Hayven',
   description: 'A step-by-step guide to negotiating a SaaS job offer. Learn how to counter, what to ask for, and how to handle common recruiter objections.',
+  alternates: { canonical: 'https://gethayven.com/blog/how-to-negotiate-saas-job-offer' },
+  openGraph: {
+    title: 'How to Negotiate a SaaS Job Offer | Hayven',
+    description: 'A step-by-step guide to negotiating a SaaS job offer. Learn how to counter, what to ask for, and how to handle recruiter objections.',
+    url: 'https://gethayven.com/blog/how-to-negotiate-saas-job-offer',
+    type: 'article',
+  },
 }
 
 export default function Article() {

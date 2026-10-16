@@ -4,6 +4,13 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'What your equity is actually worth: a realistic guide | Hayven',
   description: 'Most startup equity is worth less than the paper it\'s written on. Here\'s how to assess your equity honestly and ask the right questions.',
+  alternates: { canonical: 'https://gethayven.com/blog/what-your-equity-is-actually-worth' },
+  openGraph: {
+    title: 'What Your Equity Is Actually Worth | Hayven',
+    description: 'Most startup equity is worth less than the paper it\'s written on. Here\'s how to assess your equity honestly.',
+    url: 'https://gethayven.com/blog/what-your-equity-is-actually-worth',
+    type: 'article',
+  },
 }
 
 export default function Article() {

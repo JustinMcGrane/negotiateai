@@ -23,6 +23,9 @@ export function GET() {
     { loc: `${base}/blog/average-software-engineer-salary-by-city`, priority: '0.8' },
     { loc: `${base}/blog/how-to-ask-for-a-raise-scripts-that-work`, priority: '0.8' },
     { loc: `${base}/blog/what-to-say-when-recruiter-asks-current-salary`, priority: '0.8' },
+    { loc: `${base}/resources/salary-negotiation-scripts`, priority: '0.8' },
+    { loc: `${base}/resources/salary-negotiation-email`, priority: '0.8' },
+    { loc: `${base}/resources/ask-for-a-raise-email`, priority: '0.8' },
   ]
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -4,6 +4,13 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Why 75% of professionals leave money on the table | Hayven',
   description: 'Research shows most professionals never negotiate their salary. Here\'s the psychology behind it — and how to overcome it.',
+  alternates: { canonical: 'https://gethayven.com/blog/why-professionals-leave-money-on-table' },
+  openGraph: {
+    title: 'Why 75% of Professionals Leave Money on the Table | Hayven',
+    description: 'Research shows most professionals never negotiate their salary. Here\'s the psychology behind it — and how to overcome it.',
+    url: 'https://gethayven.com/blog/why-professionals-leave-money-on-table',
+    type: 'article',
+  },
 }
 
 export default function Article() {
