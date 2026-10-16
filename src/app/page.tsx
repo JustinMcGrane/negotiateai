@@ -28,6 +28,20 @@ export const metadata: Metadata = {
   },
 }
 
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Hayven',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: 'https://gethayven.com',
+  offers: [
+    { '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD' },
+    { '@type': 'Offer', name: 'Pro', price: '20', priceCurrency: 'USD', billingIncrement: 'P1M' },
+  ],
+  description: 'Hayven is an AI-powered career coaching platform. It helps professionals negotiate higher salaries, ask for raises, evaluate job offers, and advance their careers using AI coaching from Sarah — Hayven\'s AI career coach.',
+}
+
 const careerFeatures = [
   { icon: UserCircle, color: '#6366f1', bg: '#eef2ff', name: 'AI Recruiter — Sarah', desc: 'Your personal recruiter available 24/7. Resume feedback, job targeting, interview prep, and offer strategy — all in one conversation.' },
   { icon: FileText, color: '#0891b2', bg: '#e0f2fe', name: 'Resume Analyzer', desc: 'Recruiter-grade feedback with ATS scoring, section-by-section breakdown, rewritten bullets, and a prioritized action plan.' },
@@ -52,6 +66,8 @@ const negotiationTools = [
 
 export default function LandingPage() {
   return (
+    <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }} />
     <div style={{ background: '#fff', minHeight: '100vh' }}>
 
       {/* Header */}
@@ -385,5 +401,6 @@ export default function LandingPage() {
         </div>
       </footer>
     </div>
+    </>
   )
 }

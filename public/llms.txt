@@ -10,15 +10,22 @@ Sarah is Hayven's AI career coach. She provides personalized salary negotiation 
 
 ## Core Features
 
-- Salary market analysis and benchmarking (25th–90th percentile)
-- Personalized negotiation scripts and strategies
-- Offer evaluation and counter-offer builder
-- Resume analysis with ATS scoring
-- Cover letter generation
-- Raise builder and promotion planner
-- Negotiation simulator (practice conversations with AI)
-- Equity calculator and modeling
-- Job tracker
+- Sarah — AI career coach (24/7, unlimited coaching on Pro)
+- Compensation Analyzer — salary market analysis 25th–90th percentile
+- Offer Evaluator — scores any job offer 0–100
+- Equity Calculator — models equity across exit scenarios
+- Cost of Not Negotiating — shows compounding dollar gap
+- Negotiation Playbook — personalized 5-step plan with scripts
+- Counter-Offer Builder — generates ready-to-send email and phone script
+- Objection Handler — responses to any recruiter pushback
+- Raise Request Builder — raise request email and talking points
+- Negotiation Simulator — practice conversations with AI, scored debrief
+- Interview Salary Coach — coaching for salary questions at every stage
+- Resume Analyzer — ATS scoring and section-by-section feedback
+- Cover Letter Generator — tailored cover letters in seconds
+- Job Search — search real listings and apply in one click
+- Application Tracker — tracks every application
+- Salary Calculator — market rate calculator
 
 ## Pricing
 
