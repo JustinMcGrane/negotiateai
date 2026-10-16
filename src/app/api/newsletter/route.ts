@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
           <p style="color: #475569; font-size: 15px; line-height: 1.7; margin: 0 0 28px;">
             Click below to create your account and activate your rate.
           </p>
-          <a href="${appUrl}/signup?early=1" style="display: inline-block; background: #141414; color: #fff; text-decoration: none; padding: 13px 28px; border-radius: 9px; font-weight: 700; font-size: 15px; margin-bottom: 32px;">Activate my $40/month rate →</a>
+          <a href="${appUrl}/signup?early=1" style="display: inline-block; background: #141414; color: #fff; text-decoration: none; padding: 13px 28px; border-radius: 9px; font-weight: 700; font-size: 15px; margin-bottom: 32px;">Activate my $20/month rate →</a>
           <p style="color: #94a3b8; font-size: 12px; line-height: 1.6; margin: 0;">
             You signed up for early access to Hayven. <a href="${appUrl}/unsubscribe" style="color: #94a3b8;">Unsubscribe</a>
           </p>
@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify({
           from: 'Hayven <hello@gethayven.com>',
           to: email,
-          subject: "You're locked in at $40/month — forever",
+          subject: "You're locked in at $20/month — forever",
           html,
         }),
       })

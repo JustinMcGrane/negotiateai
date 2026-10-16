@@ -44,44 +44,25 @@ export function UpgradeModal({ onClose }: Props) {
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 500 }}>Pro monthly</div>
+                <div style={{ fontSize: 13, fontWeight: 500 }}>Pro</div>
                 <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>
-                  Unlimited access to all 10 tools
+                  Unlimited access to all 16 tools
                 </div>
               </div>
-              <div style={{ fontSize: 18, fontWeight: 500 }}>$29<span style={{ fontSize: 12, fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: 18, fontWeight: 500 }}>$20<span style={{ fontSize: 12, fontWeight: 400 }}>/mo</span></div>
             </div>
             <button onClick={() => handleUpgrade(process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || '')}
               style={{
                 marginTop: 14, width: '100%', height: 38, background: '#141414', color: '#fff',
                 border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 500,
               }}>
-              Get Pro monthly
-            </button>
-          </div>
-
-          <div style={{ border: '0.5px solid var(--color-border-tertiary)', borderRadius: 10, padding: 20 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 500 }}>Pro annual</div>
-                <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>
-                  Save $99/yr · $20.75/mo
-                </div>
-              </div>
-              <div style={{ fontSize: 18, fontWeight: 500 }}>$249<span style={{ fontSize: 12, fontWeight: 400 }}>/yr</span></div>
-            </div>
-            <button onClick={() => handleUpgrade(process.env.NEXT_PUBLIC_STRIPE_PRO_ANNUAL_PRICE_ID || '')}
-              style={{
-                marginTop: 14, width: '100%', height: 38, background: 'transparent', color: 'var(--color-text-primary)',
-                border: '0.5px solid var(--color-border-primary)', borderRadius: 8, fontSize: 13,
-              }}>
-              Get Pro annual
+              Upgrade to Pro — $20/mo
             </button>
           </div>
         </div>
 
         <div style={{ marginTop: 16, fontSize: 12, color: 'var(--color-text-tertiary)', textAlign: 'center' }}>
-          Or get a <a href="/account/billing" style={{ color: 'var(--color-text-secondary)', textDecoration: 'underline' }}>one-time compensation report for $49</a>
+          Questions? <a href="/account/billing" style={{ color: 'var(--color-text-secondary)', textDecoration: 'underline' }}>View all plan details</a>
         </div>
       </div>
     </div>

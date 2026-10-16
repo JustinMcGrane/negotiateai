@@ -59,7 +59,7 @@ export function NewsletterForm() {
       <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 12, padding: '24px', textAlign: 'center' }}>
         <div style={{ fontSize: 13, fontWeight: 700, color: '#15803d', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8 }}>You&apos;re locked in</div>
         <div style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>Check your inbox.</div>
-        <div style={{ fontSize: 14, color: '#475569' }}>We&apos;ve sent you a link to activate your $40/month rate before it&apos;s gone.</div>
+        <div style={{ fontSize: 14, color: '#475569' }}>We&apos;ve sent you a link to activate your $20/month rate before it&apos;s gone.</div>
       </div>
     )
   }
@@ -96,7 +96,7 @@ export function NewsletterForm() {
             opacity: status === 'loading' ? 0.7 : 1, whiteSpace: 'nowrap',
           }}
         >
-          {status === 'loading' ? 'Reserving…' : <><span>Lock in $40/mo</span> <ArrowRight size={14} /></>}
+          {status === 'loading' ? 'Reserving…' : <><span>Lock in $20/mo</span> <ArrowRight size={14} /></>}
         </button>
         {status === 'error' && <div style={{ width: '100%', fontSize: 13, color: '#dc2626', textAlign: 'center' }}>Something went wrong. Please try again.</div>}
       </form>
