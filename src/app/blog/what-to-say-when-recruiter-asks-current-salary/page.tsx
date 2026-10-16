@@ -1,3 +1,17 @@
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What to Say When a Recruiter Asks Your Current Salary',
+  description: 'Recruiters ask your current salary to anchor the offer low. Here\'s exactly what to say to protect your leverage.',
+  url: 'https://gethayven.com/blog/what-to-say-when-recruiter-asks-current-salary',
+  datePublished: '2024-11-15',
+  dateModified: '2026-01-01',
+  author: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com', logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.png' } },
+  image: { '@type': 'ImageObject', url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630 },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://gethayven.com/blog/what-to-say-when-recruiter-asks-current-salary' },
+}
+
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -10,6 +24,13 @@ export const metadata: Metadata = {
     description: 'Recruiters ask your current salary to anchor the offer low. Here\'s exactly what to say to protect your leverage and get a better offer.',
     url: 'https://gethayven.com/blog/what-to-say-when-recruiter-asks-current-salary',
     type: 'article',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'What to Say When Asked Current Salary' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'What to Say When a Recruiter Asks Your Current Salary | Hayven',
+    description: 'Recruiters ask your current salary to anchor the offer low. Here\'s exactly what to say to protect your leverage.',
+    images: ['https://gethayven.com/opengraph-image'],
   },
 }
 
@@ -19,6 +40,7 @@ const readTime = '5 min read'
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>{tag}</span>

@@ -12,11 +12,19 @@ import {
 export const metadata: Metadata = {
   title: 'Hayven — Your personal AI career platform',
   description: 'AI career coach, resume analyzer, job search, cover letter generator, and salary negotiation tools. Everything you need to land the job and the offer you deserve.',
+  alternates: { canonical: 'https://gethayven.com' },
   openGraph: {
     title: 'Hayven — Your personal AI career platform',
     description: 'AI career coach, resume analyzer, job search, and salary negotiation. Land the job and the offer you deserve.',
     url: 'https://gethayven.com',
     type: 'website',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'Hayven — AI Career Platform' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hayven — Your personal AI career platform',
+    description: 'AI career coach, resume analyzer, job search, and salary negotiation. Land the job and the offer you deserve.',
+    images: ['https://gethayven.com/opengraph-image'],
   },
 }
 

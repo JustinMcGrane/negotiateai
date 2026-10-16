@@ -10,10 +10,15 @@ export const metadata: Metadata = {
     siteName: 'Hayven',
     type: 'website',
     locale: 'en_US',
+    title: 'Hayven — AI Career Coaching & Salary Negotiation',
+    description: "AI-powered career coaching for salary negotiation, raise requests, and compensation guidance. Know your market rate and get paid what you're worth.",
+    url: 'https://gethayven.com',
     images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'Hayven — AI Career Coaching & Salary Negotiation' }],
   },
   twitter: {
     card: 'summary_large_image',
+    title: 'Hayven — AI Career Coaching & Salary Negotiation',
+    description: "AI-powered career coaching for salary negotiation, raise requests, and compensation guidance.",
     images: ['https://gethayven.com/opengraph-image'],
   },
 }

@@ -1,3 +1,17 @@
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The 5 Recruiter Types and How to Handle Each',
+  description: 'Not all recruiters negotiate the same way. Learn the 5 recruiter archetypes and the exact strategy for each.',
+  url: 'https://gethayven.com/blog/recruiter-types-and-how-to-handle',
+  datePublished: '2024-09-20',
+  dateModified: '2026-01-01',
+  author: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com', logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.png' } },
+  image: { '@type': 'ImageObject', url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630 },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://gethayven.com/blog/recruiter-types-and-how-to-handle' },
+}
+
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -10,12 +24,20 @@ export const metadata: Metadata = {
     description: 'Not all recruiters negotiate the same way. Learn the 5 recruiter archetypes and the exact strategy for each.',
     url: 'https://gethayven.com/blog/recruiter-types-and-how-to-handle',
     type: 'article',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'Recruiter Types and Negotiation Strategy' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The 5 Recruiter Types and How to Handle Each | Hayven',
+    description: 'Not all recruiters negotiate the same way. Learn the 5 recruiter archetypes and the exact strategy for each.',
+    images: ['https://gethayven.com/opengraph-image'],
   },
 }
 
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginBottom: 12 }}>Negotiation strategy · 6 min read</div>
       <h1 style={{ fontSize: 28, fontWeight: 500, lineHeight: 1.3, letterSpacing: '-0.02em', marginBottom: 16 }}>The 5 recruiter types and how to handle each</h1>
       <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', marginBottom: 32, lineHeight: 1.7 }}>Not all recruiters are created equal. Your strategy should change depending on who&apos;s across the table.</p>

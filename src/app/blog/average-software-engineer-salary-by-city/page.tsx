@@ -1,6 +1,20 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Average Software Engineer Salary by City (2026)',
+  description: 'Software engineer salaries vary dramatically by city. A breakdown of average software engineer pay in the top US tech hubs for 2026.',
+  url: 'https://gethayven.com/blog/average-software-engineer-salary-by-city',
+  datePublished: '2025-01-15',
+  dateModified: '2026-01-01',
+  author: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com', logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.png' } },
+  image: { '@type': 'ImageObject', url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630 },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://gethayven.com/blog/average-software-engineer-salary-by-city' },
+}
+
 export const metadata: Metadata = {
   title: 'Average Software Engineer Salary by City (2026) | Hayven',
   description: 'Software engineer salaries vary dramatically by city. Here\'s a breakdown of average software engineer pay in the top US tech hubs for 2026.',
@@ -10,6 +24,13 @@ export const metadata: Metadata = {
     description: 'Software engineer salaries vary dramatically by city. Here\'s a breakdown of average software engineer pay in the top US tech hubs for 2026.',
     url: 'https://gethayven.com/blog/average-software-engineer-salary-by-city',
     type: 'article',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'Average Software Engineer Salary by City' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Average Software Engineer Salary by City (2026) | Hayven',
+    description: 'Software engineer salaries vary dramatically by city. Here\'s a breakdown of average pay in the top US tech hubs.',
+    images: ['https://gethayven.com/opengraph-image'],
   },
 }
 
@@ -31,6 +52,7 @@ const cities = [
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>{tag}</span>

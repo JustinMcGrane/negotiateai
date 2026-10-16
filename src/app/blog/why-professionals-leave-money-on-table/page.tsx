@@ -1,3 +1,17 @@
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Why 75% of Professionals Leave Money on the Table',
+  description: 'Research shows most professionals never negotiate their salary. Here\'s the psychology behind it — and how to overcome it.',
+  url: 'https://gethayven.com/blog/why-professionals-leave-money-on-table',
+  datePublished: '2024-09-01',
+  dateModified: '2026-01-01',
+  author: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com', logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.png' } },
+  image: { '@type': 'ImageObject', url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630 },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://gethayven.com/blog/why-professionals-leave-money-on-table' },
+}
+
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -10,12 +24,20 @@ export const metadata: Metadata = {
     description: 'Research shows most professionals never negotiate their salary. Here\'s the psychology behind it — and how to overcome it.',
     url: 'https://gethayven.com/blog/why-professionals-leave-money-on-table',
     type: 'article',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'Why Professionals Leave Money on the Table' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Why 75% of Professionals Leave Money on the Table | Hayven',
+    description: 'Research shows most professionals never negotiate their salary. Here\'s the psychology behind it — and how to overcome it.',
+    images: ['https://gethayven.com/opengraph-image'],
   },
 }
 
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginBottom: 12 }}>Career intelligence · 5 min read</div>
       <h1 style={{ fontSize: 28, fontWeight: 500, lineHeight: 1.3, letterSpacing: '-0.02em', marginBottom: 16 }}>Why 75% of professionals leave money on the table</h1>
       <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', marginBottom: 32, lineHeight: 1.7 }}>The research is clear: most people don&apos;t negotiate. Here&apos;s the psychology behind it — and how to overcome it.</p>

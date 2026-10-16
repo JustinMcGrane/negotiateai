@@ -1,3 +1,17 @@
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How to Negotiate Your First SaaS Job Offer',
+  description: 'A step-by-step guide to negotiating a SaaS job offer. Learn how to counter, what to ask for, and how to handle recruiter objections.',
+  url: 'https://gethayven.com/blog/how-to-negotiate-saas-job-offer',
+  datePublished: '2024-09-10',
+  dateModified: '2026-01-01',
+  author: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com', logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.png' } },
+  image: { '@type': 'ImageObject', url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630 },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://gethayven.com/blog/how-to-negotiate-saas-job-offer' },
+}
+
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -10,12 +24,20 @@ export const metadata: Metadata = {
     description: 'A step-by-step guide to negotiating a SaaS job offer. Learn how to counter, what to ask for, and how to handle recruiter objections.',
     url: 'https://gethayven.com/blog/how-to-negotiate-saas-job-offer',
     type: 'article',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'How to Negotiate a SaaS Job Offer' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'How to Negotiate Your First SaaS Job Offer | Hayven',
+    description: 'A step-by-step guide to negotiating a SaaS job offer. Learn how to counter, what to ask for, and handle recruiter objections.',
+    images: ['https://gethayven.com/opengraph-image'],
   },
 }
 
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginBottom: 12 }}>Salary negotiation · 5 min read</div>
       <h1 style={{ fontSize: 28, fontWeight: 500, lineHeight: 1.3, letterSpacing: '-0.02em', marginBottom: 16 }}>How to negotiate your first SaaS job offer</h1>
       <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', marginBottom: 32, lineHeight: 1.7 }}>The tech industry — and SaaS companies specifically — have more compensation flexibility than almost any other sector. Here&apos;s how to use it.</p>

@@ -1,35 +1,35 @@
 export function GET() {
   const base = 'https://gethayven.com'
   const urls = [
-    { loc: base, priority: '1.0' },
-    { loc: `${base}/ai-career-coach`, priority: '0.9' },
-    { loc: `${base}/compensation-analyzer`, priority: '0.9' },
-    { loc: `${base}/counter-offer-builder`, priority: '0.9' },
-    { loc: `${base}/equity-calculator`, priority: '0.9' },
-    { loc: `${base}/job-tracker`, priority: '0.9' },
-    { loc: `${base}/negotiation-simulator`, priority: '0.9' },
-    { loc: `${base}/objection-handler`, priority: '0.9' },
-    { loc: `${base}/offer-evaluator`, priority: '0.9' },
-    { loc: `${base}/resume-builder`, priority: '0.9' },
-    { loc: `${base}/salary-negotiation`, priority: '0.9' },
-    { loc: `${base}/how-to-ask-for-a-raise`, priority: '0.9' },
-    { loc: `${base}/salary-calculator`, priority: '0.8' },
-    { loc: `${base}/blog/how-to-negotiate-saas-job-offer`, priority: '0.8' },
-    { loc: `${base}/blog/recruiter-types-and-how-to-handle`, priority: '0.8' },
-    { loc: `${base}/blog/why-professionals-leave-money-on-table`, priority: '0.8' },
-    { loc: `${base}/blog/what-your-equity-is-actually-worth`, priority: '0.8' },
-    { loc: `${base}/blog/how-to-evaluate-a-job-offer`, priority: '0.8' },
-    { loc: `${base}/blog/how-to-negotiate-remote-job-offer`, priority: '0.8' },
-    { loc: `${base}/blog/average-software-engineer-salary-by-city`, priority: '0.8' },
-    { loc: `${base}/blog/how-to-ask-for-a-raise-scripts-that-work`, priority: '0.8' },
-    { loc: `${base}/blog/what-to-say-when-recruiter-asks-current-salary`, priority: '0.8' },
-    { loc: `${base}/resources/salary-negotiation-scripts`, priority: '0.8' },
-    { loc: `${base}/resources/salary-negotiation-email`, priority: '0.8' },
-    { loc: `${base}/resources/ask-for-a-raise-email`, priority: '0.8' },
+    { loc: base, priority: '1.0', lastmod: '2026-10-16' },
+    { loc: `${base}/ai-career-coach`, priority: '0.9', lastmod: '2026-10-16' },
+    { loc: `${base}/salary-negotiation`, priority: '0.9', lastmod: '2026-10-16' },
+    { loc: `${base}/how-to-ask-for-a-raise`, priority: '0.9', lastmod: '2026-10-16' },
+    { loc: `${base}/salary-calculator`, priority: '0.9', lastmod: '2026-10-16' },
+    { loc: `${base}/compensation-analyzer`, priority: '0.8', lastmod: '2026-10-16' },
+    { loc: `${base}/counter-offer-builder`, priority: '0.8', lastmod: '2026-10-16' },
+    { loc: `${base}/equity-calculator`, priority: '0.8', lastmod: '2026-10-16' },
+    { loc: `${base}/job-tracker`, priority: '0.8', lastmod: '2026-10-16' },
+    { loc: `${base}/negotiation-simulator`, priority: '0.8', lastmod: '2026-10-16' },
+    { loc: `${base}/objection-handler`, priority: '0.8', lastmod: '2026-10-16' },
+    { loc: `${base}/offer-evaluator`, priority: '0.8', lastmod: '2026-10-16' },
+    { loc: `${base}/resume-builder`, priority: '0.8', lastmod: '2026-10-16' },
+    { loc: `${base}/blog/how-to-ask-for-a-raise-scripts-that-work`, priority: '0.8', lastmod: '2026-01-01' },
+    { loc: `${base}/blog/average-software-engineer-salary-by-city`, priority: '0.8', lastmod: '2026-01-01' },
+    { loc: `${base}/blog/what-to-say-when-recruiter-asks-current-salary`, priority: '0.8', lastmod: '2026-01-01' },
+    { loc: `${base}/blog/how-to-evaluate-a-job-offer`, priority: '0.8', lastmod: '2026-01-01' },
+    { loc: `${base}/blog/how-to-negotiate-remote-job-offer`, priority: '0.7', lastmod: '2026-01-01' },
+    { loc: `${base}/blog/how-to-negotiate-saas-job-offer`, priority: '0.7', lastmod: '2026-01-01' },
+    { loc: `${base}/blog/recruiter-types-and-how-to-handle`, priority: '0.7', lastmod: '2026-01-01' },
+    { loc: `${base}/blog/why-professionals-leave-money-on-table`, priority: '0.7', lastmod: '2026-01-01' },
+    { loc: `${base}/blog/what-your-equity-is-actually-worth`, priority: '0.7', lastmod: '2026-01-01' },
+    { loc: `${base}/resources/salary-negotiation-scripts`, priority: '0.7', lastmod: '2026-10-16' },
+    { loc: `${base}/resources/salary-negotiation-email`, priority: '0.7', lastmod: '2026-10-16' },
+    { loc: `${base}/resources/ask-for-a-raise-email`, priority: '0.7', lastmod: '2026-10-16' },
   ]
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${u.loc}</loc><priority>${u.priority}</priority></url>`).join('\n')}
+${urls.map((u) => `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod><priority>${u.priority}</priority></url>`).join('\n')}
 </urlset>`
   return new Response(xml, { headers: { 'Content-Type': 'application/xml' } })
 }

@@ -1,3 +1,17 @@
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How to Evaluate a Job Offer (Beyond the Base Salary)',
+  description: 'Base salary is just one number. Here\'s how to evaluate the full value of a job offer — and what to negotiate before you sign.',
+  url: 'https://gethayven.com/blog/how-to-evaluate-a-job-offer',
+  datePublished: '2024-10-15',
+  dateModified: '2026-01-01',
+  author: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
+  publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com', logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.png' } },
+  image: { '@type': 'ImageObject', url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630 },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://gethayven.com/blog/how-to-evaluate-a-job-offer' },
+}
+
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -10,6 +24,13 @@ export const metadata: Metadata = {
     description: 'Base salary is just one number. Here\'s how to evaluate the full value of a job offer — and what to negotiate before you sign.',
     url: 'https://gethayven.com/blog/how-to-evaluate-a-job-offer',
     type: 'article',
+    images: [{ url: 'https://gethayven.com/opengraph-image', width: 1200, height: 630, alt: 'How to Evaluate a Job Offer' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'How to Evaluate a Job Offer (Beyond the Base Salary) | Hayven',
+    description: 'Base salary is just one number. Here\'s how to evaluate the full value of a job offer — and what to negotiate before you sign.',
+    images: ['https://gethayven.com/opengraph-image'],
   },
 }
 
@@ -19,6 +40,7 @@ const readTime = '7 min read'
 export default function Article() {
   return (
     <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div style={{ marginBottom: 40 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 600, color: '#4A90D9', background: '#EBF5FB', padding: '4px 10px', borderRadius: 20 }}>{tag}</span>
