@@ -84,7 +84,7 @@ export function ProGate({ children, toolName }: Props) {
           </div>
 
           {/* CTA */}
-          <Link href="/upgrade" style={{
+          <Link href="/account/billing" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
             background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
             color: '#fff', padding: '14px 28px', borderRadius: 12,
