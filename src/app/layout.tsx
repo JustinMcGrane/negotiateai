@@ -2,15 +2,54 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Hayven — The compensation platform that pays for itself',
-  description: "Know your market rate. Build your strategy. Practice until you're ready.",
+  title: 'Hayven — AI Career Coaching & Salary Negotiation',
+  description: "AI-powered career coaching for salary negotiation, raise requests, and compensation guidance. Know your market rate, build your strategy, and get paid what you're worth.",
   icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
+  metadataBase: new URL('https://gethayven.com'),
+  openGraph: {
+    siteName: 'Hayven',
+    type: 'website',
+    locale: 'en_US',
+  },
+}
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Hayven',
+  url: 'https://gethayven.com',
+  logo: 'https://gethayven.com/logo.png',
+  description: 'AI-powered career coaching platform for salary negotiation, raise requests, and compensation guidance.',
+  sameAs: [],
+}
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Hayven',
+  url: 'https://gethayven.com',
+  description: 'AI-powered career coaching for salary negotiation and compensation guidance.',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: { '@type': 'EntryPoint', urlTemplate: 'https://gethayven.com/blog?q={search_term_string}' },
+    'query-input': 'required name=search_term_string',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        {children}
+      </body>
     </html>
   )
 }
