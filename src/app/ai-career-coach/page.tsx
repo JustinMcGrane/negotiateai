@@ -77,6 +77,23 @@ const faqSchema = {
         text: 'Hayven has a free plan that includes a salary assessment and one coaching session with Sarah. Pro is $20/month for unlimited coaching and all negotiation tools.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'Can Sarah help me prepare for a salary negotiation?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Salary negotiation preparation is one of Sarah\'s primary use cases. She analyzes your market rate, builds a personalized negotiation strategy, writes your counter-offer email or phone script, and roleplays the conversation with you through the Negotiation Simulator. You can practice as many times as you need before the real conversation.',
+      },
+    },
+  ],
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+    { '@type': 'ListItem', position: 2, name: 'AI Career Coach', item: 'https://gethayven.com/ai-career-coach' },
   ],
 }
 
@@ -85,6 +102,7 @@ export default function AiCareerCoachPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Nav */}
       <header style={{
@@ -375,6 +393,10 @@ export default function AiCareerCoachPage() {
             {
               q: 'Do I need to be in a specific country?',
               a: 'Hayven\'s compensation data and coaching is primarily US-focused. Market rate analysis is most accurate for US roles and locations.',
+            },
+            {
+              q: 'Can Sarah help me prepare for a salary negotiation?',
+              a: 'Yes. Salary negotiation preparation is one of Sarah\'s primary use cases. She analyzes your market rate, builds a personalized negotiation strategy, writes your counter-offer email or phone script, and roleplays the conversation with you through the Negotiation Simulator. You can practice as many times as you need before the real conversation.',
             },
           ].map(({ q, a }) => (
             <div key={q} style={{ marginBottom: 24, paddingBottom: 24, borderBottom: '1px solid #f1f5f9' }}>

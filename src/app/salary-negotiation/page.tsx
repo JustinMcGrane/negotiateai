@@ -74,6 +74,39 @@ const faqSchema = {
         text: 'Use market data as your anchor. Research what the role pays at the 50th–75th percentile for your title, level, and location. Present that data professionally and make your case based on your contributions and market position, not on personal financial need.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'Should I negotiate by phone or email?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Phone or video calls give you more negotiating power — you can read tone, respond to objections in real time, and build rapport. Email is fine for initial counter-offers because it gives you time to craft your message carefully and leaves a paper trail. Many professionals use both: negotiate on the phone, then follow up with a written summary.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the best way to counter a lowball offer?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Stay professional and anchor to market data. Say something like: "I appreciate the offer. Based on my research for this role in [location], the 75th percentile is around $[X]. Given my background in [relevant area], I\'d like to come in at $[Y]. Is there flexibility to get closer to that?" Never express disappointment or frustration — stay collaborative throughout.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'When should I accept a salary offer without negotiating?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Accept without negotiating only if the offer is already at or above the 75th percentile for your role, level, and location — or if the company has explicitly stated that compensation is non-negotiable and you\'ve verified that through conversation. Even then, you can often negotiate non-salary components like signing bonus, equity, or start date.',
+      },
+    },
+  ],
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+    { '@type': 'ListItem', position: 2, name: 'Salary Negotiation', item: 'https://gethayven.com/salary-negotiation' },
   ],
 }
 
@@ -82,6 +115,7 @@ export default function SalaryNegotiationPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Nav */}
       <header style={{
@@ -338,10 +372,16 @@ export default function SalaryNegotiationPage() {
           <p style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>Related guides</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <Link href="/how-to-ask-for-a-raise" style={{ fontSize: 15, color: '#2563eb', textDecoration: 'none' }}>
-              → How to ask for a raise at work
+              → How to ask for a raise at your current job
             </Link>
             <Link href="/ai-career-coach" style={{ fontSize: 15, color: '#2563eb', textDecoration: 'none' }}>
-              → Meet Sarah — your AI career coach
+              → Meet Sarah — your AI career coach for salary negotiation prep
+            </Link>
+            <Link href="/resources/salary-negotiation-scripts" style={{ fontSize: 15, color: '#2563eb', textDecoration: 'none' }}>
+              → Word-for-word salary negotiation scripts (copy &amp; use)
+            </Link>
+            <Link href="/resources/salary-negotiation-email" style={{ fontSize: 15, color: '#2563eb', textDecoration: 'none' }}>
+              → Salary negotiation email templates — ready to send
             </Link>
             <Link href="/compensation-analyzer" style={{ fontSize: 15, color: '#2563eb', textDecoration: 'none' }}>
               → Check your market rate with the Compensation Analyzer

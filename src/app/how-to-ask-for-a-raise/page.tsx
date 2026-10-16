@@ -74,6 +74,39 @@ const faqSchema = {
         text: 'The keys to a successful raise ask: have market data as your anchor, present specific quantified accomplishments (not just effort), name a specific number (not a range), give your manager notice rather than surprising them, and be prepared to handle the most common objections professionally.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'How much of a raise should I ask for?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ask for an amount that gets you to the 75th percentile of market pay for your role, level, and location. If you\'re currently below the 50th percentile, that often means requesting a 10–20% increase. If you\'re at the median, targeting the 75th percentile typically means a 5–12% ask. Your specific accomplishments and scope growth can justify going higher.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What if my manager says no to my raise request?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A "no" is rarely permanent. Ask for a specific number and a timeline: "Can we agree on what it would take to get to $X and when we could revisit this?" Document the conversation in a follow-up email. If budget is truly the constraint, negotiate a one-time bonus or equity grant. If the answer remains no with no path forward, that is valuable information about whether to stay.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should I ask for a raise in person or by email?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Request a dedicated meeting in person or by video call — do not ambush your manager in a regular 1:1 or send a cold raise request email without warning. The conversation is almost always more effective face-to-face because you can read the room, respond to objections, and build rapport. Follow up in writing after the meeting to document what was agreed.',
+      },
+    },
+  ],
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+    { '@type': 'ListItem', position: 2, name: 'How to Ask for a Raise', item: 'https://gethayven.com/how-to-ask-for-a-raise' },
   ],
 }
 
@@ -82,6 +115,7 @@ export default function HowToAskForARaisePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Nav */}
       <header style={{
@@ -342,10 +376,13 @@ export default function HowToAskForARaisePage() {
           <p style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>Related guides</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <Link href="/salary-negotiation" style={{ fontSize: 15, color: '#2563eb', textDecoration: 'none' }}>
-              → How to negotiate salary (for new job offers)
+              → How to negotiate salary for a new job offer
             </Link>
             <Link href="/ai-career-coach" style={{ fontSize: 15, color: '#2563eb', textDecoration: 'none' }}>
-              → Meet Sarah — your AI career coach
+              → Meet Sarah — AI career coach that builds your raise case
+            </Link>
+            <Link href="/resources/ask-for-a-raise-email" style={{ fontSize: 15, color: '#2563eb', textDecoration: 'none' }}>
+              → Raise request email templates — copy and use
             </Link>
             <Link href="/compensation-analyzer" style={{ fontSize: 15, color: '#2563eb', textDecoration: 'none' }}>
               → Check your market rate

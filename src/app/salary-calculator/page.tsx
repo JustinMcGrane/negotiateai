@@ -67,6 +67,39 @@ const faqSchema = {
         text: 'You\'re underpaid if your current salary is below the 50th percentile for your role, level, and location — or if it\'s below the market rate for your actual responsibilities and impact. Hayven\'s Compensation Analyzer will show you exactly where you fall in the market range and what you could realistically ask for.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'How do I convert annual salary to hourly rate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Divide your annual salary by 2,080 — the standard number of work hours per year (40 hours per week × 52 weeks). For example, a $75,000 annual salary equals approximately $36.06 per hour. If you work a different schedule, divide your annual salary by your actual annual hours.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much should I ask for in a raise?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ask for an amount that gets you to the 75th percentile of market pay for your role, level, and location. If you\'re currently below the median, that often means requesting 10–20%. If you\'re already at the median, aiming for the 75th percentile typically means a 5–12% ask. Your specific accomplishments and any new responsibilities you\'ve taken on can justify going higher.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much of a raise should I ask for as a percentage?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A 10% raise gets your current salary to 110% of its current level. A 15% raise takes it to 115%. Use this formula: new salary = current salary × (1 + raise percentage / 100). The right percentage to ask for depends entirely on where your current salary sits relative to market rate for your role and location — not on what feels comfortable to ask.',
+      },
+    },
+  ],
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+    { '@type': 'ListItem', position: 2, name: 'Salary Calculator', item: 'https://gethayven.com/salary-calculator' },
   ],
 }
 
@@ -75,6 +108,7 @@ export default function SalaryCalculatorPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Nav */}
       <header style={{
@@ -196,6 +230,102 @@ export default function SalaryCalculatorPage() {
           </div>
         </section>
 
+        {/* Raise percentage calculator */}
+        <section style={{ marginBottom: 64 }}>
+          <h2 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 16 }}>
+            Raise percentage calculator
+          </h2>
+          <p style={{ fontSize: 16, lineHeight: 1.85, color: '#334155', marginBottom: 20 }}>
+            To calculate your new salary after a raise, multiply your current salary by (1 + raise percentage ÷ 100):
+          </p>
+          <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, padding: '24px 28px', marginBottom: 20 }}>
+            <p style={{ fontSize: 15, color: '#0f172a', fontWeight: 700, marginBottom: 12 }}>New salary = Current salary × (1 + raise % ÷ 100)</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+              {[
+                { raise: '5%', example: '$80,000 → $84,000' },
+                { raise: '10%', example: '$80,000 → $88,000' },
+                { raise: '15%', example: '$80,000 → $92,000' },
+                { raise: '20%', example: '$80,000 → $96,000' },
+              ].map(({ raise, example }) => (
+                <div key={raise} style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 8, padding: '12px 16px' }}>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: '#2563eb', marginBottom: 4 }}>{raise} raise</p>
+                  <p style={{ fontSize: 13, color: '#334155', margin: 0 }}>{example}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <p style={{ fontSize: 15, color: '#64748b', lineHeight: 1.7 }}>
+            These examples use a $80,000 starting salary. Apply the same formula to your own number. A 10% raise on $120,000 = $132,000. A 15% raise on $65,000 = $74,750. If you want to know what percentage raise you need to reach a specific target salary, use: raise % = (target salary ÷ current salary − 1) × 100.
+          </p>
+          <p style={{ fontSize: 15, color: '#64748b', lineHeight: 1.7, marginTop: 12 }}>
+            Once you know your target number, read our guide on{' '}
+            <Link href="/how-to-ask-for-a-raise" style={{ color: '#2563eb', textDecoration: 'none' }}>how to ask for a raise</Link>
+            {' '}to learn how to make the case for it.
+          </p>
+        </section>
+
+        {/* Annual to hourly converter */}
+        <section style={{ marginBottom: 64 }}>
+          <h2 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 16 }}>
+            Annual salary to hourly rate converter
+          </h2>
+          <p style={{ fontSize: 16, lineHeight: 1.85, color: '#334155', marginBottom: 20 }}>
+            To convert an annual salary to an hourly rate, divide by 2,080 — the number of work hours in a standard year (40 hours × 52 weeks):
+          </p>
+          <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, padding: '24px 28px', marginBottom: 20 }}>
+            <p style={{ fontSize: 15, color: '#0f172a', fontWeight: 700, marginBottom: 12 }}>Hourly rate = Annual salary ÷ 2,080</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+              {[
+                { annual: '$50,000/yr', hourly: '≈ $24.04/hr' },
+                { annual: '$75,000/yr', hourly: '≈ $36.06/hr' },
+                { annual: '$100,000/yr', hourly: '≈ $48.08/hr' },
+                { annual: '$150,000/yr', hourly: '≈ $72.12/hr' },
+                { annual: '$200,000/yr', hourly: '≈ $96.15/hr' },
+                { annual: '$250,000/yr', hourly: '≈ $120.19/hr' },
+              ].map(({ annual, hourly }) => (
+                <div key={annual} style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 8, padding: '12px 16px' }}>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>{annual}</p>
+                  <p style={{ fontSize: 13, color: '#334155', margin: 0 }}>{hourly}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <p style={{ fontSize: 15, color: '#64748b', lineHeight: 1.7 }}>
+            This conversion is useful when comparing a full-time salary offer to a contracting or hourly rate. Note that hourly contractors typically do not receive benefits (health insurance, 401k match, PTO), so a contractor rate needs to be 25–40% higher than the equivalent salaried hourly rate to be comparable.
+          </p>
+        </section>
+
+        {/* How much should I ask for */}
+        <section style={{ marginBottom: 64 }}>
+          <h2 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 16 }}>
+            How much should I ask for?
+          </h2>
+          <p style={{ fontSize: 16, lineHeight: 1.85, color: '#334155', marginBottom: 20 }}>
+            The right number to ask for in a salary negotiation depends on where your current pay sits relative to market. Here is how to determine your ask:
+          </p>
+          <ol style={{ paddingLeft: 24, marginBottom: 24 }}>
+            {[
+              { label: 'Find your market range', desc: 'Run a compensation analysis for your role, level, and location. You need both the 50th percentile (your floor) and the 75th percentile (your target ask).' },
+              { label: 'Compare your current salary', desc: 'If you are below the 50th percentile, any ask up to the 75th percentile is well-supported. If you are at the median, target the 75th. If you are already at the 75th, you need strong accomplishments to justify the 90th.' },
+              { label: 'Factor in your accomplishments', desc: 'Strong, specific, quantified wins from the past year — revenue generated, costs reduced, team impact — support a higher ask. The market rate sets a floor; your performance justifies going above it.' },
+              { label: 'Name a specific number', desc: 'Pick one number, not a range. Ranges give the other side an anchor at the low end. Your number should be your real target, not a high number you expect to be negotiated down from.' },
+            ].map(({ label, desc }, i) => (
+              <li key={i} style={{ fontSize: 16, color: '#334155', marginBottom: 16, lineHeight: 1.7 }}>
+                <strong>{label}</strong> — {desc}
+              </li>
+            ))}
+          </ol>
+          <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 12, padding: '18px 22px' }}>
+            <p style={{ fontSize: 14, color: '#1e40af', lineHeight: 1.7, margin: 0 }}>
+              Ready to find out your number? Use{' '}
+              <Link href="/salary-negotiation" style={{ color: '#1e40af' }}>our salary negotiation guide</Link>
+              {' '}for step-by-step instructions, or{' '}
+              <Link href="/how-to-ask-for-a-raise" style={{ color: '#1e40af' }}>the raise guide</Link>
+              {' '}if you are negotiating with your current employer.
+            </p>
+          </div>
+        </section>
+
         {/* FAQ */}
         <section style={{ marginBottom: 64 }}>
           <h2 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 24 }}>
@@ -217,6 +347,14 @@ export default function SalaryCalculatorPage() {
             {
               q: 'How accurate is AI-generated salary data?',
               a: 'AI-generated salary data reflects market benchmarks based on training data and is useful as a starting reference. For maximum accuracy, cross-reference Hayven\'s numbers with Levels.fyi, LinkedIn Salary, and Glassdoor — especially for niche roles or less common locations. Use the combined picture to build a credible market rate argument.',
+            },
+            {
+              q: 'How do I convert annual salary to hourly rate?',
+              a: 'Divide your annual salary by 2,080 — the standard number of work hours per year (40 hours per week × 52 weeks). A $75,000 annual salary equals approximately $36.06 per hour. If you work a non-standard schedule, divide by your actual annual hours.',
+            },
+            {
+              q: 'How much should I ask for in a raise?',
+              a: 'Ask for a number that gets you to the 75th percentile for your role, level, and location. If you\'re below the 50th percentile, that often means requesting 10–20%. If you\'re at the median, targeting the 75th percentile typically means a 5–12% ask. Your accomplishments and any new responsibilities can justify going higher.',
             },
           ].map(({ q, a }) => (
             <div key={q} style={{ marginBottom: 24, paddingBottom: 24, borderBottom: '1px solid #f1f5f9' }}>
