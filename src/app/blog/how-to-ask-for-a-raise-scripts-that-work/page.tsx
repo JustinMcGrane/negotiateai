@@ -104,6 +104,16 @@ export default function Article() {
         <div style={{ fontSize: 15, color: '#64748b', marginBottom: 24, lineHeight: 1.65 }}>Hayven shows you your precise market percentile so you can walk into the raise conversation with real data — not a guess.</div>
         <Link href="/worth" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#141414', color: '#fff', padding: '10px 22px', borderRadius: 9, fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>Check my market value →</Link>
       </div>
+
+      <div style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid #e2e8f0' }}>
+        <p style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 12 }}>Related guides</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <Link href="/how-to-ask-for-a-raise" style={{ fontSize: 14, color: '#2563eb', textDecoration: 'none' }}>→ Complete guide: how to ask for a raise at work</Link>
+          <Link href="/salary-negotiation" style={{ fontSize: 14, color: '#2563eb', textDecoration: 'none' }}>→ Salary negotiation guide — for new job offers</Link>
+          <Link href="/resources/ask-for-a-raise-email" style={{ fontSize: 14, color: '#2563eb', textDecoration: 'none' }}>→ Raise request email templates — copy and use</Link>
+          <Link href="/ai-career-coach" style={{ fontSize: 14, color: '#2563eb', textDecoration: 'none' }}>→ Meet Sarah — AI career coach for raise preparation</Link>
+        </div>
+      </div>
     </article>
   )
 }

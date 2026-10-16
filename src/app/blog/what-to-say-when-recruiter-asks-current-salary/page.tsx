@@ -91,6 +91,16 @@ export default function Article() {
         <div style={{ fontSize: 15, color: '#64748b', marginBottom: 24, lineHeight: 1.65 }}>Hayven shows you your real market rate so you can name a number with confidence — not a guess.</div>
         <Link href="/worth" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#141414', color: '#fff', padding: '10px 22px', borderRadius: 9, fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>Check my market value →</Link>
       </div>
+
+      <div style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid #e2e8f0' }}>
+        <p style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 12 }}>Related guides</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <Link href="/salary-negotiation" style={{ fontSize: 14, color: '#2563eb', textDecoration: 'none' }}>→ Complete salary negotiation guide — strategies and scripts</Link>
+          <Link href="/resources/salary-negotiation-scripts" style={{ fontSize: 14, color: '#2563eb', textDecoration: 'none' }}>→ Word-for-word salary negotiation scripts</Link>
+          <Link href="/ai-career-coach" style={{ fontSize: 14, color: '#2563eb', textDecoration: 'none' }}>→ Practice with Sarah — AI career coach</Link>
+          <Link href="/salary-calculator" style={{ fontSize: 14, color: '#2563eb', textDecoration: 'none' }}>→ Salary calculator — find your market rate</Link>
+        </div>
+      </div>
     </article>
   )
 }
