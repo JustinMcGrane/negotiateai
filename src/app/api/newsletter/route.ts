@@ -68,9 +68,9 @@ export async function POST(req: NextRequest) {
           <div style="background: #141414; width: 40px; height: 40px; border-radius: 10px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
             <span style="color: #fff; font-size: 18px; font-weight: 700;">H</span>
           </div>
-          <h1 style="font-size: 22px; font-weight: 800; color: #0f172a; margin: 0 0 8px; letter-spacing: -0.02em;">You're locked in at $40/month — forever.</h1>
+          <h1 style="font-size: 22px; font-weight: 800; color: #0f172a; margin: 0 0 8px; letter-spacing: -0.02em;">You're locked in at $20/month — forever.</h1>
           <p style="color: #475569; font-size: 15px; line-height: 1.7; margin: 0 0 16px;">
-            You've claimed your early access rate. Once you activate, you'll pay $40/month for Hayven Pro — locked in for life, even when the price goes up to $49.
+            You've claimed your early access rate. Once you activate, you'll pay $20/month for Hayven Pro — locked in for life, even when the price goes up.
           </p>
           <p style="color: #475569; font-size: 15px; line-height: 1.7; margin: 0 0 28px;">
             Click below to create your account and activate your rate.

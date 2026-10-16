@@ -49,7 +49,7 @@ export function NewsletterForm() {
       <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 12, padding: '24px', textAlign: 'center' }}>
         <div style={{ fontSize: 13, fontWeight: 700, color: '#dc2626', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8 }}>Early access closed</div>
         <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>All 1,000 spots have been claimed.</div>
-        <div style={{ fontSize: 14, color: '#475569' }}>Sign up at the regular price — Pro is $49/month.</div>
+        <div style={{ fontSize: 14, color: '#475569' }}>Sign up at the regular price — Pro is $20/month.</div>
       </div>
     )
   }

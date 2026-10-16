@@ -12,6 +12,10 @@ export async function POST(req: NextRequest) {
 
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
     if (user) {
       const { data: prof } = await supabase.from('profiles').select('plan').eq('id', user.id).single()
       logToolUse(user.id, 'counter-offer', prof?.plan ?? 'free')

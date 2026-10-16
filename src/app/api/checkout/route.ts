@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
 
     const { priceId } = await req.json()
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://gethayven.com'
 
     const isOneTime = priceId === process.env.STRIPE_REPORT_PRICE_ID
     const session = await getStripe().checkout.sessions.create({

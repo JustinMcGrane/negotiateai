@@ -267,12 +267,12 @@ export default function LandingPage() {
             <h2 style={{ fontSize: 'clamp(22px, 4vw, 34px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', margin: '0 0 10px' }}>Simple pricing</h2>
             <p style={{ fontSize: 15, color: '#64748b' }}>Start free. Upgrade when it pays off.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, maxWidth: 620, margin: '0 auto' }}>
             <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 14, padding: 28 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>Free</div>
               <div style={{ fontSize: 32, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 4 }}>$0</div>
               <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>No credit card required</div>
-              {['Sarah salary assessment (one session)', 'See your current market value', 'Get your target role + salary', 'Realistic timeline to get there'].map(f => (
+              {['Sarah AI coach — 20 messages/mo', 'See your current market value', 'Resume analyzer — 1 use', 'Cover letter — 1 use'].map(f => (
                 <div key={f} style={{ fontSize: 13, color: '#475569', padding: '6px 0', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ color: '#10b981', fontWeight: 700 }}>✓</span> {f}
                 </div>
@@ -290,20 +290,20 @@ export default function LandingPage() {
             <div style={{ background: '#0f172a', border: '2px solid #0f172a', borderRadius: 14, padding: 28, position: 'relative' }}>
               <div style={{
                 position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                background: '#2563eb', color: '#fff',
+                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: '#fff',
                 fontSize: 11, fontWeight: 700, padding: '3px 12px', borderRadius: 20,
                 whiteSpace: 'nowrap',
               }}>MOST POPULAR</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 6 }}>Professional</div>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>$49<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>Unlimited coaching &amp; tools</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 6 }}>Pro</div>
+              <div style={{ fontSize: 32, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>$20<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>Unlimited coaching &amp; all tools</div>
               {[
-                'Sarah AI recruiter — unlimited coaching',
-                'All 10 negotiation tools — unlimited',
-                'Resume analyzer + cover letter generator',
+                'Sarah AI coach — unlimited',
+                'All 16 negotiation tools — unlimited',
+                'Resume analyzer + cover letter — unlimited',
                 'Offer evaluator + counter-offer builder',
                 'Raise builder + negotiation playbook',
-                'Session history',
+                'Equity calculator + interview coach',
               ].map(f => (
                 <div key={f} style={{ fontSize: 13, color: '#cbd5e1', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ color: '#34d399', fontWeight: 700 }}>✓</span> {f}
@@ -312,35 +312,10 @@ export default function LandingPage() {
               <Link href="/signup" style={{
                 display: 'block', marginTop: 24, textAlign: 'center',
                 height: 42, lineHeight: '42px',
-                background: '#2563eb', borderRadius: 9,
+                background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)', borderRadius: 9,
                 fontSize: 14, textDecoration: 'none', color: '#fff', fontWeight: 700,
               }}>
-                Get Professional →
-              </Link>
-            </div>
-
-            <div style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', border: '1px solid rgba(102,126,234,0.4)', borderRadius: 14, padding: 28, position: 'relative' }}>
-              <div style={{
-                position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                background: 'linear-gradient(135deg, #667eea, #764ba2)', color: '#fff',
-                fontSize: 11, fontWeight: 700, padding: '3px 12px', borderRadius: 20,
-                whiteSpace: 'nowrap',
-              }}>BEST RESULTS</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', marginBottom: 6 }}>Pro</div>
-              <div style={{ fontSize: 32, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 4 }}>$79<span style={{ fontSize: 15, fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 24 }}>Everything in Professional, plus:</div>
-              {['Sarah remembers you across sessions', 'Mock interview coaching with feedback', 'Live negotiation roleplay with Sarah', 'Annual Review Coach + Promotion Planner', 'PDF compensation report', 'Priority support'].map(f => (
-                <div key={f} style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ color: '#667eea', fontWeight: 700 }}>✓</span> {f}
-                </div>
-              ))}
-              <Link href="/signup" style={{
-                display: 'block', marginTop: 24, textAlign: 'center',
-                height: 42, lineHeight: '42px',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: 9,
-                fontSize: 14, textDecoration: 'none', color: '#fff', fontWeight: 700,
-              }}>
-                Get Pro →
+                Get Pro — $20/mo →
               </Link>
             </div>
           </div>
@@ -375,10 +350,10 @@ export default function LandingPage() {
             LIMITED — FIRST 1,000 MEMBERS ONLY
           </div>
           <h2 style={{ fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 12px', lineHeight: 1.2 }}>
-            Lock in Pro at $40/month — forever.
+            Lock in Pro at $20/month — forever.
           </h2>
           <p style={{ fontSize: 16, color: '#94a3b8', marginBottom: 8, lineHeight: 1.7 }}>
-            Pro is $49/month. The first 1,000 members get it at $40/month, locked in for life — even when the price goes up.
+            Pro is $20/month. The first 1,000 members lock in this rate for life — even when the price goes up.
           </p>
           <p style={{ fontSize: 14, color: '#64748b', marginBottom: 36 }}>
             Enter your email to claim your spot. We&apos;ll send you the activation link.

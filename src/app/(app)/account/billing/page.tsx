@@ -51,8 +51,8 @@ export default function BillingPage() {
     {
       key: 'pro',
       name: 'Pro',
-      price: '$29',
-      sub: '/mo · or $249/yr',
+      price: '$20',
+      sub: '/mo',
       features: ['Unlimited all 10 tools', 'Full session history', 'PDF export', 'Progress tracking', 'Priority support'],
       cta: 'Upgrade to Pro',
       disabled: false,
