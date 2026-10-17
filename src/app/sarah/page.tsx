@@ -1,7 +1,7 @@
 'use client'
 import { useState, useRef, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { Send, Briefcase, ArrowRight } from 'lucide-react'
+import { Send, Briefcase, ArrowRight, Paperclip, X, FileText } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -73,12 +73,45 @@ function SarahChat() {
   const [loading, setLoading] = useState(false)
   const [userMessageCount, setUserMessageCount] = useState(0)
   const [showSignup, setShowSignup] = useState(false)
+  const [resumeText, setResumeText] = useState<string | null>(null)
+  const [resumeFilename, setResumeFilename] = useState<string | null>(null)
+  const [uploadLoading, setUploadLoading] = useState(false)
+  const [uploadError, setUploadError] = useState<string | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
+
+  async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setUploadLoading(true)
+    setUploadError(null)
+    try {
+      const form = new FormData()
+      form.append('file', file)
+      const res = await fetch('/api/parse-resume', { method: 'POST', body: form })
+      const data = await res.json()
+      if (!res.ok) {
+        setUploadError(data.error ?? 'Failed to read file.')
+        return
+      }
+      setResumeText(data.text)
+      setResumeFilename(data.filename)
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: `I've read your resume (${data.filename}). I can see your experience, skills, and background. What would you like help with — feedback on how it reads, rewriting specific sections, ATS optimization, or something else?`,
+      }])
+    } catch {
+      setUploadError('Something went wrong. Please try again.')
+    } finally {
+      setUploadLoading(false)
+      if (fileInputRef.current) fileInputRef.current.value = ''
+    }
+  }
 
   function autoResize() {
     const el = textareaRef.current
@@ -108,6 +141,7 @@ function SarahChat() {
         body: JSON.stringify({
           messages: newMessages,
           ...(worthContext?.systemContext ? { contextNote: worthContext.systemContext } : {}),
+          ...(resumeText ? { resumeContext: resumeText } : {}),
         }),
       })
       const data = await res.json()
@@ -253,18 +287,44 @@ function SarahChat() {
 
       {/* Input */}
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px 16px', paddingBottom: 'max(12px, env(safe-area-inset-bottom))', maxWidth: 720, width: '100%', margin: '0 auto' }}>
+        {/* Resume badge */}
+        {resumeFilename && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, background: 'rgba(102,126,234,0.15)', border: '1px solid rgba(102,126,234,0.3)', borderRadius: 8, padding: '6px 10px' }}>
+            <FileText size={13} color="#667eea" />
+            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', flex: 1 }}>{resumeFilename}</span>
+            <button onClick={() => { setResumeText(null); setResumeFilename(null) }} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', padding: 0, display: 'flex' }}>
+              <X size={13} />
+            </button>
+          </div>
+        )}
+        {uploadError && (
+          <div style={{ fontSize: 12, color: '#fca5a5', marginBottom: 8, textAlign: 'center' }}>{uploadError}</div>
+        )}
+        <input ref={fileInputRef} type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style={{ display: 'none' }} onChange={handleFileUpload} />
         <div style={{
           display: 'flex', gap: 8, alignItems: 'flex-end',
           background: 'rgba(255,255,255,0.06)',
           border: '1px solid rgba(255,255,255,0.12)',
           borderRadius: 12, padding: '8px 12px',
         }}>
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploadLoading}
+            title="Upload resume (PDF or DOCX)"
+            style={{
+              background: 'none', border: 'none', color: resumeFilename ? '#667eea' : 'rgba(255,255,255,0.35)',
+              cursor: 'pointer', padding: '4px 2px', display: 'flex', alignItems: 'center', flexShrink: 0,
+              opacity: uploadLoading ? 0.5 : 1,
+            }}
+          >
+            <Paperclip size={17} />
+          </button>
           <textarea
             ref={textareaRef}
             value={input}
             onChange={e => { setInput(e.target.value); autoResize() }}
             onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send() } }}
-            placeholder="Ask Sarah anything…"
+            placeholder={resumeFilename ? 'Ask Sarah about your resume…' : 'Ask Sarah anything…'}
             rows={1}
             style={{
               flex: 1, background: 'transparent', border: 'none', outline: 'none',

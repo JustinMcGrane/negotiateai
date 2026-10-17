@@ -30,6 +30,7 @@ Allow: /negotiation-simulator
 Allow: /interview-salary-coach
 Allow: /job-tracker
 Allow: /ai-career-coach
+Allow: /resume-coach
 Disallow: /dashboard
 Disallow: /tools/comp-analyzer
 Disallow: /tools/offer-evaluator

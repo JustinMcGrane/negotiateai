@@ -30,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/salary-negotiation`, lastModified: D('2026-10-16'), priority: 0.9 },
     { url: `${base}/how-to-ask-for-a-raise`, lastModified: D('2026-10-16'), priority: 0.9 },
     { url: `${base}/salary-calculator`, lastModified: D('2026-10-16'), priority: 0.8 },
+    { url: `${base}/resume-coach`, lastModified: D('2026-10-17'), priority: 0.8 },
 
     // Calculators
     { url: `${base}/raise-calculator`, lastModified: D('2026-09-01'), priority: 0.9 },

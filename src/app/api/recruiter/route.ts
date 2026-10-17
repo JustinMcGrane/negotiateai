@@ -186,7 +186,7 @@ export async function POST(req: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     const body = await req.json()
-    const { messages, contextNote } = body
+    const { messages, contextNote, resumeContext } = body
 
     // Guest (unauthenticated) path
     if (!user) {
@@ -195,7 +195,8 @@ export async function POST(req: NextRequest) {
       if (!guest.allowed) {
         return NextResponse.json({ error: 'limit_reached', used: guest.used, limit: GUEST_LIMIT }, { status: 429 })
       }
-      const systemPrompt = buildAssessmentSystemPrompt(contextNote ?? '')
+      const resumeSection = resumeContext ? `\n\nThe user has uploaded their resume. Here is the extracted text:\n---\n${resumeContext}\n---\nUse this to give specific, personalized feedback. Reference actual content from their resume, not generic advice.` : ''
+      const systemPrompt = buildAssessmentSystemPrompt((contextNote ?? '') + resumeSection)
       const anthropicMessages = messages
         .filter((m: { role: string }) => m.role !== 'system')
         .map((m: { role: string; content: string }) => ({ role: m.role as 'user' | 'assistant', content: m.content }))
@@ -263,7 +264,8 @@ export async function POST(req: NextRequest) {
     const profileContext = formatProfileContext(onboardingProfile)
     const isAssessmentMode = !isPro
 
-    const combinedContext = [profileContext, contextNote].filter(Boolean).join('\n\n')
+    const resumeSection = resumeContext ? `\n\nThe user has uploaded their resume. Here is the extracted text:\n---\n${resumeContext}\n---\nUse this to give specific, personalized feedback. Reference actual content from their resume, not generic advice.` : ''
+    const combinedContext = [profileContext, contextNote, resumeSection].filter(Boolean).join('\n\n')
     let systemPrompt = isAssessmentMode ? buildAssessmentSystemPrompt(combinedContext) : buildFreeSystemPrompt(combinedContext)
     let memory: Record<string, string> = {}
 
