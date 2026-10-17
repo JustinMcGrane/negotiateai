@@ -1,17 +1,21 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Best Skills to Put on a Resume — Examples by Job Type | Hayven',
-  description: 'Discover the best skills to put on a resume. Browse top technical skills, soft skills, and computer skills with examples for every industry and job type.',
+  title: 'Resume Skills List — Top Skills to Put on Your Resume in 2025 | Hayven',
+  description: 'Browse 200+ in-demand resume skills across tech, marketing, project management, and more. Find the right keywords to get past ATS and impress recruiters.',
   alternates: { canonical: 'https://gethayven.com/resume-skills' },
   openGraph: {
-    title: 'Best Resume Skills List — Examples by Job | Hayven',
-    description: 'The best technical skills, soft skills, and computer skills to put on your resume for any role.',
+    type: 'website',
+    title: 'Resume Skills List — Top Skills to Put on Your Resume in 2025 | Hayven',
+    description: 'Browse 200+ in-demand resume skills across tech, marketing, project management, and more. Find the right keywords to get past ATS and impress recruiters.',
+    url: 'https://gethayven.com/resume-skills',
+    images: [{ url: 'https://gethayven.com/resume-skills/opengraph-image' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Best Resume Skills to List | Hayven',
-    description: 'Browse top resume skills by category and job type with real examples.',
+    title: 'Resume Skills List — Top Skills to Put on Your Resume in 2025 | Hayven',
+    description: 'Browse 200+ in-demand resume skills across tech, marketing, project management, and more. Find the right keywords to get past ATS and impress recruiters.',
+    images: ['https://gethayven.com/resume-skills/opengraph-image'],
   },
 }
 

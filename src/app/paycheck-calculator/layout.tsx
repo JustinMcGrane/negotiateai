@@ -1,20 +1,24 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Paycheck Calculator — Take-Home Pay After Taxes | Hayven',
-  description: 'Free paycheck calculator. Calculate your take-home pay after federal and state income taxes for any pay period — weekly, biweekly, semi-monthly, or monthly.',
+  title: 'Paycheck Calculator — Estimate Your Take-Home Pay | Hayven',
+  description: 'Calculate your net paycheck after federal and state taxes, Social Security, and Medicare. Supports all 50 states and multiple filing statuses.',
   alternates: { canonical: 'https://gethayven.com/paycheck-calculator' },
   openGraph: {
-    title: 'Paycheck Calculator — Free | Hayven',
-    description: 'Calculate take-home pay after federal and state taxes for any pay period.',
+    type: 'website',
+    title: 'Paycheck Calculator — Estimate Your Take-Home Pay | Hayven',
+    description: 'Calculate your net paycheck after federal and state taxes, Social Security, and Medicare. Supports all 50 states and multiple filing statuses.',
+    url: 'https://gethayven.com/paycheck-calculator',
+    images: [{ url: 'https://gethayven.com/paycheck-calculator/opengraph-image' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paycheck Calculator | Hayven',
-    description: 'Free paycheck calculator. See your take-home pay after taxes for weekly, biweekly, or monthly pay.',
+    title: 'Paycheck Calculator — Estimate Your Take-Home Pay | Hayven',
+    description: 'Calculate your net paycheck after federal and state taxes, Social Security, and Medicare. Supports all 50 states and multiple filing statuses.',
+    images: ['https://gethayven.com/paycheck-calculator/opengraph-image'],
   },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return children
 }
