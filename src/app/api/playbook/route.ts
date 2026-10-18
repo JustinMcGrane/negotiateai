@@ -22,6 +22,9 @@ export async function POST(req: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
+    const { data: profileData } = await supabase.from('profiles').select('plan').eq('id', user.id).single()
+    if (!['pro', 'elite'].includes((profileData?.plan ?? '').toLowerCase())) return NextResponse.json({ error: 'Pro subscription required' }, { status: 403 })
+
     const { negotiationType, currentOffer, target, leverage } = await req.json()
 
     const prompt = `You are a salary negotiation expert. Return ONLY valid JSON.
