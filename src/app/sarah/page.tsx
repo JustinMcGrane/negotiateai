@@ -1,7 +1,7 @@
 'use client'
 import { useState, useRef, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { Send, Briefcase, ArrowRight, Paperclip, X, FileText, Download, BookmarkCheck } from 'lucide-react'
+import { Send, Briefcase, ArrowRight, Paperclip, X, FileText, Download, BookmarkCheck, ClipboardList } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -87,6 +87,9 @@ function SarahChat() {
   const [savedIds, setSavedIds] = useState<Record<number, string>>({})
   const [uploadCount, setUploadCount] = useState(0)
   const [isPro, setIsPro] = useState(false)
+  const [jobDescription, setJobDescription] = useState('')
+  const [showJobInput, setShowJobInput] = useState(false)
+  const [jobDescriptionSaved, setJobDescriptionSaved] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -197,12 +200,17 @@ function SarahChat() {
     setUserMessageCount(newCount)
 
     try {
+      const jobContext = jobDescriptionSaved
+        ? `\n\nThe user has provided a job description they are targeting:\n---\n${jobDescriptionSaved}\n---\nWhen reviewing their resume or giving advice, compare it directly against this job description. Identify: (1) keywords and skills in the job description missing from their resume, (2) experiences they have that map well to the role, (3) specific bullets they should rewrite to better match this role. Be specific — quote lines from both the job description and their resume.`
+        : ''
+      const combinedContext = [worthContext?.systemContext, jobContext].filter(Boolean).join('\n\n')
+
       const res = await fetch('/api/recruiter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           messages: newMessages,
-          ...(worthContext?.systemContext ? { contextNote: worthContext.systemContext } : {}),
+          ...(combinedContext ? { contextNote: combinedContext } : {}),
           ...(resumeText ? { resumeContext: resumeText } : {}),
         }),
       })
@@ -389,6 +397,39 @@ function SarahChat() {
             </button>
           </div>
         )}
+        {jobDescriptionSaved && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, background: 'rgba(74,222,128,0.1)', border: '1px solid rgba(74,222,128,0.3)', borderRadius: 8, padding: '6px 10px' }}>
+            <ClipboardList size={13} color="#4ade80" />
+            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', flex: 1 }}>Job description added</span>
+            <button onClick={() => { setJobDescriptionSaved(''); setJobDescription('') }} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', padding: 0, display: 'flex' }}>
+              <X size={13} />
+            </button>
+          </div>
+        )}
+        {showJobInput && (
+          <div style={{ marginBottom: 8, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: 10 }}>
+            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginBottom: 6 }}>Paste job description — Sarah will compare your resume against it</div>
+            <textarea
+              value={jobDescription}
+              onChange={e => setJobDescription(e.target.value)}
+              placeholder="Paste the full job posting here…"
+              rows={5}
+              style={{ width: '100%', background: 'transparent', border: 'none', outline: 'none', fontSize: 13, color: '#fff', resize: 'none', lineHeight: 1.5, boxSizing: 'border-box' }}
+            />
+            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+              <button
+                onClick={() => { if (jobDescription.trim()) { setJobDescriptionSaved(jobDescription.trim()); setShowJobInput(false) } }}
+                disabled={!jobDescription.trim()}
+                style={{ fontSize: 12, padding: '6px 14px', borderRadius: 7, background: '#667eea', color: '#fff', border: 'none', cursor: 'pointer', opacity: jobDescription.trim() ? 1 : 0.4 }}
+              >
+                Save
+              </button>
+              <button onClick={() => { setShowJobInput(false); setJobDescription('') }} style={{ fontSize: 12, padding: '6px 14px', borderRadius: 7, background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', border: 'none', cursor: 'pointer' }}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
         {uploadError && (
           <div style={{ fontSize: 12, color: '#fca5a5', marginBottom: 8, textAlign: 'center' }}>{uploadError}</div>
         )}
@@ -410,6 +451,16 @@ function SarahChat() {
             }}
           >
             <Paperclip size={17} />
+          </button>
+          <button
+            onClick={() => setShowJobInput(v => !v)}
+            title="Add job description"
+            style={{
+              background: 'none', border: 'none', color: jobDescriptionSaved ? '#4ade80' : 'rgba(255,255,255,0.35)',
+              cursor: 'pointer', padding: '4px 2px', display: 'flex', alignItems: 'center', flexShrink: 0,
+            }}
+          >
+            <ClipboardList size={17} />
           </button>
           <textarea
             ref={textareaRef}
