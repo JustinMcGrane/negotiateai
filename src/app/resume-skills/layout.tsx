@@ -19,6 +19,30 @@ export const metadata: Metadata = {
   },
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: 'Resume Skills List',
+      url: 'https://gethayven.com/resume-skills',
+      description: 'Browse 200+ in-demand resume skills across tech, marketing, project management, and more.',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+        { '@type': 'ListItem', position: 2, name: 'Resume Skills', item: 'https://gethayven.com/resume-skills' },
+      ],
+    },
+  ],
+}
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {children}
+    </>
+  )
 }

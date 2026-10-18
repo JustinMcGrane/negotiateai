@@ -19,6 +19,33 @@ export const metadata: Metadata = {
   },
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      name: 'Salary to Hourly Calculator',
+      url: 'https://gethayven.com/salary-to-hourly-calculator',
+      applicationCategory: 'FinanceApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      description: 'Free salary to hourly rate calculator. Convert annual salary to hourly, daily, weekly, and monthly pay.',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gethayven.com' },
+        { '@type': 'ListItem', position: 2, name: 'Salary to Hourly Calculator', item: 'https://gethayven.com/salary-to-hourly-calculator' },
+      ],
+    },
+  ],
+}
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {children}
+    </>
+  )
 }

@@ -40,7 +40,7 @@ export async function middleware(request: NextRequest) {
   const isAuthRoute = pathname.startsWith('/login') || pathname.startsWith('/signup')
   const isProtected =
     pathname.startsWith('/dashboard') ||
-    pathname.startsWith('/tools') ||
+    (pathname.startsWith('/tools') && !pathname.startsWith('/tools/salaries')) ||
     (pathname === '/resume' || pathname.startsWith('/resume/')) ||
     pathname.startsWith('/progress') ||
     pathname.startsWith('/account') ||
