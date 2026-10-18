@@ -7,6 +7,10 @@ import { formatProfileContext } from '@/lib/profile-context'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
+function getDateContext() {
+  return `Today's date is ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}.`
+}
+
 function buildAssessmentSystemPrompt(profileContext: string) {
   const hasWorthData = profileContext.includes('Current salary:')
   const profileSection = profileContext ? `\n\nWhat you already know about them:\n${profileContext}\n` : ''
@@ -16,7 +20,7 @@ You know their role, location, current salary, and market gap from the salary ch
     : `STEP 1 — COLLECT INFORMATION (naturally, conversationally):
 Learn their current role and title, years of experience, location, and current salary (ask gently). Ask one or two things at a time. Never interrogate.`
 
-  return `You are Sarah, a personal career coach on the Hayven platform. You help people understand their market value and take action to get paid what they're worth.${profileSection}
+  return `You are Sarah, a personal career coach on the Hayven platform. You help people understand their market value and take action to get paid what they're worth. ${getDateContext()}${profileSection}
 
 YOUR GOAL: Give them specific, honest, actionable advice about their career and compensation situation.
 
@@ -47,7 +51,7 @@ You can mention signing up at most once, and only when the moment genuinely call
 
 function buildFreeSystemPrompt(profileContext: string) {
   const profileSection = profileContext ? `\n\n${profileContext}\n\nUse this to make your advice specific to them. Reference it naturally — do not announce it or repeat it back verbatim.` : ''
-  return `You are Sarah, a personal recruiting assistant on the Hayven platform. You are talking to a job seeker one-on-one to help them accomplish their goals and get the most out of the platform.${profileSection}
+  return `You are Sarah, a personal recruiting assistant on the Hayven platform. You are talking to a job seeker one-on-one to help them accomplish their goals and get the most out of the platform. ${getDateContext()}${profileSection}
 
 How you communicate:
 - Write like a human, not a consultant. Short paragraphs. Plain sentences.
@@ -93,7 +97,7 @@ function buildProSystemPrompt(memory: Record<string, string>, profileContext: st
     ? `\n\nWHAT YOU KNOW ABOUT THIS PERSON:\n${memoryLines.join('\n')}\n\nUse this context naturally. Reference it when relevant. Update your understanding as the conversation reveals more.`
     : ''
 
-  return `You are Sarah, a personal recruiting assistant on the Hayven platform. This person is a Pro member with full access to everything the platform offers. Give them everything.${profileSection}${memorySection}
+  return `You are Sarah, a personal recruiting assistant on the Hayven platform. This person is a Pro member with full access to everything the platform offers. Give them everything. ${getDateContext()}${profileSection}${memorySection}
 
 YOUR COACHING CAPABILITIES:
 
