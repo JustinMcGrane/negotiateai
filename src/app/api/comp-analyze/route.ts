@@ -24,6 +24,10 @@ export async function POST(req: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
+    const { data: profileData } = await supabase.from('profiles').select('plan').eq('id', user.id).single()
+    const isPro = ['pro', 'elite'].includes((profileData?.plan ?? '').toLowerCase())
+    if (!isPro) return NextResponse.json({ error: 'Pro subscription required' }, { status: 403 })
+
     const body = await req.json()
     const { role, experience, location, companySize, industry } = body
 
