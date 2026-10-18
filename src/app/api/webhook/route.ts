@@ -25,11 +25,15 @@ export async function POST(req: NextRequest) {
     const customerId = typeof sub.customer === 'string' ? sub.customer : sub.customer.id
     const supabase = createServiceClient()
 
+    // Never downgrade owner account
+    const { data: profileCheck } = await supabase.from('profiles').select('email').eq('stripe_customer_id', customerId).single()
+    const isOwner = profileCheck?.email === 'jmcgrane6@gmail.com'
+
     if (sub.status === 'active' || sub.status === 'trialing') {
       const priceId = sub.items.data[0]?.price.id
       const plan = priceId === process.env.STRIPE_ELITE_PRICE_ID ? 'elite' : 'pro'
       await supabase.from('profiles').update({ plan }).eq('stripe_customer_id', customerId)
-    } else if (sub.status === 'canceled' || sub.status === 'unpaid' || sub.status === 'past_due') {
+    } else if (!isOwner && (sub.status === 'canceled' || sub.status === 'unpaid' || sub.status === 'past_due')) {
       await supabase.from('profiles').update({ plan: 'free' }).eq('stripe_customer_id', customerId)
     }
   }
