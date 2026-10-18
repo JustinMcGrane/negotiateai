@@ -1,7 +1,7 @@
 'use client'
 import { useState, useRef, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { Send, Briefcase, ArrowRight, Paperclip, X, FileText, Download, BookmarkCheck, ClipboardList } from 'lucide-react'
+import { Send, Briefcase, ArrowRight, Paperclip, X, FileText, Download, BookmarkCheck, ClipboardList, Columns2, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -94,12 +94,40 @@ function SarahChat() {
   const [atsLoading, setAtsLoading] = useState(false)
   const [suggestedPrompts, setSuggestedPrompts] = useState<string[]>([])
   const [sessionEnded, setSessionEnded] = useState(false)
+  const [sideBySideMsg, setSideBySideMsg] = useState<number | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     fetch('/api/subscription-status').then(r => r.json()).then(d => setIsPro(!!d.subscribed)).catch(() => {})
+    // For new users with onboarding data, personalise the intro
+    fetch('/api/profile-context').then(r => r.json()).then(d => {
+      if (!d.profile) return
+      const { goal, situation, role, lastSessionSummary, lastSessionAt } = d.profile
+      // Returning user greeting
+      if (lastSessionSummary) {
+        const daysSince = lastSessionAt ? Math.floor((Date.now() - new Date(lastSessionAt).getTime()) / 86400000) : null
+        const timeAgo = daysSince === 0 ? 'earlier today' : daysSince === 1 ? 'yesterday' : daysSince ? `${daysSince} days ago` : 'recently'
+        setMessages([{ role: 'assistant', content: `Welcome back! Last time (${timeAgo}) we covered: ${lastSessionSummary} Want to pick up where we left off, or is there something new on your mind?` }])
+        return
+      }
+      // First-session guided intro for users with onboarding data
+      if (!goal && !role) return
+      const goalLabels: Record<string, string> = {
+        new_job: 'land a new job',
+        negotiate: 'negotiate a job offer',
+        raise: 'get a raise or promotion',
+        resume: 'improve your resume',
+      }
+      const goalText = goalLabels[goal] ?? goal ?? 'advance your career'
+      const roleText = role ? ` as a ${role}` : ''
+      const situationText = situation === 'have_offer' ? " I see you have an offer in hand — let's make sure you get every dollar you deserve."
+        : situation === 'actively_looking' ? " Since you're actively applying, let's make sure your materials and approach are dialled in."
+        : ''
+      const personalIntro = `Hey! I'm Sarah, your career coach${roleText}. You mentioned you want to ${goalText}.${situationText} What's the most pressing thing on your plate right now?`
+      setMessages([{ role: 'assistant', content: personalIntro }])
+    }).catch(() => {})
   }, [])
 
   useEffect(() => {
@@ -305,6 +333,16 @@ function SarahChat() {
           </div>
           <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Sarah · Personalized Career Coach</div>
         </div>
+        {isPro && (
+          <div style={{ display: 'flex', gap: 12 }}>
+            <Link href="/tracker" style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>
+              <ExternalLink size={11} />Job tracker
+            </Link>
+            <Link href="/progress" style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>
+              <ExternalLink size={11} />Progress
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Messages */}
@@ -332,7 +370,7 @@ function SarahChat() {
                 dangerouslySetInnerHTML={{ __html: renderContent(msg.content) }}
               />
               {msg.role === 'assistant' && looksLikeResume(msg.content) && (
-                <div style={{ display: 'flex', gap: 8 }}>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   <button
                     onClick={() => exportPDF(msg.content)}
                     disabled={exportLoading}
@@ -346,12 +384,44 @@ function SarahChat() {
                     <Download size={12} />
                     {exportLoading ? 'Exporting…' : 'Export as PDF'}
                   </button>
+                  {isPro && resumeText && (
+                    <button
+                      onClick={() => setSideBySideMsg(sideBySideMsg === i ? null : i)}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: 6,
+                        background: sideBySideMsg === i ? 'rgba(74,222,128,0.2)' : 'rgba(255,255,255,0.06)',
+                        border: `1px solid ${sideBySideMsg === i ? 'rgba(74,222,128,0.4)' : 'rgba(255,255,255,0.15)'}`,
+                        borderRadius: 8, padding: '6px 12px', fontSize: 12,
+                        color: sideBySideMsg === i ? '#4ade80' : 'rgba(255,255,255,0.5)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <Columns2 size={12} />
+                      {sideBySideMsg === i ? 'Close compare' : 'Compare'}
+                    </button>
+                  )}
                   {savedIds[i] && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#4ade80' }}>
                       <BookmarkCheck size={12} />
                       Saved
                     </div>
                   )}
+                </div>
+              )}
+              {sideBySideMsg === i && resumeText && (
+                <div style={{
+                  display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 8,
+                  background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: 12, padding: 14, fontSize: 12, lineHeight: 1.6,
+                }}>
+                  <div>
+                    <div style={{ fontSize: 10, fontWeight: 600, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>Original</div>
+                    <pre style={{ whiteSpace: 'pre-wrap', color: 'rgba(255,255,255,0.55)', fontFamily: 'inherit', margin: 0, fontSize: 11 }}>{resumeText.slice(0, 3000)}</pre>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 10, fontWeight: 600, color: '#4ade80', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>Sarah&apos;s version</div>
+                    <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: 11 }} dangerouslySetInnerHTML={{ __html: renderContent(msg.content) }} />
+                  </div>
                 </div>
               )}
             </div>

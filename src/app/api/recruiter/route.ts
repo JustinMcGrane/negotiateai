@@ -225,7 +225,7 @@ export async function POST(req: NextRequest) {
 
     const { data: profile } = await supabase
       .from('profiles')
-      .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role')
+      .select('plan, onboarding_goal, onboarding_situation, onboarding_experience, onboarding_role, last_session_summary, last_session_context, last_session_at')
       .eq('id', user.id)
       .single()
 
@@ -266,10 +266,28 @@ export async function POST(req: NextRequest) {
     }
 
     const profileContext = formatProfileContext(onboardingProfile)
+
+    // Build session memory context for returning users (free + pro)
+    let sessionMemorySection = ''
+    if (profile?.last_session_summary && messages.length <= 2) {
+      const daysSince = profile.last_session_at
+        ? Math.floor((Date.now() - new Date(profile.last_session_at).getTime()) / 86400000)
+        : null
+      const timeAgo = daysSince === 0 ? 'earlier today' : daysSince === 1 ? 'yesterday' : daysSince ? `${daysSince} days ago` : 'recently'
+      sessionMemorySection = `\n\nPREVIOUS SESSION (${timeAgo}):\n${profile.last_session_summary}`
+      if (profile.last_session_context) {
+        const ctx = profile.last_session_context as Record<string, string>
+        if (ctx.role) sessionMemorySection += `\nTheir role: ${ctx.role}`
+        if (ctx.goal) sessionMemorySection += `\nTheir goal: ${ctx.goal}`
+        if (ctx.salaryTarget) sessionMemorySection += `\nSalary target discussed: ${ctx.salaryTarget}`
+      }
+      sessionMemorySection += `\n\nReference this context naturally when it's relevant. Don't announce that you remember — just use it. Pick up where you left off if the conversation warrants it.`
+    }
+
     const isAssessmentMode = !isPro
 
     const resumeSection = resumeContext ? `\n\nThe user has uploaded their resume. Here is the extracted text:\n---\n${resumeContext}\n---\nUse this to give specific, personalized feedback. Reference actual content from their resume, not generic advice.` : ''
-    const combinedContext = [profileContext, contextNote, resumeSection].filter(Boolean).join('\n\n')
+    const combinedContext = [profileContext, sessionMemorySection, contextNote, resumeSection].filter(Boolean).join('\n\n')
     let systemPrompt = isAssessmentMode ? buildAssessmentSystemPrompt(combinedContext) : buildFreeSystemPrompt(combinedContext)
     let memory: Record<string, string> = {}
 
@@ -286,7 +304,7 @@ export async function POST(req: NextRequest) {
         console.log('[recruiter] memory error:', memoryError)
       }
       memory = (memoryData?.context as Record<string, string>) ?? {}
-      systemPrompt = buildProSystemPrompt(memory, profileContext)
+      systemPrompt = buildProSystemPrompt(memory, [profileContext, sessionMemorySection].filter(Boolean).join('\n\n'))
       console.log('[recruiter] pro system prompt built, calling claude...')
     }
 
