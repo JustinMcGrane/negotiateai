@@ -1,11 +1,17 @@
 'use client'
 import { useState, useRef, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { Send, Briefcase, ArrowRight, Paperclip, X, FileText } from 'lucide-react'
+import { Send, Briefcase, ArrowRight, Paperclip, X, FileText, Download, BookmarkCheck } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 type Message = { role: 'user' | 'assistant'; content: string }
+
+function looksLikeResume(text: string) {
+  const markers = ['experience', 'education', 'skills', 'summary', 'work history']
+  const lower = text.toLowerCase()
+  return markers.filter(m => lower.includes(m)).length >= 3 && text.length > 500
+}
 
 const SIGNUP_AFTER = 14 // hard fallback — Sarah should mention signup naturally before this
 
@@ -77,9 +83,17 @@ function SarahChat() {
   const [resumeFilename, setResumeFilename] = useState<string | null>(null)
   const [uploadLoading, setUploadLoading] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
+  const [exportLoading, setExportLoading] = useState(false)
+  const [savedIds, setSavedIds] = useState<Record<number, string>>({})
+  const [uploadCount, setUploadCount] = useState(0)
+  const [isPro, setIsPro] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    fetch('/api/subscription-status').then(r => r.json()).then(d => setIsPro(!!d.subscribed)).catch(() => {})
+  }, [])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -88,6 +102,13 @@ function SarahChat() {
   async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
+
+    if (!isPro && uploadCount >= 1) {
+      setUploadError('Free accounts can upload 1 resume. Upgrade to Pro for unlimited uploads.')
+      if (fileInputRef.current) fileInputRef.current.value = ''
+      return
+    }
+
     setUploadLoading(true)
     setUploadError(null)
     try {
@@ -101,6 +122,7 @@ function SarahChat() {
       }
       setResumeText(data.text)
       setResumeFilename(data.filename)
+      setUploadCount(c => c + 1)
       setMessages(prev => [...prev, {
         role: 'assistant',
         content: `I've read your resume (${data.filename}). I can see your experience, skills, and background. What would you like help with — feedback on how it reads, rewriting specific sections, ATS optimization, or something else?`,
@@ -110,6 +132,46 @@ function SarahChat() {
     } finally {
       setUploadLoading(false)
       if (fileInputRef.current) fileInputRef.current.value = ''
+    }
+  }
+
+  async function saveResume(content: string, msgIndex: number) {
+    try {
+      const res = await fetch('/api/save-resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content,
+          title: resumeFilename ? `Resume – ${resumeFilename.replace(/\.[^.]+$/, '')}` : 'Resume',
+        }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        setSavedIds(prev => ({ ...prev, [msgIndex]: data.id }))
+      }
+    } catch {}
+  }
+
+  async function exportPDF(content: string) {
+    setExportLoading(true)
+    try {
+      const res = await fetch('/api/export-resume-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content }),
+      })
+      if (!res.ok) throw new Error('Export failed')
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'resume-hayven.pdf'
+      a.click()
+      URL.revokeObjectURL(url)
+    } catch {
+      alert('PDF export failed. Please try again.')
+    } finally {
+      setExportLoading(false)
     }
   }
 
@@ -155,7 +217,13 @@ function SarahChat() {
       // Strip assessment tags for cleaner display
       replyContent = replyContent.replace(/\[ASSESSMENT_COMPLETE\][\s\S]*?\[\/ASSESSMENT_COMPLETE\]/, '').trim()
 
-      setMessages(prev => [...prev, { role: 'assistant', content: replyContent }])
+      setMessages(prev => {
+        const next = [...prev, { role: 'assistant' as const, content: replyContent }]
+        if (looksLikeResume(replyContent)) {
+          saveResume(replyContent, next.length - 1)
+        }
+        return next
+      })
 
       if (newCount >= SIGNUP_AFTER) {
         setShowSignup(true)
@@ -199,17 +267,41 @@ function SarahChat() {
                 <Briefcase size={13} color="#fff" />
               </div>
             )}
-            <div
-              style={{
-                maxWidth: '78%',
-                background: msg.role === 'user' ? '#667eea' : 'rgba(255,255,255,0.06)',
-                color: '#fff',
-                borderRadius: msg.role === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
-                padding: '12px 16px', fontSize: 14, lineHeight: 1.65,
-                border: msg.role === 'assistant' ? '1px solid rgba(255,255,255,0.08)' : 'none',
-              }}
-              dangerouslySetInnerHTML={{ __html: renderContent(msg.content) }}
-            />
+            <div style={{ maxWidth: '78%', display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <div
+                style={{
+                  background: msg.role === 'user' ? '#667eea' : 'rgba(255,255,255,0.06)',
+                  color: '#fff',
+                  borderRadius: msg.role === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
+                  padding: '12px 16px', fontSize: 14, lineHeight: 1.65,
+                  border: msg.role === 'assistant' ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                }}
+                dangerouslySetInnerHTML={{ __html: renderContent(msg.content) }}
+              />
+              {msg.role === 'assistant' && looksLikeResume(msg.content) && (
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button
+                    onClick={() => exportPDF(msg.content)}
+                    disabled={exportLoading}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 6,
+                      background: 'rgba(102,126,234,0.2)', border: '1px solid rgba(102,126,234,0.4)',
+                      borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#a5b4fc',
+                      cursor: 'pointer', opacity: exportLoading ? 0.5 : 1,
+                    }}
+                  >
+                    <Download size={12} />
+                    {exportLoading ? 'Exporting…' : 'Export as PDF'}
+                  </button>
+                  {savedIds[i] && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#4ade80' }}>
+                      <BookmarkCheck size={12} />
+                      Saved
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         ))}
 
