@@ -1,10 +1,10 @@
 'use client'
 import { useState, useRef } from 'react'
-import { Send, Briefcase, Paperclip, X, FileText, Download } from 'lucide-react'
+import { Send, Briefcase, Paperclip, X, FileText, Download, BookmarkCheck } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-type Message = { role: 'user' | 'assistant'; content: string }
+type Message = { role: 'user' | 'assistant'; content: string; savedId?: string }
 
 const RESUME_INTRO = `Hi! I'm Sarah. Upload your resume and I'll give you honest, specific feedback — what's working, what's not, and exactly how to fix it. I'll also tell you how it reads to an ATS and what recruiters will think when they see it.`
 
@@ -33,6 +33,7 @@ export default function ResumeCoachPage() {
   const [uploadLoading, setUploadLoading] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
   const [exportLoading, setExportLoading] = useState(false)
+  const [savedIds, setSavedIds] = useState<Record<number, string>>({})
   const fileInputRef = useRef<HTMLInputElement>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -103,12 +104,37 @@ export default function ResumeCoachPage() {
         return
       }
       const replyContent = data.content.replace(/\[ASSESSMENT_COMPLETE\][\s\S]*?\[\/ASSESSMENT_COMPLETE\]/, '').trim()
-      setMessages(prev => [...prev, { role: 'assistant', content: replyContent }])
+      setMessages(prev => {
+        const next = [...prev, { role: 'assistant' as const, content: replyContent }]
+        if (looksLikeResume(replyContent)) {
+          saveResume(replyContent, next.length - 1)
+        }
+        return next
+      })
       setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 50)
     } catch {
       setMessages(prev => [...prev, { role: 'assistant', content: "Something went wrong. Please try again." }])
     } finally {
       setLoading(false)
+    }
+  }
+
+  async function saveResume(content: string, msgIndex: number) {
+    try {
+      const res = await fetch('/api/save-resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content,
+          title: resumeFilename ? `Resume – ${resumeFilename.replace(/\.[^.]+$/, '')}` : 'Resume',
+        }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        setSavedIds(prev => ({ ...prev, [msgIndex]: data.id }))
+      }
+    } catch {
+      // silent — saving is best-effort
     }
   }
 
@@ -199,21 +225,33 @@ export default function ResumeCoachPage() {
                 }}
                 dangerouslySetInnerHTML={{ __html: renderContent(msg.content) }}
               />
-              {/* Export button for messages that look like full resume rewrites */}
+              {/* Export + saved indicator for messages that look like full resume rewrites */}
               {msg.role === 'assistant' && looksLikeResume(msg.content) && (
-                <button
-                  onClick={() => exportPDF(msg.content)}
-                  disabled={exportLoading}
-                  style={{
-                    alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: 6,
-                    background: 'rgba(102,126,234,0.15)', border: '1px solid rgba(102,126,234,0.3)',
-                    borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#a5b4fc',
-                    cursor: 'pointer', marginLeft: 0,
-                  }}
-                >
-                  <Download size={12} />
-                  {exportLoading ? 'Exporting…' : 'Export as PDF'}
-                </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                  <button
+                    onClick={() => exportPDF(msg.content)}
+                    disabled={exportLoading}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 6,
+                      background: 'rgba(102,126,234,0.15)', border: '1px solid rgba(102,126,234,0.3)',
+                      borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#a5b4fc',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <Download size={12} />
+                    {exportLoading ? 'Exporting…' : 'Export as PDF'}
+                  </button>
+                  {savedIds[i] ? (
+                    <Link href="/resume" style={{
+                      display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none',
+                      background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.3)',
+                      borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#6ee7b7',
+                    }}>
+                      <BookmarkCheck size={12} />
+                      Saved · View in My Resumes
+                    </Link>
+                  ) : null}
+                </div>
               )}
             </div>
           </div>

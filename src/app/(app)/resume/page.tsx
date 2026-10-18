@@ -1,10 +1,112 @@
 'use client'
-import { useState } from 'react'
-import { Sparkles, CheckCircle, AlertCircle, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Sparkles, CheckCircle, AlertCircle, ArrowRight, ChevronDown, ChevronUp, FileText, Trash2, ExternalLink } from 'lucide-react'
 import { ClientPageHeader } from '@/components/negotiate/ClientPageHeader'
 import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
 import { ProGate } from '@/components/negotiate/ProGate'
+import Link from 'next/link'
 import posthog from 'posthog-js'
+
+type SavedResume = { id: string; title: string; created_at: string; updated_at: string }
+
+function SavedResumes() {
+  const [resumes, setResumes] = useState<SavedResume[]>([])
+  const [loading, setLoading] = useState(true)
+  const [selected, setSelected] = useState<{ id: string; title: string; content: string } | null>(null)
+  const [deleting, setDeleting] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetch('/api/resumes')
+      .then(r => r.json())
+      .then(d => { setResumes(d.resumes ?? []); setLoading(false) })
+      .catch(() => setLoading(false))
+  }, [])
+
+  async function loadResume(id: string, title: string) {
+    const res = await fetch(`/api/resumes/${id}`)
+    if (res.ok) {
+      const data = await res.json()
+      setSelected({ id, title, content: data.content })
+    }
+  }
+
+  async function deleteResume(id: string) {
+    setDeleting(id)
+    await fetch(`/api/resumes/${id}`, { method: 'DELETE' })
+    setResumes(prev => prev.filter(r => r.id !== id))
+    if (selected?.id === id) setSelected(null)
+    setDeleting(null)
+  }
+
+  if (loading) return <div style={{ padding: 40, textAlign: 'center', color: 'var(--color-text-tertiary)', fontSize: 14 }}>Loading saved resumes…</div>
+
+  if (selected) {
+    return (
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+          <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', color: 'var(--color-text-secondary)', cursor: 'pointer', fontSize: 13, padding: 0 }}>← Back</button>
+          <span style={{ fontSize: 16, fontWeight: 600 }}>{selected.title}</span>
+        </div>
+        <pre style={{
+          whiteSpace: 'pre-wrap', wordBreak: 'break-word', fontSize: 13, lineHeight: 1.7,
+          background: 'var(--color-background-secondary)',
+          border: '0.5px solid var(--color-border-tertiary)',
+          borderRadius: 10, padding: '20px 24px',
+          color: 'var(--color-text-primary)', fontFamily: 'inherit',
+        }}>{selected.content}</pre>
+      </div>
+    )
+  }
+
+  if (resumes.length === 0) {
+    return (
+      <div style={{ textAlign: 'center', padding: '60px 24px' }}>
+        <FileText size={36} color="var(--color-text-tertiary)" style={{ marginBottom: 12 }} />
+        <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 8 }}>No saved resumes yet</div>
+        <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 20 }}>
+          Chat with Sarah in Resume Coach and she&apos;ll automatically save any resume she rewrites for you.
+        </p>
+        <Link href="/resume-coach" style={{
+          display: 'inline-flex', alignItems: 'center', gap: 8,
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          color: '#fff', textDecoration: 'none', borderRadius: 10, padding: '10px 20px', fontSize: 14, fontWeight: 600,
+        }}>
+          Open Resume Coach <ExternalLink size={13} />
+        </Link>
+      </div>
+    )
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      {resumes.map(r => (
+        <div key={r.id} style={{
+          display: 'flex', alignItems: 'center', gap: 12,
+          background: 'var(--color-background-secondary)',
+          border: '0.5px solid var(--color-border-tertiary)',
+          borderRadius: 10, padding: '14px 16px',
+        }}>
+          <FileText size={16} color="#667eea" style={{ flexShrink: 0 }} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 14, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.title}</div>
+            <div style={{ fontSize: 12, color: 'var(--color-text-tertiary)', marginTop: 2 }}>
+              {new Date(r.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </div>
+          </div>
+          <button onClick={() => loadResume(r.id, r.title)} style={{
+            fontSize: 13, color: '#667eea', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 500,
+          }}>View</button>
+          <button onClick={() => deleteResume(r.id)} disabled={deleting === r.id} style={{
+            background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-tertiary)', padding: 4,
+            opacity: deleting === r.id ? 0.4 : 1,
+          }}>
+            <Trash2 size={14} />
+          </button>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 type SectionScore = { name: string; score: number; feedback: string }
 type BulletRewrite = { original: string; rewritten: string; reason: string }
@@ -117,6 +219,7 @@ function BulletCard({ bullet }: { bullet: BulletRewrite }) {
 }
 
 export default function ResumePage() {
+  const [tab, setTab] = useState<'analyze' | 'saved'>('analyze')
   const [text, setText] = useState('')
   const [jobTitle, setJobTitle] = useState('')
   const [jobDesc, setJobDesc] = useState('')
@@ -164,14 +267,32 @@ export default function ResumePage() {
   return (
     <ProGate><div>
       {showUpgradeModal && <UpgradeModal feature="resume" onClose={() => setShowUpgradeModal(false)} />}
-      <ClientPageHeader title="Resume Analyzer" description="Recruiter-grade feedback and ATS scoring" />
+      <ClientPageHeader title="Resume" description="Analyze, coach, and save your resumes" />
     <div style={{ maxWidth: 820, margin: '0 auto', padding: '32px 24px 80px' }}>
-      <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Resume Analyzer</h1>
+      <div style={{ marginBottom: 24 }}>
+        <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Resume</h1>
         <p style={{ color: 'var(--color-text-secondary)', marginTop: 8, fontSize: 14 }}>
           Recruiter-grade feedback. ATS scoring. Rewritten bullets. Prioritized action plan.
         </p>
       </div>
+
+      {/* Tabs */}
+      <div style={{ display: 'flex', gap: 4, marginBottom: 28, background: 'var(--color-background-secondary)', borderRadius: 10, padding: 4, width: 'fit-content' }}>
+        {(['analyze', 'saved'] as const).map(t => (
+          <button key={t} onClick={() => setTab(t)} style={{
+            padding: '7px 18px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 13, fontWeight: 600,
+            background: tab === t ? 'var(--color-background-primary)' : 'transparent',
+            color: tab === t ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
+            boxShadow: tab === t ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+            transition: 'all 0.15s',
+          }}>
+            {t === 'analyze' ? 'Analyze' : 'My Resumes'}
+          </button>
+        ))}
+      </div>
+
+      {tab === 'saved' && <SavedResumes />}
+      {tab === 'analyze' && <>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 24 }}>
         <div>
@@ -425,6 +546,7 @@ export default function ResumePage() {
           )}
         </div>
       )}
+    </>}
     </div>
     </div></ProGate>
   )

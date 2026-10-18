@@ -9,6 +9,7 @@ import { lessonsRouter } from './lessons'
 import { brandDealsRouter } from './brandDeals'
 import { activityLogRouter } from './activityLog'
 import { goalsRouter } from './goals'
+import { resumesRouter } from './resumes'
 
 export const appRouter = router({
   workspace: workspaceRouter,
@@ -21,6 +22,7 @@ export const appRouter = router({
   activityLog: activityLogRouter,
   goals: goalsRouter,
   notifications: notificationsRouter,
+  resumes: resumesRouter,
 })
 
 export type AppRouter = typeof appRouter
