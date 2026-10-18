@@ -90,6 +90,10 @@ function SarahChat() {
   const [jobDescription, setJobDescription] = useState('')
   const [showJobInput, setShowJobInput] = useState(false)
   const [jobDescriptionSaved, setJobDescriptionSaved] = useState('')
+  const [atsScore, setAtsScore] = useState<null | { overallScore: number; sections: Record<string, { score: number; label: string; issue: string | null }>; topIssues: string[]; missingKeywords: string[] }>(null)
+  const [atsLoading, setAtsLoading] = useState(false)
+  const [suggestedPrompts, setSuggestedPrompts] = useState<string[]>([])
+  const [sessionEnded, setSessionEnded] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -130,6 +134,13 @@ function SarahChat() {
         role: 'assistant',
         content: `I've read your resume (${data.filename}). I can see your experience, skills, and background. What would you like help with — feedback on how it reads, rewriting specific sections, ATS optimization, or something else?`,
       }])
+      // Kick off ATS score in background
+      setAtsLoading(true)
+      fetch('/api/ats-score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ resumeText: data.text, jobDescription: jobDescriptionSaved || undefined }),
+      }).then(r => r.json()).then(d => { if (d.overallScore !== undefined) setAtsScore(d) }).catch(() => {}).finally(() => setAtsLoading(false))
     } catch {
       setUploadError('Something went wrong. Please try again.')
     } finally {
@@ -176,6 +187,37 @@ function SarahChat() {
     } finally {
       setExportLoading(false)
     }
+  }
+
+  async function generateFollowUps(lastReply: string) {
+    try {
+      const res = await fetch('/api/negotiate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [{ role: 'user', content: `Based on this career coaching response, suggest 3 short follow-up questions the user might want to ask. Return ONLY a JSON array of 3 strings, each under 10 words. Example: ["How do I bring this up?", "What if they say no?", "When is the best time?"]\n\nResponse:\n${lastReply.slice(0, 1000)}` }],
+          systemPrompt: 'You generate short follow-up question suggestions. Return only a JSON array of 3 strings.',
+        }),
+      })
+      const data = await res.json()
+      const match = data.reply?.match(/\[[\s\S]*?\]/)
+      if (match) {
+        const prompts = JSON.parse(match[0])
+        if (Array.isArray(prompts)) setSuggestedPrompts(prompts.slice(0, 3))
+      }
+    } catch {}
+  }
+
+  async function endSession() {
+    if (messages.length < 3 || sessionEnded) return
+    setSessionEnded(true)
+    try {
+      await fetch('/api/session-summary', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages, sendEmail: isPro }),
+      })
+    } catch {}
   }
 
   function autoResize() {
@@ -232,6 +274,9 @@ function SarahChat() {
         }
         return next
       })
+
+      // Generate contextual follow-up prompts
+      generateFollowUps(replyContent)
 
       if (newCount >= SIGNUP_AFTER) {
         setShowSignup(true)
@@ -312,6 +357,78 @@ function SarahChat() {
             </div>
           </div>
         ))}
+
+        {/* ATS Score Panel */}
+        {(atsLoading || atsScore) && (
+          <div style={{
+            background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: 14, padding: '16px 18px', marginTop: 4,
+          }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 12 }}>ATS Score</div>
+            {atsLoading ? (
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>Analyzing resume…</div>
+            ) : atsScore ? (
+              <>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 14 }}>
+                  <div style={{
+                    width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
+                    background: `conic-gradient(${atsScore.overallScore >= 70 ? '#4ade80' : atsScore.overallScore >= 45 ? '#fbbf24' : '#f87171'} ${atsScore.overallScore * 3.6}deg, rgba(255,255,255,0.08) 0deg)`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <div style={{ width: 42, height: 42, borderRadius: '50%', background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>{atsScore.overallScore}</span>
+                    </div>
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    {Object.values(atsScore.sections).map((s) => (
+                      <div key={s.label} style={{ marginBottom: 6 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'rgba(255,255,255,0.5)', marginBottom: 3 }}>
+                          <span>{s.label}</span><span>{s.score}</span>
+                        </div>
+                        <div style={{ height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+                          <div style={{ height: '100%', width: `${s.score}%`, borderRadius: 2, background: s.score >= 70 ? '#4ade80' : s.score >= 45 ? '#fbbf24' : '#f87171', transition: 'width 0.6s' }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {atsScore.topIssues.length > 0 && (
+                  <div style={{ marginBottom: 10 }}>
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginBottom: 6 }}>Top fixes</div>
+                    {atsScore.topIssues.slice(0, 2).map((issue, i) => (
+                      <div key={i} style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', marginBottom: 4, paddingLeft: 10, borderLeft: '2px solid #fbbf24' }}>{issue}</div>
+                    ))}
+                  </div>
+                )}
+                {atsScore.missingKeywords.length > 0 && (
+                  <div>
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', marginBottom: 6 }}>Missing keywords</div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                      {atsScore.missingKeywords.slice(0, 5).map((kw, i) => (
+                        <span key={i} style={{ fontSize: 11, background: 'rgba(248,113,113,0.15)', border: '1px solid rgba(248,113,113,0.3)', borderRadius: 6, padding: '2px 8px', color: '#fca5a5' }}>{kw}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
+            ) : null}
+          </div>
+        )}
+
+        {/* Suggested follow-up prompts */}
+        {suggestedPrompts.length > 0 && !loading && (
+          <div style={{ paddingLeft: 38, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {suggestedPrompts.map(p => (
+              <button key={p} onClick={() => { setSuggestedPrompts([]); send(p) }} style={{
+                background: 'rgba(102,126,234,0.12)', border: '1px solid rgba(102,126,234,0.3)',
+                borderRadius: 20, padding: '6px 13px', fontSize: 12, color: '#a5b4fc',
+                cursor: 'pointer',
+              }}>
+                {p}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Starter prompts */}
         {messages.length === 1 && (
