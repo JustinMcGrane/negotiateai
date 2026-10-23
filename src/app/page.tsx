@@ -204,17 +204,26 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonial — Israel */}
-      <section style={{ padding: '48px 40px', background: '#f8fafc', borderTop: '1px solid #f1f5f9' }}>
-        <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ fontSize: 36, color: '#4A90D9', lineHeight: 1, marginBottom: 16, fontFamily: 'Georgia, serif' }}>&ldquo;</div>
-          <p style={{ fontSize: 18, color: '#334155', lineHeight: 1.75, fontStyle: 'italic', margin: '0 0 24px' }}>
-            I really like that Sarah made my resume analysis experience personalized, it felt like I was actually talking to a real human being and that&apos;s unique. This truly helped me feel confident for my next interview. Thanks Hayven!
-          </p>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
-            <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg, #4A90D9 0%, #2952CC 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 700, color: '#fff' }}>I</div>
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>Israel</div>
-              <div style={{ fontSize: 12, color: '#94a3b8' }}>Hayven user</div>
+      <section style={{ padding: '72px 40px', background: '#fff', borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9' }}>
+        <div style={{ maxWidth: 760, margin: '0 auto' }}>
+          <div style={{ background: 'linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%)', borderRadius: 20, padding: '48px 56px', position: 'relative', boxShadow: '0 4px 24px rgba(74,144,217,0.08)' }}>
+            {/* Large quote mark */}
+            <div style={{ position: 'absolute', top: 28, left: 40, fontSize: 80, color: '#4A90D9', lineHeight: 1, fontFamily: 'Georgia, serif', opacity: 0.25, userSelect: 'none' }}>&ldquo;</div>
+            {/* Stars */}
+            <div style={{ display: 'flex', gap: 4, marginBottom: 20 }}>
+              {[1,2,3,4,5].map(i => (
+                <svg key={i} width="18" height="18" viewBox="0 0 20 20" fill="#F59E0B"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              ))}
+            </div>
+            <p style={{ fontSize: 20, color: '#1e293b', lineHeight: 1.8, fontWeight: 400, margin: '0 0 32px', position: 'relative', zIndex: 1 }}>
+              &ldquo;I really like that Sarah made my resume analysis experience personalized — it felt like I was actually talking to a real human being and that&apos;s unique. This truly helped me feel confident for my next interview. Thanks Hayven!&rdquo;
+            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'linear-gradient(135deg, #4A90D9 0%, #2952CC 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 700, color: '#fff', flexShrink: 0, boxShadow: '0 2px 8px rgba(74,144,217,0.35)' }}>I</div>
+              <div>
+                <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a' }}>Israel</div>
+                <div style={{ fontSize: 13, color: '#64748b', marginTop: 2 }}>Software Engineer &mdash; Hayven user</div>
+              </div>
             </div>
           </div>
         </div>
