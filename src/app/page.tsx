@@ -216,7 +216,7 @@ export default function LandingPage() {
               ))}
             </div>
             <p style={{ fontSize: 20, color: '#1e293b', lineHeight: 1.8, fontWeight: 400, margin: '0 0 32px', position: 'relative', zIndex: 1 }}>
-              &ldquo;I really like that Sarah made my resume analysis experience personalized — it felt like I was actually talking to a real human being and that&apos;s unique. This truly helped me feel confident for my next interview. Thanks Hayven!&rdquo;
+              &ldquo;I really like that Sarah made my resume analysis experience personalized — it felt like I was actually talking to a real human being and that&apos;s unique. She even created a tailored plan for me to get to my salary goal with outlined steps and a specific plan. This truly helped me feel confident for my next interview. Thanks Hayven!&rdquo;
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
               <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'linear-gradient(135deg, #4A90D9 0%, #2952CC 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 700, color: '#fff', flexShrink: 0, boxShadow: '0 2px 8px rgba(74,144,217,0.35)' }}>I</div>
