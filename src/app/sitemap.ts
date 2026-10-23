@@ -51,9 +51,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/resume-builder/financial-analyst`, lastModified: D('2026-09-01'), priority: 0.9 },
     { url: `${base}/resume-builder/operations-manager`, lastModified: D('2026-09-01'), priority: 0.9 },
 
-    // Job search
-    { url: `${base}/job-tracker`, lastModified: D('2026-09-01'), priority: 0.7 },
-
     // Salary guides
     { url: `${base}/tools/salaries`, lastModified: D('2026-09-23'), priority: 0.8 },
     ...SALARY_ROLES.map(r => ({
