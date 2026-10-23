@@ -1,26 +1,17 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'AI Resume Coach — Get Expert Resume Feedback | Hayven',
-  description: 'Upload your resume and get instant, specific feedback from an AI resume coach. Fix weak bullets, improve ATS scores, and download a polished resume PDF.',
-  alternates: {
-    canonical: 'https://gethayven.com/resume-coach',
-  },
+  title: 'AI Resume Coach — Instant Feedback, ATS Score & Rewrites | Hayven',
+  description: 'Upload your resume and get honest, specific feedback in seconds. Sarah identifies ATS issues, weak bullets, missing metrics, and rewrites sections so you can compete.',
+  alternates: { canonical: 'https://gethayven.com/resume-coach' },
   openGraph: {
-    type: 'website',
-    title: 'AI Resume Coach — Get Expert Resume Feedback | Hayven',
-    description: 'Upload your resume and get instant, specific feedback from an AI resume coach. Fix weak bullets, improve ATS scores, and download a polished resume PDF.',
+    title: 'AI Resume Coach — Instant Feedback, ATS Score & Rewrites',
+    description: 'Upload your resume and get honest, specific feedback in seconds. Sarah identifies ATS issues, weak bullets, missing metrics, and rewrites sections so you can compete.',
     url: 'https://gethayven.com/resume-coach',
-    images: [{ url: 'https://gethayven.com/resume-coach/opengraph-image' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'AI Resume Coach — Get Expert Resume Feedback | Hayven',
-    description: 'Upload your resume and get instant, specific feedback from an AI resume coach. Fix weak bullets, improve ATS scores, and download a polished resume PDF.',
-    images: ['https://gethayven.com/resume-coach/opengraph-image'],
+    type: 'website',
   },
 }
 
-export default function ResumeCoachLayout({ children }: { children: React.ReactNode }) {
-  return children
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>
 }
