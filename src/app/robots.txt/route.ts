@@ -1,52 +1,7 @@
 export function GET() {
   const body = `User-agent: *
-Allow: /
-Allow: /blog/
-Allow: /tools/salaries
-Allow: /tools/salaries/
-Allow: /resume-builder
-Allow: /resume-builder/software-engineer
-Allow: /resume-builder/product-manager
-Allow: /resume-builder/marketing-manager
-Allow: /resume-builder/account-executive
-Allow: /resume-builder/data-scientist
-Allow: /resume-builder/ux-designer
-Allow: /resume-builder/project-manager
-Allow: /resume-builder/financial-analyst
-Allow: /resume-builder/operations-manager
-Allow: /resume-skills
-Allow: /resume-templates
-Allow: /raise-calculator
-Allow: /salary-to-hourly-calculator
-Allow: /paycheck-calculator
-Allow: /equity-calculator
-Allow: /compensation-analyzer
-Allow: /counter-offer-builder
-Allow: /offer-evaluator
-Allow: /objection-handler
-Allow: /raise-request-builder
-Allow: /negotiation-playbook
-Allow: /negotiation-simulator
-Allow: /interview-salary-coach
-Allow: /job-tracker
-Allow: /ai-career-coach
-Allow: /resume-coach
+Disallow: /api/
 Disallow: /dashboard
-Disallow: /tools/comp-analyzer
-Disallow: /tools/offer-evaluator
-Disallow: /tools/equity-calc
-Disallow: /tools/cost-calculator
-Disallow: /tools/playbook
-Disallow: /tools/counter-offer
-Disallow: /tools/objections
-Disallow: /tools/raise-builder
-Disallow: /tools/simulator
-Disallow: /tools/interview-coach
-Disallow: /tools/annual-review
-Disallow: /tools/promotion-planner
-Disallow: /tools/competing-offer
-Disallow: /tools/career-timeline
-Disallow: /tools/cover-letter
 Disallow: /account
 Disallow: /progress
 Disallow: /jobs
@@ -64,7 +19,22 @@ Disallow: /brand-deals
 Disallow: /live-coach
 Disallow: /calendar
 Disallow: /recruiter
-Disallow: /api/
+Disallow: /tools/comp-analyzer
+Disallow: /tools/offer-evaluator
+Disallow: /tools/equity-calc
+Disallow: /tools/cost-calculator
+Disallow: /tools/playbook
+Disallow: /tools/counter-offer
+Disallow: /tools/objections
+Disallow: /tools/raise-builder
+Disallow: /tools/simulator
+Disallow: /tools/interview-coach
+Disallow: /tools/annual-review
+Disallow: /tools/promotion-planner
+Disallow: /tools/competing-offer
+Disallow: /tools/career-timeline
+Disallow: /tools/cover-letter
+
 Sitemap: https://gethayven.com/sitemap.xml`
   return new Response(body, { headers: { 'Content-Type': 'text/plain' } })
 }
