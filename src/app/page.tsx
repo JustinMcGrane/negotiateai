@@ -202,6 +202,24 @@ export default function LandingPage() {
           <HeroWidget />
         </div>
       </section>
+
+      {/* Testimonial — Israel */}
+      <section style={{ padding: '48px 40px', background: '#f8fafc', borderTop: '1px solid #f1f5f9' }}>
+        <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ fontSize: 36, color: '#4A90D9', lineHeight: 1, marginBottom: 16, fontFamily: 'Georgia, serif' }}>&ldquo;</div>
+          <p style={{ fontSize: 18, color: '#334155', lineHeight: 1.75, fontStyle: 'italic', margin: '0 0 24px' }}>
+            I really like that Sarah made my resume analysis experience personalized, it felt like I was actually talking to a real human being and that&apos;s unique. This truly helped me feel confident for my next interview. Thanks Hayven!
+          </p>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+            <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg, #4A90D9 0%, #2952CC 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 700, color: '#fff' }}>I</div>
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>Israel</div>
+              <div style={{ fontSize: 12, color: '#94a3b8' }}>Hayven user</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <style>{`
         @media (max-width: 768px) {
           .landing-hero-grid { grid-template-columns: 1fr !important; }
