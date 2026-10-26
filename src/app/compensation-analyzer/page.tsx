@@ -123,10 +123,12 @@ export default function CompensationAnalyzerPage() {
         <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>Related tools</h2>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
           {[
-            { href: '/offer-evaluator', label: 'Offer Evaluator' },
-            { href: '/counter-offer-builder', label: 'Counter-Offer Builder' },
+            { href: '/negotiation-simulator', label: 'Negotiation Simulator' },
             { href: '/raise-calculator', label: 'Raise Calculator' },
             { href: '/raise-request-builder', label: 'Raise Request Builder' },
+            { href: '/tools/salaries', label: 'Salary Guides by Role' },
+            { href: '/salary-negotiation', label: 'Salary Negotiation Guide' },
+            { href: '/interview-salary-coach', label: 'Interview Salary Coach' },
           ].map(({ href, label }) => (
             <Link key={href} href={href} style={{ fontSize: 13, color: '#4169E1', textDecoration: 'none', border: '1px solid #dbeafe', borderRadius: 8, padding: '6px 14px', background: '#eff6ff' }}>{label}</Link>
           ))}
