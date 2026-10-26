@@ -3,11 +3,11 @@ import Link from 'next/link'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Salary Negotiation: The Complete Guide to Getting Paid What You\'re Worth | Hayven',
+  title: 'Salary Negotiation: The Complete Guide | Hayven',
   description: 'Learn how to negotiate salary with confidence. Step-by-step guide covering market research, counter-offer strategies, negotiation scripts, email templates, and how to handle pushback.',
   alternates: { canonical: 'https://gethayven.com/salary-negotiation' },
   openGraph: {
-    title: 'Salary Negotiation: The Complete Guide to Getting Paid What You\'re Worth | Hayven',
+    title: 'Salary Negotiation: The Complete Guide | Hayven',
     description: 'Step-by-step guide to negotiating your salary. Market research, counter-offer strategies, negotiation scripts, and email templates.',
     url: 'https://gethayven.com/salary-negotiation',
     type: 'article',

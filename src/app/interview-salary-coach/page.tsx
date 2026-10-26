@@ -5,11 +5,11 @@ import { ArrowRight, CheckCircle, MessageCircle, Brain, TrendingUp } from 'lucid
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'What to Say When Asked Your Salary Expectations in an Interview | Hayven',
+  title: 'Salary Expectations in an Interview: What to Say | Hayven',
   description: '"What are your salary expectations?" — don\'t freeze. Get the exact script to deflect, anchor high, and control the salary conversation from the first interview. Free.',
   alternates: { canonical: 'https://gethayven.com/interview-salary-coach' },
   openGraph: {
-    title: 'What to Say When Asked Your Salary Expectations in an Interview | Hayven',
+    title: 'Salary Expectations in an Interview: What to Say | Hayven',
     description: 'Don\'t freeze when they ask about salary. Get the exact script to deflect, anchor, and stay in control.',
   },
   twitter: {

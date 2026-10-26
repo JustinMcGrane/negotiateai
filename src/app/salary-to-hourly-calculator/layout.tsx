@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Salary to Hourly Calculator — Convert Annual Pay to Hourly Rate | Hayven',
+  title: 'Salary to Hourly Calculator — Annual to Hourly | Hayven',
   description: 'Convert your annual salary to an hourly rate instantly. See your equivalent hourly pay based on a 40-hour work week, plus monthly and weekly breakdowns.',
   alternates: { canonical: 'https://gethayven.com/salary-to-hourly-calculator' },
   openGraph: {
-    title: 'Salary to Hourly Calculator — Convert Annual Pay to Hourly Rate',
+    title: 'Salary to Hourly Calculator — Annual to Hourly',
     description: 'Convert your annual salary to an hourly rate instantly. See your equivalent hourly pay based on a 40-hour work week, plus monthly and weekly breakdowns.',
     url: 'https://gethayven.com/salary-to-hourly-calculator',
     type: 'website',
