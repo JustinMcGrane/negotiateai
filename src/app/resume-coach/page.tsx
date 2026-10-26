@@ -176,7 +176,7 @@ export default function ResumeCoachPage() {
           }}>
             <FileText size={11} color="#fff" />
           </div>
-          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Sarah · Resume Coach</div>
+          <h1 style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', margin: 0, fontWeight: 400 }}>Sarah · Resume Coach</h1>
         </div>
       </div>
 
