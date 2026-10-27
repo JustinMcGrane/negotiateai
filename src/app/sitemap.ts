@@ -13,12 +13,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: base, lastModified: D('2026-09-23'), priority: 1.0 },
     { url: `${base}/sarah`, lastModified: D('2026-09-01'), priority: 0.9 },
 
+    // AI coach
+    { url: `${base}/ai-career-coach`, lastModified: D('2026-10-27'), priority: 0.9 },
+    { url: `${base}/worth`, lastModified: D('2026-09-01'), priority: 0.8 },
+
     // Negotiation tools
     { url: `${base}/compensation-analyzer`, lastModified: D('2026-09-23'), priority: 0.8 },
     { url: `${base}/negotiation-simulator`, lastModified: D('2026-09-23'), priority: 0.8 },
     { url: `${base}/interview-salary-coach`, lastModified: D('2026-09-23'), priority: 0.7 },
     { url: `${base}/raise-request-builder`, lastModified: D('2026-09-23'), priority: 0.7 },
     { url: `${base}/negotiation-playbook`, lastModified: D('2026-09-01'), priority: 0.7 },
+    { url: `${base}/equity-calculator`, lastModified: D('2026-10-27'), priority: 0.7 },
+    { url: `${base}/offer-evaluator`, lastModified: D('2026-10-27'), priority: 0.7 },
+    { url: `${base}/counter-offer-builder`, lastModified: D('2026-10-27'), priority: 0.7 },
+    { url: `${base}/objection-handler`, lastModified: D('2026-10-27'), priority: 0.7 },
+    { url: `${base}/job-tracker`, lastModified: D('2026-09-01'), priority: 0.6 },
 
     // SEO landing pages
     { url: `${base}/salary-negotiation`, lastModified: D('2026-10-16'), priority: 0.9 },

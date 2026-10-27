@@ -1,5 +1,9 @@
 export function GET() {
   const body = `User-agent: *
+Allow: /resume-builder
+Allow: /resume-coach
+Allow: /resume-skills
+Allow: /resume-templates
 Disallow: /api/
 Disallow: /dashboard
 Disallow: /account
@@ -19,6 +23,8 @@ Disallow: /brand-deals
 Disallow: /live-coach
 Disallow: /calendar
 Disallow: /recruiter
+Disallow: /onboarding
+Disallow: /analyze
 Disallow: /tools/comp-analyzer
 Disallow: /tools/offer-evaluator
 Disallow: /tools/equity-calc
