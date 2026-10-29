@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Terms of Service | Hayven',
   description: 'Terms of Service for Hayven.',
+  alternates: { canonical: 'https://gethayven.com/terms' },
 }
 
 export default function TermsPage() {

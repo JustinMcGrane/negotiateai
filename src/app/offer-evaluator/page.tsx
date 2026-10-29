@@ -5,11 +5,11 @@ import { ArrowRight, CheckCircle, Scale, AlertCircle, TrendingUp } from 'lucide-
 import { LandingNav } from '@/components/negotiate/LandingNav'
 
 export const metadata: Metadata = {
-  title: 'Job Offer Evaluator — Score Any Offer & Know What to Counter | Hayven',
+  title: 'Job Offer Evaluator — Score & Know What to Counter | Hayven',
   description: 'Is the offer good? Get a 0–100 score across salary, equity, benefits, and total comp. See exactly what\'s below market, what to push on, and what to say. Free.',
   alternates: { canonical: 'https://gethayven.com/offer-evaluator' },
   openGraph: {
-    title: 'Job Offer Evaluator — Score Any Offer & Know What to Counter | Hayven',
+    title: 'Job Offer Evaluator — Score & Know What to Counter | Hayven',
     description: 'Score any offer 0–100. See what\'s below market and exactly what to push on before you sign.',
   },
   twitter: {

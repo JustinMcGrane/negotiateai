@@ -553,7 +553,7 @@ export default function LandingPage() {
               <div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>PRODUCT</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {[{ href: '/signup', label: 'Get started' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/ai-career-coach', label: 'Career Coach' }].map(({ href, label }) => (
+                  {[{ href: '/signup', label: 'Get started' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/sarah', label: 'Career Coach' }].map(({ href, label }) => (
                     <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
                   ))}
                 </div>
@@ -563,22 +563,40 @@ export default function LandingPage() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {[
                     { href: '/compensation-analyzer', label: 'Compensation Analyzer' },
-                    { href: '/offer-evaluator', label: 'Offer Evaluator' },
-                    { href: '/equity-calculator', label: 'Equity Calculator' },
-                    { href: '/counter-offer-builder', label: 'Counter-Offer Builder' },
-                    { href: '/raise-calculator', label: 'Raise Calculator' },
-                    { href: '/raise-request-builder', label: 'Raise Request Builder' },
-                    { href: '/negotiation-playbook', label: 'Negotiation Playbook' },
-                    { href: '/objection-handler', label: 'Objection Handler' },
                     { href: '/negotiation-simulator', label: 'Negotiation Simulator' },
                     { href: '/interview-salary-coach', label: 'Interview Salary Coach' },
-                    { href: '/job-tracker', label: 'Job Tracker' },
+                    { href: '/raise-request-builder', label: 'Raise Request Builder' },
+                    { href: '/raise-calculator', label: 'Raise Calculator' },
+                    { href: '/negotiation-playbook', label: 'Negotiation Playbook' },
+                    { href: '/equity-calculator', label: 'Equity Calculator' },
+                    { href: '/offer-evaluator', label: 'Offer Evaluator' },
+                    { href: '/counter-offer-builder', label: 'Counter-Offer Builder' },
+                    { href: '/objection-handler', label: 'Objection Handler' },
+                    { href: '/salary-calculator', label: 'Salary Calculator' },
+                    { href: '/salary-to-hourly-calculator', label: 'Salary to Hourly' },
+                    { href: '/paycheck-calculator', label: 'Paycheck Calculator' },
                     { href: '/resume-builder', label: 'Resume Builder' },
+                    { href: '/resume-coach', label: 'Resume Coach' },
                     { href: '/resume-templates', label: 'Resume Templates' },
                     { href: '/resume-skills', label: 'Resume Skills' },
-                    { href: '/paycheck-calculator', label: 'Paycheck Calculator' },
-                    { href: '/salary-to-hourly-calculator', label: 'Salary to Hourly' },
                     { href: '/tools/salaries', label: 'Salary Guides' },
+                  ].map(({ href, label }) => (
+                    <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>GUIDES</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {[
+                    { href: '/salary-negotiation', label: 'Salary Negotiation' },
+                    { href: '/how-to-ask-for-a-raise', label: 'How to Ask for a Raise' },
+                    { href: '/blog/how-to-negotiate-salary-offer', label: 'Negotiate a Job Offer' },
+                    { href: '/blog/salary-negotiation-email-template', label: 'Negotiation Email Template' },
+                    { href: '/blog/how-to-evaluate-a-job-offer', label: 'Evaluate a Job Offer' },
+                    { href: '/blog/what-your-equity-is-actually-worth', label: 'What Your Equity Is Worth' },
+                    { href: '/blog/software-engineer-resume', label: 'Software Engineer Resume' },
+                    { href: '/blog/product-manager-resume', label: 'Product Manager Resume' },
                   ].map(({ href, label }) => (
                     <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
                   ))}

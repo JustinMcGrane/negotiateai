@@ -3,11 +3,11 @@ import Link from 'next/link'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Salary Negotiation: The Complete Guide to Getting Paid What You\'re Worth | Hayven',
+  title: 'Salary Negotiation: The Complete Guide | Hayven',
   description: 'Learn how to negotiate salary with confidence. Step-by-step guide covering market research, counter-offer strategies, negotiation scripts, email templates, and how to handle pushback.',
   alternates: { canonical: 'https://gethayven.com/salary-negotiation' },
   openGraph: {
-    title: 'Salary Negotiation: The Complete Guide to Getting Paid What You\'re Worth | Hayven',
+    title: 'Salary Negotiation: The Complete Guide | Hayven',
     description: 'Step-by-step guide to negotiating your salary. Market research, counter-offer strategies, negotiation scripts, and email templates.',
     url: 'https://gethayven.com/salary-negotiation',
     type: 'article',
@@ -413,7 +413,9 @@ export default function SalaryNegotiationPage() {
                 { label: 'How to Ask for a Raise', href: '/how-to-ask-for-a-raise', desc: 'Step-by-step guide for getting a raise at your current job.' },
                 { label: 'Salary Negotiation Email Templates', href: '/blog/salary-negotiation-email-template', desc: 'Copy-paste email scripts for your counter-offer.' },
                 { label: 'How to Negotiate After a Job Offer', href: '/blog/how-to-negotiate-salary-after-job-offer', desc: 'Specific tactics for new job offer negotiations.' },
-                { label: 'AI Career Coach (Sarah)', href: '/sarah', desc: 'Get your market rate and a personalized negotiation strategy.' },
+                { label: 'Salary Guides by Role', href: '/tools/salaries', desc: 'See p25–p90 salary ranges for your specific role and city.' },
+                { label: 'Compensation Analyzer', href: '/compensation-analyzer', desc: 'Get your personalized market rate in 30 seconds.' },
+                { label: 'AI Career Coach (Sarah)', href: '/sarah', desc: 'Get a personalized negotiation strategy from your AI coach.' },
               ].map(({ label, href, desc }) => (
                 <Link key={href} href={href} style={{ display: 'block', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, padding: '20px 20px', textDecoration: 'none' }}>
                   <div style={{ fontSize: 15, fontWeight: 700, color: '#1a4fa0', marginBottom: 6 }}>{label}</div>

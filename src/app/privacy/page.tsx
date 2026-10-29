@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Privacy Policy | Hayven',
   description: 'Privacy Policy for Hayven.',
+  alternates: { canonical: 'https://gethayven.com/privacy' },
 }
 
 export default function PrivacyPage() {

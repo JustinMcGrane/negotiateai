@@ -342,6 +342,8 @@ export default function HowToAskForARaisePage() {
                 { label: 'AI Career Coach (Sarah)', href: '/sarah', desc: 'Get coached through your raise conversation, personalized to your situation.' },
                 { label: 'Scripts That Work', href: '/blog/how-to-ask-for-a-raise-scripts-that-work', desc: 'Detailed scripts for every raise scenario.' },
                 { label: 'Salary Calculator', href: '/salary-calculator', desc: 'All Hayven salary tools in one place.' },
+                { label: 'Salary Guides by Role', href: '/tools/salaries', desc: 'See p25–p90 salary ranges for your role before your conversation.' },
+                { label: 'Paycheck Calculator', href: '/paycheck-calculator', desc: 'See exactly what your raise means for your take-home pay.' },
               ].map(({ label, href, desc }) => (
                 <Link key={href} href={href} style={{ display: 'block', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, padding: '20px 20px', textDecoration: 'none' }}>
                   <div style={{ fontSize: 15, fontWeight: 700, color: '#1a4fa0', marginBottom: 6 }}>{label}</div>

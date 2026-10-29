@@ -23,6 +23,7 @@ const articleSchema = {
   dateModified: '2026-09-23',
   publisher: { '@type': 'Organization', name: 'Hayven', url: 'https://gethayven.com' },
   author: { '@type': 'Organization', name: 'Hayven' },
+  image: { '@type': 'ImageObject', url: 'https://gethayven.com/og-image.png', width: 1200, height: 630 },
 }
 export default function Article() {
   return (

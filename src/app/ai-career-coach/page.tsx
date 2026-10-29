@@ -3,11 +3,11 @@ import Link from 'next/link'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'AI Career Coach — Salary Negotiation, Resume & Career Advice | Hayven',
+  title: 'AI Career Coach — Salary, Resume & Career Advice | Hayven',
   description: 'Get the coaching $300/hr career advisors charge — for free. Personalized salary benchmarking, negotiation scripts, resume feedback, and career strategy available 24/7.',
   alternates: { canonical: 'https://gethayven.com/ai-career-coach' },
   openGraph: {
-    title: 'AI Career Coach — Salary Negotiation, Resume & Career Advice | Hayven',
+    title: 'AI Career Coach — Salary, Resume & Career Advice | Hayven',
     description: 'The coaching $300/hr advisors charge — for free. Salary benchmarking, negotiation strategy, and resume feedback 24/7.',
     url: 'https://gethayven.com/ai-career-coach',
     type: 'website',
