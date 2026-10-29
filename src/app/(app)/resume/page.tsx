@@ -420,7 +420,7 @@ export default function ResumePage() {
           </div>
 
           {/* Critical Issues + Strengths */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))', gap: 16 }}>
             <div style={{
               background: '#fef2f2', border: '0.5px solid #fecaca',
               borderRadius: 12, padding: 20,

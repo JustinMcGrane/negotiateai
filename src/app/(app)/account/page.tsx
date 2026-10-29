@@ -183,7 +183,7 @@ export default function AccountPage() {
         borderRadius: 12, padding: 24, marginBottom: 20,
       }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)', marginBottom: 16, letterSpacing: '0.04em' }}>USAGE</div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(140px, 100%), 1fr))', gap: 12 }}>
           <div style={{ background: 'var(--color-background-secondary)', borderRadius: 8, padding: '14px 16px', textAlign: 'center' }}>
             <div style={{ fontSize: 24, fontWeight: 700 }}>{profile?.sessions_used || 0}</div>
             <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>Sessions completed</div>

@@ -67,7 +67,7 @@ export default function EquityCalc() {
 
       {result && (
         <div style={{ marginTop: 32 }} className="animate-slide-up">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, marginBottom: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(120px, 100%), 1fr))', gap: 10, marginBottom: 20 }}>
             {([['Conservative', result.conservative, 'var(--color-danger)'], ['Base case', result.base, 'var(--color-warning)'], ['Optimistic', result.optimistic, 'var(--color-success)']] as [string, number, string][]).map(([label, val, color]) => (
               <div key={label} style={{ background: 'var(--color-background-secondary)', borderRadius: 8, padding: 16, textAlign: 'center' }}>
                 <div style={{ fontSize: 20, fontWeight: 500, color }}>{fmt(val)}</div>

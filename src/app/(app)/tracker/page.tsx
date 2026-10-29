@@ -153,7 +153,7 @@ export default function TrackerPage() {
       {showForm && (
         <div style={{ background: 'var(--color-background-secondary)', border: '0.5px solid var(--color-border-tertiary)', borderRadius: 12, padding: 20, marginBottom: 24 }}>
           <h3 style={{ fontSize: 15, fontWeight: 600, margin: '0 0 16px' }}>Add Application</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 12, marginBottom: 12 }}>
             <div>
               <label style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Company *</label>
               <input value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} placeholder="Stripe" style={inputStyle} />

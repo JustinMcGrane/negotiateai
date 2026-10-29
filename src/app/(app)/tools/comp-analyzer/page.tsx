@@ -96,7 +96,7 @@ export default function CompAnalyzer() {
             </div>
           ))}
 
-          <div style={{ marginTop: 24, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div style={{ marginTop: 24, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))', gap: 12 }}>
             <div style={{ background: 'var(--color-background-secondary)', borderRadius: 8, padding: 16 }}>
               <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginBottom: 4 }}>RECOMMENDED TARGET</div>
               <div style={{ fontSize: 22, fontWeight: 500, color: 'var(--color-success)' }}>{fmt(result.recommendedTarget)}</div>
