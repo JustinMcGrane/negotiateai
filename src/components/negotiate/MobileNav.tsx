@@ -27,7 +27,7 @@ export function MobileNav() {
         return (
           <Link key={item.href} href={item.href} style={{
             flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center',
-            padding: '10px 4px 8px', gap: 4, textDecoration: 'none',
+            padding: '12px 4px 10px', gap: 4, textDecoration: 'none',
             color: active ? '#2D6EA8' : '#7AB8E8',
             fontSize: 10, fontWeight: active ? 700 : 400,
             transition: 'color 0.15s',

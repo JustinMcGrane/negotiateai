@@ -93,6 +93,7 @@ export function LandingNav() {
       <Dropdown label="Resources" items={RESOURCES} />
       <style>{`
         @media (max-width: 767px) { .landing-nav { display: none !important; } }
+        @media (max-width: 768px) { .tool-landing-header { padding: 0 16px !important; } }
         .landing-nav-link:hover { color: #4A90D9 !important; }
       `}</style>
     </nav>

@@ -153,7 +153,7 @@ export default function LandingPage() {
           <span style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>85% of people who negotiate their salary get more money</span>
           <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}> — are you leaving money on the table?</span>
         </div>
-        <Link href="/signup" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
+        <Link href="/signup" className="landing-announcement-cta" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
           Find out →
         </Link>
       </div>
@@ -206,9 +206,9 @@ export default function LandingPage() {
       {/* Testimonial — Israel */}
       <section style={{ padding: '72px 40px', background: '#fff', borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
-          <div style={{ background: 'linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%)', borderRadius: 20, padding: '48px 56px', position: 'relative', boxShadow: '0 4px 24px rgba(74,144,217,0.08)' }}>
+          <div className="landing-testimonial-card" style={{ background: 'linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%)', borderRadius: 20, padding: '48px 56px', position: 'relative', boxShadow: '0 4px 24px rgba(74,144,217,0.08)' }}>
             {/* Large quote mark */}
-            <div style={{ position: 'absolute', top: 28, left: 40, fontSize: 80, color: '#4A90D9', lineHeight: 1, fontFamily: 'Georgia, serif', opacity: 0.25, userSelect: 'none' }}>&ldquo;</div>
+            <div className="landing-testimonial-quote" style={{ position: 'absolute', top: 28, left: 40, fontSize: 80, color: '#4A90D9', lineHeight: 1, fontFamily: 'Georgia, serif', opacity: 0.25, userSelect: 'none' }}>&ldquo;</div>
             {/* Stars */}
             <div style={{ display: 'flex', gap: 4, marginBottom: 20 }}>
               {[1,2,3,4,5].map(i => (
@@ -242,6 +242,15 @@ export default function LandingPage() {
           .landing-header { padding: 0 16px !important; }
           .landing-footer { padding: 40px 20px !important; }
           .landing-footer-links { gap: 32px !important; flex-direction: column !important; }
+          .landing-testimonial-card { padding: 28px 20px !important; }
+          .landing-testimonial-quote { left: 16px !important; font-size: 56px !important; top: 16px !important; }
+          .landing-resume-grid { grid-template-columns: 1fr !important; }
+          .landing-announcement-cta { display: none !important; }
+          .landing-sarah-widget { min-height: 280px !important; }
+        }
+        @media (max-width: 480px) {
+          .tool-page-header { padding: 0 16px !important; }
+          .tool-page-h1 { white-space: normal !important; }
         }
       `}</style>
 
@@ -398,7 +407,7 @@ export default function LandingPage() {
               Step-by-step resume breakdowns for the roles that matter most — with real examples and the exact metrics hiring managers want to see.
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
+          <div className="landing-resume-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))', gap: 24 }}>
 
             {/* Software Engineer */}
             <Link href="/blog/software-engineer-resume" style={{ textDecoration: 'none' }}>

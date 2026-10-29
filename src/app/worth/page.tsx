@@ -62,7 +62,7 @@ export default function WorthPage() {
     <div style={{ background: '#0f172a', minHeight: '100vh', fontFamily: '-apple-system, BlinkMacSystemFont, Inter, sans-serif' }}>
 
       {/* Header */}
-      <header style={{
+      <header className="tool-landing-header" style={{
         borderBottom: '1px solid rgba(255,255,255,0.08)',
         padding: '0 24px', height: 56,
         display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative',
