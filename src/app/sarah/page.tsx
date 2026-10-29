@@ -318,6 +318,11 @@ function SarahChat() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#0f172a', display: 'flex', flexDirection: 'column' }}>
+      <style>{`
+        @media (max-width: 640px) {
+          .sarah-resume-compare { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
       {/* Header */}
       <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '16px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
         <Link href="/" style={{ textDecoration: 'none' }}>
@@ -409,7 +414,7 @@ function SarahChat() {
                 </div>
               )}
               {sideBySideMsg === i && resumeText && (
-                <div style={{
+                <div className="sarah-resume-compare" style={{
                   display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 8,
                   background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)',
                   borderRadius: 12, padding: 14, fontSize: 12, lineHeight: 1.6,

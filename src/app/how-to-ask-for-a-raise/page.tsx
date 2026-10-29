@@ -100,7 +100,7 @@ export default function HowToAskForARaisePage() {
       <div style={{ background: '#fff', minHeight: '100vh', fontFamily: '-apple-system, BlinkMacSystemFont, Inter, sans-serif' }}>
 
         {/* Header */}
-        <header style={{
+        <header className="tool-landing-header" style={{
           borderBottom: '0.5px solid #e5e7eb', padding: '0 32px', height: 60,
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           position: 'sticky', top: 0, background: '#fff', zIndex: 50,
