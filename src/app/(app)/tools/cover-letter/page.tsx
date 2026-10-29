@@ -67,7 +67,7 @@ export default function CoverLetterPage() {
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 16, marginBottom: 16 }}>
         <div>
           <label style={{ fontSize: 13, fontWeight: 500, display: 'block', marginBottom: 6 }}>Job Title *</label>
           <input value={jobTitle} onChange={e => setJobTitle(e.target.value)} placeholder="Senior Product Manager" style={inputStyle} />

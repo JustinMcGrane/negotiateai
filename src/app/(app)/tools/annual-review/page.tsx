@@ -102,7 +102,7 @@ export default function AnnualReviewPage() {
             <p style={{ fontSize: 13, lineHeight: 1.7, margin: 0 }}>{result.summary}</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 12, marginBottom: 16 }}>
             <div style={{ background: '#ecfdf5', borderRadius: 10, padding: 16 }}>
               <div style={{ fontSize: 11, color: '#065f46', fontWeight: 600, marginBottom: 8 }}>STRONGEST POINTS TO MAKE</div>
               {result.accomplishments.map((a, i) => <div key={i} style={{ fontSize: 13, color: '#065f46', marginBottom: 4, display: 'flex', gap: 6 }}><span>✓</span>{a}</div>)}

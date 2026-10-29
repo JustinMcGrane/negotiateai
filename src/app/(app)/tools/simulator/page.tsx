@@ -301,7 +301,7 @@ This is turn ${newTurn} of ${MAX_TURNS}. ${newTurn === MAX_TURNS - 1 ? 'This is 
             <div style={{ fontSize: 13, lineHeight: 1.7 }}>{debrief.outcome}</div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: 12, marginBottom: 16 }}>
             <div style={{ border: '0.5px solid rgba(15,110,86,0.3)', borderRadius: 8, padding: 16, background: '#F0FBF7' }}>
               <div style={{ fontSize: 11, color: 'var(--color-success)', marginBottom: 10 }}>WHAT WORKED</div>
               {debrief.strengths.map((s, i) => <div key={i} style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginBottom: 6, paddingLeft: 12, borderLeft: '2px solid var(--color-success)' }}>{s}</div>)}
