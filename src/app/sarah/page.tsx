@@ -502,16 +502,34 @@ function SarahChat() {
 
         {/* Starter prompts */}
         {messages.length === 1 && (
-          <div style={{ paddingLeft: 38, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {STARTERS.map(s => (
-              <button key={s} onClick={() => send(s)} style={{
-                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
-                borderRadius: 20, padding: '7px 14px', fontSize: 13, color: 'rgba(255,255,255,0.8)',
-                cursor: 'pointer',
-              }}>
-                {s}
+          <div style={{ paddingLeft: 38, display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {STARTERS.map(s => (
+                <button key={s} onClick={() => send(s)} style={{
+                  background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
+                  borderRadius: 20, padding: '7px 14px', fontSize: 13, color: 'rgba(255,255,255,0.8)',
+                  cursor: 'pointer',
+                }}>
+                  {s}
+                </button>
+              ))}
+            </div>
+            {!resumeFilename && (
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploadLoading}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  background: 'rgba(102,126,234,0.12)', border: '1px dashed rgba(102,126,234,0.5)',
+                  borderRadius: 10, padding: '10px 16px', fontSize: 13, fontWeight: 600,
+                  color: '#a5b4fc', cursor: 'pointer', width: 'fit-content',
+                  opacity: uploadLoading ? 0.6 : 1,
+                }}
+              >
+                <Paperclip size={14} />
+                {uploadLoading ? 'Uploading…' : 'Upload your resume for personalized coaching'}
               </button>
-            ))}
+            )}
           </div>
         )}
 
