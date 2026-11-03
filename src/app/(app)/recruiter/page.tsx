@@ -1,6 +1,6 @@
 'use client'
 import { useState, useRef, useEffect, Suspense } from 'react'
-import { Send, Briefcase, Sparkles, ChevronDown, ChevronUp, Brain } from 'lucide-react'
+import { Send, Briefcase, Sparkles, ChevronDown, ChevronUp, Brain, Paperclip, FileText, X } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 import { UpgradeModal } from '@/components/negotiate/UpgradeModal'
 import posthog from 'posthog-js'
@@ -49,7 +49,12 @@ function RecruiterPageInner() {
   const [initialized, setInitialized] = useState(false)
   const [userHasSent, setUserHasSent] = useState(false)
   const [checkinTriggered, setCheckinTriggered] = useState(false)
+  const [resumeText, setResumeText] = useState<string | null>(null)
+  const [resumeFilename, setResumeFilename] = useState<string | null>(null)
+  const [uploadLoading, setUploadLoading] = useState(false)
+  const [uploadError, setUploadError] = useState<string | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const searchParams = useSearchParams()
   const isCheckin = searchParams.get('checkin') === 'true'
 
@@ -82,6 +87,31 @@ function RecruiterPageInner() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, userHasSent])
 
+  async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setUploadLoading(true)
+    setUploadError(null)
+    try {
+      const form = new FormData()
+      form.append('file', file)
+      const res = await fetch('/api/parse-resume', { method: 'POST', body: form })
+      const data = await res.json()
+      if (!res.ok) { setUploadError(data.error ?? 'Failed to read file.'); return }
+      setResumeText(data.text)
+      setResumeFilename(data.filename)
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: `I've read your resume (${data.filename}). I can see your experience, skills, and background. What would you like help with — feedback on how it reads, rewriting specific sections, ATS optimization, or something else?`,
+      }])
+    } catch {
+      setUploadError('Something went wrong. Please try again.')
+    } finally {
+      setUploadLoading(false)
+      if (fileInputRef.current) fileInputRef.current.value = ''
+    }
+  }
+
   async function send(text?: string) {
     const content = (text ?? input).trim()
     if (!content || loading || limitReached) return
@@ -96,7 +126,7 @@ function RecruiterPageInner() {
       const res = await fetch('/api/recruiter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: allMessages }),
+        body: JSON.stringify({ messages: allMessages, resumeContext: resumeText }),
       })
       const data = await res.json()
 
@@ -305,22 +335,40 @@ function RecruiterPageInner() {
 
         {/* Pro starter prompts — show after intro if no messages sent yet */}
         {isPro && messages.length === 1 && !loading && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, paddingLeft: 36 }}>
-            {PRO_STARTERS.map(s => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingLeft: 36 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {PRO_STARTERS.map(s => (
+                <button
+                  key={s.label}
+                  onClick={() => send(s.prompt)}
+                  style={{
+                    background: 'var(--color-background-secondary)',
+                    border: '0.5px solid var(--color-border-tertiary)',
+                    borderRadius: 20, padding: '7px 14px',
+                    fontSize: 12, cursor: 'pointer',
+                    color: 'var(--color-text-primary)',
+                  }}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
+            {!resumeFilename && (
               <button
-                key={s.label}
-                onClick={() => send(s.prompt)}
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploadLoading}
                 style={{
-                  background: 'var(--color-background-secondary)',
-                  border: '0.5px solid var(--color-border-tertiary)',
-                  borderRadius: 20, padding: '7px 14px',
-                  fontSize: 12, cursor: 'pointer',
-                  color: 'var(--color-text-primary)',
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  background: 'rgba(102,126,234,0.08)', border: '1px dashed rgba(102,126,234,0.4)',
+                  borderRadius: 10, padding: '10px 16px', fontSize: 13, fontWeight: 600,
+                  color: '#667eea', cursor: 'pointer', width: 'fit-content',
+                  opacity: uploadLoading ? 0.6 : 1,
                 }}
               >
-                {s.label}
+                <Paperclip size={14} />
+                {uploadLoading ? 'Uploading…' : 'Upload your resume for personalized coaching'}
               </button>
-            ))}
+            )}
           </div>
         )}
 
@@ -369,12 +417,33 @@ function RecruiterPageInner() {
         </div>
       ) : (
         <div style={{ padding: '12px 0 24px' }}>
+          <input ref={fileInputRef} type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style={{ display: 'none' }} onChange={handleFileUpload} />
+          {uploadError && (
+            <div style={{ fontSize: 12, color: '#ef4444', marginBottom: 8 }}>{uploadError}</div>
+          )}
+          {resumeFilename && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, background: 'rgba(102,126,234,0.08)', border: '0.5px solid rgba(102,126,234,0.3)', borderRadius: 8, padding: '6px 10px', width: 'fit-content' }}>
+              <FileText size={13} color="#667eea" />
+              <span style={{ fontSize: 12, color: '#667eea', fontWeight: 500 }}>{resumeFilename}</span>
+              <button onClick={() => { setResumeText(null); setResumeFilename(null) }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', color: '#667eea', opacity: 0.6 }}>
+                <X size={13} />
+              </button>
+            </div>
+          )}
           <div style={{
             display: 'flex', gap: 8,
             background: 'var(--color-background-secondary)',
             border: '0.5px solid var(--color-border-tertiary)',
             borderRadius: 12, padding: '8px 12px',
           }}>
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={uploadLoading}
+              title="Upload resume (PDF or DOCX)"
+              style={{ background: 'none', border: 'none', color: resumeFilename ? '#667eea' : 'var(--color-text-tertiary)', cursor: 'pointer', padding: '4px 2px', display: 'flex', alignItems: 'center', flexShrink: 0, opacity: uploadLoading ? 0.5 : 1 }}
+            >
+              <Paperclip size={17} />
+            </button>
             <textarea
               value={input}
               onChange={e => setInput(e.target.value)}
