@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 
     if (type === 'application/pdf' || name.endsWith('.pdf')) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const pdfParseModule = await import('pdf-parse') as any
+      const pdfParseModule = await import('pdf-parse/lib/pdf-parse.js') as any
       const pdfParse = pdfParseModule.default ?? pdfParseModule
       const result = await pdfParse(buffer)
       text = result.text
