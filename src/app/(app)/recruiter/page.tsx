@@ -462,7 +462,7 @@ function RecruiterPageInner() {
               onClick={() => fileInputRef.current?.click()}
               disabled={uploadLoading}
               title="Upload resume (PDF or DOCX)"
-              style={{ background: 'none', border: 'none', color: resumeFilename ? '#667eea' : 'var(--color-text-tertiary)', cursor: 'pointer', padding: '4px 2px', display: 'flex', alignItems: 'center', flexShrink: 0, opacity: uploadLoading ? 0.5 : 1 }}
+              style={{ background: 'none', border: 'none', color: resumeFilename ? '#667eea' : 'var(--color-text-secondary)', cursor: 'pointer', padding: '4px 6px', display: 'flex', alignItems: 'center', flexShrink: 0, opacity: uploadLoading ? 0.5 : 1 }}
             >
               <Paperclip size={17} />
             </button>
