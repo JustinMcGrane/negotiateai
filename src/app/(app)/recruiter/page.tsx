@@ -53,6 +53,7 @@ function RecruiterPageInner() {
   const [resumeFilename, setResumeFilename] = useState<string | null>(null)
   const [uploadLoading, setUploadLoading] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
+  const [dragOver, setDragOver] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const searchParams = useSearchParams()
@@ -354,20 +355,41 @@ function RecruiterPageInner() {
               ))}
             </div>
             {!resumeFilename && (
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                disabled={uploadLoading}
+              <div
+                onClick={() => !uploadLoading && fileInputRef.current?.click()}
+                onDragOver={e => { e.preventDefault(); setDragOver(true) }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={e => {
+                  e.preventDefault()
+                  setDragOver(false)
+                  const file = e.dataTransfer.files?.[0]
+                  if (file && fileInputRef.current) {
+                    const dt = new DataTransfer()
+                    dt.items.add(file)
+                    fileInputRef.current.files = dt.files
+                    fileInputRef.current.dispatchEvent(new Event('change', { bubbles: true }))
+                  }
+                }}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 8,
-                  background: 'rgba(102,126,234,0.08)', border: '1px dashed rgba(102,126,234,0.4)',
-                  borderRadius: 10, padding: '10px 16px', fontSize: 13, fontWeight: 600,
-                  color: '#667eea', cursor: 'pointer', width: 'fit-content',
-                  opacity: uploadLoading ? 0.6 : 1,
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                  gap: 8, background: dragOver ? 'rgba(102,126,234,0.15)' : 'rgba(102,126,234,0.06)',
+                  border: `1.5px dashed ${dragOver ? '#667eea' : 'rgba(102,126,234,0.35)'}`,
+                  borderRadius: 12, padding: '20px 24px', cursor: uploadLoading ? 'default' : 'pointer',
+                  transition: 'all 0.15s', maxWidth: 360,
                 }}
               >
-                <Paperclip size={14} />
-                {uploadLoading ? 'Uploading…' : 'Upload your resume for personalized coaching'}
-              </button>
+                <Paperclip size={18} color="#667eea" style={{ opacity: uploadLoading ? 0.5 : 1 }} />
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#667eea' }}>
+                    {uploadLoading ? 'Uploading…' : 'Upload your resume'}
+                  </div>
+                  {!uploadLoading && (
+                    <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginTop: 2 }}>
+                      Drag & drop or click to browse · PDF or DOCX
+                    </div>
+                  )}
+                </div>
+              </div>
             )}
           </div>
         )}
