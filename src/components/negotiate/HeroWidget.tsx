@@ -169,12 +169,6 @@ export function HeroWidget() {
             </div>
             <span style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', letterSpacing: '-0.01em' }}>Check My Market Value</span>
           </div>
-          <span style={{
-            fontSize: 11, color: '#64748b', fontWeight: 600,
-            background: 'rgba(255,255,255,0.05)',
-            padding: '3px 8px', borderRadius: 20,
-            border: '1px solid rgba(255,255,255,0.07)',
-          }}>↑ 3,241 this week</span>
         </div>
 
         <div style={{ padding: '22px 20px' }}>
