@@ -89,7 +89,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'Hayven',
   url: 'https://gethayven.com',
-  logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.svg', contentUrl: 'https://gethayven.com/logo.svg' },
+  logo: { '@type': 'ImageObject', url: 'https://gethayven.com/logo.svg' },
   description: 'AI-powered salary negotiation and career coaching platform.',
 }
 
@@ -98,10 +98,10 @@ const softwareSchema = {
   '@type': 'SoftwareApplication',
   name: 'Hayven',
   applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
+  operatingSystem: 'Windows, macOS, iOS, Android',
   offers: [
-    { '@type': 'Offer', price: '0', priceCurrency: 'USD', name: 'Free' },
-    { '@type': 'Offer', price: '20', priceCurrency: 'USD', name: 'Pro', priceSpecification: { '@type': 'UnitPriceSpecification', price: '20', priceCurrency: 'USD', unitText: 'MONTH' } },
+    { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    { '@type': 'Offer', price: '20', priceCurrency: 'USD' },
   ],
   description: 'Know your market rate, negotiate your salary, and build your career with AI coaching.',
   url: 'https://gethayven.com',

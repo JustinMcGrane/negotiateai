@@ -66,11 +66,12 @@ export default function RaiseCalculator() {
     return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
   }
 
-  const schema = { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Raise Calculator', url: 'https://gethayven.com/raise-calculator', applicationCategory: 'FinanceApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, description: 'Free salary raise calculator. Calculate your new salary after a percent or dollar raise.' }
+  const schema = { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Raise Calculator', url: 'https://gethayven.com/raise-calculator', applicationCategory: 'FinanceApplication', operatingSystem: 'Windows, macOS, iOS, Android', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, description: 'Free salary raise calculator. Calculate your new salary after a percent or dollar raise.' }
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <style>{`
         @media (max-width: 768px) {
           .rc-hero { padding: 48px 20px 56px !important; }

@@ -101,11 +101,11 @@ const faqSchema = {
 
 const webAppSchema = {
   '@context': 'https://schema.org',
-  '@type': 'WebApplication',
+  '@type': 'SoftwareApplication',
   name: 'Hayven AI Resume Builder',
   url: 'https://gethayven.com/resume-builder',
   applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
+  operatingSystem: 'Windows, macOS, iOS, Android',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   description: 'AI-powered resume builder with ATS scoring, bullet rewrites, and keyword gap analysis.',
 }
