@@ -44,7 +44,7 @@ export default function Article() {
 
       <div style={{ fontSize: 16, lineHeight: 1.85, color: '#334155' }}>
         <p style={{ marginBottom: 24 }}>Data science hiring has become brutally competitive. Every candidate lists Python, scikit-learn, and SQL. The resumes that stand out are the ones that show what the model did for the business — not just that a model was built. A 94% AUC is meaningless without the revenue impact, cost reduction, or decision it enabled.</p>
-        <p style={{ marginBottom: 24 }}>Here&apos;s how to structure your data scientist resume, which metrics matter, and how to frame technical work so it reads as business impact.</p>
+        <p style={{ marginBottom: 24 }}>Here&apos;s how to structure your data scientist resume, which metrics matter, and how to frame technical work so it reads as business impact. If you&apos;ve already landed an offer, see our guide on <Link href="/blog/how-to-evaluate-a-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>how to evaluate a job offer</Link> before you sign.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>The right structure for a data scientist resume</h2>
         <p style={{ marginBottom: 24 }}>Keep it to one page for under 8 years of experience. Two pages is appropriate for staff-level or ML engineers with significant production systems. Order:</p>
@@ -88,6 +88,8 @@ export default function Article() {
           <li style={{ marginBottom: 12 }}>❌ <em>Performed data analysis and created dashboards to support decision-making</em></li>
         </ul>
 
+        <p style={{ marginBottom: 24 }}>For other technical roles, see our <Link href="/blog/software-engineer-resume" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>software engineer resume guide</Link> for comparison — many of the production-signal principles apply across both disciplines.</p>
+
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Common mistakes that kill data scientist resumes</h2>
         <ul style={{ paddingLeft: 20, marginBottom: 24 }}>
           <li style={{ marginBottom: 12 }}><strong>Listing tools without context</strong> — &ldquo;Proficient in TensorFlow&rdquo; is meaningless. What did you build with it? At what scale? With what outcome?</li>
@@ -99,7 +101,7 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Get your resume scored</h2>
         <p style={{ marginBottom: 24 }}>Before you apply anywhere, run your resume through Hayven&apos;s <Link href="/resume-builder/data-scientist" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Data Scientist Resume Analyzer</Link>. It checks ATS keyword coverage for DS-specific terms, production vs. prototype framing, business impact language, and structure — then gives you a prioritized fix list.</p>
-        <p style={{ marginBottom: 24 }}>Once your resume is in shape, make sure the comp reflects what data scientists at your level and domain actually earn. Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> shows you market rate by role, city, and experience level.</p>
+        <p style={{ marginBottom: 24 }}>Once your resume is in shape, make sure the comp reflects what data scientists at your level and domain actually earn. Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> shows you market rate by role, city, and experience level. When you get an offer, use the <Link href="/offer-evaluator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Offer Evaluator</Link> to score it against benchmarks before you respond.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>
