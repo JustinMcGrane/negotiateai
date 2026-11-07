@@ -16,7 +16,6 @@ export const metadata: Metadata = {
   description: "Know your market rate. Build your strategy. Practice until you're ready.",
   icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
   metadataBase: new URL('https://gethayven.com'),
-  alternates: { canonical: '/' },
   openGraph: {
     siteName: 'Hayven',
     type: 'website',
