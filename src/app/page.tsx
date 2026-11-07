@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import s from './page.module.css'
 import {
   TrendingUp, BookOpen, Play, FileSearch,
   Calculator, DollarSign, Mail, Shield, PenLine, MessageSquare,
@@ -141,17 +142,17 @@ const faqSchema = {
 
 export default function LandingPage() {
   return (
-    <div style={{ background: '#fff', minHeight: '100vh' }}>
+    <div className={s.page}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Top announcement bar */}
-      <div style={{ background: '#0f172a', width: '100%', padding: '12px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ flex: 1, textAlign: 'center' }}>
-          <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>🏆 </span>
-          <span style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>85% of people who negotiate their salary get more money</span>
-          <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}> — are you leaving money on the table?</span>
+      <div className={s.announcementBar}>
+        <div className={s.announcementText}>
+          <span className={s.announcementEmoji}>🏆 </span>
+          <span className={s.announcementBold}>85% of people who negotiate their salary get more money</span>
+          <span className={s.announcementSub}> — are you leaving money on the table?</span>
         </div>
         <Link href="/signup" className="landing-announcement-cta" style={{ fontSize: 13, fontWeight: 600, color: '#7AB8E8', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
           Find out →
@@ -159,28 +160,14 @@ export default function LandingPage() {
       </div>
 
       {/* Header */}
-      <header className="landing-header" style={{
-        borderBottom: '0.5px solid #e5e7eb',
-        padding: '0 32px', height: 60,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        position: 'sticky', top: 0, background: '#fff', zIndex: 50,
-      }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+      <header className={`landing-header ${s.header}`}>
+        <Link href="/" className={s.headerLogo}>
           <Image src="/logo.svg" alt="Hayven" width={190} height={52} style={{ objectFit: 'contain' }} priority />
         </Link>
         <LandingNav />
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
-            Sign in
-          </Link>
-          <Link href="/signup" style={{
-            fontSize: 14, fontWeight: 700,
-            background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-            color: '#fff',
-            textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
-            display: 'flex', alignItems: 'center', gap: 6,
-            boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
-          }}>
+        <div className={s.headerActions}>
+          <Link href="/login" prefetch={true} className={s.signIn}>Sign in</Link>
+          <Link href="/signup" className={s.getStarted}>
             Get Started Free <ArrowRight size={14} />
           </Link>
         </div>
@@ -188,41 +175,34 @@ export default function LandingPage() {
 
       <main>
       {/* Hero */}
-      <section style={{ maxWidth: 1140, margin: '0 auto', padding: '72px 40px 80px' }} className="landing-hero landing-section-pad">
-        {/* Centered headline */}
-        <div style={{ textAlign: 'center', marginBottom: 56 }}>
-          <h1 style={{ fontWeight: 900, lineHeight: 1.0, letterSpacing: '-0.04em', marginBottom: 16, color: '#0f172a', fontSize: 'clamp(56px, 8vw, 96px)' }}>
-            Are You Underpaid?
-          </h1>
-          <p style={{ fontSize: 'clamp(20px, 2.5vw, 32px)', fontWeight: 700, color: '#2952CC', letterSpacing: '-0.02em' }}>Find out in 30 seconds — free.</p>
+      <section className={`landing-hero landing-section-pad ${s.heroSection}`}>
+        <div className={s.heroHeadline}>
+          <h1 className={s.heroH1}>Are You Underpaid?</h1>
+          <p className={s.heroSubtitle}>Find out in 30 seconds — free.</p>
         </div>
-
-        {/* Widget centered */}
-        <div style={{ maxWidth: 480, margin: '0 auto' }}>
+        <div className={s.heroWidgetWrap}>
           <HeroWidget />
         </div>
       </section>
 
       {/* Testimonial — Israel */}
-      <section style={{ padding: '72px 40px', background: '#fff', borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9' }}>
-        <div style={{ maxWidth: 760, margin: '0 auto' }}>
-          <div className="landing-testimonial-card" style={{ background: 'linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%)', borderRadius: 20, padding: '48px 56px', position: 'relative', boxShadow: '0 4px 24px rgba(74,144,217,0.08)' }}>
-            {/* Large quote mark */}
-            <div className="landing-testimonial-quote" style={{ position: 'absolute', top: 28, left: 40, fontSize: 80, color: '#4A90D9', lineHeight: 1, fontFamily: 'Georgia, serif', opacity: 0.25, userSelect: 'none' }}>&ldquo;</div>
-            {/* Stars */}
-            <div style={{ display: 'flex', gap: 4, marginBottom: 20 }}>
+      <section className={s.testimonialSection}>
+        <div className={s.testimonialInner}>
+          <div className="landing-testimonial-card landing-testimonial-card-inner">
+            <div className="landing-testimonial-quote landing-testimonial-quote-mark">&ldquo;</div>
+            <div className="testimonial-stars">
               {[1,2,3,4,5].map(i => (
                 <svg key={i} width="18" height="18" viewBox="0 0 20 20" fill="#F59E0B"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
               ))}
             </div>
-            <p style={{ fontSize: 20, color: '#1e293b', lineHeight: 1.8, fontWeight: 400, margin: '0 0 32px', position: 'relative', zIndex: 1 }}>
+            <p className="testimonial-quote-text">
               &ldquo;I really like that Sarah made my resume analysis experience personalized — it felt like I was actually talking to a real human being and that&apos;s unique. She even created a tailored plan for me to get to my salary goal with outlined steps and a specific plan. This truly helped me feel confident for my next interview. Thanks Hayven!&rdquo;
             </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'linear-gradient(135deg, #4A90D9 0%, #2952CC 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 700, color: '#fff', flexShrink: 0, boxShadow: '0 2px 8px rgba(74,144,217,0.35)' }}>I</div>
+            <div className="testimonial-author">
+              <div className="testimonial-avatar">I</div>
               <div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a' }}>Israel</div>
-                <div style={{ fontSize: 13, color: '#64748b', marginTop: 2 }}>Software Engineer &mdash; Hayven user</div>
+                <div className="testimonial-name">Israel</div>
+                <div className="testimonial-role">Software Engineer &mdash; Hayven user</div>
               </div>
             </div>
           </div>
@@ -255,16 +235,12 @@ export default function LandingPage() {
       `}</style>
 
       {/* Logo strip */}
-      <div style={{ borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', padding: '24px 40px', background: '#fafbfc' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.08em', textAlign: 'center', marginBottom: 16 }}>USED BY PROFESSIONALS AT</div>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+      <div className={s.logoStrip}>
+        <div className={s.logoStripInner}>
+          <div className={s.logoStripLabel}>USED BY PROFESSIONALS AT</div>
+          <div className={s.logoStripRow}>
             {LOGOS.map(({ name, color }) => (
-              <div key={name} style={{
-                background: '#fff', border: '1px solid #e8edf3', borderRadius: 10,
-                padding: '10px 20px', fontSize: 14, fontWeight: 700, color,
-                boxShadow: '0 1px 4px rgba(0,0,0,0.04)', letterSpacing: '-0.01em',
-              }}>{name}</div>
+              <div key={name} className={s.logoItem} style={{ color }}>{name}</div>
             ))}
           </div>
         </div>
@@ -273,35 +249,22 @@ export default function LandingPage() {
       <LandingSarahWidget />
 
       {/* Career Hub */}
-      <section id="features" style={{ padding: '96px 40px' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <div style={{ marginBottom: 64 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#4A90D9', letterSpacing: '0.1em', marginBottom: 12 }}>CAREER HUB</div>
-            <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', margin: '0 0 16px' }}>
-              Everything you need to land the job
-            </h2>
-            <p style={{ fontSize: 16, color: '#64748b', maxWidth: 500, lineHeight: 1.7 }}>
-              From finding the right roles to submitting a polished application — all in one place.
-            </p>
+      <section id="features" className={s.careerHubSection}>
+        <div className={s.careerHubInner}>
+          <div className={s.sectionHeader}>
+            <div className={s.sectionBadge}>CAREER HUB</div>
+            <h2 className={s.sectionTitle}>Everything you need to land the job</h2>
+            <p className={s.sectionDesc}>From finding the right roles to submitting a polished application — all in one place.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(420px, 100%), 1fr))', gap: '4px 40px' }}>
+          <div className={s.featureGrid}>
             {careerFeatures.map(({ icon: Icon, color, name, desc }) => (
-              <div key={name} style={{
-                display: 'flex', gap: 24, alignItems: 'flex-start',
-                padding: '28px 0',
-                borderBottom: '1px solid #f1f5f9',
-              }}>
-                <div style={{
-                  width: 64, height: 64, borderRadius: '50%',
-                  background: '#f1f5f9',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0,
-                }}>
+              <div key={name} className={s.featureRow}>
+                <div className={s.featureIconWrap}>
                   <Icon size={26} color={color} />
                 </div>
-                <div style={{ paddingTop: 6 }}>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>{name}</div>
-                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{desc}</div>
+                <div className={s.featureContent}>
+                  <div className={s.featureName}>{name}</div>
+                  <div className={s.featureDesc}>{desc}</div>
                 </div>
               </div>
             ))}
@@ -310,35 +273,22 @@ export default function LandingPage() {
       </section>
 
       {/* Negotiation tools */}
-      <section style={{ padding: '96px 40px', background: '#f8fafc' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <div style={{ marginBottom: 64 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#4A90D9', letterSpacing: '0.1em', marginBottom: 12 }}>NEGOTIATION SUITE</div>
-            <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', margin: '0 0 16px' }}>
-              Get paid what you&apos;re worth
-            </h2>
-            <p style={{ fontSize: 16, color: '#64748b', maxWidth: 480, lineHeight: 1.7 }}>
-              10 tools to know your market rate, build your strategy, and practice until you&apos;re ready.
-            </p>
+      <section className={s.toolsSection}>
+        <div className={s.toolsInner}>
+          <div className={s.sectionHeader}>
+            <div className={s.sectionBadge}>NEGOTIATION SUITE</div>
+            <h2 className={s.sectionTitle}>Get paid what you&apos;re worth</h2>
+            <p className={s.sectionDesc}>10 tools to know your market rate, build your strategy, and practice until you&apos;re ready.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(420px, 100%), 1fr))', gap: '4px 40px' }}>
+          <div className={s.featureGrid}>
             {negotiationTools.map(({ icon: Icon, name, desc }) => (
-              <div key={name} style={{
-                display: 'flex', gap: 24, alignItems: 'flex-start',
-                padding: '28px 0',
-                borderBottom: '1px solid #e9eef4',
-              }}>
-                <div style={{
-                  width: 64, height: 64, borderRadius: '50%',
-                  background: '#eef2f7',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0,
-                }}>
+              <div key={name} className={s.toolRow}>
+                <div className={s.toolIconWrap}>
                   <Icon size={26} color="#475569" />
                 </div>
-                <div style={{ paddingTop: 6 }}>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>{name}</div>
-                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{desc}</div>
+                <div className={s.featureContent}>
+                  <div className={s.featureName}>{name}</div>
+                  <div className={s.featureDesc}>{desc}</div>
                 </div>
               </div>
             ))}
@@ -347,49 +297,28 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      <section style={{ padding: '96px 40px', background: '#f8fafc' }}>
-        <div style={{ maxWidth: 480, margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ fontSize: 12, fontWeight: 700, color: '#4A90D9', letterSpacing: '0.12em', marginBottom: 16 }}>PRICING</div>
-          <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', margin: '0 0 48px' }}>Simple, transparent pricing</h2>
+      <section className={s.pricingSection}>
+        <div className={s.pricingInner}>
+          <div className={s.pricingBadge}>PRICING</div>
+          <h2 className={s.pricingTitle}>Simple, transparent pricing</h2>
 
-          {/* Pricing card */}
-          <div style={{
-            background: '#fff',
-            border: '1px solid #e2e8f0',
-            borderRadius: 20,
-            padding: '40px 36px',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
-            textAlign: 'left',
-          }}>
-            <div style={{ fontSize: 11, fontWeight: 800, color: '#10b981', letterSpacing: '0.12em', marginBottom: 20 }}>
-              PRO PLAN
-            </div>
-            <div style={{ fontSize: 52, fontWeight: 900, color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 8 }}>
-              $20 <span style={{ fontSize: 18, fontWeight: 400, color: '#94a3b8' }}>/month</span>
-            </div>
-            <div style={{ fontSize: 15, color: '#475569', marginBottom: 6 }}>Full unlimited access to everything.</div>
-            <div style={{ fontSize: 13, color: '#94a3b8', marginBottom: 32 }}>Free to start · Cancel anytime.</div>
+          <div className={s.pricingCard}>
+            <div className={s.pricingPlan}>PRO PLAN</div>
+            <div className={s.pricingAmount}>$20 <span className={s.pricingAmountSuffix}>/month</span></div>
+            <div className={s.pricingSubtitle}>Full unlimited access to everything.</div>
+            <div className={s.pricingNote}>Free to start · Cancel anytime.</div>
 
-            <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: 24, display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 32 }}>
+            <div className={s.pricingFeatures}>
               {proFeatures.map(f => (
-                <div key={f} style={{ fontSize: 14, color: '#334155', display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div key={f} className={s.pricingFeatureItem}>
                   <CheckCircle size={15} color="#16a34a" style={{ flexShrink: 0 }} />
                   {f}
                 </div>
               ))}
             </div>
 
-            <Link href="/signup" style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              height: 52,
-              background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-              borderRadius: 12,
-              fontSize: 15, textDecoration: 'none', color: '#fff', fontWeight: 700,
-              boxShadow: '0 4px 20px rgba(239,68,68,0.25)',
-            }}>
-              Get Started Free
-            </Link>
-            <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 12, textAlign: 'center' }}>Cancel anytime. No commitment.</div>
+            <Link href="/signup" className={s.pricingCta}>Get Started Free</Link>
+            <div className={s.pricingCtaNote}>Cancel anytime. No commitment.</div>
           </div>
         </div>
       </section>
@@ -397,128 +326,103 @@ export default function LandingPage() {
       <FAQ />
 
       {/* Resume Cards Section */}
-      <section style={{ padding: '96px 40px', background: '#f8fafc' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 38px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', marginBottom: 14 }}>
-              Resume guides by role
-            </h2>
-            <p style={{ fontSize: 17, color: '#64748b', maxWidth: 520, margin: '0 auto', lineHeight: 1.7 }}>
+      <section className={s.resumeSection}>
+        <div className={s.resumeInner}>
+          <div className={s.resumeHeader}>
+            <h2 className={s.resumeTitle}>Resume guides by role</h2>
+            <p className={s.resumeDesc}>
               Step-by-step resume breakdowns for the roles that matter most — with real examples and the exact metrics hiring managers want to see.
             </p>
           </div>
           <div className="landing-resume-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))', gap: 24 }}>
 
             {/* Software Engineer */}
-            <Link href="/blog/software-engineer-resume" style={{ textDecoration: 'none' }}>
-              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 16, overflow: 'hidden', transition: 'box-shadow 0.2s', cursor: 'pointer' }}>
-                {/* Mini Resume Mockup */}
-                <div style={{ background: '#1e293b', padding: '24px 20px', position: 'relative' }}>
-                  <div style={{ background: '#fff', borderRadius: 8, padding: '16px 14px', fontSize: 9, lineHeight: 1.6, color: '#334155', fontFamily: 'monospace' }}>
-                    <div style={{ fontWeight: 800, fontSize: 11, color: '#0f172a', marginBottom: 2 }}>Jordan Lee</div>
-                    <div style={{ color: '#64748b', marginBottom: 8, fontSize: 8 }}>jordan@email.com · github.com/jlee · linkedin.com/in/jlee</div>
-                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6, marginBottom: 6 }}>
-                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Skills</div>
-                      <div style={{ color: '#475569' }}>Python · TypeScript · React · Node.js · AWS · Docker · Postgres</div>
-                    </div>
-                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6, marginBottom: 6 }}>
-                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Experience</div>
-                      <div style={{ fontWeight: 700, fontSize: 9, color: '#0f172a' }}>Senior Software Engineer · Stripe</div>
-                      <div style={{ color: '#64748b', marginBottom: 4, fontSize: 8 }}>2022 – Present</div>
-                      <div style={{ color: '#475569' }}>• Reduced API latency by 40%, cutting p99 from 800ms to 480ms</div>
-                      <div style={{ color: '#475569' }}>• Built real-time pipeline processing 2M events/day with Kafka</div>
-                    </div>
-                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6 }}>
-                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Education</div>
-                      <div style={{ color: '#475569' }}>B.S. Computer Science · UC Berkeley · 2020</div>
-                    </div>
+            <Link href="/blog/software-engineer-resume" className={s.resumeCard}>
+              <div className={s.resumeCardMockup}>
+                <div className={s.resumeCardMockupInner}>
+                  <div className={s.mockName}>Jordan Lee</div>
+                  <div className={s.mockMeta}>jordan@email.com · github.com/jlee · linkedin.com/in/jlee</div>
+                  <div className={s.mockDivider}>
+                    <div className={s.mockLabel}>Skills</div>
+                    <div className={s.mockText}>Python · TypeScript · React · Node.js · AWS · Docker · Postgres</div>
                   </div>
-                  <div style={{ position: 'absolute', top: 12, right: 12, background: '#6366f1', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20 }}>
-                    ATS ✓
+                  <div className={s.mockDivider}>
+                    <div className={s.mockLabel}>Experience</div>
+                    <div className={s.mockJobTitle}>Senior Software Engineer · Stripe</div>
+                    <div className={s.mockDate}>2022 – Present</div>
+                    <div className={s.mockText}>• Reduced API latency by 40%, cutting p99 from 800ms to 480ms</div>
+                    <div className={s.mockText}>• Built real-time pipeline processing 2M events/day with Kafka</div>
+                  </div>
+                  <div className={s.mockDivider}>
+                    <div className={s.mockLabel}>Education</div>
+                    <div className={s.mockText}>B.S. Computer Science · UC Berkeley · 2020</div>
                   </div>
                 </div>
-                <div style={{ padding: '20px 22px 24px' }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: '#6366f1', marginBottom: 6 }}>Software Engineer</div>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>Resume guide & examples</div>
-                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6, marginBottom: 16 }}>How to structure your tech stack, write impact-driven bullets, and pass ATS screening.</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 600, color: '#6366f1' }}>
-                    Read guide <ArrowRight size={14} />
-                  </div>
-                </div>
+                <div className={s.resumeCardBadge} style={{ background: '#6366f1' }}>ATS ✓</div>
+              </div>
+              <div className={s.resumeCardBody}>
+                <div style={{ fontSize: 13, fontWeight: 600, color: '#6366f1', marginBottom: 6 }}>Software Engineer</div>
+                <div className={s.resumeCardTitle}>Resume guide &amp; examples</div>
+                <div className={s.resumeCardDesc}>How to structure your tech stack, write impact-driven bullets, and pass ATS screening.</div>
+                <div className={s.resumeCardLink} style={{ color: '#6366f1' }}>Read guide <ArrowRight size={14} /></div>
               </div>
             </Link>
 
             {/* Account Executive */}
-            <Link href="/blog/account-executive-resume" style={{ textDecoration: 'none' }}>
-              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 16, overflow: 'hidden', cursor: 'pointer' }}>
-                <div style={{ background: '#1e293b', padding: '24px 20px', position: 'relative' }}>
-                  <div style={{ background: '#fff', borderRadius: 8, padding: '16px 14px', fontSize: 9, lineHeight: 1.6, color: '#334155', fontFamily: 'monospace' }}>
-                    <div style={{ fontWeight: 800, fontSize: 11, color: '#0f172a', marginBottom: 2 }}>Morgan Chen</div>
-                    <div style={{ color: '#64748b', marginBottom: 8, fontSize: 8 }}>morgan@email.com · linkedin.com/in/mchen</div>
-                    <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 4, padding: '4px 8px', marginBottom: 8, fontSize: 8, color: '#166534' }}>
-                      Mid-market SaaS AE · 5 yrs · Avg 118% quota · $30K–$150K ACV
-                    </div>
-                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6, marginBottom: 6 }}>
-                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Experience</div>
-                      <div style={{ fontWeight: 700, fontSize: 9, color: '#0f172a' }}>Account Executive · Salesforce</div>
-                      <div style={{ color: '#64748b', marginBottom: 4, fontSize: 8 }}>2021 – Present</div>
-                      <div style={{ color: '#475569' }}>• Closed $2.4M ARR in FY2024 at 127% quota — #2 of 18 AEs</div>
-                      <div style={{ color: '#475569' }}>• Self-sourced 60% of pipeline, averaging 4 SQLs/week</div>
-                    </div>
-                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6 }}>
-                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Tools</div>
-                      <div style={{ color: '#475569' }}>Salesforce · Outreach · Gong · MEDDIC · LinkedIn SN</div>
-                    </div>
+            <Link href="/blog/account-executive-resume" className={s.resumeCard}>
+              <div className={s.resumeCardMockup}>
+                <div className={s.resumeCardMockupInner}>
+                  <div className={s.mockName}>Morgan Chen</div>
+                  <div className={s.mockMeta}>morgan@email.com · linkedin.com/in/mchen</div>
+                  <div className={s.mockHighlightGreen}>Mid-market SaaS AE · 5 yrs · Avg 118% quota · $30K–$150K ACV</div>
+                  <div className={s.mockDivider}>
+                    <div className={s.mockLabel}>Experience</div>
+                    <div className={s.mockJobTitle}>Account Executive · Salesforce</div>
+                    <div className={s.mockDate}>2021 – Present</div>
+                    <div className={s.mockText}>• Closed $2.4M ARR in FY2024 at 127% quota — #2 of 18 AEs</div>
+                    <div className={s.mockText}>• Self-sourced 60% of pipeline, averaging 4 SQLs/week</div>
                   </div>
-                  <div style={{ position: 'absolute', top: 12, right: 12, background: '#059669', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20 }}>
-                    127% ✓
+                  <div className={s.mockDivider}>
+                    <div className={s.mockLabel}>Tools</div>
+                    <div className={s.mockText}>Salesforce · Outreach · Gong · MEDDIC · LinkedIn SN</div>
                   </div>
                 </div>
-                <div style={{ padding: '20px 22px 24px' }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: '#059669', marginBottom: 6 }}>Account Executive</div>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>Resume guide & examples</div>
-                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6, marginBottom: 16 }}>How to show quota attainment, deal size, and pipeline metrics in a way that lands interviews.</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 600, color: '#059669' }}>
-                    Read guide <ArrowRight size={14} />
-                  </div>
-                </div>
+                <div className={s.resumeCardBadge} style={{ background: '#059669' }}>127% ✓</div>
+              </div>
+              <div className={s.resumeCardBody}>
+                <div style={{ fontSize: 13, fontWeight: 600, color: '#059669', marginBottom: 6 }}>Account Executive</div>
+                <div className={s.resumeCardTitle}>Resume guide &amp; examples</div>
+                <div className={s.resumeCardDesc}>How to show quota attainment, deal size, and pipeline metrics in a way that lands interviews.</div>
+                <div className={s.resumeCardLink} style={{ color: '#059669' }}>Read guide <ArrowRight size={14} /></div>
               </div>
             </Link>
 
             {/* Marketing Manager */}
-            <Link href="/blog/marketing-manager-resume" style={{ textDecoration: 'none' }}>
-              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 16, overflow: 'hidden', cursor: 'pointer' }}>
-                <div style={{ background: '#1e293b', padding: '24px 20px', position: 'relative' }}>
-                  <div style={{ background: '#fff', borderRadius: 8, padding: '16px 14px', fontSize: 9, lineHeight: 1.6, color: '#334155', fontFamily: 'monospace' }}>
-                    <div style={{ fontWeight: 800, fontSize: 11, color: '#0f172a', marginBottom: 2 }}>Alex Rivera</div>
-                    <div style={{ color: '#64748b', marginBottom: 8, fontSize: 8 }}>alex@email.com · linkedin.com/in/arivera</div>
-                    <div style={{ background: '#fef9c3', border: '1px solid #fef08a', borderRadius: 4, padding: '4px 8px', marginBottom: 8, fontSize: 8, color: '#713f12' }}>
-                      Demand gen · B2B SaaS · 6 yrs · $800K budget ownership
-                    </div>
-                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6, marginBottom: 6 }}>
-                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Experience</div>
-                      <div style={{ fontWeight: 700, fontSize: 9, color: '#0f172a' }}>Marketing Manager · HubSpot</div>
-                      <div style={{ color: '#64748b', marginBottom: 4, fontSize: 8 }}>2020 – Present</div>
-                      <div style={{ color: '#475569' }}>• Drove $4.2M in pipeline via 6-channel demand gen program</div>
-                      <div style={{ color: '#475569' }}>• Grew organic traffic 8K → 47K/mo in 14 months via SEO</div>
-                    </div>
-                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 6 }}>
-                      <div style={{ fontWeight: 700, fontSize: 8, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>Tools</div>
-                      <div style={{ color: '#475569' }}>HubSpot · Marketo · GA4 · Semrush · LinkedIn Ads</div>
-                    </div>
+            <Link href="/blog/marketing-manager-resume" className={s.resumeCard}>
+              <div className={s.resumeCardMockup}>
+                <div className={s.resumeCardMockupInner}>
+                  <div className={s.mockName}>Alex Rivera</div>
+                  <div className={s.mockMeta}>alex@email.com · linkedin.com/in/arivera</div>
+                  <div className={s.mockHighlightYellow}>Demand gen · B2B SaaS · 6 yrs · $800K budget ownership</div>
+                  <div className={s.mockDivider}>
+                    <div className={s.mockLabel}>Experience</div>
+                    <div className={s.mockJobTitle}>Marketing Manager · HubSpot</div>
+                    <div className={s.mockDate}>2020 – Present</div>
+                    <div className={s.mockText}>• Drove $4.2M in pipeline via 6-channel demand gen program</div>
+                    <div className={s.mockText}>• Grew organic traffic 8K → 47K/mo in 14 months via SEO</div>
                   </div>
-                  <div style={{ position: 'absolute', top: 12, right: 12, background: '#d97706', color: '#fff', fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 20 }}>
-                    3.4x ROAS ✓
+                  <div className={s.mockDivider}>
+                    <div className={s.mockLabel}>Tools</div>
+                    <div className={s.mockText}>HubSpot · Marketo · GA4 · Semrush · LinkedIn Ads</div>
                   </div>
                 </div>
-                <div style={{ padding: '20px 22px 24px' }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: '#d97706', marginBottom: 6 }}>Marketing Manager</div>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>Resume guide & examples</div>
-                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6, marginBottom: 16 }}>How to show campaign results, budget ownership, and channel impact — not just buzzwords.</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 600, color: '#d97706' }}>
-                    Read guide <ArrowRight size={14} />
-                  </div>
-                </div>
+                <div className={s.resumeCardBadge} style={{ background: '#d97706' }}>3.4x ROAS ✓</div>
+              </div>
+              <div className={s.resumeCardBody}>
+                <div style={{ fontSize: 13, fontWeight: 600, color: '#d97706', marginBottom: 6 }}>Marketing Manager</div>
+                <div className={s.resumeCardTitle}>Resume guide &amp; examples</div>
+                <div className={s.resumeCardDesc}>How to show campaign results, budget ownership, and channel impact — not just buzzwords.</div>
+                <div className={s.resumeCardLink} style={{ color: '#d97706' }}>Read guide <ArrowRight size={14} /></div>
               </div>
             </Link>
 
@@ -527,49 +431,40 @@ export default function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: '#EBF5FB', borderTop: '1px solid #EBF5FB', borderBottom: '1px solid #EBF5FB', padding: '96px 40px', textAlign: 'center' }}>
-        <div style={{ maxWidth: 540, margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 42px)', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.025em', marginBottom: 16 }}>
-            Find out what you&apos;re worth.
-          </h2>
-          <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.7, marginBottom: 36 }}>
+      <section className={s.ctaSection}>
+        <div className={s.ctaInner}>
+          <h2 className={s.ctaTitle}>Find out what you&apos;re worth.</h2>
+          <p className={s.ctaDesc}>
             Sarah will tell you your market rate, what&apos;s holding you back, and exactly what to do next.
           </p>
-          <Link href="#check-market-value" style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: '#2D6EA8', color: '#fff',
-            padding: '15px 36px', borderRadius: 10,
-            fontSize: 16, fontWeight: 700, textDecoration: 'none',
-          }}>
+          <Link href="#check-market-value" className={s.ctaBtn}>
             See my market value <ArrowRight size={16} />
           </Link>
-          <div style={{ marginTop: 14, fontSize: 13, color: '#94a3b8' }}>Free to start · $20/month after · Cancel anytime.</div>
+          <div className={s.ctaSmallNote}>Free to start · $20/month after · Cancel anytime.</div>
         </div>
       </section>
 
       </main>
       {/* Footer */}
-      <footer style={{ borderTop: '1px solid #e2e8f0', padding: '48px 40px 36px' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 32, marginBottom: 40 }}>
-            <div>
+      <footer className={s.footer}>
+        <div className={s.footerInner}>
+          <div className={s.footerTop}>
+            <div className={s.footerBrand}>
               <Image src="/logo.svg" alt="Hayven" width={130} height={36} style={{ objectFit: 'contain', marginBottom: 12 }} />
-              <div style={{ fontSize: 13, color: '#94a3b8', maxWidth: 260, lineHeight: 1.6 }}>
-                AI-powered career and salary negotiation tools for professionals who want to get paid what they&apos;re worth.
-              </div>
+              <div>AI-powered career and salary negotiation tools for professionals who want to get paid what they&apos;re worth.</div>
             </div>
-            <div style={{ display: 'flex', gap: 56, flexWrap: 'wrap' }}>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>PRODUCT</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div className={s.footerLinks}>
+              <div className={s.footerCol}>
+                <div className={s.footerColTitle}>PRODUCT</div>
+                <div className={s.footerColLinks}>
                   {[{ href: '/signup', label: 'Get started' }, { href: '/login', label: 'Sign in' }, { href: '/#features', label: 'Features' }, { href: '/sarah', label: 'Career Coach' }].map(({ href, label }) => (
-                    <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+                    <Link key={href} href={href} className={s.footerLink}>{label}</Link>
                   ))}
                 </div>
               </div>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>TOOLS</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div className={s.footerCol}>
+                <div className={s.footerColTitle}>TOOLS</div>
+                <div className={s.footerColLinks}>
                   {[
                     { href: '/compensation-analyzer', label: 'Compensation Analyzer' },
                     { href: '/negotiation-simulator', label: 'Negotiation Simulator' },
@@ -590,13 +485,13 @@ export default function LandingPage() {
                     { href: '/resume-skills', label: 'Resume Skills' },
                     { href: '/tools/salaries', label: 'Salary Guides' },
                   ].map(({ href, label }) => (
-                    <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+                    <Link key={href} href={href} className={s.footerLink}>{label}</Link>
                   ))}
                 </div>
               </div>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>GUIDES</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div className={s.footerCol}>
+                <div className={s.footerColTitle}>GUIDES</div>
+                <div className={s.footerColLinks}>
                   {[
                     { href: '/salary-negotiation', label: 'Salary Negotiation' },
                     { href: '/how-to-ask-for-a-raise', label: 'How to Ask for a Raise' },
@@ -607,27 +502,27 @@ export default function LandingPage() {
                     { href: '/blog/software-engineer-resume', label: 'Software Engineer Resume' },
                     { href: '/blog/product-manager-resume', label: 'Product Manager Resume' },
                   ].map(({ href, label }) => (
-                    <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+                    <Link key={href} href={href} className={s.footerLink}>{label}</Link>
                   ))}
                 </div>
               </div>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>LEGAL</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div className={s.footerCol}>
+                <div className={s.footerColTitle}>LEGAL</div>
+                <div className={s.footerColLinks}>
                   {[{ href: '/privacy', label: 'Privacy Policy' }, { href: '/terms', label: 'Terms of Service' }].map(({ href, label }) => (
-                    <Link key={href} href={href} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+                    <Link key={href} href={href} className={s.footerLink}>{label}</Link>
                   ))}
                 </div>
               </div>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f172a', letterSpacing: '0.05em', marginBottom: 14 }}>SUPPORT</div>
-                <a href="mailto:GetHayven@gmail.com" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>GetHayven@gmail.com</a>
+              <div className={s.footerCol}>
+                <div className={s.footerColTitle}>SUPPORT</div>
+                <a href="mailto:GetHayven@gmail.com" className={s.footerLink}>GetHayven@gmail.com</a>
               </div>
             </div>
           </div>
-          <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-            <div style={{ fontSize: 12, color: '#94a3b8' }}>© {new Date().getFullYear()} Hayven. All rights reserved.</div>
-            <div style={{ fontSize: 12, color: '#94a3b8' }}>AI-generated guidance for informational purposes only. Results may vary.</div>
+          <div className={s.footerBottom}>
+            <div className={s.footerCopy}>© {new Date().getFullYear()} Hayven. All rights reserved.</div>
+            <div className={s.footerCopy}>AI-generated guidance for informational purposes only. Results may vary.</div>
             <a href="https://launchaf.com/" target="_blank" rel="noopener" data-launchaf-badge="true">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="https://launchaf.com/api/badge/light?v=launchaf-blue-2026-2" alt="Featured on LaunchAF" width={200} height={56} />

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { ArrowRight, CheckCircle, FileText, Zap, Target } from 'lucide-react'
 import { LandingNav } from '@/components/negotiate/LandingNav'
 import { TemplatesTabs } from '@/components/resume-builder/TemplatesTabs'
+import s from './resume-builder.module.css'
 
 export const metadata: Metadata = {
   title: 'Free AI Resume Builder — ATS Score, Bullet Rewrites & Feedback | Hayven',
@@ -112,71 +113,39 @@ const webAppSchema = {
 
 export default function ResumeBuilderPage() {
   return (
-    <div style={{ background: '#fff', minHeight: '100vh' }}>
+    <div className={s.page}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }} />
 
       {/* Header */}
-      <header style={{
-        borderBottom: '0.5px solid #e5e7eb',
-        padding: '0 32px', height: 60,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        position: 'sticky', top: 0, background: '#fff', zIndex: 50,
-      }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+      <header className={s.header}>
+        <Link href="/" className={s.headerLogo}>
           <Image src="/logo.svg" alt="Hayven" width={190} height={52} style={{ objectFit: 'contain' }} priority />
         </Link>
         <LandingNav />
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Link href="/login" prefetch={true} style={{ fontSize: 14, color: '#6b7280', textDecoration: 'none', padding: '7px 14px' }}>
-            Sign in
-          </Link>
-          <Link href="/signup" style={{
-            fontSize: 14, fontWeight: 700,
-            background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-            color: '#fff',
-            textDecoration: 'none', padding: '8px 18px', borderRadius: 8,
-            display: 'flex', alignItems: 'center', gap: 6,
-            boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
-          }}>Get Started Free <ArrowRight size={14} /></Link>
+        <div className={s.headerActions}>
+          <Link href="/login" prefetch={true} className={s.signIn}>Sign in</Link>
+          <Link href="/signup" className={s.getStarted}>Get Started Free <ArrowRight size={14} /></Link>
         </div>
       </header>
 
       {/* Hero */}
-      <section style={{ maxWidth: 900, margin: '0 auto', padding: '56px 24px 72px', textAlign: 'center' }}>
-        <h1 style={{
-          fontSize: 'clamp(36px, 6.5vw, 76px)',
-          fontWeight: 800, lineHeight: 1.12,
-          letterSpacing: '-0.03em', marginBottom: 24, color: '#0f172a',
-          whiteSpace: 'nowrap',
-        }}>
+      <section className={s.hero}>
+        <h1 className={s.heroTitle}>
           Your resume, reviewed<br />
-          <span style={{ color: '#4169E1' }}>the way recruiters see it.</span>
+          <span className={s.heroTitleAccent}>the way recruiters see it.</span>
         </h1>
-
-        <p style={{
-          fontSize: 18, color: '#475569', lineHeight: 1.7,
-          maxWidth: 560, margin: '0 auto 40px',
-        }}>
+        <p className={s.heroDesc}>
           Get honest, recruiter-grade feedback on your resume — ATS score, section-by-section breakdown, rewritten bullets, and a clear action plan.
         </p>
-
-        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48 }}>
-          <Link href="/signup" style={{
-            height: 48, display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '0 28px',
-            background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-            color: '#fff',
-            borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
-            boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
-          }}>
+        <div className={s.heroCtas}>
+          <Link href="/signup" className={s.heroPrimaryBtn}>
             Get Started Free <ArrowRight size={15} />
           </Link>
         </div>
-
-        <div style={{ display: 'flex', gap: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div className={s.heroBadges}>
           {['No account required to try', 'Results in under 30 seconds', '100% free to start'].map(t => (
-            <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#64748b' }}>
+            <div key={t} className={s.heroBadgeItem}>
               <CheckCircle size={14} color="#16a34a" />
               {t}
             </div>
@@ -185,20 +154,16 @@ export default function ResumeBuilderPage() {
       </section>
 
       {/* Benefits */}
-      <section style={{ background: '#f8fafc', borderTop: '0.5px solid #e5e7eb', borderBottom: '0.5px solid #e5e7eb', padding: '72px 24px' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', textAlign: 'center', marginBottom: 12 }}>
-            Not a resume template. A resume coach.
-          </h2>
-          <p style={{ fontSize: 16, color: '#64748b', textAlign: 'center', marginBottom: 56, maxWidth: 520, margin: '0 auto 56px' }}>
-            Most resume tools just format your words. We tell you what's wrong and how to fix it.
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 24 }}>
+      <section className={s.benefitsSection}>
+        <div className={s.sectionInner}>
+          <h2 className={s.sectionTitle}>Not a resume template. A resume coach.</h2>
+          <p className={s.sectionDesc}>Most resume tools just format your words. We tell you what&apos;s wrong and how to fix it.</p>
+          <div className={s.benefitsGrid}>
             {benefits.map(b => (
-              <div key={b.title} style={{ background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 14, padding: '28px 24px' }}>
+              <div key={b.title} className={s.benefitCard}>
                 <b.icon size={18} color="#94a3b8" style={{ marginBottom: 16 }} />
-                <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>{b.title}</div>
-                <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{b.desc}</div>
+                <div className={s.benefitTitle}>{b.title}</div>
+                <div className={s.benefitDesc}>{b.desc}</div>
               </div>
             ))}
           </div>
@@ -206,17 +171,15 @@ export default function ResumeBuilderPage() {
       </section>
 
       {/* How it works */}
-      <section style={{ maxWidth: 800, margin: '0 auto', padding: '72px 24px' }}>
-        <h2 style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', textAlign: 'center', marginBottom: 56 }}>
-          How it works
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-          {steps.map((s, i) => (
-            <div key={s.number} style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-              <div style={{ fontSize: 13, fontWeight: 800, color: '#94a3b8', minWidth: 32, paddingTop: 2 }}>{s.number}</div>
+      <section className={s.howSection}>
+        <h2 className={s.howTitle}>How it works</h2>
+        <div className={s.stepList}>
+          {steps.map((step, i) => (
+            <div key={step.number} className={s.stepRow}>
+              <div className={s.stepNum}>{step.number}</div>
               <div style={{ flex: 1, paddingBottom: i < steps.length - 1 ? 32 : 0, borderBottom: i < steps.length - 1 ? '0.5px solid #e5e7eb' : 'none' }}>
-                <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>{s.title}</div>
-                <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{s.desc}</div>
+                <div className={s.stepTitle}>{step.title}</div>
+                <div className={s.stepDesc}>{step.desc}</div>
               </div>
             </div>
           ))}
@@ -224,45 +187,39 @@ export default function ResumeBuilderPage() {
       </section>
 
       {/* Stats Bar */}
-      <section style={{ background: '#fff', borderTop: '0.5px solid #e5e7eb', borderBottom: '0.5px solid #e5e7eb', padding: '40px 24px' }}>
-        <div style={{ maxWidth: 860, margin: '0 auto', display: 'flex', justifyContent: 'center', gap: 56, flexWrap: 'wrap', textAlign: 'center' }}>
+      <section className={s.statsBar}>
+        <div className={s.statsInner}>
           {[
             { v: '75%', l: 'of resumes rejected by ATS before a human reads them' },
             { v: '6s', l: 'average recruiter time on a resume before deciding' },
             { v: '40%', l: 'more callbacks with quantified bullets' },
             { v: '$27K', l: 'average salary increase after a strong negotiation' },
-          ].map(s => (
-            <div key={s.l} style={{ maxWidth: 160 }}>
-              <div style={{ fontSize: 38, fontWeight: 800, color: '#0f172a', lineHeight: 1, marginBottom: 8 }}>{s.v}</div>
-              <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5 }}>{s.l}</div>
+          ].map(stat => (
+            <div key={stat.l} className={s.statItem}>
+              <div className={s.statValue}>{stat.v}</div>
+              <div className={s.statLabel}>{stat.l}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Before / After */}
-      <section style={{ padding: '72px 24px', background: '#f8fafc', borderBottom: '0.5px solid #e5e7eb' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', textAlign: 'center', marginBottom: 12 }}>
-            Before &amp; after Hayven
-          </h2>
-          <p style={{ fontSize: 16, color: '#64748b', textAlign: 'center', maxWidth: 480, margin: '0 auto 48px', lineHeight: 1.7 }}>
-            Responsibilities get ignored. Outcomes get interviews. Here&apos;s the difference.
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <section className={s.beforeAfterSection}>
+        <div className={s.beforeAfterInner}>
+          <h2 className={s.beforeAfterTitle}>Before &amp; after Hayven</h2>
+          <p className={s.beforeAfterDesc}>Responsibilities get ignored. Outcomes get interviews. Here&apos;s the difference.</p>
+          <div className={s.beforeAfterList}>
             {beforeAfter.map(ex => (
-              <div key={ex.label} style={{ background: '#fff', borderRadius: 14, border: '0.5px solid #e5e7eb', overflow: 'hidden' }}>
-                <div style={{ padding: '10px 24px', background: '#f8fafc', borderBottom: '0.5px solid #e5e7eb', fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.06em' }}>
-                  {ex.label}
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-                  <div style={{ padding: 24, borderRight: '0.5px solid #e5e7eb' }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, color: '#ef4444', marginBottom: 10, letterSpacing: '0.06em' }}>❌ BEFORE</div>
-                    <p style={{ fontSize: 14, color: '#64748b', lineHeight: 1.7, margin: 0, background: '#fef2f2', padding: '12px 16px', borderRadius: 8, borderLeft: '3px solid #ef4444' }}>{ex.before}</p>
+              <div key={ex.label} className={s.baCard}>
+                <div className={s.baCardLabel}>{ex.label}</div>
+                <div className={s.baCardGrid}>
+                  <div className={s.baCardBefore}>
+                    <div className={s.baBeforeTag}>❌ BEFORE</div>
+                    <p className={s.baBeforeText}>{ex.before}</p>
                   </div>
-                  <div style={{ padding: 24 }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, color: '#10b981', marginBottom: 10, letterSpacing: '0.06em' }}>✓ AFTER HAYVEN</div>
-                    <p style={{ fontSize: 14, color: '#0f172a', lineHeight: 1.7, margin: 0, background: '#ecfdf5', padding: '12px 16px', borderRadius: 8, borderLeft: '3px solid #10b981' }}>{ex.after}</p>
+                  <div className={s.baCardAfter}>
+                    <div className={s.baAfterTag}>✓ AFTER HAYVEN</div>
+                    <p className={s.baAfterText}>{ex.after}</p>
                   </div>
                 </div>
               </div>
@@ -272,27 +229,23 @@ export default function ResumeBuilderPage() {
       </section>
 
       {/* Features Grid */}
-      <section style={{ padding: '72px 24px' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', textAlign: 'center', marginBottom: 12 }}>
-            Everything in one analysis
-          </h2>
-          <p style={{ fontSize: 16, color: '#64748b', textAlign: 'center', maxWidth: 480, margin: '0 auto 48px', lineHeight: 1.7 }}>
-            Most tools give you formatting tips. Hayven gives you the content changes that move the needle.
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+      <section className={s.featuresSection}>
+        <div className={s.featuresInner}>
+          <h2 className={s.sectionTitle}>Everything in one analysis</h2>
+          <p className={s.sectionDesc}>Most tools give you formatting tips. Hayven gives you the content changes that move the needle.</p>
+          <div className={s.featuresGrid}>
             {features.map(f => (
-              <div key={f.title} style={{ background: '#f8fafc', border: '0.5px solid #e5e7eb', borderRadius: 14, padding: 28 }}>
-                <div style={{ fontSize: 24, marginBottom: 14 }}>{f.icon}</div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>{f.title}</div>
-                <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65 }}>{f.desc}</div>
+              <div key={f.title} className={s.featureCard}>
+                <div className={s.featureIcon}>{f.icon}</div>
+                <div className={s.featureTitle}>{f.title}</div>
+                <div className={s.featureDesc}>{f.desc}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How to improve your resume with AI — checklist + mockup */}
+      {/* How to improve your resume with AI */}
       <section style={{ background: '#f8fafc', borderTop: '0.5px solid #e5e7eb', borderBottom: '0.5px solid #e5e7eb', padding: '72px 24px' }}>
         <div style={{ maxWidth: 1040, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 420px', gap: 64, alignItems: 'center' }}>
           <div>
@@ -321,30 +274,23 @@ export default function ResumeBuilderPage() {
           {/* Product mockup */}
           <div style={{ background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 16, padding: 24, boxShadow: '0 4px 32px rgba(0,0,0,0.08)' }}>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.06em', marginBottom: 16 }}>BULLET REWRITER</div>
-
-            {/* Original bullet */}
             <div style={{ background: '#fef2f2', border: '0.5px solid #fca5a5', borderRadius: 10, padding: '14px 16px', marginBottom: 8 }}>
               <div style={{ fontSize: 10, fontWeight: 700, color: '#ef4444', marginBottom: 6, letterSpacing: '0.05em' }}>ORIGINAL</div>
               <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, margin: 0 }}>
                 Managed social media and helped increase website traffic through content marketing campaigns.
               </p>
             </div>
-
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, margin: '10px 0', paddingLeft: 4 }}>
               <div style={{ width: 20, height: 1, background: '#e2e8f0' }} />
               <span style={{ fontSize: 11, fontWeight: 600, color: '#10b981' }}>✦ AI Rewrite</span>
               <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
             </div>
-
-            {/* Rewritten bullet */}
             <div style={{ background: '#ecfdf5', border: '0.5px solid #6ee7b7', borderRadius: 10, padding: '14px 16px', marginBottom: 20 }}>
               <div style={{ fontSize: 10, fontWeight: 700, color: '#10b981', marginBottom: 6, letterSpacing: '0.05em' }}>REWRITTEN</div>
               <p style={{ fontSize: 13, color: '#065f46', lineHeight: 1.6, margin: 0 }}>
                 Grew website traffic by <strong>30%</strong> in 6 months by launching a short-form content marketing campaign across 3 channels — driving <strong>12K new monthly visitors</strong> and a <strong>22% increase in sign-ups</strong>.
               </p>
             </div>
-
-            {/* Keyword tags */}
             <div style={{ marginBottom: 16 }}>
               <div style={{ fontSize: 11, fontWeight: 600, color: '#475569', marginBottom: 8 }}>Keywords matched to job description</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -353,8 +299,6 @@ export default function ResumeBuilderPage() {
                 ))}
               </div>
             </div>
-
-            {/* Action buttons */}
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
               <button style={{ fontSize: 13, fontWeight: 600, padding: '8px 16px', borderRadius: 8, background: '#f1f5f9', color: '#475569', border: '0.5px solid #e2e8f0', cursor: 'pointer' }}>Cancel</button>
               <button style={{ fontSize: 13, fontWeight: 600, padding: '8px 16px', borderRadius: 8, background: '#0f172a', color: '#fff', border: 'none', cursor: 'pointer' }}>Save Bullet</button>
@@ -386,10 +330,10 @@ export default function ResumeBuilderPage() {
                 { v: '6s', l: 'average recruiter attention before moving on' },
                 { v: '40%', l: 'more callbacks from resumes with quantified results' },
                 { v: '3×', l: 'higher interview rate with tailored vs. generic resumes' },
-              ].map(s => (
-                <div key={s.l} style={{ padding: '14px 0', borderBottom: '0.5px solid #f1f5f9' }}>
-                  <div style={{ fontSize: 24, fontWeight: 800, color: '#4169E1' }}>{s.v}</div>
-                  <div style={{ fontSize: 12, color: '#64748b', marginTop: 2 }}>{s.l}</div>
+              ].map(stat => (
+                <div key={stat.l} style={{ padding: '14px 0', borderBottom: '0.5px solid #f1f5f9' }}>
+                  <div style={{ fontSize: 24, fontWeight: 800, color: '#4169E1' }}>{stat.v}</div>
+                  <div style={{ fontSize: 12, color: '#64748b', marginTop: 2 }}>{stat.l}</div>
                 </div>
               ))}
               <Link href="/signup" style={{ display: 'block', background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: '#fff', textAlign: 'center', padding: 13, borderRadius: 9, fontSize: 14, fontWeight: 700, textDecoration: 'none', marginTop: 24 }}>
@@ -401,16 +345,14 @@ export default function ResumeBuilderPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ padding: '72px 24px' }}>
-        <div style={{ maxWidth: 760, margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', textAlign: 'center', marginBottom: 48 }}>
-            Frequently asked questions
-          </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <section className={s.faqSection}>
+        <div className={s.faqInner}>
+          <h2 className={s.faqTitle}>Frequently asked questions</h2>
+          <div className={s.faqList}>
             {faqs.map(f => (
-              <div key={f.q} style={{ background: '#f8fafc', border: '0.5px solid #e5e7eb', borderRadius: 12, padding: '24px 28px' }}>
-                <div style={{ fontWeight: 700, fontSize: 15, color: '#0f172a', marginBottom: 10 }}>{f.q}</div>
-                <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.7 }}>{f.a}</div>
+              <div key={f.q} className={s.faqItem}>
+                <div className={s.faqQ}>{f.q}</div>
+                <div className={s.faqA}>{f.a}</div>
               </div>
             ))}
           </div>
@@ -418,28 +360,21 @@ export default function ResumeBuilderPage() {
       </section>
 
       {/* Resume Templates */}
-      <section style={{ background: '#f0f4f8', borderTop: '0.5px solid #e2e8f0', padding: '72px 24px' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <div style={{ display: 'inline-block', background: '#0f2240', color: '#fff', fontSize: 16, fontWeight: 700, padding: '12px 32px', borderRadius: 40, marginBottom: 28 }}>
-              Free Resume Templates
-            </div>
+      <section className={s.templatesSection}>
+        <div className={s.templatesInner}>
+          <div className={s.templatesHeader}>
+            <div className={s.templatesBadge}>Free Resume Templates</div>
           </div>
-
           <TemplatesTabs />
         </div>
       </section>
 
       {/* Testimonials */}
-      <section style={{ padding: '72px 24px' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', textAlign: 'center', marginBottom: 12 }}>
-            What people say after using Hayven
-          </h2>
-          <p style={{ fontSize: 16, color: '#64748b', textAlign: 'center', maxWidth: 480, margin: '0 auto 48px', lineHeight: 1.7 }}>
-            Real results from people who used Hayven to land interviews and better offers.
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+      <section className={s.testimonialsSection}>
+        <div className={s.testimonialsInner}>
+          <h2 className={s.sectionTitle}>What people say after using Hayven</h2>
+          <p className={s.sectionDesc}>Real results from people who used Hayven to land interviews and better offers.</p>
+          <div className={s.testimonialsGrid}>
             {[
               { quote: 'I sent out 40 applications with my old resume and got 2 callbacks. After Hayven rewrote my bullets and flagged my keyword gaps, I got 6 interviews from the next 15 applications.', name: 'Marcus T.', role: 'Senior Software Engineer', company: 'Now at Stripe' },
               { quote: 'The ATS score told me immediately why I was getting rejected — my resume was at a 31. I fixed the 3 things it flagged, resubmitted to the same companies, and got 4 calls in a week.', name: 'Priya K.', role: 'Product Manager', company: 'Now at Figma' },
@@ -448,13 +383,13 @@ export default function ResumeBuilderPage() {
               { quote: 'The section-by-section scores showed me my summary was a 40 and my experience section was an 88. I rewrote just the summary and my response rate tripled.', name: 'Daniel M.', role: 'Data Scientist', company: 'Now at Meta' },
               { quote: 'As a career changer, I didn\'t know how to frame my experience for tech roles. Hayven showed me exactly which keywords to add and how to reframe 5 years of consulting into PM language.', name: 'Sophie L.', role: 'Associate PM', company: 'Now at Notion' },
             ].map(t => (
-              <div key={t.name} style={{ background: '#f8fafc', border: '0.5px solid #e5e7eb', borderRadius: 14, padding: 28 }}>
-                <div style={{ fontSize: 22, color: '#4169E1', marginBottom: 12, lineHeight: 1 }}>&ldquo;</div>
-                <p style={{ fontSize: 14, color: '#334155', lineHeight: 1.7, marginBottom: 20 }}>{t.quote}</p>
-                <div style={{ borderTop: '0.5px solid #e5e7eb', paddingTop: 16 }}>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a' }}>{t.name}</div>
-                  <div style={{ fontSize: 13, color: '#64748b' }}>{t.role}</div>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: '#10b981', marginTop: 4 }}>{t.company}</div>
+              <div key={t.name} className={s.testimonialCard}>
+                <div className={s.testimonialQuoteMark}>&ldquo;</div>
+                <p className={s.testimonialText}>{t.quote}</p>
+                <div className={s.testimonialDivider}>
+                  <div className={s.testimonialName}>{t.name}</div>
+                  <div className={s.testimonialRole}>{t.role}</div>
+                  <div className={s.testimonialCompany}>{t.company}</div>
                 </div>
               </div>
             ))}
@@ -463,15 +398,11 @@ export default function ResumeBuilderPage() {
       </section>
 
       {/* Resume Guides by Role */}
-      <section style={{ background: '#f8fafc', borderTop: '0.5px solid #e5e7eb', padding: '72px 24px' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(22px, 3.5vw, 34px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#0f172a', textAlign: 'center', marginBottom: 12 }}>
-            Resume builder by role
-          </h2>
-          <p style={{ fontSize: 16, color: '#64748b', textAlign: 'center', maxWidth: 480, margin: '0 auto 48px', lineHeight: 1.7 }}>
-            Role-specific ATS keywords, before/after examples, and writing tips for your exact job target.
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
+      <section className={s.guidesSection}>
+        <div className={s.guidesInner}>
+          <h2 className={s.sectionTitle}>Resume builder by role</h2>
+          <p className={s.sectionDesc}>Role-specific ATS keywords, before/after examples, and writing tips for your exact job target.</p>
+          <div className={s.guidesGrid}>
             {[
               { role: 'Software Engineer', color: '#6366f1', bg: '#eef2ff', href: '/resume-builder/software-engineer', desc: 'Tech stack placement, impact bullets, ATS keywords, latency/uptime metrics, and GitHub links.' },
               { role: 'Product Manager', color: '#0284c7', bg: '#e0f2fe', href: '/resume-builder/product-manager', desc: 'OKRs, DAU/MAU, ARR, retention metrics, roadmap ownership, and cross-functional leadership.' },
@@ -484,12 +415,12 @@ export default function ResumeBuilderPage() {
               { role: 'Operations Manager', color: '#1d4ed8', bg: '#eff6ff', href: '/resume-builder/operations-manager', desc: 'Cost savings, efficiency gains, team scale, process methodology (Lean, Six Sigma), and ERP systems.' },
             ].map(g => (
               <Link key={g.role} href={g.href} style={{ textDecoration: 'none' }}>
-                <div style={{ background: '#fff', border: '0.5px solid #e5e7eb', borderRadius: 14, padding: 24, display: 'flex', flexDirection: 'column', gap: 10, height: '100%' }}>
+                <div className={s.guideCard}>
                   <div style={{ display: 'inline-flex', alignItems: 'center', background: g.bg, color: g.color, fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 20, width: 'fit-content' }}>
                     {g.role}
                   </div>
-                  <div style={{ fontSize: 14, color: '#64748b', lineHeight: 1.65, flex: 1 }}>{g.desc}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, fontWeight: 600, color: g.color, marginTop: 4 }}>
+                  <div className={s.guideDesc}>{g.desc}</div>
+                  <div className={s.guideLink} style={{ color: g.color }}>
                     View guide <ArrowRight size={13} />
                   </div>
                 </div>
@@ -500,29 +431,20 @@ export default function ResumeBuilderPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: '#0f172a', padding: '72px 24px', textAlign: 'center' }}>
-        <h2 style={{ fontSize: 'clamp(24px, 4vw, 38px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: 16 }}>
-          Stop guessing. Start getting interviews.
-        </h2>
-        <p style={{ fontSize: 16, color: '#94a3b8', marginBottom: 36, maxWidth: 480, margin: '0 auto 36px' }}>
-          Find out exactly what's holding your resume back — and get the fixes to do something about it.
+      <section className={s.ctaSection}>
+        <h2 className={s.ctaTitle}>Stop guessing. Start getting interviews.</h2>
+        <p className={s.ctaDesc}>
+          Find out exactly what&apos;s holding your resume back — and get the fixes to do something about it.
         </p>
-        <Link href="/signup" style={{
-          height: 50, display: 'inline-flex', alignItems: 'center', gap: 8,
-          padding: '0 32px',
-          background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-          color: '#fff',
-          borderRadius: 10, fontSize: 15, fontWeight: 700, textDecoration: 'none',
-          boxShadow: '0 3px 10px rgba(239,68,68,0.3)',
-        }}>
+        <Link href="/signup" className={s.ctaBtn}>
           Get Started Free <ArrowRight size={15} />
         </Link>
       </section>
 
       {/* Footer */}
-      <footer style={{ borderTop: '0.5px solid #e5e7eb', padding: '32px 24px', display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap' }}>
+      <footer className={s.footer}>
         {[{ href: '/login', label: 'Sign in' }, { href: '/signup', label: 'Sign up' }, { href: '/resume-templates', label: 'Resume Templates' }, { href: '/resume-skills', label: 'Resume Skills' }].map(({ href, label }) => (
-          <Link key={href} href={href} prefetch={true} style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>{label}</Link>
+          <Link key={href} href={href} prefetch={true} className={s.footerLink}>{label}</Link>
         ))}
       </footer>
     </div>
