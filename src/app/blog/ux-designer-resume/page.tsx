@@ -44,7 +44,7 @@ export default function Article() {
 
       <div style={{ fontSize: 16, lineHeight: 1.85, color: '#334155' }}>
         <p style={{ marginBottom: 24 }}>UX design is one of the few fields where most candidates know their portfolio matters more than their resume — and then put almost no effort into the resume as a result. That&apos;s a mistake. The resume is what gets you past the first screen. The portfolio is what closes the interview. Both have to work.</p>
-        <p style={{ marginBottom: 24 }}>Here&apos;s how to structure your UX designer resume, what metrics prove impact, and how to frame your process in a way that resonates with both design hiring managers and non-design stakeholders who may be reviewing your application.</p>
+        <p style={{ marginBottom: 24 }}>Here&apos;s how to structure your UX designer resume, what metrics prove impact, and how to frame your process in a way that resonates with both design hiring managers and non-design stakeholders who may be reviewing your application. Once you have an offer, our <Link href="/blog/how-to-evaluate-a-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>job offer evaluation guide</Link> helps you assess the full package before you sign.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>The right structure for a UX designer resume</h2>
         <p style={{ marginBottom: 24 }}>One page for under 8 years of experience. Two pages is acceptable for senior or principal designers with complex multi-product histories. Order:</p>
@@ -97,6 +97,8 @@ export default function Article() {
         </div>
         <p style={{ marginBottom: 24 }}>If you have accessibility or design systems experience, highlight it prominently — both are hiring signals at senior levels and in enterprise product companies.</p>
 
+        <p style={{ marginBottom: 24 }}>For related creative roles, see our <Link href="/blog/marketing-manager-resume" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>marketing manager resume guide</Link> — many UX designers move into product marketing and the resume crossover is significant.</p>
+
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Common mistakes that kill UX designer resumes</h2>
         <ul style={{ paddingLeft: 20, marginBottom: 24 }}>
           <li style={{ marginBottom: 12 }}><strong>No portfolio link</strong> — The single most common reason UX resumes get filtered out. It must be in your header, not buried in a footnote.</li>
@@ -108,7 +110,7 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Get your resume scored</h2>
         <p style={{ marginBottom: 24 }}>Before you apply anywhere, run your resume through Hayven&apos;s <Link href="/resume-builder/ux-designer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>UX Designer Resume Analyzer</Link>. It checks ATS compatibility, impact language, keyword coverage for UX-specific terms, and structure — then gives you a prioritized fix list in under 60 seconds.</p>
-        <p style={{ marginBottom: 24 }}>Once your resume is strong, make sure the offer reflects what UX designers at your level and company type actually earn. Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> shows you market rate data by role, city, and experience level so you can walk into any negotiation with a defensible number.</p>
+        <p style={{ marginBottom: 24 }}>Once your resume is strong, make sure the offer reflects what UX designers at your level and company type actually earn. Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> shows you market rate data by role, city, and experience level so you can walk into any negotiation with a defensible number. When you&apos;re ready to counter, the <Link href="/counter-offer-builder" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Counter Offer Builder</Link> generates your response with the right framing.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

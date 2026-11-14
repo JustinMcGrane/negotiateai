@@ -1,0 +1,402 @@
+.nav {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navBrand {
+  font-weight: 800;
+  font-size: 18px;
+  color: #0f172a;
+  text-decoration: none;
+}
+.navActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.signIn {
+  font-size: 14px;
+  color: #64748b;
+  text-decoration: none;
+}
+.getStarted {
+  font-size: 14px;
+  font-weight: 700;
+  background: #0f172a;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.hero {
+  background: #0f172a;
+  padding: 72px 40px 80px;
+  text-align: center;
+}
+.heroInner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.heroBadge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #7AB8E8;
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+}
+.heroTitle {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.heroDesc {
+  font-size: 18px;
+  color: #94a3b8;
+  line-height: 1.7;
+  margin: 0;
+}
+.calcSection {
+  padding: 64px 40px;
+  background: #f8fafc;
+}
+.calcInner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.calcCard {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 40px 36px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.fieldGroup {
+  margin-bottom: 20px;
+}
+.fieldGroupLg {
+  margin-bottom: 28px;
+}
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  display: block;
+  margin-bottom: 8px;
+}
+.toggleRow {
+  display: flex;
+  gap: 8px;
+}
+.inputWrap {
+  position: relative;
+}
+.prefix {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 15px;
+}
+.input {
+  width: 100%;
+  padding: 12px 14px 12px 28px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+}
+.inputPlain {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+}
+.calcBtn {
+  width: 100%;
+  height: 52px;
+  background: #0f172a;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.resultsDivider {
+  margin-top: 32px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 28px;
+}
+.resultHighlight {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.resultHighlightLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #16a34a;
+  margin-bottom: 8px;
+}
+.resultHighlightValue {
+  font-size: 42px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+}
+.resultHighlightSub {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 4px;
+}
+.resultsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.resultCard {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 16px;
+}
+.resultCardLabel {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+.resultCardValue {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+}
+.ctaBox {
+  margin-top: 24px;
+  background: #0f172a;
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.ctaBoxTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.ctaBoxDesc {
+  font-size: 13px;
+  color: #94a3b8;
+}
+.ctaBoxBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.section {
+  padding: 80px 40px;
+  background: #fff;
+}
+.sectionAlt {
+  padding: 80px 40px;
+  background: #f8fafc;
+}
+.sectionInner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.sectionTitle {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+.sectionDesc {
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+.raiseGrid {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.raiseRow {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+.raiseRange {
+  font-size: 18px;
+  font-weight: 900;
+  min-width: 70px;
+}
+.raiseLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.raiseDesc {
+  font-size: 13px;
+  color: #64748b;
+}
+.sectionDescBottom {
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.8;
+}
+.stepList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.stepRow {
+  display: flex;
+  gap: 20px;
+}
+.stepNum {
+  font-size: 13px;
+  font-weight: 800;
+  color: #cbd5e1;
+  min-width: 28px;
+  padding-top: 2px;
+}
+.stepTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+.stepBody {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.7;
+}
+.faqTitle {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin-bottom: 40px;
+}
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.faqItem {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 28px;
+}
+.faqQ {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+.faqA {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.8;
+}
+.seoSection {
+  padding: 40px 40px 0;
+  background: #fff;
+}
+.seoText {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.8;
+}
+.bottomCta {
+  padding: 80px 40px;
+  background: #0f172a;
+  text-align: center;
+}
+.bottomCtaInner {
+  max-width: 520px;
+  margin: 0 auto;
+}
+.bottomCtaTitle {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+.bottomCtaDesc {
+  font-size: 16px;
+  color: #94a3b8;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+.bottomCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(239,68,68,0.3);
+}
+.bottomCtaNote {
+  font-size: 12px;
+  color: #475569;
+  margin-top: 12px;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 48px 20px 56px; }
+  .calcSection, .section, .sectionAlt, .seoSection { padding: 64px 20px; }
+}

@@ -44,7 +44,7 @@ export default function Article() {
 
       <div style={{ fontSize: 16, lineHeight: 1.85, color: '#334155' }}>
         <p style={{ marginBottom: 24 }}>Financial analyst roles attract highly credentialed candidates. Everyone lists Excel, financial modeling, and variance analysis. The resumes that get interviews go further — they name the deal sizes, the models built, the decisions influenced, and the dollars saved or generated. Specificity is the differentiator.</p>
-        <p style={{ marginBottom: 24 }}>Here&apos;s how to structure your financial analyst resume, which metrics and skills to highlight, and the mistakes that filter you out before a human ever sees your application.</p>
+        <p style={{ marginBottom: 24 }}>Here&apos;s how to structure your financial analyst resume, which metrics and skills to highlight, and the mistakes that filter you out before a human ever sees your application. Once you have an offer, our <Link href="/blog/how-to-evaluate-a-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>job offer evaluation guide</Link> walks through how to assess base, bonus, and equity together.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>The right structure for a financial analyst resume</h2>
         <p style={{ marginBottom: 24 }}>Keep it to one page for analysts with under 8 years of experience. Two pages for senior roles with significant deal history or publications. Order:</p>
@@ -101,6 +101,8 @@ export default function Article() {
         </div>
         <p style={{ marginBottom: 24 }}>Be specific about Excel. &ldquo;Advanced Excel&rdquo; is meaningless; &ldquo;Excel (INDEX-MATCH, dynamic arrays, Power Query, VBA)&rdquo; is specific and searchable.</p>
 
+        <p style={{ marginBottom: 24 }}>For related roles, see our <Link href="/blog/operations-manager-resume" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>operations manager resume guide</Link> — many of the quantification principles carry over to finance-adjacent ops roles.</p>
+
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Common mistakes that kill financial analyst resumes</h2>
         <ul style={{ paddingLeft: 20, marginBottom: 24 }}>
           <li style={{ marginBottom: 12 }}><strong>No deal or portfolio size</strong> — The most common omission. Finance is a scale-dependent field. Always include it.</li>
@@ -112,7 +114,7 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Get your resume scored</h2>
         <p style={{ marginBottom: 24 }}>Before you apply anywhere, run your resume through Hayven&apos;s <Link href="/resume-builder/financial-analyst" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Financial Analyst Resume Analyzer</Link>. It checks ATS compatibility, keyword coverage for finance-specific terms, impact language, and model type mentions — then gives you a prioritized fix list.</p>
-        <p style={{ marginBottom: 24 }}>Once your resume is in shape, make sure the offers you receive reflect what financial analysts at your level and function actually earn. Hayven&apos;s <Link href="/equity-calculator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Equity Calculator</Link> helps you understand the full value of any offer — including RSUs and options that finance candidates often undervalue.</p>
+        <p style={{ marginBottom: 24 }}>Once your resume is in shape, make sure the offers you receive reflect what financial analysts at your level and function actually earn. Hayven&apos;s <Link href="/equity-calculator" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Equity Calculator</Link> helps you understand the full value of any offer — including RSUs and options that finance candidates often undervalue. And if you&apos;re negotiating, our <Link href="/salary-negotiation" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>salary negotiation guide</Link> covers the full counter-offer process step by step.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

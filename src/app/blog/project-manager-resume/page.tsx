@@ -44,7 +44,7 @@ export default function Article() {
 
       <div style={{ fontSize: 16, lineHeight: 1.85, color: '#334155' }}>
         <p style={{ marginBottom: 24 }}>Project management is one of the broadest disciplines in business — which makes it one of the hardest to write a resume for. Every PM claims they &ldquo;delivered projects on time and on budget.&rdquo; The resumes that get interviews are the ones that prove it with scope, scale, and specific outcomes that a hiring manager can compare against the role they&apos;re filling.</p>
-        <p style={{ marginBottom: 24 }}>Here&apos;s exactly how to structure your PM resume, which metrics matter most, and what separates a forgettable resume from one that gets a callback.</p>
+        <p style={{ marginBottom: 24 }}>Here&apos;s exactly how to structure your PM resume, which metrics matter most, and what separates a forgettable resume from one that gets a callback. Once you land an offer, see our <Link href="/blog/how-to-evaluate-a-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>job offer evaluation guide</Link> so you know what to negotiate before you accept.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>The right structure for a PM resume</h2>
         <p style={{ marginBottom: 24 }}>One page if you have under 10 years of experience. Two pages is acceptable for senior PMs with portfolio breadth. The order:</p>
@@ -103,6 +103,8 @@ export default function Article() {
         </div>
         <p style={{ marginBottom: 24 }}>If you hold a PMP, put it after your name in the header: &ldquo;Jane Smith, PMP.&rdquo; It&apos;s the most recognized PM credential and signals immediately that you&apos;ve cleared a high bar.</p>
 
+        <p style={{ marginBottom: 24 }}>For a related discipline, see our <Link href="/blog/operations-manager-resume" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>operations manager resume guide</Link> — many cross-functional PMs transition between these roles and the resume principles overlap significantly.</p>
+
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Common mistakes that kill PM resumes</h2>
         <ul style={{ paddingLeft: 20, marginBottom: 24 }}>
           <li style={{ marginBottom: 12 }}><strong>No budget figures</strong> — This is the #1 red flag. Scale is everything in PM hiring. A hiring manager filling a $10M program role needs to know you&apos;ve worked at that scale.</li>
@@ -114,7 +116,7 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Get your resume scored</h2>
         <p style={{ marginBottom: 24 }}>Before you apply anywhere, run your resume through Hayven&apos;s <Link href="/resume-builder/project-manager" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Project Manager Resume Analyzer</Link>. It checks ATS compatibility, keyword coverage, impact language, and structure — then gives you a prioritized fix list. Most users improve their score significantly in under 30 minutes.</p>
-        <p style={{ marginBottom: 24 }}>Once your resume is strong, make sure the offer reflects what PMs at your scope and level actually earn. Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> gives you market rate data by role, level, and city.</p>
+        <p style={{ marginBottom: 24 }}>Once your resume is strong, make sure the offer reflects what PMs at your scope and level actually earn. Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> gives you market rate data by role, level, and city. When you get an offer, use the <Link href="/counter-offer-builder" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Counter Offer Builder</Link> to craft your response.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

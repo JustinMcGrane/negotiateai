@@ -44,7 +44,7 @@ export default function Article() {
 
       <div style={{ fontSize: 16, lineHeight: 1.85, color: '#334155' }}>
         <p style={{ marginBottom: 24 }}>Operations management is one of the most impact-driven disciplines in business — and one of the hardest to write a resume for. Everyone claims they &ldquo;streamlined processes&rdquo; and &ldquo;improved efficiency.&rdquo; Hiring managers have read that phrase so many times it&apos;s become noise. What they&apos;re actually looking for is specificity: what did you improve, by how much, and at what scale?</p>
-        <p style={{ marginBottom: 24 }}>Here&apos;s exactly how to structure your operations manager resume, which metrics matter most, and what makes the difference between getting filtered out and getting a callback.</p>
+        <p style={{ marginBottom: 24 }}>Here&apos;s exactly how to structure your operations manager resume, which metrics matter most, and what makes the difference between getting filtered out and getting a callback. If you already have an offer in hand, see how to <Link href="/blog/how-to-evaluate-a-job-offer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>evaluate a job offer</Link> before responding.</p>
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>The right structure for an operations manager resume</h2>
         <p style={{ marginBottom: 24 }}>One page for managers with under 10 years of experience. Two pages is acceptable for senior ops leaders with multi-site or P&L responsibility. Order:</p>
@@ -99,6 +99,8 @@ export default function Article() {
         </div>
         <p style={{ marginBottom: 24 }}>If you&apos;re a Six Sigma Black Belt, list it after your name in the header. It&apos;s a recognized quality credential that signals rigorous process thinking from the first line.</p>
 
+        <p style={{ marginBottom: 24 }}>For related disciplines, see our <Link href="/blog/project-manager-resume" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>project manager resume guide</Link> — the two roles share many of the same metrics and bullet-writing principles.</p>
+
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Common mistakes that kill operations manager resumes</h2>
         <ul style={{ paddingLeft: 20, marginBottom: 24 }}>
           <li style={{ marginBottom: 12 }}><strong>No cost or efficiency numbers</strong> — The most common mistake. &ldquo;Improved efficiency&rdquo; means nothing without a before/after number.</li>
@@ -110,7 +112,7 @@ export default function Article() {
 
         <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 14, marginTop: 48 }}>Get your resume scored</h2>
         <p style={{ marginBottom: 24 }}>Before you apply anywhere, run your resume through Hayven&apos;s <Link href="/resume-builder/operations-manager" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Operations Manager Resume Analyzer</Link>. It checks ATS compatibility, keyword coverage for ops-specific terms, impact language, and structure — then gives you a prioritized fix list.</p>
-        <p style={{ marginBottom: 24 }}>Once your resume is strong, make sure the offers you receive match what operations managers at your level and industry actually earn. Hayven&apos;s <Link href="/raise-request-builder" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Raise Request Builder</Link> also helps you make the case for a raise at your current company with scripts and talking points tailored to your situation.</p>
+        <p style={{ marginBottom: 24 }}>Once your resume is strong, make sure the offers you receive match what operations managers at your level and industry actually earn. Use Hayven&apos;s <Link href="/compensation-analyzer" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Compensation Analyzer</Link> for market rate benchmarks, and the <Link href="/raise-request-builder" style={{ color: '#4169E1', textDecoration: 'none', fontWeight: 600 }}>Raise Request Builder</Link> to make the case for a raise at your current company with scripts tailored to your situation.</p>
       </div>
 
       <div style={{ marginTop: 64, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 16, padding: '32px 28px' }}>

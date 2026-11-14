@@ -1,0 +1,650 @@
+.page {
+  background: #fff;
+  min-height: 100vh;
+}
+.announcementBar {
+  background: #0f172a;
+  width: 100%;
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.announcementText {
+  flex: 1;
+  text-align: center;
+}
+.announcementEmoji {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+}
+.announcementBold {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.announcementSub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+}
+.header {
+  border-bottom: 0.5px solid #e5e7eb;
+  padding: 0 32px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 50;
+}
+.headerLogo {
+  display: flex;
+  align-items: center;
+}
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.signIn {
+  font-size: 14px;
+  color: #6b7280;
+  text-decoration: none;
+  padding: 7px 14px;
+}
+.getStarted {
+  font-size: 14px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 3px 10px rgba(239,68,68,0.3);
+}
+.heroSection {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 72px 40px 80px;
+}
+.heroHeadline {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.heroH1 {
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  margin-bottom: 16px;
+  color: #0f172a;
+  font-size: clamp(56px, 8vw, 96px);
+}
+.heroSubtitle {
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 700;
+  color: #2952CC;
+  letter-spacing: -0.02em;
+}
+.heroWidgetWrap {
+  max-width: 480px;
+  margin: 0 auto;
+}
+.testimonialSection {
+  padding: 72px 40px;
+  background: #fff;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+.testimonialInner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+:global(.landing-testimonial-card-inner) {
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+  border-radius: 20px;
+  padding: 48px 56px;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(74,144,217,0.08);
+}
+:global(.landing-testimonial-quote-mark) {
+  position: absolute;
+  top: 28px;
+  left: 40px;
+  font-size: 80px;
+  color: #4A90D9;
+  line-height: 1;
+  font-family: Georgia, serif;
+  opacity: 0.25;
+  user-select: none;
+}
+:global(.testimonial-stars) {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+:global(.testimonial-quote-text) {
+  font-size: 20px;
+  color: #1e293b;
+  line-height: 1.8;
+  font-weight: 400;
+  margin: 0 0 32px;
+  position: relative;
+  z-index: 1;
+}
+:global(.testimonial-author) {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+:global(.testimonial-avatar) {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4A90D9 0%, #2952CC 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(74,144,217,0.35);
+}
+:global(.testimonial-name) {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+}
+:global(.testimonial-role) {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 2px;
+}
+.logoStrip {
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 24px 40px;
+  background: #fafbfc;
+}
+.logoStripInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.logoStripLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.logoStripRow {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.careerHubSection {
+  padding: 96px 40px;
+}
+.careerHubInner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.sectionHeader {
+  margin-bottom: 64px;
+}
+.sectionBadge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4A90D9;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+.sectionTitle {
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin: 0 0 16px;
+}
+.sectionDesc {
+  font-size: 16px;
+  color: #64748b;
+  max-width: 500px;
+  line-height: 1.7;
+}
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(420px, 100%), 1fr));
+  gap: 4px 40px;
+}
+.featureRow {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 28px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.featureIconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.featureContent {
+  padding-top: 6px;
+}
+.featureName {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+.featureDesc {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.65;
+}
+.toolsSection {
+  padding: 96px 40px;
+  background: #f8fafc;
+}
+.toolsInner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.toolRow {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 28px 0;
+  border-bottom: 1px solid #e9eef4;
+}
+.toolIconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #eef2f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pricingSection {
+  padding: 96px 40px;
+  background: #f8fafc;
+}
+.pricingInner {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+.pricingBadge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4A90D9;
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+}
+.pricingTitle {
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin: 0 0 48px;
+}
+.pricingCard {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 40px 36px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  text-align: left;
+}
+.pricingPlan {
+  font-size: 11px;
+  font-weight: 800;
+  color: #10b981;
+  letter-spacing: 0.12em;
+  margin-bottom: 20px;
+}
+.pricingAmount {
+  font-size: 52px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.pricingAmountSuffix {
+  font-size: 18px;
+  font-weight: 400;
+  color: #94a3b8;
+}
+.pricingSubtitle {
+  font-size: 15px;
+  color: #475569;
+  margin-bottom: 6px;
+}
+.pricingNote {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 32px;
+}
+.pricingFeatures {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.pricingFeatureItem {
+  font-size: 14px;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pricingCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  border-radius: 12px;
+  font-size: 15px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(239,68,68,0.25);
+}
+.pricingCtaNote {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 12px;
+  text-align: center;
+}
+.resumeSection {
+  padding: 96px 40px;
+  background: #f8fafc;
+}
+.resumeInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.resumeHeader {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.resumeTitle {
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin-bottom: 14px;
+}
+.resumeDesc {
+  font-size: 17px;
+  color: #64748b;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.ctaSection {
+  background: #EBF5FB;
+  border-top: 1px solid #EBF5FB;
+  border-bottom: 1px solid #EBF5FB;
+  padding: 96px 40px;
+  text-align: center;
+}
+.ctaInner {
+  max-width: 540px;
+  margin: 0 auto;
+}
+.ctaTitle {
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+.ctaDesc {
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #2D6EA8;
+  color: #fff;
+  padding: 15px 36px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.ctaSmallNote {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+.footer {
+  border-top: 1px solid #e2e8f0;
+  padding: 48px 40px 36px;
+}
+.footerInner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.footerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+.footerBrand {
+  font-size: 13px;
+  color: #94a3b8;
+  max-width: 260px;
+  line-height: 1.6;
+}
+.footerLinks {
+  display: flex;
+  gap: 56px;
+  flex-wrap: wrap;
+}
+.footerCol {
+}
+.footerColTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+.footerColLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footerLink {
+  font-size: 13px;
+  color: #64748b;
+  text-decoration: none;
+}
+.footerBottom {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footerCopy {
+  font-size: 12px;
+  color: #94a3b8;
+}
+/* Logo strip item */
+.logoItem {
+  background: #fff;
+  border: 1px solid #e8edf3;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  letter-spacing: -0.01em;
+}
+/* Resume cards section */
+.resumeSection {
+  padding: 96px 40px;
+  background: #f8fafc;
+}
+.resumeInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.resumeHeader {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.resumeTitle {
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin-bottom: 14px;
+}
+.resumeDesc {
+  font-size: 17px;
+  color: #64748b;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.resumeCard {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+.resumeCardMockup {
+  background: #1e293b;
+  padding: 24px 20px;
+  position: relative;
+}
+.resumeCardMockupInner {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px 14px;
+  font-size: 9px;
+  line-height: 1.6;
+  color: #334155;
+  font-family: monospace;
+}
+.resumeCardBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+.resumeCardBody {
+  padding: 20px 22px 24px;
+}
+.resumeCardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+.resumeCardDesc {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.resumeCardLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+/* Mock resume text styles */
+.mockName { font-weight: 800; font-size: 11px; color: #0f172a; margin-bottom: 2px; }
+.mockMeta { color: #64748b; margin-bottom: 8px; font-size: 8px; }
+.mockDivider { border-top: 1px solid #e2e8f0; padding-top: 6px; margin-bottom: 6px; }
+.mockLabel { font-weight: 700; font-size: 8px; color: #0f172a; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+.mockText { color: #475569; }
+.mockJobTitle { font-weight: 700; font-size: 9px; color: #0f172a; }
+.mockDate { color: #64748b; margin-bottom: 4px; font-size: 8px; }
+.mockHighlightGreen { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 4px 8px; margin-bottom: 8px; font-size: 8px; color: #166534; }
+.mockHighlightYellow { background: #fef9c3; border: 1px solid #fef08a; border-radius: 4px; padding: 4px 8px; margin-bottom: 8px; font-size: 8px; color: #713f12; }
+/* CTA section */
+.ctaSection {
+  background: #EBF5FB;
+  border-top: 1px solid #EBF5FB;
+  border-bottom: 1px solid #EBF5FB;
+  padding: 96px 40px;
+  text-align: center;
+}
+.ctaInner {
+  max-width: 540px;
+  margin: 0 auto;
+}
+.ctaTitle {
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+.ctaDesc {
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #2D6EA8;
+  color: #fff;
+  padding: 15px 36px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.ctaSmallNote {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #94a3b8;
+}
