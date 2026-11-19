@@ -98,6 +98,32 @@ function SarahChat() {
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const messagesRef = useRef(messages)
+  const isProRef = useRef(isPro)
+  const sessionEndedRef = useRef(sessionEnded)
+
+  useEffect(() => { messagesRef.current = messages }, [messages])
+  useEffect(() => { isProRef.current = isPro }, [isPro])
+  useEffect(() => { sessionEndedRef.current = sessionEnded }, [sessionEnded])
+
+  useEffect(() => {
+    const handleUnload = () => {
+      const msgs = messagesRef.current
+      if (msgs.length < 3 || sessionEndedRef.current) return
+      // Use sendBeacon so the request survives page unload
+      navigator.sendBeacon('/api/session-summary', JSON.stringify({ messages: msgs, sendEmail: isProRef.current }))
+      sessionEndedRef.current = true
+    }
+    const handleVisibility = () => {
+      if (document.visibilityState === 'hidden') handleUnload()
+    }
+    window.addEventListener('beforeunload', handleUnload)
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => {
+      window.removeEventListener('beforeunload', handleUnload)
+      document.removeEventListener('visibilitychange', handleVisibility)
+    }
+  }, [])
 
   useEffect(() => {
     fetch('/api/subscription-status').then(r => r.json()).then(d => setIsPro(!!d.subscribed)).catch(() => {})
