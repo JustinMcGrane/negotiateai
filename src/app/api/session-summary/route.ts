@@ -13,7 +13,9 @@ export async function POST(req: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-    const { messages, sendEmail } = await req.json()
+    const contentType = req.headers.get('content-type') ?? ''
+    const body = contentType.includes('application/json') ? await req.json() : JSON.parse(await req.text())
+    const { messages, sendEmail } = body
     if (!messages?.length) return NextResponse.json({ error: 'No messages' }, { status: 400 })
 
     const transcript = messages
